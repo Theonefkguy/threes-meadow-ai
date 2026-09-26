@@ -1,91 +1,91 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#12363a">
-  <meta name="description" content="合三：一款讲究节奏与空间的数字合并游戏。">
-  <title data-i18n="合三">合三</title>
+  <meta name="description" content="Play Threes Meadow with a five-ply AI. Free, on-device, no account required.">
+  <title data-i18n="合三">Threes Meadow</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%2312363a'/%3E%3Cpath d='M18 19h16c9 0 14 4 14 11 0 4-2 7-6 9 5 1 8 5 8 10 0 8-6 12-16 12H18v-9h16c4 0 6-1 6-4s-2-4-6-4h-9v-9h9c3 0 5-1 5-4s-2-4-5-4H18z' fill='%23ffd05a'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="./styles.css?v=20">
 </head>
 <body>
-  <main class="app" aria-label="合三游戏" data-i18n-aria="合三游戏">
-    <div class="language-bar"><label for="language">语言 / Language</label><select id="language"><option value="zh-CN">中文</option><option value="en">English</option></select></div>
+  <main class="app" aria-label="Threes Meadow game" data-i18n-aria="合三游戏">
+    <div class="language-bar"><label for="language">Language / 语言</label><select id="language"><option value="en" selected>English</option><option value="zh-CN">中文</option></select></div>
     <header class="topbar">
       <div class="brand">
         <div class="logo" aria-hidden="true"><span>3</span><i></i></div>
-        <div><h1 data-i18n="合三">合三</h1><p data-i18n="让数字找到彼此">让数字找到彼此</p></div>
+        <div><h1 data-i18n="合三">Threes Meadow</h1><p data-i18n="让数字找到彼此">Make room for the next match</p></div>
       </div>
-      <button class="new-game" id="new-game" type="button" data-i18n="新一局">新一局</button>
+      <button class="new-game" id="new-game" type="button" data-i18n="新一局">New game</button>
     </header>
 
-    <section class="status" aria-label="游戏状态" data-i18n-aria="游戏状态">
+    <section class="status" aria-label="Game status" data-i18n-aria="游戏状态">
       <div class="next-wrap">
-        <span class="eyebrow" id="next-hint" data-i18n="下一张">下一张</span>
+        <span class="eyebrow" id="next-hint" data-i18n="下一张">Next card</span>
         <div class="next-tiles" id="next-tile" role="group" aria-live="polite"></div>
       </div>
       <div class="score-card">
-        <div><span class="eyebrow" data-i18n="得分">得分</span><strong id="score">0</strong></div>
+        <div><span class="eyebrow" data-i18n="得分">Score</span><strong id="score">0</strong></div>
         <div class="divider"></div>
-        <div><span class="eyebrow" data-i18n="最佳">最佳</span><strong id="best">0</strong></div>
+        <div><span class="eyebrow" data-i18n="最佳">Best</span><strong id="best">0</strong></div>
       </div>
     </section>
 
     <section class="game-shell">
-      <div class="board" id="board" role="grid" aria-label="4乘4游戏棋盘" data-i18n-aria="4乘4游戏棋盘" tabindex="0"></div>
+      <div class="board" id="board" role="grid" aria-label="4 by 4 game board" data-i18n-aria="4乘4游戏棋盘" tabindex="0"></div>
       <div class="game-over" id="game-over" hidden>
         <div class="over-card">
-          <span class="over-kicker" id="over-kicker" data-i18n="无路可走">无路可走</span>
-          <h2 id="over-title" data-i18n="这一局走到了尽头">这一局走到了尽头</h2>
-          <p><span data-i18n="得分">得分</span> <strong id="final-score">0</strong></p>
-          <button id="play-again" type="button" data-i18n="再来一局">再来一局</button>
+          <span class="over-kicker" id="over-kicker" data-i18n="无路可走">No moves left</span>
+          <h2 id="over-title" data-i18n="这一局走到了尽头">Game over</h2>
+          <p><span data-i18n="得分">Score</span> <strong id="final-score">0</strong></p>
+          <button id="play-again" type="button" data-i18n="再来一局">Play again</button>
         </div>
       </div>
     </section>
 
-    <nav class="controls" aria-label="移动方向" data-i18n-aria="移动方向">
-      <button data-dir="up" aria-label="向上移动" data-i18n-aria="向上移动">↑</button>
+    <nav class="controls" aria-label="Move direction" data-i18n-aria="移动方向">
+      <button data-dir="up" aria-label="Move up" data-i18n-aria="向上移动">↑</button>
       <div>
-        <button data-dir="left" aria-label="向左移动" data-i18n-aria="向左移动">←</button>
-        <button data-dir="down" aria-label="向下移动" data-i18n-aria="向下移动">↓</button>
-        <button data-dir="right" aria-label="向右移动" data-i18n-aria="向右移动">→</button>
+        <button data-dir="left" aria-label="Move left" data-i18n-aria="向左移动">←</button>
+        <button data-dir="down" aria-label="Move down" data-i18n-aria="向下移动">↓</button>
+        <button data-dir="right" aria-label="Move right" data-i18n-aria="向右移动">→</button>
       </div>
     </nav>
 
-    <section class="ai-controls" aria-label="AI 自动玩" data-i18n-aria="AI 自动玩">
-      <label class="ai-label" for="ai-policy" data-i18n="AI 策略">AI 策略</label>
+    <section class="ai-controls" aria-label="Play with AI" data-i18n-aria="AI 自动玩">
+      <label class="ai-label" for="ai-policy" data-i18n="AI 策略">AI strategy</label>
       <select id="ai-policy">
-        <option value="rl-fast" selected data-i18n="五层剪枝搜索（默认）">五层剪枝搜索（默认）</option>
-        <option value="rl-v8" data-i18n="蒙特卡洛搜索（实验）">蒙特卡洛搜索（实验）</option>
-        <option value="rl-v7" data-i18n="强化学习 · 第七版（实验）">强化学习 · 第七版（实验）</option>
-        <option value="rl-v6" data-i18n="强化学习 · 第六版（实验）">强化学习 · 第六版（实验）</option>
-        <option value="rl-v5" data-i18n="强化学习 · 第五版（实验）">强化学习 · 第五版（实验）</option>
-        <option value="rl-v4" data-i18n="强化学习 · 第四版">强化学习 · 第四版</option>
-        <option value="rl-v3" data-i18n="强化学习 · 第三版">强化学习 · 第三版</option>
-        <option value="rl-v2" data-i18n="强化学习 · 第二版">强化学习 · 第二版</option>
-        <option value="rl" data-i18n="强化学习 · 第一版">强化学习 · 第一版</option>
-        <option value="classic" data-i18n="经典搜索">经典搜索</option>
+        <option value="rl-fast" selected data-i18n="五层剪枝搜索（默认）">Five-ply search (default)</option>
+        <option value="rl-v8" data-i18n="蒙特卡洛搜索（实验）">Monte Carlo (experimental)</option>
+        <option value="rl-v7" data-i18n="强化学习 · 第七版（实验）">RL · V7 (experimental)</option>
+        <option value="rl-v6" data-i18n="强化学习 · 第六版（实验）">RL · V6 (experimental)</option>
+        <option value="rl-v5" data-i18n="强化学习 · 第五版（实验）">RL · V5 (experimental)</option>
+        <option value="rl-v4" data-i18n="强化学习 · 第四版">RL · V4</option>
+        <option value="rl-v3" data-i18n="强化学习 · 第三版">RL · V3</option>
+        <option value="rl-v2" data-i18n="强化学习 · 第二版">RL · V2</option>
+        <option value="rl" data-i18n="强化学习 · 第一版">RL · V1</option>
+        <option value="classic" data-i18n="经典搜索">Classic search</option>
       </select>
-      <button id="ai-toggle" type="button" aria-pressed="false" data-i18n="AI 自动玩">AI 自动玩</button>
-      <p id="ai-status" role="status" data-i18n="从当前棋盘接手，点击停止或手动操作即可接管。">从当前棋盘接手，点击停止或手动操作即可接管。</p>
-      <p class="ai-note" data-i18n="默认使用 V23 模型与五层剪枝搜索。模型约 8 MB，下载后在你的设备上运行，无需账号。">默认使用 V23 模型与五层剪枝搜索。模型约 8 MB，下载后在你的设备上运行，无需账号。</p>
+      <button id="ai-toggle" type="button" aria-pressed="false" data-i18n="AI 自动玩">Play with AI</button>
+      <p id="ai-status" role="status" data-i18n="从当前棋盘接手，点击停止或手动操作即可接管。">Starts from your board. Stop the AI or make a move to take over.</p>
+      <p class="ai-note" data-i18n="默认使用 V23 模型与五层剪枝搜索。模型约 8 MB，下载后在你的设备上运行，无需账号。">The default uses the V23 model and five-ply search. The 8 MB model runs on your device after download. No account needed.</p>
     </section>
 
     <section class="rules">
       <div class="rule"><span class="mini one">1</span><b>+</b><span class="mini two">2</span><b>=</b><span class="mini three">3</span></div>
-      <p data-i18n="每次移动一格。1 与 2 相合，3 以上相同数字相合。拖动可预览，拉回可取消。">每次移动一格。1 与 2 相合，3 以上相同数字相合。拖动可预览，拉回可取消。</p>
+      <p data-i18n="每次移动一格。1 与 2 相合，3 以上相同数字相合。拖动可预览，拉回可取消。">Slide one cell at a time. Merge 1 with 2, or equal cards of 3 and above. Drag to preview; pull back to cancel.</p>
     </section>
     <details class="rule-details">
-      <summary data-i18n="规则与来牌">规则与来牌</summary>
-      <p data-i18n="使用滑动、方向键或屏幕按钮操作。一次有效移动后，一张新牌从反方向的边缘进入，只会进入刚刚移动过的行或列。无法移动时不会补牌。">使用滑动、方向键或屏幕按钮操作。一次有效移动后，一张新牌从反方向的边缘进入，只会进入刚刚移动过的行或列。无法移动时不会补牌。</p>
-      <p data-i18n="普通牌是一副 12 张的牌组：1、2、3 各四张。开局从中抽九张，之后继续抽剩余牌；抽完再洗牌。因此下一张普通牌的概率取决于牌组中还剩什么。">普通牌是一副 12 张的牌组：1、2、3 各四张。开局从中抽九张，之后继续抽剩余牌；抽完再洗牌。因此下一张普通牌的概率取决于牌组中还剩什么。</p>
-      <p data-i18n="最大数字达到 48 后，每次生成来牌提示有 1/21（约 4.76%）的机会出现奖励牌。奖励牌不消耗普通牌组，数值从 6 开始逐级翻倍，最高为棋盘最大数字的八分之一。">最大数字达到 48 后，每次生成来牌提示有 1/21（约 4.76%）的机会出现奖励牌。奖励牌不消耗普通牌组，数值从 6 开始逐级翻倍，最高为棋盘最大数字的八分之一。</p>
-      <p data-i18n="奖励牌先等概率选择一个合法候选窗口，再在窗口内等概率抽牌。预告最多显示三个连续候选值；中间数值因此可能比两端更常见。">奖励牌先等概率选择一个合法候选窗口，再在窗口内等概率抽牌。预告最多显示三个连续候选值；中间数值因此可能比两端更常见。</p>
-      <p data-i18n="1、2 不计分；3、6、12、24… 分别计 3、9、27、81… 分。无路可走时结束；两张 6144 合出 12288 时立即通关。">1、2 不计分；3、6、12、24… 分别计 3、9、27、81… 分。无路可走时结束；两张 6144 合出 12288 时立即通关。</p>
-      <p class="rule-source"><span data-i18n="规则参考：">规则参考：</span> <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=3155431026" target="_blank" rel="noopener noreferrer" data-i18n="社区逆向指南">社区逆向指南</a></p>
+      <summary data-i18n="规则与来牌">Rules and incoming cards</summary>
+      <p data-i18n="使用滑动、方向键或屏幕按钮操作。一次有效移动后，一张新牌从反方向的边缘进入，只会进入刚刚移动过的行或列。无法移动时不会补牌。">Use swipes, arrow keys or the on-screen buttons. After a valid move, a card enters from the opposite edge, uniformly among the rows or columns that moved. Blocked moves do not draw cards.</p>
+      <p data-i18n="普通牌是一副 12 张的牌组：1、2、3 各四张。开局从中抽九张，之后继续抽剩余牌；抽完再洗牌。因此下一张普通牌的概率取决于牌组中还剩什么。">The basic deck contains twelve cards: four each of 1, 2 and 3. Nine cards are dealt at the start. Play continues through the remaining deck before reshuffling, so draw probabilities depend on what remains.</p>
+      <p data-i18n="最大数字达到 48 后，每次生成来牌提示有 1/21（约 4.76%）的机会出现奖励牌。奖励牌不消耗普通牌组，数值从 6 开始逐级翻倍，最高为棋盘最大数字的八分之一。">Once the highest card reaches 48, each new preview has a 1/21 chance of being a bonus. Bonuses do not consume the basic deck. Values double from 6 up to one eighth of the highest card.</p>
+      <p data-i18n="奖励牌先等概率选择一个合法候选窗口，再在窗口内等概率抽牌。预告最多显示三个连续候选值；中间数值因此可能比两端更常见。">A bonus window is chosen uniformly, then a card is drawn uniformly within it. The preview shows up to three consecutive values, making middle values more likely than the extremes when there are multiple windows.</p>
+      <p data-i18n="1、2 不计分；3、6、12、24… 分别计 3、9、27、81… 分。无路可走时结束；两张 6144 合出 12288 时立即通关。">Cards 1 and 2 score zero; 3, 6, 12, 24… score 3, 9, 27, 81… points. The game ends when no move remains, or immediately when two 6144 cards merge into 12288.</p>
+      <p class="rule-source"><span data-i18n="规则参考：">Rules reference:</span> <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=3155431026" target="_blank" rel="noopener noreferrer" data-i18n="社区逆向指南">Community reverse-engineering guide</a></p>
     </details>
-    <footer><a href="https://github.com/Theonefkguy/threes-meadow-ai" data-i18n="源码与评测">源码与评测</a><p data-i18n="独立研究项目，与 Threes! / Sirvo 无隶属关系。">独立研究项目，与 Threes! / Sirvo 无隶属关系。</p></footer>
+    <footer><a href="https://github.com/Theonefkguy/threes-meadow-ai" data-i18n="源码与评测">Source &amp; benchmarks</a><p data-i18n="独立研究项目，与 Threes! / Sirvo 无隶属关系。">Independent research project, not affiliated with Threes! or Sirvo.</p></footer>
     <p id="move-status" class="sr-only" role="status" aria-live="polite"></p>
   </main>
   <script type="module" src="./game.js?v=20"></script>

@@ -97,11 +97,10 @@ export const english = {
   "通关，": "You won! ",
   "第 {turns} 步，补入 {value}。": "Move {turns}: added {value}."
 };
-let language = 'zh-CN';
+let language = 'en';
 try {
   const saved = localStorage.getItem('threesLanguage');
-  language = saved === 'en' || saved === 'zh-CN' ? saved :
-    (navigator.language.startsWith('zh') ? 'zh-CN' : 'en');
+  language = saved === 'en' || saved === 'zh-CN' ? saved : 'en';
 } catch { /* Browser storage can be unavailable. */ }
 export const locale = () => language;
 export function setLanguage(value) {

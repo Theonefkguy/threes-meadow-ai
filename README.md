@@ -1,4 +1,4 @@
-# Threes Meadow AI · 合三
+# Threes Meadow AI
 
 [Play in your browser](https://theonefkguy.github.io/threes-meadow-ai/) · **English** | [简体中文](README.zh-CN.md)
 
@@ -8,7 +8,7 @@ A high-performance Threes AI you can watch, interrupt and play alongside. Multi-
 
 ## Play
 
-Open the [live demo](https://theonefkguy.github.io/threes-meadow-ai/), choose 中文 or English, and press **Play with AI**. Use arrow keys, swipe, or the direction buttons to take over. The default V23 model is about 8 MiB and loads on first use. Earlier strategies are available for exploration.
+Open the [live demo](https://theonefkguy.github.io/threes-meadow-ai/), use the English default or switch to 中文, and press **Play with AI**. Use arrow keys, swipe, or the direction buttons to take over. The default V23 model is about 8 MiB and loads on first use. Earlier strategies are available for exploration.
 
 ## V24 results
 
