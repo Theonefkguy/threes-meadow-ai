@@ -1,0 +1,22 @@
+{
+  "base": "training/v7/base.ntd",
+  "baseSHA256": "d863b01eb0b958237e5ba9833da38c8f57ec833c983e4add1a196a515cbff590",
+  "initial": "training/v11/policy-202609252/best.net",
+  "initialSHA256": "c1063da4f651dc59ed2cbf685dfa3e9cfc1d4540c934ed5f7106b808d0425335",
+  "selection": "lowest V11 validationKL across3 pretrained seeds; no selection by game win rate",
+  "trainingSeeds": [
+    202609271,
+    202609272,
+    202609273
+  ],
+  "training": "8192 normal-opening on-policy games per seed;4rounds2048;batch64;terminal1536 success=1/death=0; stochastic softmax residual policy temperature.1; no tree search. REINFORCE with previous-batch per-rank-band EMA baseline(.9), initially.5; no discount. Adam3e-5,beta.9/.999, globalgradientclip1. Average trajectory gradients over64 episodes.",
+  "oldExperience": "Each update64 replay states sampled from V11 training split only, with frozen initial-student probabilities atT1; .02KL(initial||current) regularizer, no teacherQ labels used.",
+  "inference": "greedy policy logits with original table-derived features and logits retained; no search, no new value-head training",
+  "evaluationSeeds": [
+    11910001,
+    11910512
+  ],
+  "evaluation": "512 common fresh normal openings: initial student, oldMCTS1ms, all3seeds at rounds1..4; stop1536/death.",
+  "primary": "mean3 final round4 students minus initial direct student; paired tCI over512 game-seed clusters, conditional on3 training runs. Intermediate rounds descriptive only; no choosing best checkpoint or optional stop.",
+  "scope": "one bounded outcome-based RL pilot; no website deployment and no6144 claim"
+}

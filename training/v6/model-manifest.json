@@ -1,0 +1,53 @@
+{
+  "control": {
+    "sha256": "d863b01eb0b958237e5ba9833da38c8f57ec833c983e4add1a196a515cbff590",
+    "bytes": 6291472,
+    "archive": "candidate-control.ntd.gz",
+    "kind": "score",
+    "training": {
+      "episodes": 169284,
+      "success1536": 124525,
+      "resumed": 109656,
+      "steps": 53499660,
+      "cpuSeconds": 450,
+      "wallSeconds": 451.603,
+      "truncated": 0,
+      "warmUpdates": 0,
+      "warmCPU": 0
+    }
+  },
+  "hard": {
+    "sha256": "f093e577a568db9d0861cc290ae20fccb4755bb59dd2fd3654fa520ca7c4f77a",
+    "bytes": 6291472,
+    "archive": "candidate-hard.ntd.gz",
+    "kind": "score",
+    "training": {
+      "episodes": 215119,
+      "success1536": 157078,
+      "resumed": 143810,
+      "steps": 53759678,
+      "cpuSeconds": 450.003,
+      "wallSeconds": 452,
+      "truncated": 0,
+      "warmUpdates": 0,
+      "warmCPU": 0
+    }
+  },
+  "probability": {
+    "sha256": "83d3d024c066b07c276b07295d222ce3769c02f81cb9a00cc5ea944f847723af",
+    "bytes": 6291472,
+    "archive": "candidate-probability.ntd.gz",
+    "kind": "reach1536",
+    "training": {
+      "episodes": 323774,
+      "success1536": 11116,
+      "resumed": 210230,
+      "steps": 43182234,
+      "cpuSeconds": 450.002,
+      "wallSeconds": 451.837,
+      "truncated": 0,
+      "warmUpdates": 73507030,
+      "warmCPU": 90
+    }
+  }
+}

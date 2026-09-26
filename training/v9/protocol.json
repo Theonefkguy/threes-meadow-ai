@@ -1,0 +1,46 @@
+{
+  "purpose": "First2x2 ablation of public context and learned action priors; supervised search distillation, not yet iterative online RL",
+  "baseModel": "training/v7/base.ntd",
+  "baseSHA256": "d863b01eb0b958237e5ba9833da38c8f57ec833c983e4add1a196a515cbff590",
+  "collectionSeeds": [
+    11010001,
+    11011200
+  ],
+  "collection": "1200 baseline3ply/24000 normal games; independent reservoir samples in four max-rank bands, plus final pre-death state for failed games; include successful games",
+  "teacher": "Fully completed4ply expectimax with frozen baseline leaves; all chance outcomes enumerated",
+  "policyLabels": "Softmax of full4ply action values at temperature2000; soft distribution, not MCTS visit counts",
+  "split": "Source games with (seed-11010001)%5==0 validation; others training; augmentation never crosses game split",
+  "arms": {
+    "board_value": {
+      "context": false,
+      "policy": false
+    },
+    "context_value": {
+      "context": true,
+      "policy": false
+    },
+    "board_joint": {
+      "context": false,
+      "policy": true
+    },
+    "context_joint": {
+      "context": true,
+      "policy": true
+    }
+  },
+  "trainingSeeds": [
+    202609231,
+    202609232,
+    202609233
+  ],
+  "architecture": "Shared32-ReLU residual MLP per projected action; sparse16x16 rank one-hot; base afterstate value; optional preview probability vector,3 public remaining counts,16-entry mask. Score residual and policy-logit residual heads. Zero initial heads preserve baseline.",
+  "training": "30epochs; Adamlr.001; batch16states; Huber normalized score residual(scale8000) plus joint-only .2 policyKL; D4 augmentation transforms board and entry mask. Keep score weights and1536+ value boundary frozen.",
+  "checkpoint": "Lowest common validation Huber+.2policyKL; policy-only groups evaluated with their trained prior, value-only with softmax correctedQ; validation never used for game success claims",
+  "evaluationSeeds": [
+    11110001,
+    11110512
+  ],
+  "evaluation": "Every arm and all3 seeds, plus unchanged MCTS baseline,512 common fresh games each;1msCPU per move; stop1536/death. Search randomness separated from game RNG.",
+  "statistics": "Report per-training-seed rates. Factorial contrasts average3 replicas within each game seed; paired uncertainty clusters by game seed. Three training seeds do not quantify full training variance precisely. Co-primary contrasts: context main effect and policy main effect, Holm correction over two tests. All candidate-versus-baseline results exploratory; game-level CIs conditional on these three training seeds.",
+  "promotion": "Research diagnostics first; no default promotion without independent later-stage/browser validation; no picking another checkpoint from game results"
+}

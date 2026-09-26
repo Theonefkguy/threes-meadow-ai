@@ -1,0 +1,10 @@
+{
+  "groups": 100,
+  "heldoutGroups": 20,
+  "examples": [
+    729,
+    222
+  ],
+  "groupBy": "collection game, union identical D4 afterstates",
+  "splitSeed": 202609220
+}

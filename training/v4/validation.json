@@ -1,0 +1,160 @@
+{
+  "nativeModelTests": [
+    "zero-residual identity",
+    "normalized update",
+    "frozen base",
+    "D4 symmetry",
+    "serialization roundtrip",
+    "TC signed-error cancellation"
+  ],
+  "browserResidualTests": [
+    "native fixture",
+    "late-stage isolation",
+    "D4 symmetry",
+    "nonfinite/truncated rejection"
+  ],
+  "baseBrowserParity": {
+    "positions": 77,
+    "exact": [
+      "direction",
+      "depth",
+      "nodes"
+    ]
+  },
+  "inputLifecycleTests": 13,
+  "freshPool": {
+    "normalGames": 1000,
+    "sourceGames": 680,
+    "snapshots": 4854,
+    "seeds": [
+      6110001,
+      6111000
+    ]
+  },
+  "training": {
+    "control": {
+      "summary": {
+        "episodes": 279890,
+        "batchWins": 125,
+        "totalWins": 10651,
+        "steps": 59700065,
+        "deepSteps": 0,
+        "deepEpisodes": 0,
+        "cpuSeconds": 450,
+        "wallSeconds": 451.258,
+        "truncated": 0
+      },
+      "earlyStagesUnchanged": true,
+      "allBaseWeightsFrozen": false,
+      "sha256": "6c4a8d47d760d55a3f2ab4e7fbd9feb6345efa13fa9c870567a9d86e0892356b"
+    },
+    "a": {
+      "summary": {
+        "episodes": 53550,
+        "batchWins": 68,
+        "totalWins": 3704,
+        "steps": 6786068,
+        "deepSteps": 576390,
+        "deepEpisodes": 2677,
+        "cpuSeconds": 450,
+        "wallSeconds": 451.615,
+        "truncated": 0
+      },
+      "earlyStagesUnchanged": true,
+      "allBaseWeightsFrozen": false,
+      "sha256": "fb347954bd2936614684122daec1326c07ed170581d8d93bb5c4fa817e116fa8"
+    },
+    "b": {
+      "summary": {
+        "episodes": 43000,
+        "batchWins": 43,
+        "totalWins": 3310,
+        "steps": 5682812,
+        "deepSteps": 473990,
+        "deepEpisodes": 2150,
+        "cpuSeconds": 450.42,
+        "wallSeconds": 451.417,
+        "truncated": 0
+      },
+      "earlyStagesUnchanged": true,
+      "allBaseWeightsFrozen": true,
+      "sha256": "adfbad1882b42307fc39810d9f88bd59ed8005829570bacccaf174bcfc14f946"
+    },
+    "c": {
+      "summary": {
+        "episodes": 52043,
+        "batchWins": 157,
+        "totalWins": 3969,
+        "steps": 6794613,
+        "deepSteps": 564978,
+        "deepEpisodes": 2602,
+        "cpuSeconds": 450,
+        "wallSeconds": 451.425,
+        "truncated": 0
+      },
+      "earlyStagesUnchanged": true,
+      "allBaseWeightsFrozen": false,
+      "sha256": "3fd942f6a5e71fa80ef5e82a0fe888b3ac4b265be3b5efc709039cd85caf636b"
+    }
+  },
+  "fiveCellBrowserParity": {
+    "positions": 87,
+    "exact": [
+      "direction",
+      "nodes",
+      "depth"
+    ]
+  },
+  "sharedLeafCache": {
+    "reason": "depth-1 value independent of hint/counts",
+    "oracleTests": 3,
+    "noDepthOrNodeBudgetChange": true
+  },
+  "selectedBrowserParity": {
+    "positions": 86,
+    "exact": [
+      "direction",
+      "nodes",
+      "depth"
+    ]
+  },
+  "workerCases": 20,
+  "browserTiming": {
+    "v3": {
+      "positions": 98,
+      "meanMs": 13.696679622448984,
+      "p95Ms": 31.76344999999992,
+      "maxMs": 48.48565899999994,
+      "depths": [
+        0,
+        0,
+        2,
+        96
+      ],
+      "changedFromUnlimited": 0
+    },
+    "v4": {
+      "positions": 98,
+      "meanMs": 12.214559673469385,
+      "p95Ms": 30.776754999999866,
+      "maxMs": 39.16888699999981,
+      "depths": [
+        0,
+        0,
+        2,
+        96
+      ],
+      "changedFromUnlimited": 0
+    },
+    "environment": "Actual browser JS search in Node on this machine, alternating order; same leaf cache optimization for both models. Not a phone-specific success estimate.",
+    "compatible": true
+  },
+  "baselineUnchanged": true,
+  "staticChecks": {
+    "jsFiles": 14,
+    "moduleImports": true,
+    "selectedModelHash": true,
+    "defaultPolicy": "rl-v4",
+    "htmlLocalReferences": true
+  }
+}

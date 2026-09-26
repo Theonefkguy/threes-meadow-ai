@@ -1,0 +1,66 @@
+{
+  "r0": {
+    "sha256": "feb5078850c3d42a7c5cb64c7e45684dec5233c8e19204f2a173d5ebbb00a78d",
+    "bytes": 6291472,
+    "archive": "candidate-r0.ntd.gz",
+    "training": {
+      "episodes": 100155,
+      "success1536": 69796,
+      "resumed": 0,
+      "steps": 51239579,
+      "cpuSeconds": 450.002,
+      "wallSeconds": 981.36,
+      "truncated": 0,
+      "anchorUpdates": 100155,
+      "teacherUpdates": 0
+    }
+  },
+  "r10": {
+    "sha256": "9b98509fe5cda4e868fef8953fd54dd4a7543c27c23fe892594f3b14462a6f60",
+    "bytes": 6291472,
+    "archive": "candidate-r10.ntd.gz",
+    "training": {
+      "episodes": 111617,
+      "success1536": 78691,
+      "resumed": 11056,
+      "steps": 53022008,
+      "cpuSeconds": 450.006,
+      "wallSeconds": 510.654,
+      "truncated": 0,
+      "anchorUpdates": 111617,
+      "teacherUpdates": 0
+    }
+  },
+  "r25": {
+    "sha256": "f50311d59a1c4835a2134d6beb5792cefeb58bbe09fcd22a6897d07fda995a32",
+    "bytes": 6291472,
+    "archive": "candidate-r25.ntd.gz",
+    "training": {
+      "episodes": 126617,
+      "success1536": 90666,
+      "resumed": 31458,
+      "steps": 53057923,
+      "cpuSeconds": 450.002,
+      "wallSeconds": 510.584,
+      "truncated": 0,
+      "anchorUpdates": 126617,
+      "teacherUpdates": 0
+    }
+  },
+  "r10teacher": {
+    "sha256": "575283e30c0b64ea1da70c21eb7ff798a7c3528d80a9cfe4f37c531a71291e18",
+    "bytes": 6291472,
+    "archive": "candidate-r10teacher.ntd.gz",
+    "training": {
+      "episodes": 109823,
+      "success1536": 77060,
+      "resumed": 10892,
+      "steps": 52150312,
+      "cpuSeconds": 450,
+      "wallSeconds": 766.496,
+      "truncated": 0,
+      "anchorUpdates": 109823,
+      "teacherUpdates": 109823
+    }
+  }
+}

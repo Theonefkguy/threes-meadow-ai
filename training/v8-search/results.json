@@ -1,0 +1,632 @@
+{
+  "protocol": {
+    "purpose": "Frozen-value-model guided selective search; no new learned weights this round",
+    "model": "training/v7/base.ntd",
+    "modelSHA256": "d863b01eb0b958237e5ba9833da38c8f57ec833c983e4add1a196a515cbff590",
+    "budgetCPUmsPerMove": 1,
+    "maxDecisionDepth": 8,
+    "arms": [
+      "full",
+      "beam2",
+      "adaptive",
+      "mcts"
+    ],
+    "full": "Iterative complete expectimax, same leaf model, CPU budget, atomic last-completed-depth fallback",
+    "beam2": "All root actions; below root all actions receive full2ply estimates, best2 continue deeper; enumerate all chance outcomes at their true probabilities",
+    "adaptive": "beam2 plus any action within1500 score units of shallow best",
+    "mcts": "PUCT with model score priors; temperature2000/exploration4000; each legal root action explored; true chance sampling; separate search RNG; horizon8 plus model bootstrap; most visited root action",
+    "screenSeeds": [
+      9810001,
+      9810512
+    ],
+    "screenGames": 512,
+    "selection": "Best reach1536 count among beam2/adaptive/mcts; ties beam2,adaptive,mcts; freeze before holdout",
+    "holdoutSeeds": [
+      9910001,
+      9911024
+    ],
+    "holdoutGames": 1024,
+    "primary": "Selected candidate versus full, paired reach1536, first1536/death only",
+    "fairness": "Same nominal CPU budget; report measured per-moveCPU and overruns. Require measured meanCPU ratio <=1.05 for candidate efficiency claim; if outside, mark comparison confounded and calibrate on separate seeds before fresh test",
+    "promotion": "No website promotion from early success alone. Positive lower paired95 bound and acceptable timing needed before further6144/browser validation",
+    "limits": [
+      "Heuristic beam omission is approximate, not certified pruning",
+      "MCTS chance sampling adds variance",
+      "No separate trained policy head or new RL weights",
+      "CPU timed decisions can vary with hardware/load; save exact runs"
+    ]
+  },
+  "screen": {
+    "full": {
+      "games": 512,
+      "wins": 486,
+      "rate": 0.94921875,
+      "moves": 272627,
+      "meanMoveCPUms": 1.0164080856114768,
+      "maxMoveCPUms": 30.380976000000004,
+      "overrun20pctFraction": 0.006628103599423388,
+      "depthCounts": [
+        0,
+        20,
+        24752,
+        246584,
+        1197,
+        48,
+        2,
+        0,
+        24,
+        0
+      ]
+    },
+    "beam2": {
+      "games": 512,
+      "wins": 484,
+      "rate": 0.9453125,
+      "moves": 272605,
+      "meanMoveCPUms": 1.0166264638432883,
+      "maxMoveCPUms": 62.47103400000009,
+      "overrun20pctFraction": 0.006155426349480017,
+      "depthCounts": [
+        0,
+        18,
+        29664,
+        240653,
+        2180,
+        58,
+        3,
+        0,
+        29,
+        0
+      ]
+    },
+    "adaptive": {
+      "games": 512,
+      "wins": 478,
+      "rate": 0.93359375,
+      "moves": 271607,
+      "meanMoveCPUms": 1.0164869714550795,
+      "maxMoveCPUms": 89.43656000000021,
+      "overrun20pctFraction": 0.006148589690250988,
+      "depthCounts": [
+        0,
+        19,
+        29315,
+        240660,
+        1505,
+        68,
+        7,
+        1,
+        32,
+        0
+      ]
+    },
+    "mcts": {
+      "games": 512,
+      "wins": 487,
+      "rate": 0.951171875,
+      "moves": 272590,
+      "meanMoveCPUms": 1.0116381366741252,
+      "maxMoveCPUms": 273.39167799999996,
+      "overrun20pctFraction": 0.005928317253017352,
+      "depthCounts": [
+        22,
+        37,
+        62,
+        1719,
+        97456,
+        130640,
+        36635,
+        5395,
+        624,
+        0
+      ]
+    }
+  },
+  "selection": {
+    "selected": "mcts",
+    "screenWins": {
+      "full": 486,
+      "beam2": 484,
+      "adaptive": 478,
+      "mcts": 487
+    },
+    "rule": "Best reach1536 count among beam2/adaptive/mcts; ties beam2,adaptive,mcts; freeze before holdout",
+    "frozenAt": "2026-09-21T14:31:11.278336+00:00"
+  },
+  "holdout": {
+    "mcts": {
+      "games": 1024,
+      "wins": 985,
+      "rate": 0.9619140625,
+      "moves": 543515,
+      "meanMoveCPUms": 1.0073081850528507,
+      "maxMoveCPUms": 198.26496099999957,
+      "overrun20pctFraction": 0.004748718986596506,
+      "depthCounts": [
+        36,
+        61,
+        103,
+        2807,
+        187594,
+        264447,
+        75870,
+        11366,
+        1231,
+        0
+      ]
+    },
+    "full": {
+      "games": 1024,
+      "wins": 964,
+      "rate": 0.94140625,
+      "moves": 540912,
+      "meanMoveCPUms": 1.0150270594329578,
+      "maxMoveCPUms": 87.5565930000004,
+      "overrun20pctFraction": 0.005209719880498121,
+      "depthCounts": [
+        0,
+        28,
+        42814,
+        495278,
+        2597,
+        123,
+        14,
+        0,
+        58,
+        0
+      ]
+    }
+  },
+  "comparison": {
+    "difference": 0.0205078125,
+    "paired95CI": [
+      0.0018850782475029366,
+      0.03913054675249707
+    ],
+    "onlySelected": 58,
+    "onlyFull": 37,
+    "mcnemarExactP": 0.03960823767054588,
+    "measuredMeanCPURatio": 0.9923954003901934,
+    "fairnessGate": true,
+    "earlyImprovementGate": true,
+    "furtherLateBrowserValidationNeededBeforePromotion": true
+  },
+  "late": {
+    "protocol": {
+      "purpose": "Secondary late-game check after positive early holdout; no default promotion from512 games alone",
+      "seeds": [
+        10010001,
+        10010512
+      ],
+      "arms": [
+        "full",
+        "mcts",
+        "v4"
+      ],
+      "early": "full andmcts frozen V7-base model,1msCPU; v4 current website3ply/24000nodes",
+      "late": "At first1536 full/mcts switch to existing3ply/24000nodes score search; all later-stage weights are V4-identical",
+      "stop": "First6144 or actualdeath; no truncation",
+      "website": "Expose MCTS as opt-in experimental choice after JavaScript correctness/timing checks; retain V4 default because this small late-game diagnostic cannot establish6144 noninferiority"
+    },
+    "arms": {
+      "full": {
+        "1536": 489,
+        "3072": 353,
+        "6144": 74
+      },
+      "mcts": {
+        "1536": 486,
+        "3072": 331,
+        "6144": 71
+      },
+      "v4": {
+        "1536": 484,
+        "3072": 360,
+        "6144": 78
+      }
+    },
+    "comparisons": {
+      "mcts-full": {
+        "difference6144": -0.005859375,
+        "paired95CI": [
+          -0.04694845021491981,
+          0.03522970021491981
+        ]
+      },
+      "mcts-v4": {
+        "difference6144": -0.013671875,
+        "paired95CI": [
+          -0.058178384176531615,
+          0.030834634176531615
+        ]
+      }
+    }
+  },
+  "pooledEarlyExploratory": {
+    "games": 1536,
+    "mctsWins": 1471,
+    "fullWins": 1453,
+    "difference": 0.01171875,
+    "paired95CI": [
+      -0.003373113542437828,
+      0.026810613542437828
+    ],
+    "mcnemarExactP": 0.15052769717161313,
+    "interpretation": "Secondary cohort did not replicate the primary early gain; pooled estimate is descriptive and includeszero. No stable upgrade claim."
+  },
+  "js-validation": {
+    "nativeParityCases": 160,
+    "lateParityCases": 8,
+    "timing": {
+      "positions": 80,
+      "mean": 15.40212505000002,
+      "p95": 28.42343099999971,
+      "max": 55.74885199999994,
+      "directionChangesVs640": 0,
+      "budgetLimited": 0
+    },
+    "note": "Browser JavaScript executed in Node; no iPhone performance or game-success claim"
+  },
+  "worker-results": {
+    "passed": 45,
+    "cases": [
+      {
+        "failed": [],
+        "requested": "rl-v8",
+        "actual": "rl-v8"
+      },
+      {
+        "failed": [],
+        "requested": "rl-v7",
+        "actual": "rl-v7"
+      },
+      {
+        "failed": [],
+        "requested": "rl-v6",
+        "actual": "rl-v6"
+      },
+      {
+        "failed": [],
+        "requested": "rl-v5",
+        "actual": "rl-v5"
+      },
+      {
+        "failed": [],
+        "requested": "rl-v4",
+        "actual": "rl-v4"
+      },
+      {
+        "failed": [],
+        "requested": "rl-v3",
+        "actual": "rl-v3"
+      },
+      {
+        "failed": [],
+        "requested": "rl-v2",
+        "actual": "rl-v2"
+      },
+      {
+        "failed": [],
+        "requested": "rl",
+        "actual": "rl"
+      },
+      {
+        "failed": [],
+        "requested": "classic",
+        "actual": "classic"
+      },
+      {
+        "failed": [
+          "v8"
+        ],
+        "requested": "rl-v8",
+        "actual": "rl-v4"
+      },
+      {
+        "failed": [
+          "v8"
+        ],
+        "requested": "rl-v7",
+        "actual": "rl-v7"
+      },
+      {
+        "failed": [
+          "v8"
+        ],
+        "requested": "rl-v6",
+        "actual": "rl-v6"
+      },
+      {
+        "failed": [
+          "v8"
+        ],
+        "requested": "rl-v5",
+        "actual": "rl-v5"
+      },
+      {
+        "failed": [
+          "v8"
+        ],
+        "requested": "rl-v4",
+        "actual": "rl-v4"
+      },
+      {
+        "failed": [
+          "v8"
+        ],
+        "requested": "rl-v3",
+        "actual": "rl-v3"
+      },
+      {
+        "failed": [
+          "v8"
+        ],
+        "requested": "rl-v2",
+        "actual": "rl-v2"
+      },
+      {
+        "failed": [
+          "v8"
+        ],
+        "requested": "rl",
+        "actual": "rl"
+      },
+      {
+        "failed": [
+          "v8"
+        ],
+        "requested": "classic",
+        "actual": "classic"
+      },
+      {
+        "failed": [
+          "v8",
+          "v4"
+        ],
+        "requested": "rl-v8",
+        "actual": "rl-v3"
+      },
+      {
+        "failed": [
+          "v8",
+          "v4"
+        ],
+        "requested": "rl-v7",
+        "actual": "rl-v7"
+      },
+      {
+        "failed": [
+          "v8",
+          "v4"
+        ],
+        "requested": "rl-v6",
+        "actual": "rl-v6"
+      },
+      {
+        "failed": [
+          "v8",
+          "v4"
+        ],
+        "requested": "rl-v5",
+        "actual": "rl-v5"
+      },
+      {
+        "failed": [
+          "v8",
+          "v4"
+        ],
+        "requested": "rl-v4",
+        "actual": "rl-v3"
+      },
+      {
+        "failed": [
+          "v8",
+          "v4"
+        ],
+        "requested": "rl-v3",
+        "actual": "rl-v3"
+      },
+      {
+        "failed": [
+          "v8",
+          "v4"
+        ],
+        "requested": "rl-v2",
+        "actual": "rl-v2"
+      },
+      {
+        "failed": [
+          "v8",
+          "v4"
+        ],
+        "requested": "rl",
+        "actual": "rl"
+      },
+      {
+        "failed": [
+          "v8",
+          "v4"
+        ],
+        "requested": "classic",
+        "actual": "classic"
+      },
+      {
+        "failed": [
+          "v8",
+          "v7",
+          "v6",
+          "v5",
+          "v4",
+          "v3"
+        ],
+        "requested": "rl-v8",
+        "actual": "rl-v2"
+      },
+      {
+        "failed": [
+          "v8",
+          "v7",
+          "v6",
+          "v5",
+          "v4",
+          "v3"
+        ],
+        "requested": "rl-v7",
+        "actual": "rl-v2"
+      },
+      {
+        "failed": [
+          "v8",
+          "v7",
+          "v6",
+          "v5",
+          "v4",
+          "v3"
+        ],
+        "requested": "rl-v6",
+        "actual": "rl-v2"
+      },
+      {
+        "failed": [
+          "v8",
+          "v7",
+          "v6",
+          "v5",
+          "v4",
+          "v3"
+        ],
+        "requested": "rl-v5",
+        "actual": "rl-v2"
+      },
+      {
+        "failed": [
+          "v8",
+          "v7",
+          "v6",
+          "v5",
+          "v4",
+          "v3"
+        ],
+        "requested": "rl-v4",
+        "actual": "rl-v2"
+      },
+      {
+        "failed": [
+          "v8",
+          "v7",
+          "v6",
+          "v5",
+          "v4",
+          "v3"
+        ],
+        "requested": "rl-v3",
+        "actual": "rl-v2"
+      },
+      {
+        "failed": [
+          "v8",
+          "v7",
+          "v6",
+          "v5",
+          "v4",
+          "v3"
+        ],
+        "requested": "rl-v2",
+        "actual": "rl-v2"
+      },
+      {
+        "failed": [
+          "v8",
+          "v7",
+          "v6",
+          "v5",
+          "v4",
+          "v3"
+        ],
+        "requested": "rl",
+        "actual": "rl"
+      },
+      {
+        "failed": [
+          "v8",
+          "v7",
+          "v6",
+          "v5",
+          "v4",
+          "v3"
+        ],
+        "requested": "classic",
+        "actual": "classic"
+      },
+      {
+        "failed": [
+          "all"
+        ],
+        "requested": "rl-v8",
+        "actual": "classic"
+      },
+      {
+        "failed": [
+          "all"
+        ],
+        "requested": "rl-v7",
+        "actual": "classic"
+      },
+      {
+        "failed": [
+          "all"
+        ],
+        "requested": "rl-v6",
+        "actual": "classic"
+      },
+      {
+        "failed": [
+          "all"
+        ],
+        "requested": "rl-v5",
+        "actual": "classic"
+      },
+      {
+        "failed": [
+          "all"
+        ],
+        "requested": "rl-v4",
+        "actual": "classic"
+      },
+      {
+        "failed": [
+          "all"
+        ],
+        "requested": "rl-v3",
+        "actual": "classic"
+      },
+      {
+        "failed": [
+          "all"
+        ],
+        "requested": "rl-v2",
+        "actual": "classic"
+      },
+      {
+        "failed": [
+          "all"
+        ],
+        "requested": "rl",
+        "actual": "classic"
+      },
+      {
+        "failed": [
+          "all"
+        ],
+        "requested": "classic",
+        "actual": "classic"
+      }
+    ]
+  },
+  "websiteDecision": {
+    "experimentalOption": "rl-v8",
+    "default": "rl-v4",
+    "newWeightsTrained": false,
+    "reason": "Primary1024-game early test positive, but supplemental512-game early/late results do not establish a robust advantage; opt-in research option only."
+  }
+}

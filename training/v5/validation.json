@@ -1,0 +1,140 @@
+{
+  "nativeTests": [
+    "terminal subtraction",
+    "zero-net corner cycles",
+    "full-return telescoping",
+    "five-step lambda equivalence",
+    "inference correction",
+    "early-stage isolation",
+    "D4 symmetry"
+  ],
+  "browserModelTests": [
+    "corrected value",
+    "zero coefficient identity",
+    "early-stage isolation",
+    "D4 symmetry",
+    "invalid coefficient rejection"
+  ],
+  "correctionParity": {
+    "positions": 92,
+    "coefficient": 32768,
+    "exact": [
+      "direction",
+      "depth",
+      "nodes"
+    ]
+  },
+  "referenceEvaluator": {
+    "diagnosticSeed": 7510001,
+    "zeroCoefficientMatchesOldV4": true
+  },
+  "inputTests": 14,
+  "training": {
+    "control": {
+      "summary": {
+        "episodes": 237799,
+        "totalWins": 10375,
+        "steps": 52657530,
+        "cornerSteps": 13296054,
+        "cpuSeconds": 450.002,
+        "wallSeconds": 512.448,
+        "truncated": 0
+      },
+      "earlyStagesUnchanged": true,
+      "allWeightsFinite": true,
+      "sha256": "09e1b2fcc1655573e2cc01b966cbbe3d9ab50f9d91793dc879e7c57b269ccf08"
+    },
+    "weak": {
+      "summary": {
+        "episodes": 235727,
+        "totalWins": 10431,
+        "steps": 52536915,
+        "cornerSteps": 15970189,
+        "cpuSeconds": 450.001,
+        "wallSeconds": 512.57,
+        "truncated": 0
+      },
+      "earlyStagesUnchanged": true,
+      "allWeightsFinite": true,
+      "sha256": "d79e69d20d5dcd58b9d3acc2c624a0493c76a62eea6da70194dcdcbb02d1bf1d"
+    },
+    "medium": {
+      "summary": {
+        "episodes": 244594,
+        "totalWins": 11097,
+        "steps": 54710488,
+        "cornerSteps": 22993975,
+        "cpuSeconds": 450,
+        "wallSeconds": 864.995,
+        "truncated": 0
+      },
+      "earlyStagesUnchanged": true,
+      "allWeightsFinite": true,
+      "sha256": "ffacaf7fe431b4fa5843096ce9b084754874a8cbdb007791847ad66ab5a96300"
+    },
+    "strong": {
+      "summary": {
+        "episodes": 251250,
+        "totalWins": 8490,
+        "steps": 52518337,
+        "cornerSteps": 36749446,
+        "cpuSeconds": 450,
+        "wallSeconds": 511.992,
+        "truncated": 0
+      },
+      "earlyStagesUnchanged": true,
+      "allWeightsFinite": true,
+      "sha256": "8d65f093ee47450f7d42140d032a6fcd969ec374f2584e7ecb2eb716d8f748cb"
+    }
+  },
+  "baselineUnchanged": true,
+  "selectedBrowserParity": {
+    "positions": 87,
+    "exact": [
+      "direction",
+      "depth",
+      "nodes"
+    ],
+    "stageCoverage": [
+      0,
+      1,
+      2
+    ]
+  },
+  "workerCases": 30,
+  "browserTiming": {
+    "v4": {
+      "positions": 98,
+      "meanMs": 19.785947244897947,
+      "p95Ms": 52.26208599999973,
+      "maxMs": 85.07275600000003,
+      "depths": [
+        0,
+        0,
+        1,
+        97
+      ],
+      "changedFromUnlimited": 0
+    },
+    "v5": {
+      "positions": 98,
+      "meanMs": 21.790122857142844,
+      "p95Ms": 44.809189999999944,
+      "maxMs": 75.4033330000002,
+      "depths": [
+        0,
+        0,
+        1,
+        97
+      ],
+      "changedFromUnlimited": 0
+    },
+    "environment": "Actual browser JS search in Node on this machine, alternating order; same leaf cache optimization for both models. Not a phone-specific success estimate.",
+    "compatible": true
+  },
+  "staticJSChecks": {
+    "syntax": true,
+    "moduleImports": true
+  },
+  "publishedModelMatchesFrozenCandidate": true
+}

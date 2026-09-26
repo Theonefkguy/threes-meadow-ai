@@ -1,0 +1,26 @@
+<!doctype html><meta charset="utf-8"><title>V17 browser bench</title><pre id="out">running…</pre>
+<script type="module">
+// Serve the repository root, open this page. Runs in a Worker like the website.
+const modelPath=new URLSearchParams(location.search).get('model')||'dist/models/ntuple-v4.bin';
+const statesPath=new URLSearchParams(location.search).get('states')||'training/v17-fast-depth/data/states.json';
+const src=`
+import {decodeModel} from '${location.origin}/dist/rl-model.js?v=20';
+import {chooseFastMove} from '${location.origin}/dist/fast-search.js?v=20';
+import {chooseLearnedMove} from '${location.origin}/dist/rl-search.js?v=20';
+onmessage=async()=>{
+  const model=decodeModel(await (await fetch('${location.origin}/${modelPath}')).arrayBuffer());
+  const states=await (await fetch('${location.origin}/${statesPath}')).json();
+  const run=(name,f)=>{const ms=[],depth={};for(const s of states){const t=performance.now();const r=f(s);ms.push(performance.now()-t);depth[r.depth]=(depth[r.depth]||0)+1;}
+    ms.sort((a,b)=>a-b);return {name,meanMs:ms.reduce((a,b)=>a+b)/ms.length,p95Ms:ms[Math.floor(.95*ms.length)],maxMs:ms.at(-1),depths:depth};};
+  for(const s of states.slice(0,50))chooseFastMove(s.board,s.next,model,{remaining:s.remaining});
+  postMessage([
+    run('website V4: 3-ply/24000 nodes/160ms',s=>chooseLearnedMove(s.board,s.next,model,{remaining:s.remaining})),
+    run('fast: 4-ply cutoff .003, 160ms',s=>chooseFastMove(s.board,s.next,model,{remaining:s.remaining})),
+    run('fast: 5-ply cutoff .01, 160ms',s=>chooseFastMove(s.board,s.next,model,{remaining:s.remaining,maxDepth:5,threshold:.01})),
+    run('fast: 5-ply cutoff .01, unlimited',s=>chooseFastMove(s.board,s.next,model,{remaining:s.remaining,maxDepth:5,threshold:.01,budgetMs:1e9,maxNodes:1e12})),
+    run('fast: 4-ply cutoff .003, unlimited',s=>chooseFastMove(s.board,s.next,model,{remaining:s.remaining,budgetMs:1e9,maxNodes:1e12})),
+  ]);
+};`;
+const w=new Worker(URL.createObjectURL(new Blob([src],{type:'text/javascript'})),{type:'module'});
+w.onmessage=e=>{document.getElementById('out').textContent=JSON.stringify(e.data,null,1);};w.postMessage(0);
+</script>

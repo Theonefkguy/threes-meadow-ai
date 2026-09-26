@@ -1,0 +1,5 @@
+#include "../v7/search.h"
+#include "../v7/pool.h"
+#include <climits>
+using namespace v2;
+int main(){try{init();Learner m;m.load("training/v7/base.ntd");auto pool=loadEarlyPool("training/v7/assessment-pool.txt");Search limited(m),full(m);full.maxNodes=INT_MAX;std::ofstream out("training/diagnosis-v7/snapshots.jsonl");out<<std::setprecision(17);for(int i=0;i<int(pool.states.size());i++){auto&s=pool.states[i];auto l=limited.choose(s.game.b,s.game.next,s.counts);auto a=full.choose(s.game.b,s.game.next,s.counts,3);auto q3=full.rootValues;int n3=full.nodes;auto b=full.choose(s.game.b,s.game.next,s.counts,4);if(full.completed!=4)throw std::runtime_error("incomplete");out<<"{\"index\":"<<i<<",\"limitedAction\":"<<l.direction<<",\"exact3Action\":"<<a.direction<<",\"exact4Action\":"<<b.direction<<",\"nodes3\":"<<n3<<",\"nodes4\":"<<full.nodes<<",\"rewards\":[";for(int d=0;d<4;d++)out<<(d?",":"")<<move(s.game.b,d).reward;out<<"],\"q3\":[";for(int d=0;d<4;d++)out<<(d?",":"")<<q3[d];out<<"],\"q4\":[";for(int d=0;d<4;d++)out<<(d?",":"")<<full.rootValues[d];out<<"]}"<<std::endl;}}catch(const std::exception&e){std::cerr<<e.what()<<std::endl;return 1;}}

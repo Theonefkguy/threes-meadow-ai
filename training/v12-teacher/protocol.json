@@ -1,0 +1,18 @@
+{
+  "base": "training/v7/base.ntd",
+  "baseSHA256": "d863b01eb0b958237e5ba9833da38c8f57ec833c983e4add1a196a515cbff590",
+  "sourceSeeds": [
+    11710001,
+    11710256
+  ],
+  "sampling": "One uniform reservoir state per fresh normal baselineMCTS640 game, before1536/death. Separate sampling RNG. No selecting on disagreement, score gap, failure or outcome. Equal weight per source game; not V11 rank-stratified distribution.",
+  "teacher": "same full4ply expectimax teacher asV11; all chance outcomes; frozen leaves; assert completed4",
+  "comparator": "same original MCTS with640 fixed simulations and depth8; public state only; deterministic search seed as during collection",
+  "intervention": "Force teacher or baseline first action, then identical baselineMCTS640 continuation to1536/death. This estimates one-step action improvement under that continuation, not whole-game teacher strength.",
+  "replicates": 32,
+  "randomization": "Matched32 rollout seeds per disagreement; shuffle remaining hidden deck consistent with public counts, resample current bonus value from public preview. SearchRNG separate. Diverged actions need not imply identical later exogenous events.",
+  "agreement": "Identical chosen actions imply exactly zero treatment effect with matched deterministic continuation; do not spend rollout budget on duplicates.",
+  "statistics": "Primary mean success difference across ALL256 states (agreement effects exactly0); paired t95%CI clustered by source state, conditional on fixed original policy. Also report disagreement-only mean and state-cluster CI,32 repetitions not treated as independent boards. Score and rank exploratory.",
+  "stopping": "Fixed256 source games and32 replicates for every disagreement. No early stopping from results.",
+  "scope": "Teacher quality audit only; no model training or site changes; no6144 evaluation."
+}

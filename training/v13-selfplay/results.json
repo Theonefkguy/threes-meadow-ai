@@ -1,0 +1,152 @@
+{
+  "initial": {
+    "wins": [
+      0
+    ],
+    "ratesPercent": [
+      0.0
+    ],
+    "meanPercent": 0.0,
+    "decisionMicrosecondsPerMove": 2.525118674918093,
+    "maxDecisionMilliseconds": 2.380800999999999
+  },
+  "mcts": {
+    "wins": [
+      489
+    ],
+    "ratesPercent": [
+      95.5078125
+    ],
+    "meanPercent": 95.5078125,
+    "decisionMicrosecondsPerMove": 1005.1330757488014,
+    "maxDecisionMilliseconds": 43.675760000000174
+  },
+  "rounds": {
+    "1": {
+      "wins": [
+        0,
+        0,
+        0
+      ],
+      "ratesPercent": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "meanPercent": 0.0,
+      "decisionMicrosecondsPerMove": 2.3977489488464454,
+      "maxDecisionMilliseconds": 0.679260000000001
+    },
+    "2": {
+      "wins": [
+        0,
+        0,
+        0
+      ],
+      "ratesPercent": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "meanPercent": 0.0,
+      "decisionMicrosecondsPerMove": 2.3720270201283555,
+      "maxDecisionMilliseconds": 0.8690920000000001
+    },
+    "3": {
+      "wins": [
+        0,
+        0,
+        0
+      ],
+      "ratesPercent": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "meanPercent": 0.0,
+      "decisionMicrosecondsPerMove": 2.333919496288468,
+      "maxDecisionMilliseconds": 0.8928080000000002
+    },
+    "4": {
+      "wins": [
+        0,
+        0,
+        0
+      ],
+      "ratesPercent": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "meanPercent": 0.0,
+      "decisionMicrosecondsPerMove": 2.3357159936114447,
+      "maxDecisionMilliseconds": 0.9379550000000008
+    }
+  },
+  "training": {
+    "202609271": {
+      "episodes": 8192,
+      "wins": 1,
+      "steps": 984565,
+      "cpuSeconds": 6.43712,
+      "roundWins": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    "202609272": {
+      "episodes": 8192,
+      "wins": 0,
+      "steps": 966434,
+      "cpuSeconds": 6.38798,
+      "roundWins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "202609273": {
+      "episodes": 8192,
+      "wins": 0,
+      "steps": 984651,
+      "cpuSeconds": 6.33112,
+      "roundWins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "primaryFinalMinusInitial": {
+    "differencePP": 0.0,
+    "CI95PP": [
+      -0.7178950026259456,
+      0.7178950026259456
+    ],
+    "p": null,
+    "clusters": 512,
+    "method": "Conservative boundary fallback: Bonferroni one-sided exact binomial bounds for initial success and any-final-model success per512 game-seed clusters. Paired t inference is degenerate with all zero successes."
+  },
+  "speedupInitialVsMCTS": 398.05379673151594,
+  "speedupFinalVsMCTS": 430.3318890216107,
+  "verification": {
+    "policyGradientFiniteDifferences": 20,
+    "allModelsFinite": true,
+    "valueHeadsZero": true,
+    "noTruncatedGames": true
+  },
+  "posthocDiagnostics": {
+    "table": {
+      "wins": 0,
+      "games": 512
+    },
+    "two": {
+      "wins": 366,
+      "games": 512
+    }
+  }
+}

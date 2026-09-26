@@ -1,0 +1,45 @@
+{
+  "round": "V23: better stage-2 (3072->6144) training under official-modern rules",
+  "fixedBeforeTraining": true,
+  "base": "training/v7/base.ntd (stage 2 = website V4 stage 2); all arms start from this stage 2. Stage 3 used as frozen bootstrap = copy of base stage 2 inside training (as V21 S2).",
+  "trainingPool": "pools/onpolicy.txt: states every 25 moves (max card 3072, alive) along the current website search (5-ply, cutoff 0.01, clamped, current model) continued from the 781 V21 train-3072 snapshots, rollout seeds 23100001+index.",
+  "arms": {
+    "A": {
+      "strongShare": 0.25,
+      "tc": false,
+      "alpha": [
+        0.008,
+        0.003,
+        0.001
+      ],
+      "seed": 23210001
+    },
+    "B": {
+      "strongShare": 0.25,
+      "tc": true,
+      "alpha": [
+        0.02,
+        0.0075,
+        0.0025
+      ],
+      "seed": 23210002
+    }
+  },
+  "common": "7200 CPU seconds each, run in parallel; TD(lambda=.5) five-step score return as V21; strong episodes = complete 3-ply expectimax with clamped leaves, chosen whenever their CPU share is below 25% (share of CPU, not of episodes: strong episodes are far slower); other episodes use the two-move policy.",
+  "deviationFromPlan": "The plan said 'about 10% of games with a strong player'. Because a strong episode costs ~70x a two-move episode, the share is defined on CPU time (25%) instead; this gives ~0.1% of episodes but ~1/4 of training compute.",
+  "evalPools": "First-3072 snapshots from new openings 23110001+ (complete 3-ply), in seed order: SCREEN = first 512, CONFIRM = next 2560. Disjoint from all training data.",
+  "screen": "Arms A and B (stage 2 swapped into NEW-style model with V21 stage 3; website search with clamp) on SCREEN to first 6144 or death, rollout base 23310001. Pick the arm with more 6144s; tie -> A. No test.",
+  "confirm": {
+    "compare": "winner vs CUR (website model: base stages 0-2 + V21 stage 3), both with clamp, same search, on CONFIRM, rollout base 23320001",
+    "primary": "P(reach 6144): exact two-sided McNemar at alpha 0.05 (single test)",
+    "interim": "at 1280 pairs: stop early only if p < 0.001 (Haybittle-Peto)",
+    "secondary": "mean score gained to 6144/death; avoidable-death audit fields"
+  },
+  "adoption": "Adopt the winner's stage 2 into the website model if the primary is significant and positive.",
+  "frozenModels": {
+    "A": "b49bd9c5eeaa717b28fb5e6ab1fe644dc0b3d2b93e1d5a4d22b7619d141ffbb7",
+    "B": "a0cb2918d451924840c2905ff785ab8f415f497afa25d9eed960761179f2d307",
+    "CUR": "5e0a5f28e05d9a21d52e487f62aee497c4fbc6d832ed17b88feda4399e25d4a2"
+  },
+  "frozenNote": "hashes recorded after training, before any evaluation run"
+}

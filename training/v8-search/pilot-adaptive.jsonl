@@ -1,0 +1,8 @@
+{"seed":9800001,"success":true,"moves":626,"cpu":0.63190042000000002,"searchCPU":0.63154348999999987,"maxMoveCPU":0.0010797359999999978,"overruns20pct":0,"work":4406240,"depths":[0,0,41,582,3,0,0,0,0,0]}
+{"seed":9800002,"success":true,"moves":535,"cpu":0.53958315599999995,"searchCPU":0.53932699899999959,"maxMoveCPU":0.0010342880000000498,"overruns20pct":0,"work":3774880,"depths":[0,0,42,489,4,0,0,0,0,0]}
+{"seed":9800003,"success":true,"moves":527,"cpu":0.53162302699999997,"searchCPU":0.53131357000000179,"maxMoveCPU":0.0010675679999998522,"overruns20pct":0,"work":3605440,"depths":[0,0,45,479,3,0,0,0,0,0]}
+{"seed":9800004,"success":true,"moves":534,"cpu":0.53933453599999992,"searchCPU":0.53905782100000743,"maxMoveCPU":0.0012943249999999296,"overruns20pct":1,"work":3766496,"depths":[0,0,24,503,7,0,0,0,0,0]}
+{"seed":9800005,"success":true,"moves":569,"cpu":0.57740208900000001,"searchCPU":0.57712511799999699,"maxMoveCPU":0.0019532250000002804,"overruns20pct":4,"work":3851680,"depths":[0,1,71,494,3,0,0,0,0,0]}
+{"seed":9800006,"success":true,"moves":481,"cpu":0.48794797300000026,"searchCPU":0.48772815499999522,"maxMoveCPU":0.0028757970000001798,"overruns20pct":3,"work":3307520,"depths":[0,0,25,454,2,0,0,0,0,0]}
+{"seed":9800007,"success":true,"moves":516,"cpu":0.52125933300000016,"searchCPU":0.52100327299999938,"maxMoveCPU":0.0015144529999999712,"overruns20pct":1,"work":3657248,"depths":[0,0,21,490,5,0,0,0,0,0]}
+{"seed":9800008,"success":true,"moves":490,"cpu":0.49518383099999985,"searchCPU":0.49493863100000057,"maxMoveCPU":0.0016178560000001951,"overruns20pct":2,"work":3341728,"depths":[0,0,36,448,6,0,0,0,0,0]}

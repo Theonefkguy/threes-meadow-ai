@@ -1,0 +1,27 @@
+{
+  "base": "training/v7/base.ntd",
+  "baseSHA256": "d863b01eb0b958237e5ba9833da38c8f57ec833c983e4add1a196a515cbff590",
+  "arms": {
+    "ordinary": 0,
+    "mixed": 0.25
+  },
+  "trainingSeeds": [
+    202609241,
+    202609242,
+    202609243
+  ],
+  "cpuSecondsPerRun": 120,
+  "poolSeeds": [
+    11210001,
+    11210128
+  ],
+  "pool": "First768 state from128 fresh baseline3ply games; shared fixed pool, no evaluation games; mixed25% episode starts from pool,75% normal openings. Reshuffle hidden deck on resume.",
+  "training": "Existing two-ply score policy and TD(lambda), score reward unchanged, no teacher/anchor updates. alpha .008/.003/.001 at50%/85%CPU. Freeze1536+ stages. Final checkpoint only.",
+  "evaluationSeeds": [
+    11310001,
+    11310512
+  ],
+  "evaluation": "unchanged MCTS1msCPU/move; same512 fresh seeds for baseline and6 models; stop1536/death",
+  "statistics": "Two prespecified contrasts: ordinary-minus-base and mixed-minus-ordinary. Average training replicas within game seed, paired t intervals and Holm2 tests. Conditional on3 training seeds. Baseline run once.",
+  "promotion": "No website change without stable gain and late-stage/browser validation"
+}

@@ -1,0 +1,8 @@
+{
+  "D4CanonicalBoardOverlapBetweenTrainAndValidation": 0,
+  "teacherSHA256": "f1545e681e1a7a133706ea66a44d089f6dc68bb854933324de0fba2d57d82bc3",
+  "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0",
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+  "parentCommit": "6918a48a4561b0ba7f8dd0b9292914149614c4a0",
+  "compileFlags": "-O3 -std=c++17 -pthread"
+}

@@ -1,0 +1,5 @@
+{"seed":2910001,"success":false,"terminal":true,"truncated":false,"maxRank":13,"scoreAtStop":265740,"moves":1442,"nodes":9494521,"depthCounts":[0,14,1428],"seconds":1.1785776240000001}
+{"seed":2910002,"success":false,"terminal":true,"truncated":false,"maxRank":12,"scoreAtStop":88419,"moves":876,"nodes":4746165,"depthCounts":[0,7,869],"seconds":0.61226369199999997}
+{"seed":2910003,"success":false,"terminal":true,"truncated":false,"maxRank":13,"scoreAtStop":208638,"moves":1148,"nodes":7214684,"depthCounts":[0,15,1133],"seconds":0.79385571600000004}
+{"seed":2910004,"success":false,"terminal":true,"truncated":false,"maxRank":12,"scoreAtStop":82719,"moves":731,"nodes":3499365,"depthCounts":[0,3,728],"seconds":0.42505752099999999}
+{"seed":2910005,"success":false,"terminal":true,"truncated":false,"maxRank":12,"scoreAtStop":69747,"moves":829,"nodes":4172657,"depthCounts":[0,4,825],"seconds":0.56801294899999999}

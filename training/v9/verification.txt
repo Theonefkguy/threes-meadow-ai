@@ -1,0 +1,1 @@
+20 zero-residual MCTS parity cases; sparse-MLP gradients; allD4 maps verified

@@ -1,0 +1,46 @@
+{
+  "v1": {
+    "games": 1000,
+    "successes": 419,
+    "rate": 0.419,
+    "wilson95": [
+      0.3887865610288496,
+      0.4498333738458103
+    ],
+    "truncated": 0,
+    "meanMovesToStop": 760.965,
+    "meanNativeMsPerMove": 2.435086381640417,
+    "depthCounts": [
+      0,
+      5319,
+      755646
+    ]
+  },
+  "v2": {
+    "games": 1000,
+    "successes": 642,
+    "rate": 0.642,
+    "wilson95": [
+      0.6117948042178514,
+      0.6711183963722509
+    ],
+    "truncated": 0,
+    "meanMovesToStop": 808.956,
+    "meanNativeMsPerMove": 2.3975390718667025,
+    "depthCounts": [
+      0,
+      5292,
+      803664
+    ]
+  },
+  "paired": {
+    "difference": 0.223,
+    "pairedNormal95": [
+      0.18079315321760947,
+      0.26520684678239054
+    ],
+    "v1Only": 145,
+    "v2Only": 368,
+    "mcnemarExactTwoSidedP": 2.186021373102564e-23
+  }
+}

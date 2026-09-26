@@ -1,0 +1,30 @@
+{
+  "v3": {
+    "positions": 98,
+    "meanMs": 13.696679622448984,
+    "p95Ms": 31.76344999999992,
+    "maxMs": 48.48565899999994,
+    "depths": [
+      0,
+      0,
+      2,
+      96
+    ],
+    "changedFromUnlimited": 0
+  },
+  "v4": {
+    "positions": 98,
+    "meanMs": 12.214559673469385,
+    "p95Ms": 30.776754999999866,
+    "maxMs": 39.16888699999981,
+    "depths": [
+      0,
+      0,
+      2,
+      96
+    ],
+    "changedFromUnlimited": 0
+  },
+  "environment": "Actual browser JS search in Node on this machine, alternating order; same leaf cache optimization for both models. Not a phone-specific success estimate.",
+  "compatible": true
+}

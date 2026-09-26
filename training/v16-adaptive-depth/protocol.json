@@ -1,0 +1,12 @@
+{
+  "purpose": "Paired pilot of calibrated adaptive depth against complete depth5 from first-768 states",
+  "base": "training/v7/base.ntd",
+  "baseSHA256": "d863b01eb0b958237e5ba9833da38c8f57ec833c983e4add1a196a515cbff590",
+  "snapshots": "First 16 frozen V15 snapshots",
+  "snapshotCount": 16,
+  "replicates": 2,
+  "arms": {"0": "adaptive: depth3 at >=6 empty, depth4 at 4-5 empty, depth5 at <=3 empty", "5": "complete depth5"},
+  "continuations": 64,
+  "endpoint": "3072 or death; also record reaching1536",
+  "stopping": "Fixed pilot; no outcome-based extension"
+}

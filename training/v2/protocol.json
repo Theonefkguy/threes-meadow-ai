@@ -1,0 +1,51 @@
+{
+  "primaryMetric": "Reached a tile >=3072 from a fresh normal opening before game over",
+  "screen": {
+    "firstSeed": 910001,
+    "gamesPerCandidate": 200,
+    "candidates": [
+      "v1",
+      "a-score-multistep",
+      "b-score-plus-goal",
+      "c-score-plus-goal-context"
+    ]
+  },
+  "holdout": {
+    "firstSeed": 1910001,
+    "gamesPerPolicy": 1000,
+    "policies": [
+      "v1",
+      "frozen-screen-winner"
+    ],
+    "selectionUsesHoldout": false
+  },
+  "search": {
+    "maxDepth": 3,
+    "maxNodes": 24000,
+    "wallClockCutoff": false
+  },
+  "browser": {
+    "maxDepth": 3,
+    "maxNodes": 24000,
+    "softBudgetMs": 160
+  },
+  "stopping": "Stop each evaluation game at first >=3072 or terminal; 6000-move cap reported separately. Scores at stop are not final scores.",
+  "selection": "Highest 3072 success count on screening seeds among completed candidates; prefer A, then B, then C on a tie. Freeze model hashes before inspecting independent holdout.",
+  "training": {
+    "extraEpisodesPerCandidate": 400000,
+    "normalFraction": 0.5,
+    "middleFraction": 0.5,
+    "middleHardReplayProbability": 0.2,
+    "truncatedLambda": 0.5,
+    "nStep": 5,
+    "goalBonus": 60000,
+    "goalWarmTeacherEpisodes": 20000,
+    "goalPilotEpisodes": 100000,
+    "goalExtension": "Extend B/C beyond the 100000-episode pilot only if its 200-opening screen beats both V1 and the fully trained 400000-episode A candidate; otherwise stop this direction. Candidate A completes 400000 episodes. Goal pilot follows the originally scheduled 400000-episode learning-rate schedule."
+  },
+  "limitations": [
+    "Candidates differ in training objective, auxiliary heads, learning rates and compute; not a clean single-factor ablation.",
+    "Reconstructed Threes rules, including bonus preview posterior, are shared by all candidates.",
+    "Native offline node-budget results do not include phone wall-time cutoffs."
+  ]
+}

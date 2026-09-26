@@ -1,0 +1,29 @@
+{
+  "collected": 2000,
+  "failedBefore1536": 101,
+  "candidates": 396,
+  "assessed": 256,
+  "hard": 252,
+  "extendedTo24": 245,
+  "clearSpread": 12,
+  "teacherDepths": {
+    "1": 0,
+    "2": 0,
+    "3": 212,
+    "4": 44
+  },
+  "teacherExamples": 951,
+  "sha256": {
+    "games.jsonl": "498cfe8029c3489adea94d56cbe4529ebe7b14a9c565f4b34de53513d47c684f",
+    "sources.jsonl": "5feee79eaa923906d65359c0ed3b054d44129d004fb9755c5514cc71b9cedc54",
+    "candidates.txt": "612140ee5ffdff1b6b6181bd385430d9eed3add2f72fc340a74fd06e06c35834",
+    "assessment-indices.json": "c977422a1a891a0ba7f1c9f19c7188c0dc9f862b74b26dd30d3e4ad194645319",
+    "assessment-pool.txt": "e35b631c03831d5e29140453751a3bd36c4e6d3685b98e1dcc35706c33b7054a",
+    "assessment.jsonl": "7a10c5d173a064231f27001814ec63c3d5db52c17649f3198e107ad11c18a249",
+    "hard-indices.json": "0698a7f1e8f1bf1a115326ff41f76a65d6e00b20a2d09ad8e86b047cebcfdd62",
+    "hard-pool.txt": "ee23f6e131ea148f7f53792726c885b854ebbe4256e8da93814cd3923eceeb17",
+    "teacher.txt": "c0b14d699ba2392403fe93a06ff15980f7594a5ceee2723141971173155901f2",
+    "search-teacher.txt": "84bef8eafa9848ddeb647301736eb1c1f3e6df25b5dab92f82815305832d5038"
+  },
+  "anchorExamples": 117464
+}

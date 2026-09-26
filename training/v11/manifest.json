@@ -1,0 +1,47 @@
+{
+  "frozenAt": "2026-09-21T16:32:30.767766+00:00",
+  "models": {
+    "policy-202609251": {
+      "sha256": "47febea54876a733c2984cf76747b68d13e19b2bf226733cbcc811ac3366b21f",
+      "epoch": 44,
+      "metrics": {
+        "epoch": 44,
+        "trainHuber": 0.126849,
+        "trainKL": 0.118593,
+        "trainRMSE": 6610.28,
+        "validationHuber": 0.0757846,
+        "validationKL": 0.118628,
+        "validationRMSE": 3725.16,
+        "selected": true
+      }
+    },
+    "policy-202609252": {
+      "sha256": "c1063da4f651dc59ed2cbf685dfa3e9cfc1d4540c934ed5f7106b808d0425335",
+      "epoch": 50,
+      "metrics": {
+        "epoch": 50,
+        "trainHuber": 0.126849,
+        "trainKL": 0.0919034,
+        "trainRMSE": 6610.28,
+        "validationHuber": 0.0757846,
+        "validationKL": 0.0904146,
+        "validationRMSE": 3725.16,
+        "selected": true
+      }
+    },
+    "policy-202609253": {
+      "sha256": "cf144f66d70933c54989892d9b7a91aa5d930f22e090c51ef39378e55882fd30",
+      "epoch": 49,
+      "metrics": {
+        "epoch": 49,
+        "trainHuber": 0.126849,
+        "trainKL": 0.0982267,
+        "trainRMSE": 6610.28,
+        "validationHuber": 0.0757846,
+        "validationKL": 0.102154,
+        "validationRMSE": 3725.16,
+        "selected": true
+      }
+    }
+  }
+}

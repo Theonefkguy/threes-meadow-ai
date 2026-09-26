@@ -1,0 +1,1 @@
+80 original-root-prior versus direct-student action parity checks passed; 20 policy-gradient finite differences passed; descent sign includes terminal advantage and sampling temperature

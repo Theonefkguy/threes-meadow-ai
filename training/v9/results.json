@@ -1,0 +1,188 @@
+{
+  "cohortGames": 512,
+  "trainingSeeds": [
+    202609231,
+    202609232,
+    202609233
+  ],
+  "baseline": {
+    "successCounts": [
+      488
+    ],
+    "ratesPercent": [
+      95.3125
+    ],
+    "meanRatePercent": 95.3125,
+    "cpuMsPerMove": 1.0065358933750006,
+    "simulationsPerMove": 607.6743345588235,
+    "maxMoveCPUms": 91.08556199999995,
+    "overrun20PercentMoves": 0.3915441176470588
+  },
+  "arms": {
+    "board_value": {
+      "successCounts": [
+        448,
+        449,
+        454
+      ],
+      "ratesPercent": [
+        87.5,
+        87.6953125,
+        88.671875
+      ],
+      "meanRatePercent": 87.95572916666667,
+      "cpuMsPerMove": 1.0062559326536111,
+      "simulationsPerMove": 358.8230204125824,
+      "maxMoveCPUms": 196.03368299999957,
+      "overrun20PercentMoves": 0.35421508569938104,
+      "vsBaselineExploratory": {
+        "differencePP": -7.356770833333336,
+        "CI95PP": [
+          -9.696813927606659,
+          -5.016727739060013
+        ],
+        "p": 1.3385721351522585e-09
+      },
+      "validationMean": {
+        "validationRMSE": 7018.329999999999,
+        "validationKL": 0.253662,
+        "validationHuber": 0.15202399999999996
+      }
+    },
+    "context_value": {
+      "successCounts": [
+        451,
+        461,
+        464
+      ],
+      "ratesPercent": [
+        88.0859375,
+        90.0390625,
+        90.625
+      ],
+      "meanRatePercent": 89.58333333333333,
+      "cpuMsPerMove": 1.0066972156619283,
+      "simulationsPerMove": 318.76856915343285,
+      "maxMoveCPUms": 190.57906999999918,
+      "overrun20PercentMoves": 0.3771681956661239,
+      "vsBaselineExploratory": {
+        "differencePP": -5.729166666666669,
+        "CI95PP": [
+          -8.099880707628595,
+          -3.358452625704743
+        ],
+        "p": 2.6746431089410674e-06
+      },
+      "validationMean": {
+        "validationRMSE": 7015.09,
+        "validationKL": 0.241893,
+        "validationHuber": 0.14974733333333334
+      }
+    },
+    "board_joint": {
+      "successCounts": [
+        467,
+        457,
+        481
+      ],
+      "ratesPercent": [
+        91.2109375,
+        89.2578125,
+        93.9453125
+      ],
+      "meanRatePercent": 91.47135416666667,
+      "cpuMsPerMove": 1.0070526241022648,
+      "simulationsPerMove": 360.5516442860216,
+      "maxMoveCPUms": 146.6547309999999,
+      "overrun20PercentMoves": 0.39738192545247825,
+      "vsBaselineExploratory": {
+        "differencePP": -3.8411458333333344,
+        "CI95PP": [
+          -6.146398599154709,
+          -1.5358930675119593
+        ],
+        "p": 0.0011339283648039062
+      },
+      "validationMean": {
+        "validationRMSE": 6985.876666666667,
+        "validationKL": 0.16262733333333335,
+        "validationHuber": 0.14978166666666667
+      }
+    },
+    "context_joint": {
+      "successCounts": [
+        436,
+        445,
+        475
+      ],
+      "ratesPercent": [
+        85.15625,
+        86.9140625,
+        92.7734375
+      ],
+      "meanRatePercent": 88.28125,
+      "cpuMsPerMove": 1.007077497289916,
+      "simulationsPerMove": 320.108608691565,
+      "maxMoveCPUms": 98.09854199999978,
+      "overrun20PercentMoves": 0.3783727621087942,
+      "vsBaselineExploratory": {
+        "differencePP": -7.031250000000002,
+        "CI95PP": [
+          -9.403152125250296,
+          -4.659347874749707
+        ],
+        "p": 1.0174412365433601e-08
+      },
+      "validationMean": {
+        "validationRMSE": 6968.256666666667,
+        "validationKL": 0.1839923333333333,
+        "validationHuber": 0.14761500000000002
+      }
+    }
+  },
+  "factorial": {
+    "context": {
+      "differencePP": -0.781250000000001,
+      "CI95PP": [
+        -2.342577916048705,
+        0.7800779160487027
+      ],
+      "p": 0.3260499902462407,
+      "holmP": 0.3260499902462407
+    },
+    "policy": {
+      "differencePP": 1.1067708333333326,
+      "CI95PP": [
+        -0.3666050136835217,
+        2.580146680350187
+      ],
+      "p": 0.14061842386109094,
+      "holmP": 0.2812368477221819
+    }
+  },
+  "interactionExploratory": {
+    "differencePP": -4.817708333333336,
+    "CI95PP": [
+      -7.829281620969441,
+      -1.8061350456972294
+    ],
+    "p": 0.001770198897031377
+  },
+  "initialValidation": {
+    "epoch": 0,
+    "trainHuber": 0.1546,
+    "trainKL": 0.208061,
+    "trainRMSE": 7406.37,
+    "validationHuber": 0.192767,
+    "validationKL": 0.220342,
+    "validationRMSE": 8615,
+    "selected": true
+  },
+  "limitations": [
+    "CIs conditional on these three training seeds; clusters are512 game seeds, not1536 independent games.",
+    "CPU-timed search changes trajectories with host speed; compare observed compute as well as success.",
+    "Same simulation seed separates search from game RNG but is not perfect paired exogenous spawn coupling once trajectories diverge.",
+    "Search distillation of score teacher; not a newly completed iterative on-policy RL loop.",
+    "No6144 or browser success evaluation in this round."
+  ]
+}

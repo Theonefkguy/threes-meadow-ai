@@ -1,0 +1,136 @@
+{
+  "selection": {
+    "winner": "strong",
+    "bestShaping": "strong",
+    "coefficient": 32768,
+    "screening": {
+      "control": {
+        "games": 400,
+        "wins6144": 64,
+        "reached3072": 292,
+        "lateMoves": 100883,
+        "cornerMoves": 34404
+      },
+      "weak": {
+        "games": 400,
+        "wins6144": 70,
+        "reached3072": 292,
+        "lateMoves": 100281,
+        "cornerMoves": 36706
+      },
+      "medium": {
+        "games": 400,
+        "wins6144": 63,
+        "reached3072": 292,
+        "lateMoves": 99580,
+        "cornerMoves": 44710
+      },
+      "strong": {
+        "games": 400,
+        "wins6144": 71,
+        "reached3072": 292,
+        "lateMoves": 98638,
+        "cornerMoves": 72556
+      }
+    },
+    "hashes": {
+      "control": "09e1b2fcc1655573e2cc01b966cbbe3d9ab50f9d91793dc879e7c57b269ccf08",
+      "weak": "d79e69d20d5dcd58b9d3acc2c624a0493c76a62eea6da70194dcdcbb02d1bf1d",
+      "medium": "ffacaf7fe431b4fa5843096ce9b084754874a8cbdb007791847ad66ab5a96300",
+      "strong": "8d65f093ee47450f7d42140d032a6fcd969ec374f2584e7ecb2eb716d8f748cb"
+    },
+    "frozenAt": "2026-09-21T07:48:25.701093+00:00",
+    "holdoutUsedForSelection": false
+  },
+  "policies": {
+    "v4": {
+      "games": 5000,
+      "wins6144": 721,
+      "rate6144": 0.1442,
+      "wilson95": [
+        0.13473590476740951,
+        0.15421039193669314
+      ],
+      "reached3072": 3278,
+      "rate3072": 0.6556,
+      "rate6144Given3072": 0.21995118974984748,
+      "truncated": 0,
+      "meanMoves": 1050.4038,
+      "lateMoves": 1160891,
+      "cornerMoves": 324745,
+      "cornerRateLate": 0.2797377187005498
+    },
+    "control": {
+      "games": 5000,
+      "wins6144": 745,
+      "rate6144": 0.149,
+      "wilson95": [
+        0.1393994862071628,
+        0.15913944055826734
+      ],
+      "reached3072": 3278,
+      "rate3072": 0.6556,
+      "rate6144Given3072": 0.22727272727272727,
+      "truncated": 0,
+      "meanMoves": 1053.0022,
+      "lateMoves": 1173961,
+      "cornerMoves": 378784,
+      "cornerRateLate": 0.32265467081104054
+    },
+    "shaping": {
+      "games": 5000,
+      "wins6144": 727,
+      "rate6144": 0.1454,
+      "wilson95": [
+        0.13590146149192625,
+        0.1554429927275083
+      ],
+      "reached3072": 3278,
+      "rate3072": 0.6556,
+      "rate6144Given3072": 0.22178157413056743,
+      "truncated": 0,
+      "meanMoves": 1052.3936,
+      "lateMoves": 1170882,
+      "cornerMoves": 853669,
+      "cornerRateLate": 0.7290820082638558
+    }
+  },
+  "comparisons": {
+    "v4_vs_control": {
+      "difference": 0.0048,
+      "difference95": [
+        -0.007755539092655482,
+        0.01735553909265548
+      ],
+      "aOnly": 501,
+      "bOnly": 525,
+      "exactMcNemarP": 0.47274446881862886
+    },
+    "v4_vs_shaping": {
+      "difference": 0.0012,
+      "difference95": [
+        -0.011294859647839186,
+        0.013694859647839185
+      ],
+      "aOnly": 505,
+      "bOnly": 511,
+      "exactMcNemarP": 0.8753619757222451
+    },
+    "control_vs_shaping": {
+      "difference": -0.0036,
+      "difference95": [
+        -0.016253376251925807,
+        0.009053376251925808
+      ],
+      "aOnly": 530,
+      "bOnly": 512,
+      "exactMcNemarP": 0.5984637629353956
+    }
+  },
+  "selectedHoldout": "shaping",
+  "primaryComparison": "v4_vs_shaping",
+  "statisticalPromotionGate": false,
+  "inferenceNote": "Primary promotion comparison was fixed by screening. Other pairwise intervals are descriptive, not multiplicity-adjusted.",
+  "browserGate": true,
+  "promote": false
+}

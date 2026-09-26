@@ -1,0 +1,18 @@
+{
+  "purpose": "secondary sensitivity check after initial fit diagnostic; not a new game-performance test",
+  "folds": 5,
+  "groupBy": "source game; no cross-game D4-identical examples",
+  "shuffleSeed": 202609220,
+  "trainingShuffleSeeds": [
+    202609221,
+    202609222,
+    202609223
+  ],
+  "epochs": [
+    0,
+    1,
+    10,
+    100
+  ],
+  "alpha": 0.01
+}

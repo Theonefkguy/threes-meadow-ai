@@ -1,0 +1,49 @@
+{
+  "round": "V19 depth/threshold from first-3072 snapshots",
+  "base": "training/v7/base.ntd (= dist/models/ntuple-v8.bin; mid/late tables identical to V4)",
+  "baseSHA256": "d863b01eb0b958237e5ba9833da38c8f57ec833c983e4add1a196a515cbff590",
+  "fixedBeforeContinuations": true,
+  "pool": {
+    "generator": "complete 3-ply expectimax (threshold 0), normal openings, seeds from 19110001 upward",
+    "snapshot": "full game state (board, unseen deck, preview, public counts, turn) at the first 3072; first 1536 also saved for later use",
+    "size": 1024,
+    "selection": "the first 1024 first-3072 snapshots in source-seed order; no filtering",
+    "sha256": "6574aba382d998351118714ddbd1ffd2d934eefd8b3b1411bedf14fbc5f32acc",
+    "sourceGames": "1600 games (seeds 19110001-19111600) produced 1054 first-3072 snapshots; first 1024 by seed used"
+  },
+  "continuation": "Unseen ordinary deck reshuffled with rollout seed 19120001+index (search never reads it). Same rollout seed for every arm. Play to first 6144 or real death; fixed complete depth, no node/time cutoff; 20000-move guard raises an error.",
+  "arms": {
+    "D5": {
+      "depth": 5,
+      "threshold": 0.01,
+      "role": "current website default (reference)"
+    },
+    "S6": {
+      "depth": 6,
+      "threshold": 0.01,
+      "role": "candidate"
+    },
+    "S6w": {
+      "depth": 6,
+      "threshold": 0.02,
+      "role": "candidate"
+    },
+    "D5n": {
+      "depth": 5,
+      "threshold": 0.005,
+      "role": "candidate"
+    }
+  },
+  "primary": "Each candidate minus D5 in P(6144 | first-3072 snapshot): paired difference with 95% CI (normal approx.) and exact two-sided McNemar; Holm correction across the three comparisons.",
+  "secondary": "Mean CPU ms per move (native, single thread); pairwise candidate comparisons (exploratory); moves survived.",
+  "decision": "A candidate is called better than D5 only if its Holm-adjusted p < 0.05 and the difference is positive. Among candidates not distinguishable from each other, prefer the cheaper one. Browser timing is checked before any website change.",
+  "scope": "Results are conditional on 3-ply-generated first-3072 positions and on this frozen model; they measure late-game skill, not whole-game success rate.",
+  "pilot": "Cost pilot only on snapshots from separate seeds (99970001+); excluded.",
+  "pilotCost": {
+    "D5": 3.79,
+    "S6": 6.39,
+    "S6w": 2.13,
+    "D5n": 7.61,
+    "unit": "CPU s per continuation, 12 pilot snapshots"
+  }
+}

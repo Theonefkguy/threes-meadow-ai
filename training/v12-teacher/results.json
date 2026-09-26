@@ -1,0 +1,55 @@
+{
+  "sourceStates": 256,
+  "disagreementStates": 70,
+  "agreementStates": 186,
+  "disagreementPercent": 27.34375,
+  "pairedReplicates": 2240,
+  "continuations": 4480,
+  "primaryAllStatesPP": {
+    "mean": 0.20751953125,
+    "CI95": [
+      -0.05838425115613881,
+      0.4734233136561388
+    ],
+    "p": 0.12555500231151015,
+    "clusters": 256
+  },
+  "disagreementOnlyPP": {
+    "mean": 0.7589285714285714,
+    "CI95": [
+      -0.2190880022489278,
+      1.7369451451060707
+    ],
+    "p": 0.12618433394792114,
+    "clusters": 70
+  },
+  "disagreementTeacherWins": 2160,
+  "disagreementBaseWins": 2143,
+  "disagreementTeacherPercent": 96.42857142857143,
+  "disagreementBasePercent": 95.66964285714286,
+  "statesWithHigherTeacherEstimate": 26,
+  "statesWithLowerTeacherEstimate": 19,
+  "statesWithTiedEstimate": 25,
+  "scoreDifferenceExploratory": {
+    "mean": 242.42544642857143,
+    "CI95": [
+      -83.57419880973356,
+      568.4250916668764
+    ],
+    "p": 0.14249115886646,
+    "clusters": 70
+  },
+  "meanTeacherDecisionCPUms": 25.41030314453121,
+  "meanBaseDecisionCPUms": 1.138789433594069,
+  "rankCounts": {
+    "6": 11,
+    "8": 27,
+    "7": 20,
+    "11": 98,
+    "10": 53,
+    "5": 5,
+    "9": 37,
+    "4": 4,
+    "3": 1
+  }
+}

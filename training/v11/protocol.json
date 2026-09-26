@@ -1,0 +1,25 @@
+{
+  "base": "training/v7/base.ntd",
+  "baseSHA256": "d863b01eb0b958237e5ba9833da38c8f57ec833c983e4add1a196a515cbff590",
+  "collectionSeeds": [
+    11410001,
+    11410512
+  ],
+  "collection": "512 fresh baseline MCTS640-simulation games. Independent reservoir in4 max-rank bands plus last failure state. Both successes and failures.",
+  "teacher": "Full4ply expectimax, all chance outcomes, no node cutoff; same frozen value leaves. More exhaustive labels than one-step prior; superiority over MCTS640 not assumed.",
+  "split": "(sourceSeed-11410001)%5==0 validation; all D4 augmentation stays within source game",
+  "trainingSeeds": [
+    202609251,
+    202609252,
+    202609253
+  ],
+  "training": "Policy-only context32ReLU network; teacher softmax(Q4/2000), residual logits added to frozen baseQ/2000; KL loss only, no value loss or value updates. Adam.001, batch16,50epochs, D4 augmentation. Checkpoint lowest validationKL including epoch0.",
+  "inference": "Root policy prior only, every actual move. All values and internal-node priors remain original. No network corrections at1536+. Root inference inside time budget.",
+  "evaluationSeeds": [
+    11510001,
+    11510512
+  ],
+  "evaluation": "baseline and3 models,512 shared fresh games each; original MCTS1msCPU/move, stop1536/death",
+  "statistics": "Single primary contrast: mean3 trained replicas minus baseline, cluster by512 game seeds, paired t95%CI/test conditional on3 training seeds. No winner picked from game results.",
+  "promotion": "Research checkpoint delivery; no automatic website update without stable advantage and browser/later-stage validation."
+}

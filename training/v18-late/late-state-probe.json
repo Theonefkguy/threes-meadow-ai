@@ -1,0 +1,34 @@
+[
+ {
+  "name": "exact3",
+  "meanMs": 0.97,
+  "p95Ms": 2.0,
+  "maxMs": 5.5,
+  "agreeExact4": 694,
+  "n": 859
+ },
+ {
+  "name": "4@0.003",
+  "meanMs": 4.83,
+  "p95Ms": 11.0,
+  "maxMs": 22.3,
+  "agreeExact4": 836,
+  "n": 859
+ },
+ {
+  "name": "exact4",
+  "meanMs": 47.14,
+  "p95Ms": 123.3,
+  "maxMs": 417.6,
+  "agreeExact4": 859,
+  "n": 859
+ },
+ {
+  "name": "5@0.01",
+  "meanMs": 9.32,
+  "p95Ms": 16.0,
+  "maxMs": 33.8,
+  "agreeExact4": 755,
+  "n": 859
+ }
+]

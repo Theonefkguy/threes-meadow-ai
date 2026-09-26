@@ -1,0 +1,40 @@
+name: Publish Threes Meadow
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run tests
+        run: node --test tests/*.test.mjs
+      - name: Compile native evaluator
+        run: |
+          mkdir -p work
+          g++ -std=c++17 -O3 training/v24-acceptance/game.cpp -o work/v24-game
+      - name: Verify evidence and replay both arms
+        run: python3 scripts/verify-release.py --replay work/v24-game
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,651 @@
+{
+  "modelSHA256": "d863b01eb0b958237e5ba9833da38c8f57ec833c983e4add1a196a515cbff590",
+  "sampleSplit": {
+    "groups": 100,
+    "heldoutGroups": 20,
+    "examples": [
+      729,
+      222
+    ],
+    "groupBy": "collection game, union identical D4 afterstates",
+    "splitSeed": 202609220
+  },
+  "fit": {
+    "fit-base": [
+      {
+        "epoch": 0,
+        "rmse": [
+          6460.731539694778,
+          3452.6531656517373
+        ],
+        "bias": [
+          -553.8094413876634,
+          -673.5323163765365
+        ],
+        "normalDriftRMSE": 0,
+        "onePlyTeacherAgreement": [
+          0.5077720207253886,
+          0.6101694915254238
+        ],
+        "note": "one-ply proxy for fitting only, not deployed3-ply policy accuracy"
+      }
+    ],
+    "fit-pure-202609221": [
+      {
+        "epoch": 0,
+        "rmse": [
+          6460.731539694778,
+          3452.6531656517373
+        ],
+        "bias": [
+          -553.8094413876634,
+          -673.5323163765365
+        ],
+        "normalDriftRMSE": 0,
+        "onePlyTeacherAgreement": [
+          0.5077720207253886,
+          0.6101694915254238
+        ],
+        "note": "one-ply proxy for fitting only, not deployed3-ply policy accuracy"
+      },
+      {
+        "epoch": 1,
+        "rmse": [
+          6303.529850796446,
+          3437.1741327955865
+        ],
+        "bias": [
+          -511.7059971949054,
+          -626.4977563426696
+        ],
+        "normalDriftRMSE": 90.90060914648339,
+        "onePlyTeacherAgreement": [
+          0.5233160621761658,
+          0.6101694915254238
+        ],
+        "note": "one-ply proxy for fitting only, not deployed3-ply policy accuracy"
+      },
+      {
+        "epoch": 10,
+        "rmse": [
+          5190.425927921729,
+          3379.4277989633956
+        ],
+        "bias": [
+          -341.1064532893528,
+          -434.05348473200564
+        ],
+        "normalDriftRMSE": 577.4543936747859,
+        "onePlyTeacherAgreement": [
+          0.533678756476684,
+          0.5932203389830508
+        ],
+        "note": "one-ply proxy for fitting only, not deployed3-ply policy accuracy"
+      },
+      {
+        "epoch": 100,
+        "rmse": [
+          1735.6223744224985,
+          3454.664313828212
+        ],
+        "bias": [
+          -87.18710962372234,
+          -351.02327243490976
+        ],
+        "normalDriftRMSE": 1509.0451683652338,
+        "onePlyTeacherAgreement": [
+          0.6113989637305699,
+          0.5423728813559322
+        ],
+        "note": "one-ply proxy for fitting only, not deployed3-ply policy accuracy"
+      }
+    ],
+    "fit-pure-202609222": [
+      {
+        "epoch": 0,
+        "rmse": [
+          6460.731539694778,
+          3452.6531656517373
+        ],
+        "bias": [
+          -553.8094413876634,
+          -673.5323163765365
+        ],
+        "normalDriftRMSE": 0,
+        "onePlyTeacherAgreement": [
+          0.5077720207253886,
+          0.6101694915254238
+        ],
+        "note": "one-ply proxy for fitting only, not deployed3-ply policy accuracy"
+      },
+      {
+        "epoch": 1,
+        "rmse": [
+          6303.661653571952,
+          3437.045050653266
+        ],
+        "bias": [
+          -510.970434220045,
+          -625.7889563361124
+        ],
+        "normalDriftRMSE": 91.67677768264757,
+        "onePlyTeacherAgreement": [
+          0.5233160621761658,
+          0.6101694915254238
+        ],
+        "note": "one-ply proxy for fitting only, not deployed3-ply policy accuracy"
+      },
+      {
+        "epoch": 10,
+        "rmse": [
+          5190.625165817776,
+          3379.362319263293
+        ],
+        "bias": [
+          -340.14970726581106,
+          -433.17701026559587
+        ],
+        "normalDriftRMSE": 577.939386827477,
+        "onePlyTeacherAgreement": [
+          0.533678756476684,
+          0.5932203389830508
+        ],
+        "note": "one-ply proxy for fitting only, not deployed3-ply policy accuracy"
+      },
+      {
+        "epoch": 100,
+        "rmse": [
+          1735.701396468139,
+          3454.665656412633
+        ],
+        "bias": [
+          -86.66190082310004,
+          -350.5586762654208
+        ],
+        "normalDriftRMSE": 1509.1879022018818,
+        "onePlyTeacherAgreement": [
+          0.6113989637305699,
+          0.5423728813559322
+        ],
+        "note": "one-ply proxy for fitting only, not deployed3-ply policy accuracy"
+      }
+    ],
+    "fit-pure-202609223": [
+      {
+        "epoch": 0,
+        "rmse": [
+          6460.731539694778,
+          3452.6531656517373
+        ],
+        "bias": [
+          -553.8094413876634,
+          -673.5323163765365
+        ],
+        "normalDriftRMSE": 0,
+        "onePlyTeacherAgreement": [
+          0.5077720207253886,
+          0.6101694915254238
+        ],
+        "note": "one-ply proxy for fitting only, not deployed3-ply policy accuracy"
+      },
+      {
+        "epoch": 1,
+        "rmse": [
+          6303.449391059105,
+          3437.070483830142
+        ],
+        "bias": [
+          -510.8105348830705,
+          -625.6446647998844
+        ],
+        "normalDriftRMSE": 91.87813902021364,
+        "onePlyTeacherAgreement": [
+          0.5233160621761658,
+          0.6101694915254238
+        ],
+        "note": "one-ply proxy for fitting only, not deployed3-ply policy accuracy"
+      },
+      {
+        "epoch": 10,
+        "rmse": [
+          5190.8759586808865,
+          3379.4045550429482
+        ],
+        "bias": [
+          -340.2217181914154,
+          -433.3826434279741
+        ],
+        "normalDriftRMSE": 577.4513640474195,
+        "onePlyTeacherAgreement": [
+          0.533678756476684,
+          0.5932203389830508
+        ],
+        "note": "one-ply proxy for fitting only, not deployed3-ply policy accuracy"
+      },
+      {
+        "epoch": 100,
+        "rmse": [
+          1735.5542809821868,
+          3454.715743257495
+        ],
+        "bias": [
+          -86.86877115458137,
+          -350.7270731324941
+        ],
+        "normalDriftRMSE": 1509.216180384396,
+        "onePlyTeacherAgreement": [
+          0.6113989637305699,
+          0.5423728813559322
+        ],
+        "note": "one-ply proxy for fitting only, not deployed3-ply policy accuracy"
+      }
+    ],
+    "fit-r0": [
+      {
+        "epoch": 0,
+        "rmse": [
+          6520.402668581328,
+          3606.320017222818
+        ],
+        "bias": [
+          -1009.1415239380885,
+          -1182.5536463615445
+        ],
+        "normalDriftRMSE": 809.2887199557426,
+        "onePlyTeacherAgreement": [
+          0.5284974093264249,
+          0.6610169491525424
+        ],
+        "note": "one-ply proxy for fitting only, not deployed3-ply policy accuracy"
+      }
+    ],
+    "fit-r10": [
+      {
+        "epoch": 0,
+        "rmse": [
+          6393.7478065555215,
+          3456.2478163316673
+        ],
+        "bias": [
+          -864.2846751996451,
+          -991.4964103205099
+        ],
+        "normalDriftRMSE": 716.2372025082744,
+        "onePlyTeacherAgreement": [
+          0.5284974093264249,
+          0.6610169491525424
+        ],
+        "note": "one-ply proxy for fitting only, not deployed3-ply policy accuracy"
+      }
+    ],
+    "fit-r10teacher": [
+      {
+        "epoch": 0,
+        "rmse": [
+          5557.502424939958,
+          3265.3688900628836
+        ],
+        "bias": [
+          -1060.7166162408844,
+          -1085.5150137313835
+        ],
+        "normalDriftRMSE": 932.6818191969808,
+        "onePlyTeacherAgreement": [
+          0.5751295336787565,
+          0.6610169491525424
+        ],
+        "note": "one-ply proxy for fitting only, not deployed3-ply policy accuracy"
+      }
+    ],
+    "fit-r25": [
+      {
+        "epoch": 0,
+        "rmse": [
+          6249.478835395123,
+          3422.192991115418
+        ],
+        "bias": [
+          -787.8623838252665,
+          -845.0002359458313
+        ],
+        "normalDriftRMSE": 591.676111716623,
+        "onePlyTeacherAgreement": [
+          0.533678756476684,
+          0.5932203389830508
+        ],
+        "note": "one-ply proxy for fitting only, not deployed3-ply policy accuracy"
+      }
+    ]
+  },
+  "crossValidation": {
+    "202609221": [
+      {
+        "epoch": 0,
+        "trainRMSE": 5897.445276468654,
+        "outOfFoldRMSE": 5897.445276468652,
+        "normalDriftRMSEMean": 0,
+        "heldoutFoldRMSE": [
+          3452.6531656517373,
+          10295.90875528932,
+          5513.886265493721,
+          4399.620547331181,
+          2798.631408068265
+        ]
+      },
+      {
+        "epoch": 1,
+        "trainRMSE": 5756.861501052481,
+        "outOfFoldRMSE": 5889.35486499478,
+        "normalDriftRMSEMean": 90.66690975319706,
+        "heldoutFoldRMSE": [
+          3437.1741327955865,
+          10291.782999757363,
+          5504.02012307415,
+          4392.540631693289,
+          2779.06015155145
+        ]
+      },
+      {
+        "epoch": 10,
+        "trainRMSE": 4763.341810496779,
+        "outOfFoldRMSE": 5867.072518000859,
+        "normalDriftRMSEMean": 550.1778465354522,
+        "heldoutFoldRMSE": [
+          3379.4277989633956,
+          10278.90474492988,
+          5461.757045470311,
+          4428.348681930751,
+          2701.7521045163126
+        ]
+      },
+      {
+        "epoch": 100,
+        "trainRMSE": 1650.2557932085974,
+        "outOfFoldRMSE": 5932.721006363212,
+        "normalDriftRMSEMean": 1396.9413000012717,
+        "heldoutFoldRMSE": [
+          3454.664313828212,
+          10282.023492039438,
+          5390.334474374414,
+          4924.562301049044,
+          2674.541060777296
+        ]
+      }
+    ],
+    "202609222": [
+      {
+        "epoch": 0,
+        "trainRMSE": 5897.445276468654,
+        "outOfFoldRMSE": 5897.445276468652,
+        "normalDriftRMSEMean": 0,
+        "heldoutFoldRMSE": [
+          3452.6531656517373,
+          10295.90875528932,
+          5513.886265493721,
+          4399.620547331181,
+          2798.631408068265
+        ]
+      },
+      {
+        "epoch": 1,
+        "trainRMSE": 5756.865679673826,
+        "outOfFoldRMSE": 5889.330754555872,
+        "normalDriftRMSEMean": 91.09448750689415,
+        "heldoutFoldRMSE": [
+          3437.045050653266,
+          10291.810160966805,
+          5504.0424280020525,
+          4392.361095277628,
+          2779.099129753479
+        ]
+      },
+      {
+        "epoch": 10,
+        "trainRMSE": 4763.358109399423,
+        "outOfFoldRMSE": 5867.068335198457,
+        "normalDriftRMSEMean": 550.2724295651849,
+        "heldoutFoldRMSE": [
+          3379.362319263293,
+          10278.907860750405,
+          5461.825281007295,
+          4428.206368698869,
+          2701.865057127918
+        ]
+      },
+      {
+        "epoch": 100,
+        "trainRMSE": 1650.2297296955776,
+        "outOfFoldRMSE": 5932.728062707972,
+        "normalDriftRMSEMean": 1396.7911002554995,
+        "heldoutFoldRMSE": [
+          3454.665656412633,
+          10282.06227149262,
+          5390.323936230418,
+          4924.5585482036995,
+          2674.4943696403034
+        ]
+      }
+    ],
+    "202609223": [
+      {
+        "epoch": 0,
+        "trainRMSE": 5897.445276468654,
+        "outOfFoldRMSE": 5897.445276468652,
+        "normalDriftRMSEMean": 0,
+        "heldoutFoldRMSE": [
+          3452.6531656517373,
+          10295.90875528932,
+          5513.886265493721,
+          4399.620547331181,
+          2798.631408068265
+        ]
+      },
+      {
+        "epoch": 1,
+        "trainRMSE": 5756.883067241433,
+        "outOfFoldRMSE": 5889.326658560972,
+        "normalDriftRMSEMean": 91.06885087941961,
+        "heldoutFoldRMSE": [
+          3437.070483830142,
+          10291.740730347277,
+          5504.051368995453,
+          4392.4624994967135,
+          2779.1174769846693
+        ]
+      },
+      {
+        "epoch": 10,
+        "trainRMSE": 4763.486204086948,
+        "outOfFoldRMSE": 5867.071334483,
+        "normalDriftRMSEMean": 550.0042600345878,
+        "heldoutFoldRMSE": [
+          3379.4045550429482,
+          10278.94606986482,
+          5461.729301083305,
+          4428.26197275623,
+          2701.7961369853792
+        ]
+      },
+      {
+        "epoch": 100,
+        "trainRMSE": 1650.1960359015686,
+        "outOfFoldRMSE": 5932.718045200852,
+        "normalDriftRMSEMean": 1396.8059620668942,
+        "heldoutFoldRMSE": [
+          3454.715743257495,
+          10282.016975826073,
+          5390.321087872112,
+          4924.592064866738,
+          2674.4319924644333
+        ]
+      }
+    ]
+  },
+  "teacherActions": {
+    "teacherAction": {
+      "changed": 11,
+      "of": 256,
+      "meanRolloutDeltaAllStates": 0.001953125,
+      "meanRolloutDeltaChangedStates": 0.045454545454545456,
+      "caution": "exploratory adaptive8/24 rollouts with baseline continuation; selected failed-game states; not full teacher game success"
+    },
+    "exact3Action": {
+      "changed": 2,
+      "of": 256,
+      "meanRolloutDeltaAllStates": 0.0006510416666666666,
+      "meanRolloutDeltaChangedStates": 0.08333333333333333,
+      "caution": "exploratory adaptive8/24 rollouts with baseline continuation; selected failed-game states; not full teacher game success"
+    },
+    "exact4Action": {
+      "changed": 63,
+      "of": 256,
+      "meanRolloutDeltaAllStates": 0.0087890625,
+      "meanRolloutDeltaChangedStates": 0.03571428571428571,
+      "caution": "exploratory adaptive8/24 rollouts with baseline continuation; selected failed-game states; not full teacher game success"
+    }
+  },
+  "limits": [
+    "Original candidate fit audit is in-sample, even on the later diagnostic split. Only new pure fits exclude heldout source games.",
+    "Three seeds only vary supervised sample ordering; they are not three independent online RL trainings.",
+    "Cross-validation is secondary sensitivity analysis, no inference of game success from RMSE alone.",
+    "Current game simulator rules and search assumptions are held fixed.",
+    "512-game diagnostic cannot establish equivalence or reliably detect small gains.",
+    "No new online replay-dose, depth-matched RL, auxiliary-goal or early-state curriculum experiment in this diagnostic."
+  ],
+  "games": {
+    "current3": {
+      "wins": 486,
+      "n": 512,
+      "rate": 0.94921875,
+      "meanCPUSeconds": 0.290579990234375,
+      "depthCounts": [
+        0,
+        627,
+        270100,
+        0
+      ]
+    },
+    "exact3": {
+      "wins": 485,
+      "n": 512,
+      "rate": 0.947265625,
+      "meanCPUSeconds": 0.297661634765625,
+      "depthCounts": [
+        0,
+        0,
+        270250,
+        0
+      ]
+    },
+    "exact4": {
+      "wins": 500,
+      "n": 512,
+      "rate": 0.9765625,
+      "meanCPUSeconds": 17.15855125,
+      "depthCounts": [
+        0,
+        0,
+        0,
+        270675
+      ]
+    }
+  },
+  "comparisons": {
+    "exact4-exact3": {
+      "difference": 0.029296875,
+      "paired95CI": [
+        0.006770000279346704,
+        0.051823749720653296
+      ],
+      "intervalMethod": "paired normal approximation",
+      "onlyA": 25,
+      "onlyB": 10,
+      "mcnemarExactP": 0.016673847800120715,
+      "secondaryExceptExact4MinusExact3": false
+    },
+    "exact3-current3": {
+      "difference": -0.001953125,
+      "paired95CI": [
+        -0.016792923162669723,
+        0.012886673162669723
+      ],
+      "intervalMethod": "paired normal approximation",
+      "onlyA": 7,
+      "onlyB": 8,
+      "mcnemarExactP": 1.0,
+      "secondaryExceptExact4MinusExact3": true
+    },
+    "exact4-current3": {
+      "difference": 0.02734375,
+      "paired95CI": [
+        0.0051264474586655805,
+        0.049561052541334416
+      ],
+      "intervalMethod": "paired normal approximation",
+      "onlyA": 24,
+      "onlyB": 10,
+      "mcnemarExactP": 0.024306510109454393,
+      "secondaryExceptExact4MinusExact3": true
+    }
+  },
+  "interference": {
+    "0": {
+      "initialTrainRMSE": 1735.6260172909415,
+      "finalTrainRMSE": 1966.9892060486957,
+      "initialHeldoutRMSE": 3454.681904499447,
+      "finalHeldoutRMSE": 3493.170347989706,
+      "TDUpdates": 258360,
+      "teacherUpdates": 0
+    },
+    "0.0021": {
+      "initialTrainRMSE": 1735.6260172909415,
+      "finalTrainRMSE": 1965.4137399154145,
+      "initialHeldoutRMSE": 3454.681904499447,
+      "finalHeldoutRMSE": 3493.151755967772,
+      "TDUpdates": 258360,
+      "teacherUpdates": 542
+    },
+    "0.02": {
+      "initialTrainRMSE": 1735.6260172909415,
+      "finalTrainRMSE": 1953.2894501482012,
+      "initialHeldoutRMSE": 3454.681904499447,
+      "finalHeldoutRMSE": 3493.194807111456,
+      "TDUpdates": 258360,
+      "teacherUpdates": 5167
+    },
+    "0.1": {
+      "initialTrainRMSE": 1735.6260172909415,
+      "finalTrainRMSE": 1900.7482299838723,
+      "initialHeldoutRMSE": 3454.681904499447,
+      "finalHeldoutRMSE": 3493.079868838245,
+      "TDUpdates": 258360,
+      "teacherUpdates": 25836
+    }
+  },
+  "interferenceCaveat": "Fixed-replay interference probe after100-epoch supervised fit:100 fresh normal2-ply baseline games, frozen5-step lambdaTD targets,5passes,TDalpha=.003,teacherAlpha=.001. SameTD order across dose arms within seed. Not online RL, not1536 success rates.",
+  "contextAliasing": {
+    "sourceBoards": 219,
+    "afterstates": 828,
+    "medianTargetRange": 746.7040795442081,
+    "meanTargetRange": 1546.1926667693215,
+    "maximumTargetRange": 82209.45196672014,
+    "contextOnlyIrreducibleRMSE": 2413.423239934421,
+    "largestExample": {
+      "source": 141,
+      "direction": 1,
+      "range": 82209.45196672014,
+      "variance": 1689536842.7656415,
+      "priorCounts": [
+        2,
+        1,
+        1
+      ],
+      "targets": [
+        82209.45196672014,
+        0,
+        3
+      ]
+    },
+    "interpretation": "Completed3-ply score targets under alternative feasible normal preview draws from the same pre-draw bag counts. Each fixed afterstate has one board-only prediction but multiple conditional targets. RMSE lower bound is for this synthetic weighted context dataset only, not a bound on original teacher-label RMSE or game success."
+  }
+}

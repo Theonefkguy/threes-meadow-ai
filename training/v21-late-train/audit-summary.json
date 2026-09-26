@@ -1,0 +1,58 @@
+{
+ "E1-CUR": {
+  "games": 1024,
+  "success": 428,
+  "died": 596,
+  "deadOnArrivalSuccess": 0,
+  "finalMoveForcedCertainDeath": 536,
+  "finalMoveAvoidableCertainDeath": 22,
+  "finalMoveNotCertain": 38,
+  "gamesWithRiskierThanNeededMove": 31,
+  "riskierMoves": 31,
+  "riskierMovesWithCashInMerge": 0,
+  "expectedExtraDeaths": 27.333333333333336,
+  "movesTotal": 470431
+ },
+ "E1-NEW": {
+  "games": 1024,
+  "success": 468,
+  "died": 556,
+  "deadOnArrivalSuccess": 0,
+  "finalMoveForcedCertainDeath": 452,
+  "finalMoveAvoidableCertainDeath": 65,
+  "finalMoveNotCertain": 39,
+  "gamesWithRiskierThanNeededMove": 76,
+  "riskierMoves": 76,
+  "riskierMovesWithCashInMerge": 0,
+  "expectedExtraDeaths": 71.66666666666667,
+  "movesTotal": 481702
+ },
+ "E2-CUR": {
+  "games": 512,
+  "success": 12,
+  "died": 500,
+  "deadOnArrivalSuccess": 12,
+  "finalMoveForcedCertainDeath": 446,
+  "finalMoveAvoidableCertainDeath": 11,
+  "finalMoveNotCertain": 43,
+  "gamesWithRiskierThanNeededMove": 20,
+  "riskierMoves": 20,
+  "riskierMovesWithCashInMerge": 0,
+  "expectedExtraDeaths": 16.333333333333336,
+  "movesTotal": 213774
+ },
+ "E2-NEW": {
+  "games": 512,
+  "success": 35,
+  "died": 477,
+  "deadOnArrivalSuccess": 35,
+  "finalMoveForcedCertainDeath": 387,
+  "finalMoveAvoidableCertainDeath": 61,
+  "finalMoveNotCertain": 29,
+  "gamesWithRiskierThanNeededMove": 70,
+  "riskierMoves": 70,
+  "riskierMovesWithCashInMerge": 0,
+  "expectedExtraDeaths": 66.33333333333333,
+  "movesTotal": 242731
+ }
+}

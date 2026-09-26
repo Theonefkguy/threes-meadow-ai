@@ -1,0 +1,51 @@
+{
+  "protocol": {
+    "purpose": "Secondary late-game check after positive early holdout; no default promotion from512 games alone",
+    "seeds": [
+      10010001,
+      10010512
+    ],
+    "arms": [
+      "full",
+      "mcts",
+      "v4"
+    ],
+    "early": "full andmcts frozen V7-base model,1msCPU; v4 current website3ply/24000nodes",
+    "late": "At first1536 full/mcts switch to existing3ply/24000nodes score search; all later-stage weights are V4-identical",
+    "stop": "First6144 or actualdeath; no truncation",
+    "website": "Expose MCTS as opt-in experimental choice after JavaScript correctness/timing checks; retain V4 default because this small late-game diagnostic cannot establish6144 noninferiority"
+  },
+  "arms": {
+    "full": {
+      "1536": 489,
+      "3072": 353,
+      "6144": 74
+    },
+    "mcts": {
+      "1536": 486,
+      "3072": 331,
+      "6144": 71
+    },
+    "v4": {
+      "1536": 484,
+      "3072": 360,
+      "6144": 78
+    }
+  },
+  "comparisons": {
+    "mcts-full": {
+      "difference6144": -0.005859375,
+      "paired95CI": [
+        -0.04694845021491981,
+        0.03522970021491981
+      ]
+    },
+    "mcts-v4": {
+      "difference6144": -0.013671875,
+      "paired95CI": [
+        -0.058178384176531615,
+        0.030834634176531615
+      ]
+    }
+  }
+}

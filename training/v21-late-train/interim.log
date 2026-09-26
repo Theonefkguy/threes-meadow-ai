@@ -1,0 +1,102 @@
+done E1 NEW 0
+done E1 NEW 32
+done E1 NEW 64
+done E1 NEW 96
+done E1 NEW 128
+done E1 NEW 160
+done E1 NEW 192
+done E1 NEW 224
+done E1 NEW 288
+done E1 NEW 256
+done E1 NEW 352
+done E1 NEW 320
+done E1 NEW 416
+done E1 NEW 384
+done E1 NEW 448
+done E1 NEW 480
+done E2 NEW 0
+done E2 NEW 32
+done E2 NEW 64
+done E2 NEW 96
+done E2 NEW 128
+done E2 NEW 160
+done E2 NEW 192
+done E2 NEW 224
+{
+ "E1": {
+  "n": 512,
+  "CUR": {
+   "success": 222,
+   "meanGain": 195934.96875,
+   "second3072": 222,
+   "meanMoves": 459.927734375,
+   "msPerMove": 5.877105833542124
+  },
+  "NEW": {
+   "success": 226,
+   "meanGain": 199761.181640625,
+   "second3072": 226,
+   "meanMoves": 467.46875,
+   "msPerMove": 5.9698083135570545
+  },
+  "success": {
+   "diffPP": 0.78125,
+   "onlyNEW": 112,
+   "onlyCUR": 108,
+   "p": 0.8397713323897802
+  },
+  "gain": {
+   "diff": 3826.212890625,
+   "ci95": [
+    -12176.451319064714,
+    19828.877100314712
+   ],
+   "p": 0.6393319525427286
+  },
+  "second3072": {
+   "onlyNEW": 112,
+   "onlyCUR": 108,
+   "p": 0.8397713323897802
+  },
+  "primaryP": 0.8397713323897802,
+  "holmP": 0.8397713323897802
+ },
+ "E2": {
+  "n": 256,
+  "CUR": {
+   "success": 7,
+   "meanGain": 183603.984375,
+   "second3072": 145,
+   "meanMoves": 425.109375,
+   "msPerMove": 5.533018717609439
+  },
+  "NEW": {
+   "success": 21,
+   "meanGain": 249423.4921875,
+   "second3072": 172,
+   "meanMoves": 481.28125,
+   "msPerMove": 5.762892442049218
+  },
+  "success": {
+   "diffPP": 5.46875,
+   "onlyNEW": 18,
+   "onlyCUR": 4,
+   "p": 0.004343509674072266
+  },
+  "gain": {
+   "diff": 65819.5078125,
+   "ci95": [
+    32660.08234524219,
+    98978.93327975781
+   ],
+   "p": 0.0001000442116432243
+  },
+  "second3072": {
+   "onlyNEW": 66,
+   "onlyCUR": 39,
+   "p": 0.010817905625818658
+  },
+  "primaryP": 0.0001000442116432243,
+  "holmP": 0.0002000884232864486
+ }
+}

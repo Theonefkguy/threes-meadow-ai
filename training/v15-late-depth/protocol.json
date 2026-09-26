@@ -1,0 +1,17 @@
+{
+  "purpose": "Fixed pilot of continuous complete-depth4 versus complete-depth5 control from first-768 snapshots, measuring both 1536 and 3072 endpoints",
+  "base": "training/v7/base.ntd",
+  "baseSHA256": "d863b01eb0b958237e5ba9833da38c8f57ec833c983e4add1a196a515cbff590",
+  "snapshotSource": "Deterministic random sample without replacement of 128 first-768 snapshots from training/v7/regular.txt using Python Random seed202609281",
+  "snapshotCount": 128,
+  "replicates": 4,
+  "arms": [4, 5],
+  "continuations": 1024,
+  "rolloutSeeds": "12110001 + snapshotIndex*4 + replicate, shared by depth arms; hidden remaining deck reshuffled consistently with public counts",
+  "endpoint": "Continue each arm until3072 or death; record whether1536 was reached;6000-move guard errors rather than counts as failure",
+  "search": "Original full expectimax, INT_MAX node budget, assert every move completes requested depth; frozen value leaves; no time cap",
+  "primary": "Depth5-minus-depth4 probability of reaching1536, averaging4 paired replicates within each of128 snapshot clusters",
+  "secondary": "Depth5-minus-depth4 probability of reaching3072 and interaction (3072 effect minus1536 effect); cluster paired t intervals; score/CPU descriptive",
+  "stopping": "Fixed128 snapshots x4 replicates x2 arms; no outcome-based stopping or sample extension",
+  "scope": "Pilot for variance and stage effect; no website promotion, no6144 claim"
+}

@@ -1,0 +1,85 @@
+{
+  "baseline": "V6 ordinary continued-training arm",
+  "baselineSHA256": "d863b01eb0b958237e5ba9833da38c8f57ec833c983e4add1a196a515cbff590",
+  "arms": {
+    "r0": {
+      "hardRatio": 0,
+      "teacher": false
+    },
+    "r10": {
+      "hardRatio": 0.1,
+      "teacher": false
+    },
+    "r25": {
+      "hardRatio": 0.25,
+      "teacher": false
+    },
+    "r10teacher": {
+      "hardRatio": 0.1,
+      "teacher": true
+    }
+  },
+  "CPUSeconds": 450,
+  "trainingSeed": 202609218,
+  "collectionSeeds": [
+    9110001,
+    9112000
+  ],
+  "screenSeeds": [
+    9310001,
+    9310600
+  ],
+  "holdoutSeeds": [
+    9410001,
+    9415000
+  ],
+  "assessment": {
+    "maximumCandidates": 256,
+    "subsetSeed": 202609219,
+    "initialRolloutsPerAction": 8,
+    "extendTo": 24,
+    "extendWhen": "top two success rates differ by less than .25",
+    "seedBase": 2126100000,
+    "continuationPolicy": "frozen baseline 3-ply/24000 nodes",
+    "hardFilter": "best action reaches1536 >=25%; at least one success and failure across all actions",
+    "teacher": "4-ply/96000 nodes public expectimax; targets Q(action)-mergeReward in score units; leaf model=frozen baseline; upweight states whose best Wilson lower exceeds worst Wilson upper by3x; heuristic confidence not adjusted for selection"
+  },
+  "training": {
+    "policy": "2-ply score TD",
+    "lambda": 0.5,
+    "horizon": 5,
+    "alphas": [
+      0.008,
+      0.003,
+      0.001
+    ],
+    "boundaries": [
+      0.5,
+      0.85
+    ],
+    "normalAnchor": "one collected afterstate per episode, frozen baseline score target, alpha=.001, all arms",
+    "teacherReplay": "one weighted hard-state afterstate per episode, alpha=.003/.001/.0003, r10teacher only",
+    "laterStages": "frozen V4; first1536 score bootstrap"
+  },
+  "selection": "highest screen1536, then6144, ties r0/r10/r25/r10teacher; frozen before holdout inspection",
+  "holdoutPolicies": [
+    "baseline",
+    "selected",
+    "v4"
+  ],
+  "promotion": "paired1536 lower95>0 versus baseline AND V4;6144 point difference>=0 AND paired lower95>-.01 versus both; browser parity/timing. Otherwise V4 stays default.",
+  "search": {
+    "depth": 3,
+    "nodes": 24000,
+    "browserMs": 160,
+    "offlineTimeLimit": false
+  },
+  "limits": [
+    "One training seed per arm",
+    "CPU stopping hardware dependent",
+    "Adaptive rollout estimates and teacher confidence are noisy; no proof of optimal action",
+    "Only256 candidate snapshots assessed; preserve all candidates and deterministic subset mapping",
+    "Score-based stronger-search targets need not maximize1536 probability",
+    "Reconstructed game rules; not official-app certification"
+  ]
+}

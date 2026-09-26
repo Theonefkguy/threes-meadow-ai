@@ -1,0 +1,149 @@
+{
+  "gamesPerModel": 512,
+  "arms": {
+    "base": {
+      "wins": [
+        491
+      ],
+      "ratesPercent": [
+        95.8984375
+      ],
+      "meanPercent": 95.8984375,
+      "cpuMsPerMove": 1.0080777246285513,
+      "simulationsPerMove": 596.2168589980699,
+      "maxMoveCPUms": 31.892884999999982,
+      "overruns20pctRate": 0.005650917587428082
+    },
+    "ordinary": {
+      "wins": [
+        484,
+        485,
+        491
+      ],
+      "ratesPercent": [
+        94.53125,
+        94.7265625,
+        95.8984375
+      ],
+      "meanPercent": 95.05208333333333,
+      "cpuMsPerMove": 1.0077329666255121,
+      "simulationsPerMove": 601.8597795795362,
+      "maxMoveCPUms": 122.3926350000002,
+      "overruns20pctRate": 0.005561392947476959
+    },
+    "mixed": {
+      "wins": [
+        493,
+        491,
+        490
+      ],
+      "ratesPercent": [
+        96.2890625,
+        95.8984375,
+        95.703125
+      ],
+      "meanPercent": 95.96354166666666,
+      "cpuMsPerMove": 1.0077445110795578,
+      "simulationsPerMove": 603.4771948588393,
+      "maxMoveCPUms": 134.2293960000003,
+      "overruns20pctRate": 0.005235820932219538
+    }
+  },
+  "contrasts": {
+    "ordinaryMinusBase": {
+      "differencePP": -0.8463541666666673,
+      "CI95PP": [
+        -2.8814648523174204,
+        1.1887565189840856
+      ],
+      "p": 0.4142876861757566,
+      "holmP": 0.4808510330432307
+    },
+    "mixedMinusOrdinary": {
+      "differencePP": 0.9114583333333334,
+      "CI95PP": [
+        -0.612135633065914,
+        2.4350522997325807
+      ],
+      "p": 0.24042551652161534,
+      "holmP": 0.4808510330432307
+    }
+  },
+  "conditionalOnTrainingSeeds": true,
+  "mixedMinusBaseExploratory": {
+    "differencePP": 0.06510416666666609,
+    "CI95PP": [
+      -1.9306757729660686,
+      2.060884106299401
+    ],
+    "p": 0.9489255290275811
+  },
+  "training": {
+    "ordinary-202609241": {
+      "episodes": 28596,
+      "success1536": 20047,
+      "resumed": 0,
+      "steps": 14644208,
+      "cpuSeconds": 120.005,
+      "wallSeconds": 120.092,
+      "truncated": 0,
+      "anchorUpdates": 0,
+      "teacherUpdates": 0
+    },
+    "ordinary-202609242": {
+      "episodes": 28459,
+      "success1536": 19970,
+      "resumed": 0,
+      "steps": 14565745,
+      "cpuSeconds": 120.001,
+      "wallSeconds": 120.013,
+      "truncated": 0,
+      "anchorUpdates": 0,
+      "teacherUpdates": 0
+    },
+    "ordinary-202609243": {
+      "episodes": 28598,
+      "success1536": 19985,
+      "resumed": 0,
+      "steps": 14629581,
+      "cpuSeconds": 120.001,
+      "wallSeconds": 120.027,
+      "truncated": 0,
+      "anchorUpdates": 0,
+      "teacherUpdates": 0
+    },
+    "mixed-202609241": {
+      "episodes": 33723,
+      "success1536": 24136,
+      "resumed": 8504,
+      "steps": 14705345,
+      "cpuSeconds": 120.002,
+      "wallSeconds": 120.013,
+      "truncated": 0,
+      "anchorUpdates": 0,
+      "teacherUpdates": 0
+    },
+    "mixed-202609242": {
+      "episodes": 33888,
+      "success1536": 24371,
+      "resumed": 8429,
+      "steps": 14797301,
+      "cpuSeconds": 120.001,
+      "wallSeconds": 120.033,
+      "truncated": 0,
+      "anchorUpdates": 0,
+      "teacherUpdates": 0
+    },
+    "mixed-202609243": {
+      "episodes": 33932,
+      "success1536": 24391,
+      "resumed": 8503,
+      "steps": 14802371,
+      "cpuSeconds": 120.001,
+      "wallSeconds": 120.005,
+      "truncated": 0,
+      "anchorUpdates": 0,
+      "teacherUpdates": 0
+    }
+  }
+}

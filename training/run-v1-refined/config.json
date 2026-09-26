@@ -1,0 +1,1 @@
+{"seed":20260923,"episodes":[30000,30000,30000],"totalSteps":33093733,"truncated":0,"pool1536":5000,"pool3072":5000,"policyDepth":2,"initial":"training/run-v1-full/stage-0.ntd","method":"afterstate TD(0), gamma=1, alpha=.05/.02/.008"}

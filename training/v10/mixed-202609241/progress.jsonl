@@ -1,0 +1,14 @@
+{"episodes":2500,"success1536":1792,"resumed":655,"steps":1080831,"cpuSeconds":8.82457,"wallSeconds":8.82682,"truncated":0,"anchorUpdates":0,"teacherUpdates":0}
+{"episodes":5000,"success1536":3551,"resumed":1262,"steps":2174458,"cpuSeconds":17.7018,"wallSeconds":17.7045,"truncated":0,"anchorUpdates":0,"teacherUpdates":0}
+{"episodes":7500,"success1536":5356,"resumed":1885,"steps":3266425,"cpuSeconds":26.5866,"wallSeconds":26.5897,"truncated":0,"anchorUpdates":0,"teacherUpdates":0}
+{"episodes":10000,"success1536":7107,"resumed":2547,"steps":4343013,"cpuSeconds":35.1748,"wallSeconds":35.1789,"truncated":0,"anchorUpdates":0,"teacherUpdates":0}
+{"episodes":12500,"success1536":8919,"resumed":3195,"steps":5435335,"cpuSeconds":43.9094,"wallSeconds":43.9149,"truncated":0,"anchorUpdates":0,"teacherUpdates":0}
+{"episodes":15000,"success1536":10715,"resumed":3815,"steps":6530720,"cpuSeconds":52.7404,"wallSeconds":52.7477,"truncated":0,"anchorUpdates":0,"teacherUpdates":0}
+{"episodes":17500,"success1536":12508,"resumed":4470,"steps":7614451,"cpuSeconds":61.4789,"wallSeconds":61.4863,"truncated":0,"anchorUpdates":0,"teacherUpdates":0}
+{"episodes":20000,"success1536":14278,"resumed":5074,"steps":8709798,"cpuSeconds":70.2294,"wallSeconds":70.2375,"truncated":0,"anchorUpdates":0,"teacherUpdates":0}
+{"episodes":22500,"success1536":16063,"resumed":5721,"steps":9790548,"cpuSeconds":78.7858,"wallSeconds":78.795,"truncated":0,"anchorUpdates":0,"teacherUpdates":0}
+{"episodes":25000,"success1536":17858,"resumed":6322,"steps":10888380,"cpuSeconds":88.3101,"wallSeconds":88.3194,"truncated":0,"anchorUpdates":0,"teacherUpdates":0}
+{"episodes":27500,"success1536":19609,"resumed":6931,"steps":11977182,"cpuSeconds":97.81,"wallSeconds":97.8199,"truncated":0,"anchorUpdates":0,"teacherUpdates":0}
+{"episodes":30000,"success1536":21415,"resumed":7584,"steps":13066235,"cpuSeconds":106.614,"wallSeconds":106.624,"truncated":0,"anchorUpdates":0,"teacherUpdates":0}
+{"episodes":32500,"success1536":23251,"resumed":8215,"steps":14162130,"cpuSeconds":115.529,"wallSeconds":115.54,"truncated":0,"anchorUpdates":0,"teacherUpdates":0}
+{"episodes":33723,"success1536":24136,"resumed":8504,"steps":14705345,"cpuSeconds":120.002,"wallSeconds":120.013,"truncated":0,"anchorUpdates":0,"teacherUpdates":0}

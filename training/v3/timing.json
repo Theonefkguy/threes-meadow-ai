@@ -1,0 +1,29 @@
+{
+  "v2": {
+    "positions": 62,
+    "meanMs": 37.27910167741934,
+    "p95Ms": 77.88533999999981,
+    "maxMs": 134.69204900000005,
+    "depths": [
+      0,
+      0,
+      1,
+      61
+    ],
+    "differentFromUnlimited": 0
+  },
+  "v3": {
+    "positions": 62,
+    "meanMs": 40.729380693548315,
+    "p95Ms": 103.57941299999948,
+    "maxMs": 145.91375000000005,
+    "depths": [
+      0,
+      0,
+      1,
+      61
+    ],
+    "differentFromUnlimited": 0
+  },
+  "environment": "Actual JS search in Node on this evaluation machine; not an iPhone benchmark. Alternating model order, unlimited reference preceding timed call; sampled on-policy positions, not complete games."
+}

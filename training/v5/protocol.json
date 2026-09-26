@@ -1,0 +1,49 @@
+{
+  "baseline": "ntuple-v4.bin",
+  "baselineSHA256": "6c4a8d47d760d55a3f2ab4e7fbd9feb6345efa13fa9c870567a9d86e0892356b",
+  "goal": 6144,
+  "gamma": 1,
+  "potential": "1 iff afterstate max rank >=13 and at least one maximum tile is in any corner; 0 otherwise; absorbing terminal potential 0",
+  "coefficients": {
+    "control": 0,
+    "weak": 2048,
+    "medium": 8192,
+    "strong": 32768
+  },
+  "trainingCPUSecondsPerArm": 450,
+  "trainingSeedAllArms": 202609215,
+  "pool": "training/v3/late-pool.txt",
+  "poolSHA256": "922229b0952a686b596af03e40bcd6ef46748b481abde91bc6523444e17e0310",
+  "policy": "2-ply public-preview afterstate search",
+  "updates": "late stage only; five-step TD(lambda=.5); alpha .02/.008/.003 at CPU fractions .6/.85; actual terminal",
+  "replay": "20% recent on-policy states, historical starts stratified by empty count and presence of 1536",
+  "initialization": "Raw shaped-value tables initialized to V4 identically, so corrected initial V = V4 + coefficient*potential. This deliberately changes initialization bias; fully compensated initialization would largely cancel shaping.",
+  "inference": "Use original rewards and raw shaped afterstate value + coefficient*potential. Never add per-step corner reward in search.",
+  "screenSeeds": [
+    7310001,
+    7310400
+  ],
+  "holdoutSeeds": [
+    7410001,
+    7415000
+  ],
+  "selection": "Highest screening wins among control/weak/medium/strong; tie that order. Separately freeze best shaping arm, ties weak/medium/strong. No holdout inspection before freeze.",
+  "holdoutPolicies": [
+    "v4",
+    "control",
+    "best-shaping"
+  ],
+  "promotion": "Screen winner vs V4 paired 95% lower bound >0; browser parity and timed compatibility pass. If fail preserve default V4 and expose V5 experimental.",
+  "search": {
+    "depth": 3,
+    "nodes": 24000,
+    "browserSoftMs": 160,
+    "offlineTimeLimit": false
+  },
+  "limits": [
+    "Reconstructed Threes bonus preview posterior",
+    "One training seed per arm; finite-budget result, not proof of general superiority",
+    "CPU stopping leads to slightly different episode counts; saved weights define results",
+    "Reward shaping preserves the original score objective in the exact episodic formulation, not a guaranteed increase in 6144 probability."
+  ]
+}

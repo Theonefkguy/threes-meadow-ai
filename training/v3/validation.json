@@ -1,0 +1,115 @@
+{
+  "A": {
+    "earlyStagesUnchanged": true,
+    "lateStageUpdated": true,
+    "bytes": 6291472,
+    "sha256": "732256cf0c3908dc28064563300261c611ce20c0e986cc9eb5481323a6069b65"
+  },
+  "fastEvaluator": {
+    "exactFullGames": 5,
+    "sameFields": [
+      "success",
+      "terminal",
+      "truncated",
+      "maxRank",
+      "scoreAtStop",
+      "moves",
+      "nodes",
+      "depthCounts"
+    ]
+  },
+  "browserParityA": {
+    "positions": 65,
+    "exact": [
+      "direction",
+      "depth",
+      "nodes"
+    ]
+  },
+  "C": {
+    "lateStageUnchangedFromA": true,
+    "earlierStagesUpdated": true,
+    "sha256": "adfbad1882b42307fc39810d9f88bd59ed8005829570bacccaf174bcfc14f946"
+  },
+  "worker": {
+    "cases": 12,
+    "inference": true,
+    "v3LoadFallbackToV2": true,
+    "allModelFailureFallbackToClassic": true
+  },
+  "ui": {
+    "tests": 12,
+    "fallbackKeepsV2OnSubsequentMoves": true
+  },
+  "training": {
+    "a": {
+      "episode": 200000,
+      "batchWins": 356,
+      "steps": 39646120,
+      "truncated": 0,
+      "seconds": 302.728
+    },
+    "b": {
+      "episode": 100000,
+      "batchWins": 67,
+      "steps": 21272680,
+      "truncated": 0,
+      "seconds": 445.121
+    },
+    "c": {
+      "episode": 100000,
+      "normal": 5000,
+      "normalSuccess": 1145,
+      "middle": 5000,
+      "middleSuccess": 1689,
+      "steps": 44971664,
+      "seconds": 414.362,
+      "truncated": 0,
+      "hardPool": 5000
+    }
+  },
+  "browserParitySelected": {
+    "positions": 81,
+    "exact": [
+      "direction",
+      "depth",
+      "nodes"
+    ],
+    "modelSha256": "adfbad1882b42307fc39810d9f88bd59ed8005829570bacccaf174bcfc14f946"
+  },
+  "timing": {
+    "v2": {
+      "positions": 62,
+      "meanMs": 37.27910167741934,
+      "p95Ms": 77.88533999999981,
+      "maxMs": 134.69204900000005,
+      "depths": [
+        0,
+        0,
+        1,
+        61
+      ],
+      "differentFromUnlimited": 0
+    },
+    "v3": {
+      "positions": 62,
+      "meanMs": 40.729380693548315,
+      "p95Ms": 103.57941299999948,
+      "maxMs": 145.91375000000005,
+      "depths": [
+        0,
+        0,
+        1,
+        61
+      ],
+      "differentFromUnlimited": 0
+    },
+    "environment": "Actual JS search in Node on this evaluation machine; not an iPhone benchmark. Alternating model order, unlimited reference preceding timed call; sampled on-policy positions, not complete games."
+  },
+  "staticAssets": {
+    "localReferencesChecked": 24,
+    "javascriptSyntax": true,
+    "threeModelFilesValid": true
+  },
+  "baselineUnchanged": true
+}

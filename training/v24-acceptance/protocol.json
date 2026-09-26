@@ -1,0 +1,34 @@
+{
+  "round": "V24 whole-game acceptance test",
+  "fixedBeforeRuns": true,
+  "rules": "Official-modern (RULES.md): 12-card bag, 1/21 bonus with window-first draw, 12288 ends the game.",
+  "arms": {
+    "OLD": {
+      "what": "website AI at the start of this work: V4 model (dist/models/ntuple-v4.bin), 3-ply expectimax with a 24000-node budget and iterative deepening, no cutoff, no clamp",
+      "args": "depth 3, threshold 0, maxNodes 24000, clamp 0"
+    },
+    "NEW": {
+      "what": "current website AI: V23 model (dist/models/ntuple-v23.bin), 5-ply with probability cutoff 0.01, clamped leaves, complete depth every move",
+      "args": "depth 5, threshold 0.01, maxNodes 0, clamp 1"
+    }
+  },
+  "notes": "Native C++ (training/v24-acceptance/game.cpp). The website also has a 160 ms soft time limit; browser timing (V17-V23) shows the NEW search completes 5 plies well inside it on desktop, and OLD's node budget is emulated. OLD node counting follows the C++ search, not byte-for-byte the old JS code.",
+  "seeds": [
+    24110001,
+    24111024
+  ],
+  "sampleSize": 1024,
+  "endpoint": "Normal opening to 12288 or death; milestones 1536/3072/6144/12288, final score, moves; 50000-move guard raises an error.",
+  "primary": {
+    "P1": "reach 6144: NEW vs OLD, exact McNemar",
+    "P2": "reach 12288: NEW vs OLD, exact McNemar",
+    "P3": "final score: paired t (normal approx.)"
+  },
+  "multiplicity": "Holm across P1-P3. No interim analysis.",
+  "secondary": "1536/3072 rates, rates with Wilson intervals, CPU per move, depth completed by OLD.",
+  "scope": "Paired comparison on one set of openings; not a claim about the official app; no mobile or real-app measurements.",
+  "modelSHA256": {
+    "dist/models/ntuple-v4.bin": "6c4a8d47d760d55a3f2ab4e7fbd9feb6345efa13fa9c870567a9d86e0892356b",
+    "dist/models/ntuple-v23.bin": "cdef81fd98ef0a96d14cb8f61265adc13e50146245f63e2d1d278ea4f84be0d9"
+  }
+}

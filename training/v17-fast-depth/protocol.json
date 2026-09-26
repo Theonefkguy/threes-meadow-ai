@@ -1,0 +1,21 @@
+{
+  "round": "V17 fast depth (probability cutoff)",
+  "base": "training/v7/base.ntd (= dist/models/ntuple-v8.bin)",
+  "baseSHA256": "d863b01eb0b958237e5ba9833da38c8f57ec833c983e4add1a196a515cbff590",
+  "fixedBeforeGames": true,
+  "arms": {
+    "A": {"depth": 3, "threshold": 0, "role": "reference: complete 3-ply (close to website 3-ply/24000 nodes)"},
+    "B": {"depth": 4, "threshold": 0.003, "role": "primary candidate"},
+    "C": {"depth": 4, "threshold": 0.01, "role": "secondary: cheaper cutoff"},
+    "D": {"depth": 5, "threshold": 0.01, "role": "secondary: pruned 5-ply at similar cost"}
+  },
+  "thresholdSelection": "Chosen from speed/agreement probe on 329 sampled states (seeds 17010001-17010040, disjoint from game seeds) before any game outcome was observed.",
+  "seeds": [17110001, 17111024],
+  "sampleSize": 1024,
+  "endpoint": "Normal opening to first 1536 or real death; 6000-move guard raises an error and never counts as failure.",
+  "primary": "B minus A success rate; paired 95% CI (normal approx. on paired differences) and exact two-sided McNemar.",
+  "secondary": "C minus A, D minus A, D minus B; CPU ms per move (mean, p95, max). Reported as exploratory.",
+  "stopping": "Fixed 1024 pairs per arm; no extension or early stop based on outcomes.",
+  "comparison": "Reference exact-4 results from V7 (97.66%, 512 different seeds) are context only, not a paired arm.",
+  "scope": "No training, same frozen leaf model. Native C++ timing only; browser timing measured separately in JS."
+}

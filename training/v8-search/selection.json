@@ -1,0 +1,11 @@
+{
+  "selected": "mcts",
+  "screenWins": {
+    "full": 486,
+    "beam2": 484,
+    "adaptive": 478,
+    "mcts": 487
+  },
+  "rule": "Best reach1536 count among beam2/adaptive/mcts; ties beam2,adaptive,mcts; freeze before holdout",
+  "frozenAt": "2026-09-21T14:31:11.278336+00:00"
+}

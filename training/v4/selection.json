@@ -1,0 +1,37 @@
+{
+  "winner": "control",
+  "screening": {
+    "v3": {
+      "games": 400,
+      "wins6144": 49,
+      "reached3072": 270
+    },
+    "control": {
+      "games": 400,
+      "wins6144": 56,
+      "reached3072": 270
+    },
+    "a": {
+      "games": 400,
+      "wins6144": 40,
+      "reached3072": 270
+    },
+    "b": {
+      "games": 400,
+      "wins6144": 39,
+      "reached3072": 270
+    },
+    "c": {
+      "games": 400,
+      "wins6144": 44,
+      "reached3072": 270
+    }
+  },
+  "scoreSha256": "6c4a8d47d760d55a3f2ab4e7fbd9feb6345efa13fa9c870567a9d86e0892356b",
+  "residualSha256": null,
+  "holdoutUsedForSelection": false,
+  "testSeeds": [
+    6410001,
+    6415000
+  ]
+}

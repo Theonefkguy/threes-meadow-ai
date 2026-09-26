@@ -1,0 +1,14 @@
+{"episode":10000,"normal":5000,"normalSuccess":487,"middle":5000,"middleSuccess":854,"steps":4125198,"seconds":38.3252,"truncated":0,"hardPool":5000}
+{"episode":20000,"normal":5000,"normalSuccess":478,"middle":5000,"middleSuccess":897,"steps":8247285,"seconds":78.4637,"truncated":0,"hardPool":5000}
+{"episode":30000,"normal":5000,"normalSuccess":0,"middle":5000,"middleSuccess":6,"steps":9056015,"seconds":85.8718,"truncated":0,"hardPool":5000}
+{"episode":40000,"normal":5000,"normalSuccess":0,"middle":5000,"middleSuccess":10,"steps":10176891,"seconds":97.4554,"truncated":0,"hardPool":5000}
+{"episode":50000,"normal":5000,"normalSuccess":0,"middle":5000,"middleSuccess":4,"steps":11484980,"seconds":111.728,"truncated":0,"hardPool":5000}
+{"episode":60000,"normal":5000,"normalSuccess":0,"middle":5000,"middleSuccess":5,"steps":12935762,"seconds":127.517,"truncated":0,"hardPool":5000}
+{"episode":70000,"normal":5000,"normalSuccess":0,"middle":5000,"middleSuccess":3,"steps":14508232,"seconds":145.052,"truncated":0,"hardPool":5000}
+{"episode":80000,"normal":5000,"normalSuccess":0,"middle":5000,"middleSuccess":6,"steps":16185688,"seconds":163.985,"truncated":0,"hardPool":5000}
+{"episode":90000,"normal":5000,"normalSuccess":0,"middle":5000,"middleSuccess":8,"steps":17945254,"seconds":184.784,"truncated":0,"hardPool":5000}
+{"episode":100000,"normal":5000,"normalSuccess":0,"middle":5000,"middleSuccess":2,"steps":19779265,"seconds":206.302,"truncated":0,"hardPool":5000}
+{"episode":110000,"normal":5000,"normalSuccess":0,"middle":5000,"middleSuccess":7,"steps":21670041,"seconds":228.173,"truncated":0,"hardPool":5000}
+{"episode":120000,"normal":5000,"normalSuccess":0,"middle":5000,"middleSuccess":8,"steps":23636648,"seconds":251.869,"truncated":0,"hardPool":5000}
+{"episode":130000,"normal":5000,"normalSuccess":0,"middle":5000,"middleSuccess":8,"steps":25654619,"seconds":275.62,"truncated":0,"hardPool":5000}
+{"episode":140000,"normal":5000,"normalSuccess":0,"middle":5000,"middleSuccess":6,"steps":27718955,"seconds":298.448,"truncated":0,"hardPool":5000}

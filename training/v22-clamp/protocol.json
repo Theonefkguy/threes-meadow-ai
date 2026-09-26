@@ -1,0 +1,26 @@
+{
+  "round": "V22: non-negative leaf clamp in search (fix for avoidable certain-death moves found by the V21 death audit)",
+  "change": "At depth-1 leaves the search uses max(0, V(afterstate)). The true future score is never negative; negative estimates made a certain-death move outrank a survivable one.",
+  "fixedBeforeRuns": true,
+  "models": {"CUR": "training/v7/base.ntd (sha256 d863b01e...)", "NEW": "training/v21-late-train/models/NEW.bin (sha256 e3f0b522...; base stages 0/1, V21 S2 stage 2, V21 S3 stage 3)"},
+  "arms": {
+    "CUR": "CUR without clamp: existing V21 audit replays (same seeds, same search), not rerun",
+    "CURc": "CUR with clamp",
+    "NEWc": "NEW with clamp"
+  },
+  "pools": "Same as V21: EVAL3072 (1024, target first 6144, rollout base 21710001) and EVAL6144 (512, target 12288 or death, rollout base 21720001). These pools were used in V21; V22 tests different comparisons on them, paired by snapshot and rollout seed.",
+  "search": "5-ply, cutoff 0.01, complete depth each move, native C++ (training/v21-late-train/snap.cpp with CLAMP=1).",
+  "primary": {
+    "P1": "E1 P(6144): CURc - CUR (exact McNemar)",
+    "P2": "E2 mean score gained: CURc - CUR (paired t)",
+    "P3": "E1 P(6144): NEWc - CURc (exact McNemar)",
+    "P4": "E2 mean score gained: NEWc - CURc (paired t)"
+  },
+  "multiplicity": "Holm across P1-P4. No interim analysis; all runs to completion.",
+  "secondary": "12288 counts, 3072-beside-6144, avoidable certain-death final moves (death audit fields), ms per move.",
+  "adoption": {
+    "clamp": "Adopt if P1 or P2 is better after Holm and neither P1 nor P2 is worse at nominal p<0.05.",
+    "stage2": "Adopt the V21 S2 stage-2 table (with clamp) if P3 is better after Holm.",
+    "stage3": "Keep the adopted V21 stage-3 table unless P4 is worse at nominal p<0.05."
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "base": "training/v7/base.ntd",
+  "baseSHA256": "d863b01eb0b958237e5ba9833da38c8f57ec833c983e4add1a196a515cbff590",
+  "seeds": [
+    12010001,
+    12010016
+  ],
+  "sampleSize": 16,
+  "arms": [
+    4,
+    5
+  ],
+  "search": "Original iterative expectimax, all chance outcomes, INT_MAX node budget, assert requested depth completed on every move. Same frozen leaves. No time cap.",
+  "endpoint": "Normal opening to1536/death;6000move guard errors, never silently counts as failure.",
+  "statistics": "Pilot16 paired openings, exactMcNemar disagreement test; exact binomial per-arm interval; report raw paired outcomes and CPU seconds per game/per move. Not powered for small success differences.",
+  "stopping": "Fixed16 pairs; no extension based on wins.",
+  "scope": "No model training, website update or6144 evaluation. Full5 is not MCTS depth5; comparison is not equal-time."
+}

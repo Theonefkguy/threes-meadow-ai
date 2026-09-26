@@ -1,0 +1,1 @@
+40 shallow parity and8 depth4 exact-reduction cases; all root actions explored; public normal/bonus sampling verified

@@ -1,0 +1,12 @@
+#define SearchKey TeacherSearchKey
+#define KeyHash TeacherKeyHash
+#define Answer TeacherAnswer
+#include "../v7/search.h"
+#undef SearchKey
+#undef KeyHash
+#undef Answer
+#include <climits>
+#include "../v8-search/mcts.h"
+using namespace v2;
+struct PublicState{Board b;Preview p;Counts c;};
+int main(int argc,char**argv){try{if(argc!=4)throw std::runtime_error("FIRST N PREFIX");init();Learner m;m.load("training/v7/base.ntd");MCTS policy(m);policy.budget=1000;policy.maxSimulations=640;Search teacher(m);teacher.maxNodes=INT_MAX;uint32_t first=std::stoul(argv[1]);int count=std::stoi(argv[2]);std::string prefix=argv[3];std::ofstream out(prefix+".txt"),games(prefix+".games.jsonl");out<<std::setprecision(17);for(int i=0;i<count;i++){uint32_t seed=first+i;RNG rng{seed},sampling{seed^0x785bac};Game g;g.reset(rng);Counts c=opening(g);std::array<PublicState,4> samples;int seen[4]{};PublicState last;while(!g.over&&high(g.b)<12&&g.turns<6000){int r=high(g.b),bin=r<7?0:r<9?1:r<11?2:3;last={g.b,g.next,c};if(sampling.index(++seen[bin])==0)samples[bin]=last;auto a=policy.choose(g.b,g.next,c,uint32_t(seed*2654435761u)^uint32_t(g.turns*2246822519u));g.advance(move(g.b,a.direction),rng);c=observe(c,g.next);}if(!g.over&&high(g.b)<12)throw std::runtime_error("truncated");bool won=high(g.b)>=12;std::vector<PublicState> selected;for(int k=0;k<4;k++)if(seen[k])selected.push_back(samples[k]);if(!won)selected.push_back(last);for(auto&s:selected){teacher.choose(s.b,s.p,s.c,4);if(teacher.completed!=4)throw std::runtime_error("incomplete teacher");out<<seed<<' '<<won;for(auto r:s.b)out<<' '<<int(r);out<<' '<<s.p.size;for(int k=0;k<3;k++)out<<' '<<int(s.p.cards[k])<<' '<<s.p.p[k];for(auto n:s.c)out<<' '<<n;for(auto q:teacher.rootValues)out<<' '<<q;out<<'\n';}out.flush();games<<"{\"seed\":"<<seed<<",\"success1536\":"<<(won?"true":"false")<<",\"moves\":"<<g.turns<<",\"samples\":"<<selected.size()<<"}"<<std::endl;}}catch(const std::exception&e){std::cerr<<e.what()<<std::endl;return 1;}}

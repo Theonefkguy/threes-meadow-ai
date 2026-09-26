@@ -1,0 +1,15 @@
+{"episode":10000,"normal":5000,"normalSuccess":480,"middle":5000,"middleSuccess":870,"steps":4139908,"seconds":41.814,"truncated":0,"hardPool":5000}
+{"episode":20000,"normal":5000,"normalSuccess":437,"middle":5000,"middleSuccess":862,"steps":8264153,"seconds":82.8847,"truncated":0,"hardPool":5000}
+{"episode":30000,"normal":5000,"normalSuccess":135,"middle":5000,"middleSuccess":283,"steps":12009456,"seconds":148.802,"truncated":0,"hardPool":5000}
+{"episode":40000,"normal":5000,"normalSuccess":342,"middle":5000,"middleSuccess":591,"steps":16080158,"seconds":224.285,"truncated":0,"hardPool":5000}
+{"episode":50000,"normal":5000,"normalSuccess":387,"middle":5000,"middleSuccess":764,"steps":20216924,"seconds":298.701,"truncated":0,"hardPool":5000}
+{"episode":60000,"normal":5000,"normalSuccess":504,"middle":5000,"middleSuccess":845,"steps":24394324,"seconds":375.403,"truncated":0,"hardPool":5000}
+{"episode":70000,"normal":5000,"normalSuccess":503,"middle":5000,"middleSuccess":906,"steps":28588178,"seconds":454.307,"truncated":0,"hardPool":5000}
+{"episode":80000,"normal":5000,"normalSuccess":558,"middle":5000,"middleSuccess":1008,"steps":32799513,"seconds":532.82,"truncated":0,"hardPool":5000}
+{"episode":90000,"normal":5000,"normalSuccess":556,"middle":5000,"middleSuccess":963,"steps":37008000,"seconds":608.131,"truncated":0,"hardPool":5000}
+{"episode":100000,"normal":5000,"normalSuccess":554,"middle":5000,"middleSuccess":1002,"steps":41254664,"seconds":685.459,"truncated":0,"hardPool":5000}
+{"episode":110000,"normal":5000,"normalSuccess":598,"middle":5000,"middleSuccess":1007,"steps":45480336,"seconds":763.096,"truncated":0,"hardPool":5000}
+{"episode":120000,"normal":5000,"normalSuccess":599,"middle":5000,"middleSuccess":1014,"steps":49707701,"seconds":845.642,"truncated":0,"hardPool":5000}
+{"episode":130000,"normal":5000,"normalSuccess":567,"middle":5000,"middleSuccess":980,"steps":53920062,"seconds":939.849,"truncated":0,"hardPool":5000}
+{"episode":140000,"normal":5000,"normalSuccess":577,"middle":5000,"middleSuccess":973,"steps":58127168,"seconds":1021.21,"truncated":0,"hardPool":5000}
+{"episode":150000,"normal":5000,"normalSuccess":595,"middle":5000,"middleSuccess":964,"steps":62347059,"seconds":1110.09,"truncated":0,"hardPool":5000}

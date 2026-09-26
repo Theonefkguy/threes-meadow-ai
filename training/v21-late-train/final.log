@@ -1,0 +1,30 @@
+done E1 NEW 544
+done E1 NEW 512
+done E1 NEW 576
+done E1 NEW 608
+done E1 NEW 640
+done E1 NEW 672
+done E1 NEW 704
+done E1 NEW 736
+done E1 NEW 768
+done E1 NEW 800
+done E1 CUR 832
+done E1 NEW 832
+done E1 CUR 864
+done E1 NEW 864
+done E1 CUR 896
+done E1 NEW 896
+done E1 CUR 928
+done E1 NEW 928
+done E1 CUR 960
+done E1 NEW 960
+done E1 NEW 992
+done E1 CUR 992
+Traceback (most recent call last):
+  File "/home/claude/threes-meadow/training/v21-late-train/evaluate.py", line 63, in <module>
+    res[e] = analyze(0.5 if (R/f'stopped-{e}').exists() else 1.0)[e]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/claude/threes-meadow/training/v21-late-train/evaluate.py", line 34, in analyze
+    N = int(n_of(e)*upto_frac); a, b = rows(e, 'CUR', N), rows(e, 'NEW', N); idx = sorted(set(a) & set(b)); assert len(idx) == N, (e, len(idx), N)
+                                                                                                                   ^^^^^^^^^^^^^
+AssertionError: ('E2', 256, 512)

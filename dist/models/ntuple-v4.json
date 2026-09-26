@@ -1,0 +1,271 @@
+{
+  "version": 4,
+  "kind": "score",
+  "selection": {
+    "winner": "control",
+    "screening": {
+      "v3": {
+        "games": 400,
+        "wins6144": 49,
+        "reached3072": 270
+      },
+      "control": {
+        "games": 400,
+        "wins6144": 56,
+        "reached3072": 270
+      },
+      "a": {
+        "games": 400,
+        "wins6144": 40,
+        "reached3072": 270
+      },
+      "b": {
+        "games": 400,
+        "wins6144": 39,
+        "reached3072": 270
+      },
+      "c": {
+        "games": 400,
+        "wins6144": 44,
+        "reached3072": 270
+      }
+    },
+    "scoreSha256": "6c4a8d47d760d55a3f2ab4e7fbd9feb6345efa13fa9c870567a9d86e0892356b",
+    "residualSha256": null,
+    "holdoutUsedForSelection": false,
+    "testSeeds": [
+      6410001,
+      6415000
+    ]
+  },
+  "training": {
+    "control": {
+      "episodes": 279890,
+      "batchWins": 125,
+      "totalWins": 10651,
+      "steps": 59700065,
+      "deepSteps": 0,
+      "deepEpisodes": 0,
+      "cpuSeconds": 450,
+      "wallSeconds": 451.258,
+      "truncated": 0
+    },
+    "a": {
+      "episodes": 53550,
+      "batchWins": 68,
+      "totalWins": 3704,
+      "steps": 6786068,
+      "deepSteps": 576390,
+      "deepEpisodes": 2677,
+      "cpuSeconds": 450,
+      "wallSeconds": 451.615,
+      "truncated": 0
+    },
+    "b": {
+      "episodes": 43000,
+      "batchWins": 43,
+      "totalWins": 3310,
+      "steps": 5682812,
+      "deepSteps": 473990,
+      "deepEpisodes": 2150,
+      "cpuSeconds": 450.42,
+      "wallSeconds": 451.417,
+      "truncated": 0
+    },
+    "c": {
+      "episodes": 52043,
+      "batchWins": 157,
+      "totalWins": 3969,
+      "steps": 6794613,
+      "deepSteps": 564978,
+      "deepEpisodes": 2602,
+      "cpuSeconds": 450,
+      "wallSeconds": 451.425,
+      "truncated": 0
+    }
+  },
+  "search": {
+    "maxDepth": 3,
+    "maxNodes": 24000,
+    "browserSoftBudgetMs": 160
+  },
+  "bytes": 6291472,
+  "protocol": {
+    "goal": 6144,
+    "baseline": "ntuple-v3.bin",
+    "baselineSHA256": "adfbad1882b42307fc39810d9f88bd59ed8005829570bacccaf174bcfc14f946",
+    "trainingCPUSecondsPerArm": 450,
+    "budgetNote": "CPU time measured with std::clock, excluding initial model/pool load; final episode finishes. Same hardware, independent single-thread trainers. Episode counts intentionally differ. Shared fresh data collection cost reported separately.",
+    "arms": {
+      "control": {
+        "pool": "historical V1 late states",
+        "depth": 2,
+        "method": "continue V3 late-stage five-step TD(lambda=.5)"
+      },
+      "a": {
+        "pool": "fresh V3 three-ply trajectories",
+        "threePlyEpisodes": 0.05,
+        "method": "same TD, late stage only"
+      },
+      "b": {
+        "pool": "fresh V3 three-ply trajectories",
+        "threePlyEpisodes": 0.05,
+        "method": "V3 frozen plus two five-cell residual tables, 16 symmetry features, late stage only"
+      },
+      "c": {
+        "pool": "fresh V3 three-ply trajectories",
+        "threePlyEpisodes": 0.05,
+        "method": "TC per-parameter multiplier, signed/absolute error accumulation, alpha 2.5x A, late stage only"
+      }
+    },
+    "allArms": {
+      "recentReplay": 0.2,
+      "stratification": "empty count and coexisting 1536",
+      "restart": "shuffle hidden remaining deck; policy sees only visible information",
+      "trainUntil": "actual terminal, full-score value semantics",
+      "trainingSeeds": {
+        "control": 202610011,
+        "a": 202610012,
+        "b": 202610013,
+        "c": 202610014
+      }
+    },
+    "collectionSeeds": [
+      6110001,
+      6111000
+    ],
+    "collectionPolicy": "V3 3-ply / 24000 nodes; first rank13 plus every40 moves, <=8 per source game",
+    "screenSeeds": [
+      6310001,
+      6310400
+    ],
+    "holdoutSeeds": [
+      6410001,
+      6415000
+    ],
+    "selection": "highest 6144 screening wins among control/A/B/C; tie control,A,C,B; freeze weights before reading holdout results; no test-driven model tuning",
+    "promotion": "positive matched-seed difference with paired 95% lower bound above zero, and browser compatibility checks pass",
+    "search": {
+      "maxDepth": 3,
+      "maxNodes": 24000,
+      "offlineWallTimeCutoff": false,
+      "browserSoftBudgetMs": 160
+    },
+    "limitations": [
+      "Reconstructed original game bonus-preview posterior.",
+      "CPU-budget stopping means exact final episode count can vary between reproductions; saved weights and logs are authoritative.",
+      "A changes both dataset and training search; C also changes nominal learning rate. These are bundled interventions, not isolated causal effects."
+    ],
+    "browserGate": "All legal results; V4 timed-vs-unlimited decision changes at most 5 percentage points above V3 on same representative positions. Shared board-only leaf cache optimization preserves fixed-node policy."
+  },
+  "evaluation": {
+    "v3": {
+      "games": 5000,
+      "wins6144": 665,
+      "rate6144": 0.133,
+      "wilson95": [
+        0.12386878426710952,
+        0.14269470896056244
+      ],
+      "reached3072": 3299,
+      "rate3072": 0.6598,
+      "rate6144Given3072": 0.20157623522279478,
+      "truncated": 0,
+      "meanMoves": 1042.7274
+    },
+    "v4": {
+      "games": 5000,
+      "wins6144": 744,
+      "rate6144": 0.1488,
+      "wilson95": [
+        0.13920509888341462,
+        0.15893413496279354
+      ],
+      "reached3072": 3299,
+      "rate3072": 0.6598,
+      "rate6144Given3072": 0.22552288572294635,
+      "truncated": 0,
+      "meanMoves": 1050.1376
+    },
+    "paired": {
+      "difference": 0.0158,
+      "difference95": [
+        0.0033559181698608245,
+        0.028244081830139177
+      ],
+      "v3Only": 465,
+      "v4Only": 544,
+      "exactMcNemarP": 0.014026912465728153
+    },
+    "selection": {
+      "winner": "control",
+      "screening": {
+        "v3": {
+          "games": 400,
+          "wins6144": 49,
+          "reached3072": 270
+        },
+        "control": {
+          "games": 400,
+          "wins6144": 56,
+          "reached3072": 270
+        },
+        "a": {
+          "games": 400,
+          "wins6144": 40,
+          "reached3072": 270
+        },
+        "b": {
+          "games": 400,
+          "wins6144": 39,
+          "reached3072": 270
+        },
+        "c": {
+          "games": 400,
+          "wins6144": 44,
+          "reached3072": 270
+        }
+      },
+      "scoreSha256": "6c4a8d47d760d55a3f2ab4e7fbd9feb6345efa13fa9c870567a9d86e0892356b",
+      "residualSha256": null,
+      "holdoutUsedForSelection": false,
+      "testSeeds": [
+        6410001,
+        6415000
+      ]
+    },
+    "statisticalPromotionGate": true,
+    "browserGate": true,
+    "promote": true
+  },
+  "timing": {
+    "v3": {
+      "positions": 98,
+      "meanMs": 13.696679622448984,
+      "p95Ms": 31.76344999999992,
+      "maxMs": 48.48565899999994,
+      "depths": [
+        0,
+        0,
+        2,
+        96
+      ],
+      "changedFromUnlimited": 0
+    },
+    "v4": {
+      "positions": 98,
+      "meanMs": 12.214559673469385,
+      "p95Ms": 30.776754999999866,
+      "maxMs": 39.16888699999981,
+      "depths": [
+        0,
+        0,
+        2,
+        96
+      ],
+      "changedFromUnlimited": 0
+    },
+    "environment": "Actual browser JS search in Node on this machine, alternating order; same leaf cache optimization for both models. Not a phone-specific success estimate.",
+    "compatible": true
+  }
+}

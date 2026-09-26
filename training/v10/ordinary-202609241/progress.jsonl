@@ -1,0 +1,12 @@
+{"episodes":2500,"success1536":1775,"resumed":0,"steps":1283620,"cpuSeconds":10.6994,"wallSeconds":10.708,"truncated":0,"anchorUpdates":0,"teacherUpdates":0}
+{"episodes":5000,"success1536":3541,"resumed":0,"steps":2565282,"cpuSeconds":21.0232,"wallSeconds":21.0403,"truncated":0,"anchorUpdates":0,"teacherUpdates":0}
+{"episodes":7500,"success1536":5334,"resumed":0,"steps":3843411,"cpuSeconds":31.2888,"wallSeconds":31.3131,"truncated":0,"anchorUpdates":0,"teacherUpdates":0}
+{"episodes":10000,"success1536":7071,"resumed":0,"steps":5122407,"cpuSeconds":41.4284,"wallSeconds":41.4595,"truncated":0,"anchorUpdates":0,"teacherUpdates":0}
+{"episodes":12500,"success1536":8806,"resumed":0,"steps":6395788,"cpuSeconds":51.6443,"wallSeconds":51.6821,"truncated":0,"anchorUpdates":0,"teacherUpdates":0}
+{"episodes":15000,"success1536":10560,"resumed":0,"steps":7676365,"cpuSeconds":62.0234,"wallSeconds":62.0681,"truncated":0,"anchorUpdates":0,"teacherUpdates":0}
+{"episodes":17500,"success1536":12269,"resumed":0,"steps":8957862,"cpuSeconds":72.6634,"wallSeconds":72.7157,"truncated":0,"anchorUpdates":0,"teacherUpdates":0}
+{"episodes":20000,"success1536":14028,"resumed":0,"steps":10237975,"cpuSeconds":83.1475,"wallSeconds":83.2068,"truncated":0,"anchorUpdates":0,"teacherUpdates":0}
+{"episodes":22500,"success1536":15759,"resumed":0,"steps":11517734,"cpuSeconds":94.4696,"wallSeconds":94.5388,"truncated":0,"anchorUpdates":0,"teacherUpdates":0}
+{"episodes":25000,"success1536":17542,"resumed":0,"steps":12802349,"cpuSeconds":104.781,"wallSeconds":104.857,"truncated":0,"anchorUpdates":0,"teacherUpdates":0}
+{"episodes":27500,"success1536":19271,"resumed":0,"steps":14080939,"cpuSeconds":115.365,"wallSeconds":115.449,"truncated":0,"anchorUpdates":0,"teacherUpdates":0}
+{"episodes":28596,"success1536":20047,"resumed":0,"steps":14644208,"cpuSeconds":120.005,"wallSeconds":120.092,"truncated":0,"anchorUpdates":0,"teacherUpdates":0}

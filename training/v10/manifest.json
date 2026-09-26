@@ -1,0 +1,95 @@
+{
+  "frozenAt": "2026-09-21T16:17:38.138758+00:00",
+  "models": {
+    "ordinary-202609241": {
+      "sha256": "781814aa9973670f14886d8af90ffe9ca6086b4ea643c325c55d48dbe318c771",
+      "lateStagesUnchanged": true,
+      "training": {
+        "episodes": 28596,
+        "success1536": 20047,
+        "resumed": 0,
+        "steps": 14644208,
+        "cpuSeconds": 120.005,
+        "wallSeconds": 120.092,
+        "truncated": 0,
+        "anchorUpdates": 0,
+        "teacherUpdates": 0
+      }
+    },
+    "ordinary-202609242": {
+      "sha256": "447c13fee2f25ab1e1d5decc9a46b3aee503e74d6f5460dfc326f0d4780fcc92",
+      "lateStagesUnchanged": true,
+      "training": {
+        "episodes": 28459,
+        "success1536": 19970,
+        "resumed": 0,
+        "steps": 14565745,
+        "cpuSeconds": 120.001,
+        "wallSeconds": 120.013,
+        "truncated": 0,
+        "anchorUpdates": 0,
+        "teacherUpdates": 0
+      }
+    },
+    "ordinary-202609243": {
+      "sha256": "99fbd24042e4bf96a34cba70179c5510d7e43e28e50d4e4ce51731f5ba860ef1",
+      "lateStagesUnchanged": true,
+      "training": {
+        "episodes": 28598,
+        "success1536": 19985,
+        "resumed": 0,
+        "steps": 14629581,
+        "cpuSeconds": 120.001,
+        "wallSeconds": 120.027,
+        "truncated": 0,
+        "anchorUpdates": 0,
+        "teacherUpdates": 0
+      }
+    },
+    "mixed-202609241": {
+      "sha256": "ecbcaceb9de478d13f1b8b02ad3c1a598c01e63883eca514cb338ce0cb1cac9a",
+      "lateStagesUnchanged": true,
+      "training": {
+        "episodes": 33723,
+        "success1536": 24136,
+        "resumed": 8504,
+        "steps": 14705345,
+        "cpuSeconds": 120.002,
+        "wallSeconds": 120.013,
+        "truncated": 0,
+        "anchorUpdates": 0,
+        "teacherUpdates": 0
+      }
+    },
+    "mixed-202609242": {
+      "sha256": "b8124516f47208deede055eea5b4999f98a6aee70438e20bfee94e3f168cca6d",
+      "lateStagesUnchanged": true,
+      "training": {
+        "episodes": 33888,
+        "success1536": 24371,
+        "resumed": 8429,
+        "steps": 14797301,
+        "cpuSeconds": 120.001,
+        "wallSeconds": 120.033,
+        "truncated": 0,
+        "anchorUpdates": 0,
+        "teacherUpdates": 0
+      }
+    },
+    "mixed-202609243": {
+      "sha256": "dadd990d32d736a8838b058b3d067345745128cdae6a3259367237e6e67706ad",
+      "lateStagesUnchanged": true,
+      "training": {
+        "episodes": 33932,
+        "success1536": 24391,
+        "resumed": 8503,
+        "steps": 14802371,
+        "cpuSeconds": 120.001,
+        "wallSeconds": 120.005,
+        "truncated": 0,
+        "anchorUpdates": 0,
+        "teacherUpdates": 0
+      }
+    }
+  }
+}

@@ -1,0 +1,56 @@
+[
+ {
+  "name": "exact3",
+  "meanMs": 0.82,
+  "p95Ms": 1.7,
+  "maxMs": 5.3,
+  "agreeExact4": 1028,
+  "n": 1316,
+  "meanRegret": 114.3
+ },
+ {
+  "name": "4@0.01",
+  "meanMs": 4.05,
+  "p95Ms": 8.3,
+  "maxMs": 15.6,
+  "agreeExact4": 1243,
+  "n": 1316,
+  "meanRegret": 5.0
+ },
+ {
+  "name": "4@0.003",
+  "meanMs": 6.34,
+  "p95Ms": 13.4,
+  "maxMs": 26.5,
+  "agreeExact4": 1285,
+  "n": 1316,
+  "meanRegret": 1.0
+ },
+ {
+  "name": "4@0.001",
+  "meanMs": 10.36,
+  "p95Ms": 19.7,
+  "maxMs": 45.1,
+  "agreeExact4": 1297,
+  "n": 1316,
+  "meanRegret": 0.3
+ },
+ {
+  "name": "exact4",
+  "meanMs": 36.79,
+  "p95Ms": 93.3,
+  "maxMs": 352.6,
+  "agreeExact4": 1316,
+  "n": 1316,
+  "meanRegret": 0.0
+ },
+ {
+  "name": "5@0.01",
+  "meanMs": 10.61,
+  "p95Ms": 17.1,
+  "maxMs": 29.3,
+  "agreeExact4": 1136,
+  "n": 1316,
+  "meanRegret": 48.0
+ }
+]

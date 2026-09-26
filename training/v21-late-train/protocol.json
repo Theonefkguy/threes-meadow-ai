@@ -1,0 +1,69 @@
+{
+  "round": "V21: retrain late tables under official-modern rules; new stage for >=6144 (goal 12288)",
+  "rules": "Official-modern (RULES.md): window-first bonus, 1/21, 12288 ends the game.",
+  "baseModel": "training/v7/base.ntd (= dist/models/ntuple-v8.bin; its stage 1/2 tables equal the website V4 model). Loaded as four stages with stage 3 = copy of stage 2.",
+  "baseSHA256": "d863b01eb0b958237e5ba9833da38c8f57ec833c983e4add1a196a515cbff590",
+  "fixedBeforeEvaluation": true,
+  "scopeChange": "Stage 1 (1536-3072) is not retrained: under both rules 3072 is reached from 1536 in about 90% of games and a stage-1 effect cannot be measured cheaply. Stage 0 unchanged.",
+  "training": {
+    "method": "TD(lambda=.5), five-step truncated return, undiscounted future score (spawn + merge points), squared-multiplicity normalised updates, values recorded at play time. Behaviour: two-move score policy (as V2-V7). Episodes start from real snapshots with the unseen deck reshuffled.",
+    "S2": {
+      "stages": "2",
+      "init": "base stage 2",
+      "pool": "pools/train-3072.txt (781 snapshots)",
+      "boundary": "first 6144 afterstate bootstraps with the frozen stage-3 value (= old stage 2) and ends the episode",
+      "alpha": [
+        0.008,
+        0.003,
+        0.001
+      ],
+      "cpuSeconds": 3600,
+      "seed": 21610001
+    },
+    "S3": {
+      "stages": "3",
+      "init": "copy of base stage 2",
+      "pool": "pools/train-6144.txt (248 snapshots)",
+      "end": "death or 12288 (terminal, value 0)",
+      "alpha": [
+        0.02,
+        0.008,
+        0.003
+      ],
+      "cpuSeconds": 3600,
+      "seed": 21610002
+    },
+    "alphaSchedule": "first value until 50% of CPU budget, second until 85%, third after",
+    "newModel": "stage 0/1 from base, stage 2 from S2, stage 3 from S3 (four-stage file)"
+  },
+  "pools": "make_pools.py: EVAL3072 = first 1024 first-3072 snapshots (openings 21110001+); EVAL6144 = first 512 first-6144 snapshots made by extending first-3072 snapshots of openings 21310001+ with 4-ply/0.003; TRAIN pools from openings 21510001+. Pools are disjoint by source seed. No filtering. evalA used openings 21110001-21111660 (1600 games gave 1023 first-3072 snapshots; 60 more games were added before any evaluation). Final sizes: EVAL3072 1024, EVAL6144 512, train-3072 781, train-6144 248. A temp-file bug in the first extension run could drop snapshots; all 6144 extensions were deleted and regenerated before any use. Correction before any NEW-model run: one first-6144 snapshot of evalB was already terminal (the 6144 appeared on the losing move, no decision left); terminal snapshots are excluded and EVAL6144 is the first 512 non-terminal ones (514 available). The extend tool now skips terminal states. Only CUR continuations for indices >= 128 were affected and were rerun.",
+  "evaluation": {
+    "search": "website default: 5-ply, cutoff 0.01, complete depth every move, native C++.",
+    "pairing": "Same snapshot and same rollout seed for both models (unseen deck reshuffled with seed base+index).",
+    "E1": {
+      "pool": "EVAL3072",
+      "target": "first 6144",
+      "compare": "NEW vs CUR (differ only in stage 2 here)",
+      "endpoint": "P(reach 6144); exact McNemar",
+      "rolloutBase": 21710001
+    },
+    "E2": {
+      "pool": "EVAL6144",
+      "target": "12288 or death",
+      "compare": "NEW vs CUR (differ only in stage 3 here)",
+      "endpoint": "mean score gained after the snapshot; paired t-test",
+      "secondary": "reach a 3072 beside the 6144 (second-largest card rank >= 13), McNemar; number of 12288s; moves survived",
+      "rolloutBase": 21720001
+    }
+  },
+  "multiplicity": "Holm across the two primary endpoints (E1, E2).",
+  "interim": "One interim look at 50% of each pool (Haybittle-Peto): stop that comparison early only if two-sided p < 0.001; otherwise run to completion and test at the final Holm level.",
+  "adoption": "Each retrained table is adopted on its own if its primary endpoint is better after Holm; otherwise the current table for that stage is kept. Browser timing and JS/C++ parity are checked before any website change.",
+  "limits": "Conditional on these snapshot distributions (3-ply to 3072, 4-ply cutoff to 6144); late-stage results are not whole-game rates. 12288 is expected to be rare, hence the continuous primary endpoint for E2.",
+  "frozenModels": {
+    "NEW": "e3f0b52262e23deb20e197b104aaf8fcf0dbe70518c22af9c670d3b0be3e8e2b",
+    "S2": "565dc0358e0effcc72dad29e0686bbc6db774d80a6fa718642685c6585301a57",
+    "S3": "5e0a5f28e05d9a21d52e487f62aee497c4fbc6d832ed17b88feda4399e25d4a2",
+    "note": "hashes recorded before any NEW evaluation"
+  }
+}

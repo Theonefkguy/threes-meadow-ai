@@ -1,0 +1,11 @@
+{
+  "description": "Pure success-probability policies collapsed after teacher warm-up; stopped as unsuccessful pilots before screening.",
+  "trainer": "training/v2/train-goal-pure.cpp",
+  "initialModel": "dist/models/ntuple-v1.bin",
+  "seed": 202609242,
+  "scheduledEpisodes": 400000,
+  "warmTeacherMonteCarloEpisodes": 20000,
+  "b": {"context": false, "lastCompletedCheckpointEpisodes": 140000, "log": "training/v2/run-b/progress.jsonl"},
+  "c": {"context": true, "lastCompletedCheckpointEpisodes": 120000, "log": "training/v2/run-c/progress.jsonl"},
+  "correction": "Subsequent guided pilots start again from V1-derived initialization, reduce learning rate, and add the frozen score value to search utility. The collapsed weights are not reused."
+}

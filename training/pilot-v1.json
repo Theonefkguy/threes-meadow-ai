@@ -1,0 +1,26 @@
+[
+  {
+    "name": "single",
+    "seed": 710001,
+    "score": 29685,
+    "highest": 768,
+    "turns": 558,
+    "terminal": true,
+    "meanMs": 22.09821731362009,
+    "maxMs": 146.97364600000037,
+    "meanNodes": 4361.716845878136,
+    "meanDepth": 2.9982078853046596
+  },
+  {
+    "name": "single",
+    "seed": 710002,
+    "score": 29625,
+    "highest": 768,
+    "turns": 559,
+    "terminal": true,
+    "meanMs": 19.984829713774662,
+    "maxMs": 116.52367800000138,
+    "meanNodes": 4297.320214669052,
+    "meanDepth": 2.9964221824686943
+  }
+]

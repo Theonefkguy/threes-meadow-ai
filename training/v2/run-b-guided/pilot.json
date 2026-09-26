@@ -1,0 +1,15 @@
+{
+  "selectedPilotCheckpointEpisode": 100000,
+  "scheduledEpisodes": 400000,
+  "warmTeacherMonteCarlo": 20000,
+  "seed": 202609243,
+  "context": false,
+  "steps": 41254664,
+  "checkpointSeconds": 685.459,
+  "policy": "V1 score + 60000 * goal probability",
+  "normalEpisodes": 50000,
+  "middleEpisodes": 50000,
+  "stoppedAfterScreening": true,
+  "lastLoggedEpisode": 150000,
+  "postPilotComputationUsedInSelection": false
+}

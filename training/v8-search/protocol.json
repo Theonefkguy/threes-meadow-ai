@@ -1,0 +1,21 @@
+{
+ "purpose":"Frozen-value-model guided selective search; no new learned weights this round",
+ "model":"training/v7/base.ntd",
+ "modelSHA256":"d863b01eb0b958237e5ba9833da38c8f57ec833c983e4add1a196a515cbff590",
+ "budgetCPUmsPerMove":1,
+ "maxDecisionDepth":8,
+ "arms":["full","beam2","adaptive","mcts"],
+ "full":"Iterative complete expectimax, same leaf model, CPU budget, atomic last-completed-depth fallback",
+ "beam2":"All root actions; below root all actions receive full2ply estimates, best2 continue deeper; enumerate all chance outcomes at their true probabilities",
+ "adaptive":"beam2 plus any action within1500 score units of shallow best",
+ "mcts":"PUCT with model score priors; temperature2000/exploration4000; each legal root action explored; true chance sampling; separate search RNG; horizon8 plus model bootstrap; most visited root action",
+ "screenSeeds":[9810001,9810512],
+ "screenGames":512,
+ "selection":"Best reach1536 count among beam2/adaptive/mcts; ties beam2,adaptive,mcts; freeze before holdout",
+ "holdoutSeeds":[9910001,9911024],
+ "holdoutGames":1024,
+ "primary":"Selected candidate versus full, paired reach1536, first1536/death only",
+ "fairness":"Same nominal CPU budget; report measured per-moveCPU and overruns. Require measured meanCPU ratio <=1.05 for candidate efficiency claim; if outside, mark comparison confounded and calibrate on separate seeds before fresh test",
+ "promotion":"No website promotion from early success alone. Positive lower paired95 bound and acceptable timing needed before further6144/browser validation",
+ "limits":["Heuristic beam omission is approximate, not certified pruning","MCTS chance sampling adds variance","No separate trained policy head or new RL weights","CPU timed decisions can vary with hardware/load; save exact runs"]
+}

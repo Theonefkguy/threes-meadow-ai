@@ -1,0 +1,53 @@
+{
+  "frozenAt": "2026-09-21T16:56:32.204582+00:00",
+  "models": {
+    "202609271-round1": {
+      "sha256": "f576dfe61f493eb94cdc269c6332a5005d58d86cf4860777b652e24e1b5ec7b5",
+      "episodes": 2048
+    },
+    "202609271-round2": {
+      "sha256": "3e9c2c48d6c8231859151a0cb1d095bc6c545f53662fa5c18aca8e74b4991d72",
+      "episodes": 4096
+    },
+    "202609271-round3": {
+      "sha256": "3bc70576fd4b60925d3094e58d15a33ba165a40f7be8ae800207d1e7236718a8",
+      "episodes": 6144
+    },
+    "202609271-round4": {
+      "sha256": "3d6c399d9874660bc20e71074fe4f8f2382471c9b5f8b34511419d30c7658565",
+      "episodes": 8192
+    },
+    "202609272-round1": {
+      "sha256": "ef121392be794700acde73e394b130395df4ddab175dbdb8e85fde87f8799cfd",
+      "episodes": 2048
+    },
+    "202609272-round2": {
+      "sha256": "d1220015b92101bffbe74e3592740eadb054f94e3314a3d2127e455562d8c910",
+      "episodes": 4096
+    },
+    "202609272-round3": {
+      "sha256": "e56ba30cb8f2934dfdb84d4512b03e512b2914e465d7ea8a77c2a485c5b2ac82",
+      "episodes": 6144
+    },
+    "202609272-round4": {
+      "sha256": "796ba24ade899bb5dcbe52e77d2b364c585de5a4724b68591ef0d4e45352ee9c",
+      "episodes": 8192
+    },
+    "202609273-round1": {
+      "sha256": "c37945dc00a9e19f2c448dbd96eb418eb58751871db08505c96caea0dc1df5ca",
+      "episodes": 2048
+    },
+    "202609273-round2": {
+      "sha256": "e3b8ea6018b685eb9bab4d9ae79c1e2eb438b87f766acdbf16fbe8e779440b72",
+      "episodes": 4096
+    },
+    "202609273-round3": {
+      "sha256": "2c2fcc3f568f91a2d7d28868a8da915321b745e9891e972f693354308d5dfd32",
+      "episodes": 6144
+    },
+    "202609273-round4": {
+      "sha256": "81bd3f7b6b8b9bac85e18c776786173f245054cdd671bafe7fa007f14ab2c045",
+      "episodes": 8192
+    }
+  }
+}

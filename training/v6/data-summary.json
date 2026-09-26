@@ -1,0 +1,19 @@
+{
+  "collectionGames": 2000,
+  "failedBefore1536": 126,
+  "regularStates": 1994,
+  "candidateStates": 498,
+  "hardStates": 335,
+  "teacherExamples": 118157,
+  "teacherPositive": 111764,
+  "sha256": {
+    "regular.txt": "29bd2fb17b942676b70c77ee4cfc0240fcde5b1a99af293b8b4a9d9313bdaaf5",
+    "candidates.txt": "8659c3d2c3eb7b7b11817222731b682d5c3cee88c2f655760360d80c687a41b2",
+    "hard-pool.txt": "509918427ce8dd06c7ea7479e0f74ed4cbc63c7c91d6e8858eee459d4609f5b7",
+    "teacher.txt": "7ff21e93e698fd3e6727f72275e4c877095b09edef846553e1a0d05a73fb9848",
+    "games.jsonl": "8b0b515e6b7cae982ddbce237e9d5d18df6fd4f2503e27c5fbc8a35d9ea1ec24",
+    "sources.jsonl": "18380029996654eb0c5813c2e9062a47bc248bfc41c867ff143020607c42e4fc",
+    "assessment.jsonl": "74575518994725cbb30df0cef21dacf4bc7a7e99ef43e52935100dab1ffb76f3",
+    "hard-indices.json": "3f6585957162be41ed1b39eca2a8a95311de0ffc7e07aece3924ee84e36b8992"
+  }
+}

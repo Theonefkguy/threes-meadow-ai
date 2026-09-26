@@ -1,0 +1,68 @@
+{
+  "goal": 6144,
+  "baseline": "ntuple-v3.bin",
+  "baselineSHA256": "adfbad1882b42307fc39810d9f88bd59ed8005829570bacccaf174bcfc14f946",
+  "trainingCPUSecondsPerArm": 450,
+  "budgetNote": "CPU time measured with std::clock, excluding initial model/pool load; final episode finishes. Same hardware, independent single-thread trainers. Episode counts intentionally differ. Shared fresh data collection cost reported separately.",
+  "arms": {
+    "control": {
+      "pool": "historical V1 late states",
+      "depth": 2,
+      "method": "continue V3 late-stage five-step TD(lambda=.5)"
+    },
+    "a": {
+      "pool": "fresh V3 three-ply trajectories",
+      "threePlyEpisodes": 0.05,
+      "method": "same TD, late stage only"
+    },
+    "b": {
+      "pool": "fresh V3 three-ply trajectories",
+      "threePlyEpisodes": 0.05,
+      "method": "V3 frozen plus two five-cell residual tables, 16 symmetry features, late stage only"
+    },
+    "c": {
+      "pool": "fresh V3 three-ply trajectories",
+      "threePlyEpisodes": 0.05,
+      "method": "TC per-parameter multiplier, signed/absolute error accumulation, alpha 2.5x A, late stage only"
+    }
+  },
+  "allArms": {
+    "recentReplay": 0.2,
+    "stratification": "empty count and coexisting 1536",
+    "restart": "shuffle hidden remaining deck; policy sees only visible information",
+    "trainUntil": "actual terminal, full-score value semantics",
+    "trainingSeeds": {
+      "control": 202610011,
+      "a": 202610012,
+      "b": 202610013,
+      "c": 202610014
+    }
+  },
+  "collectionSeeds": [
+    6110001,
+    6111000
+  ],
+  "collectionPolicy": "V3 3-ply / 24000 nodes; first rank13 plus every40 moves, <=8 per source game",
+  "screenSeeds": [
+    6310001,
+    6310400
+  ],
+  "holdoutSeeds": [
+    6410001,
+    6415000
+  ],
+  "selection": "highest 6144 screening wins among control/A/B/C; tie control,A,C,B; freeze weights before reading holdout results; no test-driven model tuning",
+  "promotion": "positive matched-seed difference with paired 95% lower bound above zero, and browser compatibility checks pass",
+  "search": {
+    "maxDepth": 3,
+    "maxNodes": 24000,
+    "offlineWallTimeCutoff": false,
+    "browserSoftBudgetMs": 160
+  },
+  "limitations": [
+    "Reconstructed original game bonus-preview posterior.",
+    "CPU-budget stopping means exact final episode count can vary between reproductions; saved weights and logs are authoritative.",
+    "A changes both dataset and training search; C also changes nominal learning rate. These are bundled interventions, not isolated causal effects."
+  ],
+  "browserGate": "All legal results; V4 timed-vs-unlimited decision changes at most 5 percentage points above V3 on same representative positions. Shared board-only leaf cache optimization preserves fixed-node policy."
+}

@@ -1,0 +1,87 @@
+{
+  "v2": {
+    "games": 5000,
+    "reached6144": 403,
+    "rate6144": 0.0806,
+    "wilson95": [
+      0.07337259170799372,
+      0.0884713566835202
+    ],
+    "reached3072": 3181,
+    "rate3072": 0.6362,
+    "rate6144Given3072": 0.12668972021376926,
+    "meanMoves": 1019.372,
+    "truncated": 0
+  },
+  "v3": {
+    "games": 5000,
+    "reached6144": 639,
+    "rate6144": 0.1278,
+    "wilson95": [
+      0.11883072909474562,
+      0.13734074823315495
+    ],
+    "reached3072": 3249,
+    "rate3072": 0.6498,
+    "rate6144Given3072": 0.19667590027700832,
+    "meanMoves": 1038.8432,
+    "truncated": 0
+  },
+  "paired": {
+    "v2Only": 342,
+    "v3Only": 578,
+    "difference": 0.0472,
+    "difference95": [
+      0.0353822512308308,
+      0.059017748769169195
+    ],
+    "mcnemarExactP": 6.692852317905942e-15
+  },
+  "selection": {
+    "winner": "c",
+    "screening": {
+      "v2": {
+        "games": 200,
+        "wins": 13,
+        "reached3072": 120
+      },
+      "a": {
+        "games": 200,
+        "wins": 22,
+        "reached3072": 120
+      },
+      "b": {
+        "games": 200,
+        "wins": 20,
+        "reached3072": 120
+      },
+      "c": {
+        "games": 200,
+        "wins": 23,
+        "reached3072": 137
+      }
+    },
+    "scoreSha256": "adfbad1882b42307fc39810d9f88bd59ed8005829570bacccaf174bcfc14f946",
+    "goalSha256": null,
+    "holdoutUsedForSelection": false,
+    "holdoutSeeds": [
+      3910001,
+      3915000
+    ]
+  },
+  "promote": true,
+  "lateDiagnostic": {
+    "v2": {
+      "states": 129,
+      "rollouts": 645,
+      "wins": 92,
+      "rate": 0.14263565891472868
+    },
+    "v3": {
+      "states": 129,
+      "rollouts": 645,
+      "wins": 115,
+      "rate": 0.17829457364341086
+    }
+  }
+}

@@ -1,0 +1,1 @@
+{"method":"TD(lambda=.5), truncated five-step return, score objective","episodes":100000,"seed":202609303,"steps":44971664,"normalEpisodes":50000,"middleEpisodes":50000,"truncated":0}

@@ -1,0 +1,15 @@
+{
+  "purpose": "Diagnostic only, no model selection or website promotion",
+  "frozenModel": "training/v7/base.ntd",
+  "gameSeeds": [9510001, 9510512],
+  "gamesPerPolicy": 512,
+  "policies": ["current3", "exact3", "exact4"],
+  "primaryComparison": "exact4 minus exact3 reach1536 paired difference",
+  "secondaryComparison": "exact3 minus current3 isolates node-budget fallback",
+  "stop": "first1536 or actual death; guard6000 must never truncate",
+  "search": "same score objective and leaf model; exact policies must finish every requested depth; no wall limit",
+  "sampleCaveat": "512 paired seeds is diagnostic for large effects; cannot establish equivalence or rule out ~1pp changes",
+  "fitAudit": "Compare frozen base and all V7 candidates on previous teacher labels. Then pure supervised teacher fitting with3 shuffle seeds, grouped heldout split, fixed 1/10/100 epochs; assess training and heldout RMSE and normal-state value drift. This is learnability/generalization diagnosis, not online replay-dose efficacy.",
+  "trainingSeeds": [202609221, 202609222, 202609223],
+  "noNewTeacherClaim": "Existing teacher targets optimize score, not reach1536. Higher search depth is not assumed superior."
+}

@@ -1,0 +1,13 @@
+EVAL3072.txt 1024
+EVAL6144.txt 512
+TRAIN-1536.txt 1142
+TRAIN-3072.txt 781
+TRAIN-6144.txt 248
+evalA-1536.txt 1579
+evalA-3072.txt 1059
+evalB-1536.txt 2269
+evalB-3072.txt 1555
+evalB-6144.txt 515
+train-1536.txt 1142
+train-3072.txt 781
+train-6144.txt 248

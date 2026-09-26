@@ -1,0 +1,66 @@
+{
+  "gamesPerModel": 512,
+  "primary": {
+    "differencePP": -0.06510416666666713,
+    "CI95PP": [
+      -2.2264895166355467,
+      2.0962811833022124
+    ],
+    "p": 0.9528340918100833
+  },
+  "models": {
+    "base": {
+      "wins": 486,
+      "successPercent": 94.921875,
+      "cpuMsPerMove": 1.0065290751051228,
+      "simulationsPerMove": 613.9492461066454,
+      "maxMoveCPUms": 42.74184500000011,
+      "overrun20pctRate": 0.004325139738086736
+    },
+    "policy-202609251": {
+      "wins": 486,
+      "successPercent": 94.921875,
+      "cpuMsPerMove": 1.00703945533734,
+      "simulationsPerMove": 610.2416135338071,
+      "maxMoveCPUms": 31.52677000000015,
+      "overrun20pctRate": 0.004570948353033597,
+      "epoch": 44,
+      "initialValidationKL": 0.127878,
+      "validationKL": 0.118628,
+      "trainKL": 0.118593
+    },
+    "policy-202609252": {
+      "wins": 487,
+      "successPercent": 95.1171875,
+      "cpuMsPerMove": 1.0060287676839137,
+      "simulationsPerMove": 612.6972245863407,
+      "maxMoveCPUms": 19.51610599999998,
+      "overrun20pctRate": 0.00443226155869707,
+      "epoch": 50,
+      "initialValidationKL": 0.127878,
+      "validationKL": 0.0904146,
+      "trainKL": 0.0919034
+    },
+    "policy-202609253": {
+      "wins": 484,
+      "successPercent": 94.53125,
+      "cpuMsPerMove": 1.0065338831951578,
+      "simulationsPerMove": 611.1521166544387,
+      "maxMoveCPUms": 21.752432999999627,
+      "overrun20pctRate": 0.0048826118855465886,
+      "epoch": 49,
+      "initialValidationKL": 0.127878,
+      "validationKL": 0.102154,
+      "trainKL": 0.0982267
+    }
+  },
+  "policyMeanPercent": 94.85677083333333,
+  "data": {
+    "games": 512,
+    "success1536": 495,
+    "examples": 2062,
+    "trainExamples": 1648,
+    "validationExamples": 414,
+    "D4BoardOverlap": 0
+  }
+}

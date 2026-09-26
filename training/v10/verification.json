@@ -1,0 +1,10 @@
+{
+  "modelsVerified": 6,
+  "finiteWeights": true,
+  "lateStagesBitIdentical": true,
+  "earlyStageChanged": true,
+  "noTruncatedTrainingGames": true,
+  "poolStates": 127,
+  "poolDeckCountsMatchPublicCounts": true,
+  "teacherPoolDisjointFromEvaluationSeeds": true
+}

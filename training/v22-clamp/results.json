@@ -1,0 +1,140 @@
+{
+ "arms": {
+  "E1-CUR": {
+   "n": 1024,
+   "success": 428,
+   "meanGain": 191364.943359375,
+   "second3072": 429,
+   "died": 596,
+   "avoidableDeath": 22,
+   "forcedDeath": 536,
+   "meanMoves": 459.4052734375,
+   "msPerMove": 8.74017405528122
+  },
+  "E1-CURc": {
+   "n": 1024,
+   "success": 429,
+   "meanGain": 191632.6728515625,
+   "second3072": 430,
+   "died": 595,
+   "avoidableDeath": 0,
+   "forcedDeath": 555,
+   "meanMoves": 459.5771484375,
+   "msPerMove": 9.091914803647189
+  },
+  "E1-NEWc": {
+   "n": 1024,
+   "success": 471,
+   "meanGain": 204629.8505859375,
+   "second3072": 472,
+   "died": 553,
+   "avoidableDeath": 0,
+   "forcedDeath": 511,
+   "meanMoves": 470.7783203125,
+   "msPerMove": 8.910334544066608
+  },
+  "E2-CUR": {
+   "n": 512,
+   "success": 12,
+   "meanGain": 177369.521484375,
+   "second3072": 280,
+   "died": 500,
+   "avoidableDeath": 11,
+   "forcedDeath": 446,
+   "meanMoves": 417.52734375,
+   "msPerMove": 8.270810804868693
+  },
+  "E2-CURc": {
+   "n": 512,
+   "success": 12,
+   "meanGain": 177369.837890625,
+   "second3072": 280,
+   "died": 500,
+   "avoidableDeath": 0,
+   "forcedDeath": 457,
+   "meanMoves": 417.580078125,
+   "msPerMove": 8.428365517467176
+  },
+  "E2-NEWc": {
+   "n": 512,
+   "success": 35,
+   "meanGain": 238889.326171875,
+   "second3072": 342,
+   "died": 477,
+   "avoidableDeath": 0,
+   "forcedDeath": 446,
+   "meanMoves": 474.521484375,
+   "msPerMove": 8.293958070424562
+  }
+ },
+ "primary": {
+  "P1": {
+   "diffPP": 0.09765625,
+   "onlyFirst": 1,
+   "onlySecond": 0,
+   "p": 1.0,
+   "holmP": 1
+  },
+  "P2": {
+   "diff": 0.31640625,
+   "ci95": [
+    0.05979281992227731,
+    0.5730196800777227
+   ],
+   "p": 0.015662158632512302,
+   "holmP": 0.046986475897536906
+  },
+  "P3": {
+   "diffPP": 4.1015625,
+   "onlyFirst": 252,
+   "onlySecond": 210,
+   "p": 0.056339240099429214,
+   "holmP": 0.11267848019885843
+  },
+  "P4": {
+   "diff": 61519.48828125,
+   "ci95": [
+    39430.651386554055,
+    83608.32517594594
+   ],
+   "p": 4.794056218671017e-08,
+   "holmP": 1.9176224874684067e-07
+  }
+ },
+ "secondary": {
+  "E1 NEWc-CUR success": {
+   "diffPP": 4.19921875,
+   "onlyFirst": 253,
+   "onlySecond": 210,
+   "p": 0.050832050149572455
+  },
+  "E2 NEWc-CUR gain": {
+   "diff": 61519.8046875,
+   "ci95": [
+    39430.966259134904,
+    83608.6431158651
+   ],
+   "p": 4.793308550077313e-08
+  },
+  "E2 12288 CURc-CUR": {
+   "diffPP": 0.0,
+   "onlyFirst": 0,
+   "onlySecond": 0,
+   "p": 1.0
+  },
+  "E2 12288 NEWc-CURc": {
+   "diffPP": 4.4921875,
+   "onlyFirst": 30,
+   "onlySecond": 7,
+   "p": 0.00019107642583549023
+  },
+  "E1 gain NEWc-CURc": {
+   "diff": 12997.177734375,
+   "ci95": [
+    1391.2670432805462,
+    24603.088425469454
+   ],
+   "p": 0.028166722916465492
+  }
+ }
+}

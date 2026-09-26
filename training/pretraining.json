@@ -1,0 +1,9 @@
+{
+  "seed": 20260922,
+  "episodes": 1000000,
+  "steps": 269904307,
+  "seconds": 467.957,
+  "sha256": "98624e7d01c05dcef765e9dd53de38aa49db3bacac9cea39398938b3e74643f9",
+  "checkpoint": "training/pretraining-stage0.ntd.gz",
+  "note": "Only stage 0 is used to initialise the final run. Later stages of the exploratory run are discarded."
+}

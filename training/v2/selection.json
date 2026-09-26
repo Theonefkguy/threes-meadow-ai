@@ -1,0 +1,82 @@
+{
+  "frozenAt": "2026-09-20T20:55:51.133263+00:00",
+  "winner": "a",
+  "screen": {
+    "v1": {
+      "games": 200,
+      "successes": 84,
+      "rate": 0.42,
+      "wilson95": [
+        0.35373599161616726,
+        0.4892792606041954
+      ],
+      "truncated": 0,
+      "meanMovesToStop": 773.915,
+      "meanNativeMsPerMove": 2.4121096839640015,
+      "depthCounts": [
+        0,
+        1107,
+        153676
+      ]
+    },
+    "a": {
+      "games": 200,
+      "successes": 142,
+      "rate": 0.71,
+      "wilson95": [
+        0.6436252189922268,
+        0.7684597439293211
+      ],
+      "truncated": 0,
+      "meanMovesToStop": 821.345,
+      "meanNativeMsPerMove": 2.6473076530568767,
+      "depthCounts": [
+        0,
+        1140,
+        163129
+      ]
+    },
+    "b": {
+      "games": 200,
+      "successes": 100,
+      "rate": 0.5,
+      "wilson95": [
+        0.43136085960389187,
+        0.5686391403961082
+      ],
+      "truncated": 0,
+      "meanMovesToStop": 769.97,
+      "meanNativeMsPerMove": 4.972831621868385,
+      "depthCounts": [
+        0,
+        1068,
+        152926
+      ]
+    },
+    "c": {
+      "games": 200,
+      "successes": 112,
+      "rate": 0.56,
+      "wilson95": [
+        0.4907167533465867,
+        0.6270218074881414
+      ],
+      "truncated": 0,
+      "meanMovesToStop": 795.615,
+      "meanNativeMsPerMove": 5.36219417370839,
+      "depthCounts": [
+        0,
+        1172,
+        157951
+      ]
+    }
+  },
+  "hashes": {
+    "a": "31a936106a52c2fbf248074b7d3d26100a9e2ee5736243d1eea61c19095f67e6",
+    "b": "c824e9ac1d7574873273c1c0eef9fd64cac10fafd3b7f6a5f6290cf6a9747f63",
+    "c": "d825aa92010fec6216f40a9e210a878d221c7f264a32c3e88cb9452189019d57"
+  },
+  "v1Hash": "484f76f1fc73897eff30a6f01e5e88b667315065ba960eb197ac80fe51cbe025",
+  "holdoutInspected": false,
+  "modelEpisodes": 400000
+}

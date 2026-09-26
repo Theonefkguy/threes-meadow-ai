@@ -1,0 +1,24 @@
+{
+  "selected": "hard",
+  "kind": "score",
+  "sha256": "f093e577a568db9d0861cc290ae20fccb4755bb59dd2fd3654fa520ca7c4f77a",
+  "frozenAt": "2026-09-21T09:57:34.396085+00:00",
+  "screen": {
+    "control": {
+      "1536": 376,
+      "3072": 266,
+      "6144": 71
+    },
+    "hard": {
+      "1536": 381,
+      "3072": 266,
+      "6144": 69
+    },
+    "probability": {
+      "1536": 26,
+      "3072": 18,
+      "6144": 6
+    }
+  },
+  "holdoutInspected": false
+}

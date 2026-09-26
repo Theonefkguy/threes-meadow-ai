@@ -1,0 +1,13 @@
+{
+  "nativeParityCases": 160,
+  "lateParityCases": 8,
+  "timing": {
+    "positions": 80,
+    "mean": 15.40212505000002,
+    "p95": 28.42343099999971,
+    "max": 55.74885199999994,
+    "directionChangesVs640": 0,
+    "budgetLimited": 0
+  },
+  "note": "Browser JavaScript executed in Node; no iPhone performance or game-success claim"
+}

@@ -1,0 +1,43 @@
+{
+  "winner": "strong",
+  "bestShaping": "strong",
+  "coefficient": 32768,
+  "screening": {
+    "control": {
+      "games": 400,
+      "wins6144": 64,
+      "reached3072": 292,
+      "lateMoves": 100883,
+      "cornerMoves": 34404
+    },
+    "weak": {
+      "games": 400,
+      "wins6144": 70,
+      "reached3072": 292,
+      "lateMoves": 100281,
+      "cornerMoves": 36706
+    },
+    "medium": {
+      "games": 400,
+      "wins6144": 63,
+      "reached3072": 292,
+      "lateMoves": 99580,
+      "cornerMoves": 44710
+    },
+    "strong": {
+      "games": 400,
+      "wins6144": 71,
+      "reached3072": 292,
+      "lateMoves": 98638,
+      "cornerMoves": 72556
+    }
+  },
+  "hashes": {
+    "control": "09e1b2fcc1655573e2cc01b966cbbe3d9ab50f9d91793dc879e7c57b269ccf08",
+    "weak": "d79e69d20d5dcd58b9d3acc2c624a0493c76a62eea6da70194dcdcbb02d1bf1d",
+    "medium": "ffacaf7fe431b4fa5843096ce9b084754874a8cbdb007791847ad66ab5a96300",
+    "strong": "8d65f093ee47450f7d42140d032a6fcd969ec374f2584e7ecb2eb716d8f748cb"
+  },
+  "frozenAt": "2026-09-21T07:48:25.701093+00:00",
+  "holdoutUsedForSelection": false
+}

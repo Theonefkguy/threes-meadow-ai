@@ -1,0 +1,35 @@
+done screen B 0
+done screen A 0
+done screen A 64
+done screen B 64
+done screen A 128
+done screen B 128
+done screen B 192
+done screen A 192
+done screen B 256
+done screen A 256
+done screen A 320
+done screen B 320
+done screen A 384
+done screen B 384
+done screen A 448
+done screen B 448
+{
+ "n": 512,
+ "A": 233,
+ "B": 174,
+ "diffPP": 11.5234375,
+ "onlyA": 149,
+ "onlyB": 90,
+ "p": 0.00016378064566408034,
+ "gainDiff": 30965.94140625,
+ "gainCI95": [
+  14352.211213487419,
+  47579.67159901258
+ ],
+ "avoidable": {
+  "A": 0,
+  "B": 0
+ },
+ "winner": "A"
+}

@@ -1,0 +1,34 @@
+{
+  "unitTests": 34,
+  "unitTestsPassed": 34,
+  "canonicalEngineParity": {
+    "movesAndRewards": 2000,
+    "seededTrajectories": 20,
+    "bonusThresholdsThroughTile": 24576
+  },
+  "nativeBrowserSearchParity": {
+    "v1Positions": 690,
+    "goalContextPositions": 217,
+    "checks": [
+      "direction",
+      "completed depth",
+      "node count"
+    ],
+    "wallTimeCutoff": false
+  },
+  "learningChecks": [
+    "five-step lambda numeric targets",
+    "terminal failure",
+    "absorbing success",
+    "sigmoid update direction",
+    "context index bounds"
+  ],
+  "actualWorkerCases": [
+    "V2",
+    "V1",
+    "classic",
+    "V2 failed load falls back to V1",
+    "all model loads fail and fall back to classic"
+  ],
+  "mobileBrowserRenderingTested": false
+}

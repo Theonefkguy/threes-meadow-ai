@@ -1,0 +1,264 @@
+{
+  "passed": 35,
+  "cases": [
+    {
+      "failed": [],
+      "requested": "rl-v6",
+      "actual": "rl-v6"
+    },
+    {
+      "failed": [],
+      "requested": "rl-v5",
+      "actual": "rl-v5"
+    },
+    {
+      "failed": [],
+      "requested": "rl-v4",
+      "actual": "rl-v4"
+    },
+    {
+      "failed": [],
+      "requested": "rl-v3",
+      "actual": "rl-v3"
+    },
+    {
+      "failed": [],
+      "requested": "rl-v2",
+      "actual": "rl-v2"
+    },
+    {
+      "failed": [],
+      "requested": "rl",
+      "actual": "rl"
+    },
+    {
+      "failed": [],
+      "requested": "classic",
+      "actual": "classic"
+    },
+    {
+      "failed": [
+        "v6"
+      ],
+      "requested": "rl-v6",
+      "actual": "rl-v4"
+    },
+    {
+      "failed": [
+        "v6"
+      ],
+      "requested": "rl-v5",
+      "actual": "rl-v5"
+    },
+    {
+      "failed": [
+        "v6"
+      ],
+      "requested": "rl-v4",
+      "actual": "rl-v4"
+    },
+    {
+      "failed": [
+        "v6"
+      ],
+      "requested": "rl-v3",
+      "actual": "rl-v3"
+    },
+    {
+      "failed": [
+        "v6"
+      ],
+      "requested": "rl-v2",
+      "actual": "rl-v2"
+    },
+    {
+      "failed": [
+        "v6"
+      ],
+      "requested": "rl",
+      "actual": "rl"
+    },
+    {
+      "failed": [
+        "v6"
+      ],
+      "requested": "classic",
+      "actual": "classic"
+    },
+    {
+      "failed": [
+        "v6",
+        "v4"
+      ],
+      "requested": "rl-v6",
+      "actual": "rl-v3"
+    },
+    {
+      "failed": [
+        "v6",
+        "v4"
+      ],
+      "requested": "rl-v5",
+      "actual": "rl-v5"
+    },
+    {
+      "failed": [
+        "v6",
+        "v4"
+      ],
+      "requested": "rl-v4",
+      "actual": "rl-v3"
+    },
+    {
+      "failed": [
+        "v6",
+        "v4"
+      ],
+      "requested": "rl-v3",
+      "actual": "rl-v3"
+    },
+    {
+      "failed": [
+        "v6",
+        "v4"
+      ],
+      "requested": "rl-v2",
+      "actual": "rl-v2"
+    },
+    {
+      "failed": [
+        "v6",
+        "v4"
+      ],
+      "requested": "rl",
+      "actual": "rl"
+    },
+    {
+      "failed": [
+        "v6",
+        "v4"
+      ],
+      "requested": "classic",
+      "actual": "classic"
+    },
+    {
+      "failed": [
+        "v6",
+        "v5",
+        "v4",
+        "v3"
+      ],
+      "requested": "rl-v6",
+      "actual": "rl-v2"
+    },
+    {
+      "failed": [
+        "v6",
+        "v5",
+        "v4",
+        "v3"
+      ],
+      "requested": "rl-v5",
+      "actual": "rl-v2"
+    },
+    {
+      "failed": [
+        "v6",
+        "v5",
+        "v4",
+        "v3"
+      ],
+      "requested": "rl-v4",
+      "actual": "rl-v2"
+    },
+    {
+      "failed": [
+        "v6",
+        "v5",
+        "v4",
+        "v3"
+      ],
+      "requested": "rl-v3",
+      "actual": "rl-v2"
+    },
+    {
+      "failed": [
+        "v6",
+        "v5",
+        "v4",
+        "v3"
+      ],
+      "requested": "rl-v2",
+      "actual": "rl-v2"
+    },
+    {
+      "failed": [
+        "v6",
+        "v5",
+        "v4",
+        "v3"
+      ],
+      "requested": "rl",
+      "actual": "rl"
+    },
+    {
+      "failed": [
+        "v6",
+        "v5",
+        "v4",
+        "v3"
+      ],
+      "requested": "classic",
+      "actual": "classic"
+    },
+    {
+      "failed": [
+        "all"
+      ],
+      "requested": "rl-v6",
+      "actual": "classic"
+    },
+    {
+      "failed": [
+        "all"
+      ],
+      "requested": "rl-v5",
+      "actual": "classic"
+    },
+    {
+      "failed": [
+        "all"
+      ],
+      "requested": "rl-v4",
+      "actual": "classic"
+    },
+    {
+      "failed": [
+        "all"
+      ],
+      "requested": "rl-v3",
+      "actual": "classic"
+    },
+    {
+      "failed": [
+        "all"
+      ],
+      "requested": "rl-v2",
+      "actual": "classic"
+    },
+    {
+      "failed": [
+        "all"
+      ],
+      "requested": "rl",
+      "actual": "classic"
+    },
+    {
+      "failed": [
+        "all"
+      ],
+      "requested": "classic",
+      "actual": "classic"
+    }
+  ]
+}

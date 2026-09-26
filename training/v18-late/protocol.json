@@ -1,0 +1,20 @@
+{
+  "round": "V18 late game with probability-cutoff search",
+  "base": "training/v7/base.ntd (= dist/models/ntuple-v8.bin; stage 1/2 tables identical to V4)",
+  "baseSHA256": "d863b01eb0b958237e5ba9833da38c8f57ec833c983e4add1a196a515cbff590",
+  "fixedBeforeGames": true,
+  "arms": {
+    "A": {"depth": 3, "threshold": 0, "role": "reference: complete 3-ply"},
+    "B": {"depth": 4, "threshold": 0.003, "role": "website experimental option (V17 primary)"},
+    "D": {"depth": 5, "threshold": 0.01, "role": "pruned 5-ply (V17 secondary)"}
+  },
+  "armsNotRun": "C (4-ply, 0.01) omitted to save compute; decided before any V18 outcome.",
+  "seeds": [18110001, 18111024],
+  "sampleSize": 1024,
+  "pilot": "3-10 games per arm on seeds 99980001+ used only for cost estimates; excluded.",
+  "endpoint": "Normal opening to first 6144 or real death; milestones 1536/3072/6144 recorded. 20000-move guard raises an error.",
+  "primary": "B minus A probability of reaching 6144; paired 95% CI (normal approx.) and exact two-sided McNemar.",
+  "secondary": "B-A for 3072; D-A and D-B for 3072 and 6144; P(6144 | 3072) per arm (descriptive, not randomized); CPU per move by phase.",
+  "stopping": "Fixed 1024 pairs; chunks interleaved across arms; no extension or early stop based on outcomes.",
+  "context": "V4 website (3-ply / 24000 nodes, V4 model) reached 6144 in 14.88% of 5000 different openings (RL-V4-RESULTS.md); context only."
+}

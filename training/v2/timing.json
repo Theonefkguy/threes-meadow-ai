@@ -1,0 +1,27 @@
+{
+  "v1": {
+    "positions": 99,
+    "meanMs": 56.63180271717171,
+    "p95Ms": 120.23302199999989,
+    "maxMs": 160.11794399999962,
+    "completedDepthCounts": [
+      0,
+      0,
+      3,
+      96
+    ]
+  },
+  "v2": {
+    "positions": 99,
+    "meanMs": 53.459087020202055,
+    "p95Ms": 132.25059799999963,
+    "maxMs": 165.3506440000001,
+    "completedDepthCounts": [
+      0,
+      0,
+      4,
+      95
+    ]
+  },
+  "environment": "Node.js on this execution machine under concurrent native evaluation load; not a phone or browser benchmark"
+}

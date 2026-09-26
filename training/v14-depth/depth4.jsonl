@@ -1,0 +1,16 @@
+{"seed": 12010001, "depth": 4, "success": true, "moves": 535, "rank": 12, "searchCPU": 16.962566, "maxMoveCPU": 0.260764, "medianMoveCPU": 0.024016, "p95MoveCPU": 0.086105, "nodes": 129078941}
+{"seed": 12010002, "depth": 4, "success": true, "moves": 575, "rank": 12, "searchCPU": 19.41230900000001, "maxMoveCPU": 0.314402, "medianMoveCPU": 0.025855, "p95MoveCPU": 0.087419, "nodes": 145322908}
+{"seed": 12010003, "depth": 4, "success": true, "moves": 494, "rank": 12, "searchCPU": 14.670649000000008, "maxMoveCPU": 0.247637, "medianMoveCPU": 0.02176, "p95MoveCPU": 0.077031, "nodes": 110163992}
+{"seed": 12010004, "depth": 4, "success": true, "moves": 528, "rank": 12, "searchCPU": 15.311879000000005, "maxMoveCPU": 0.233262, "medianMoveCPU": 0.022884, "p95MoveCPU": 0.068876, "nodes": 119031015}
+{"seed": 12010005, "depth": 4, "success": true, "moves": 511, "rank": 12, "searchCPU": 14.714153999999988, "maxMoveCPU": 0.253177, "medianMoveCPU": 0.022742, "p95MoveCPU": 0.071401, "nodes": 109084394}
+{"seed": 12010006, "depth": 4, "success": true, "moves": 590, "rank": 12, "searchCPU": 17.718666000000024, "maxMoveCPU": 0.189586, "medianMoveCPU": 0.023729, "p95MoveCPU": 0.07616, "nodes": 136623391}
+{"seed": 12010007, "depth": 4, "success": true, "moves": 470, "rank": 12, "searchCPU": 14.164905999999995, "maxMoveCPU": 0.281088, "medianMoveCPU": 0.02411, "p95MoveCPU": 0.079343, "nodes": 104832638}
+{"seed": 12010008, "depth": 4, "success": true, "moves": 537, "rank": 12, "searchCPU": 13.743767000000005, "maxMoveCPU": 0.149061, "medianMoveCPU": 0.018669, "p95MoveCPU": 0.069568, "nodes": 105180925}
+{"seed": 12010009, "depth": 4, "success": true, "moves": 612, "rank": 12, "searchCPU": 21.189918000000013, "maxMoveCPU": 0.229678, "medianMoveCPU": 0.028563, "p95MoveCPU": 0.079919, "nodes": 163773945}
+{"seed": 12010010, "depth": 4, "success": true, "moves": 610, "rank": 12, "searchCPU": 19.07901600000001, "maxMoveCPU": 0.279958, "medianMoveCPU": 0.025753, "p95MoveCPU": 0.071549, "nodes": 137770869}
+{"seed": 12010011, "depth": 4, "success": true, "moves": 602, "rank": 12, "searchCPU": 18.379084999999986, "maxMoveCPU": 0.321876, "medianMoveCPU": 0.024234, "p95MoveCPU": 0.073099, "nodes": 141052520}
+{"seed": 12010012, "depth": 4, "success": true, "moves": 572, "rank": 12, "searchCPU": 16.890655, "maxMoveCPU": 0.18151, "medianMoveCPU": 0.024292, "p95MoveCPU": 0.071044, "nodes": 126306667}
+{"seed": 12010013, "depth": 4, "success": true, "moves": 541, "rank": 12, "searchCPU": 14.895365999999996, "maxMoveCPU": 0.293505, "medianMoveCPU": 0.019213, "p95MoveCPU": 0.076939, "nodes": 121236039}
+{"seed": 12010014, "depth": 4, "success": false, "moves": 483, "rank": 11, "searchCPU": 15.891508999999989, "maxMoveCPU": 0.352363, "medianMoveCPU": 0.02367, "p95MoveCPU": 0.081788, "nodes": 105911554}
+{"seed": 12010015, "depth": 4, "success": true, "moves": 517, "rank": 12, "searchCPU": 15.15492399999999, "maxMoveCPU": 0.337645, "medianMoveCPU": 0.019466, "p95MoveCPU": 0.085605, "nodes": 98677116}
+{"seed": 12010016, "depth": 4, "success": true, "moves": 533, "rank": 12, "searchCPU": 17.843612999999994, "maxMoveCPU": 0.196953, "medianMoveCPU": 0.023944, "p95MoveCPU": 0.091594, "nodes": 115124624}

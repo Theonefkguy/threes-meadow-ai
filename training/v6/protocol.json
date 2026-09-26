@@ -1,0 +1,53 @@
+{
+  "baseline": "ntuple-v4.bin",
+  "baselineSHA256": "6c4a8d47d760d55a3f2ab4e7fbd9feb6345efa13fa9c870567a9d86e0892356b",
+  "target": 1536,
+  "endToEndTarget": 6144,
+  "arms": [
+    "control",
+    "hard",
+    "probability"
+  ],
+  "cpuSecondsPerArm": 450,
+  "trainingSeed": 202609217,
+  "collectionSeeds": [
+    8110001,
+    8112000
+  ],
+  "assessment": "4 continuations per legal forced first action; then V4 3-ply; shuffle hidden remainder; select snapshots with some but not all successes",
+  "assessmentSeedBase": 2026100000,
+  "screenSeeds": [
+    8310001,
+    8310400
+  ],
+  "holdoutSeeds": [
+    8410001,
+    8415000
+  ],
+  "resumeSchedule": {
+    "CPUfractionBelow0.5": 0.8,
+    "below0.85": 0.5,
+    "otherwise": 0.2
+  },
+  "controlPool": "first 768 snapshots from all collection games",
+  "hardPool": "failed-game first768 and 20/50/100 moves before failure, filtered by continuation trials",
+  "probabilityWarmstart": "90 CPU seconds supervised on teacher afterstates, success/failure labels; included in 450 CPU seconds; initial p=.9; supervised alpha=.1; remaining budget goal TD",
+  "updates": "only stage0; five-step TD lambda=.5; 2-ply training; score alpha .02/.008/.003; probability alpha .1/.04/.015 at .5/.85 CPU fractions",
+  "handoff": "score models bootstrap frozen V4 at first1536 afterstate; probability target becomes1 at1536,0 on prior death; real play switches to frozen V4 from1536 onward",
+  "selection": "highest screen1536 count, then6144 count; ties control,hard,probability; freeze before inspecting holdout",
+  "holdoutPolicies": "V4, control, selected candidate (reuse control when selected)",
+  "promotion": "paired1536 difference lower95>0; 6144 point difference>=0 and lower95>-0.01; browser compatibility. Otherwise retain V4 default.",
+  "search": {
+    "depth": 3,
+    "nodes": 24000,
+    "browserMs": 160,
+    "offlineTimeLimit": false
+  },
+  "limits": [
+    "One training seed per arm",
+    "4 rollouts per action are a noisy recoverability filter, not proof of solvability",
+    "Probability arm changes objective and warmstart; not a pure reward-only ablation",
+    "Reconstructed bonus preview rules",
+    "CPU stopping is hardware-dependent; archived weights define the experiment"
+  ]
+}

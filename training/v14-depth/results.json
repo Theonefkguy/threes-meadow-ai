@@ -1,0 +1,45 @@
+{
+  "pairs": 16,
+  "arms": {
+    "4": {
+      "wins": 15,
+      "games": 16,
+      "successPercent": 93.75,
+      "exactBinomialCI95Percent": [
+        69.7679261565439,
+        99.84188882772308
+      ],
+      "totalSearchCPUSeconds": 266.022982,
+      "meanCPUSecondsPerGame": 16.626436375,
+      "meanCPUmsPerMove": 30.54224822043628,
+      "maxMoveCPUSeconds": 0.352363,
+      "meanMoves": 544.375,
+      "nodesPerMove": 226081.69207807118
+    },
+    "5": {
+      "wins": 16,
+      "games": 16,
+      "successPercent": 100.0,
+      "exactBinomialCI95Percent": [
+        79.40927857921768,
+        100.0
+      ],
+      "totalSearchCPUSeconds": 15610.256886999998,
+      "meanCPUSecondsPerGame": 975.6410554374999,
+      "meanCPUmsPerMove": 1887.1200298597678,
+      "maxMoveCPUSeconds": 29.466535,
+      "meanMoves": 517.0,
+      "nodesPerMove": 10716145.773452612
+    }
+  },
+  "paired": {
+    "onlyDepth5Wins": 1,
+    "onlyDepth4Wins": 0,
+    "bothWin": 15,
+    "bothLose": 0,
+    "differencePP": 6.25,
+    "exactMcNemarP": 1.0
+  },
+  "CPUPerMoveRatio5to4": 61.78720100235015,
+  "CPUPerGameRatio5to4": 58.6801063939656
+}

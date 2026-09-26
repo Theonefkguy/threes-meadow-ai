@@ -1,0 +1,59 @@
+{
+  "goal": 6144,
+  "baseline": "ntuple-v2.bin",
+  "training_pool": {
+    "source": "training/run-v1-refined/snapshots.jsonl stage 2",
+    "count": 5000
+  },
+  "screen_seeds": [
+    2910001,
+    2910200
+  ],
+  "holdout_seeds": [
+    3910001,
+    3915000
+  ],
+  "late_eval_seeds": [
+    4910001,
+    4911000
+  ],
+  "search": {
+    "depth": 3,
+    "nodes": 24000,
+    "wallClockLimit": false
+  },
+  "selection": "highest complete-opening screening 6144 rate among A/B/C; ties A then B then C; freeze before holdout; no holdout tuning",
+  "candidates": [
+    "A late score TD(lambda)",
+    "B A plus probability head",
+    "C joint score finetune from A"
+  ],
+  "abstain": "retain V2 as default if holdout fails to demonstrate improvement",
+  "training": {
+    "A": {
+      "episodes": 200000,
+      "seed": 202609301,
+      "updates": "late stage only"
+    },
+    "B": {
+      "episodes": 100000,
+      "seed": 202609302,
+      "updates": "late probability head only",
+      "goalBonus": 200000
+    },
+    "C": {
+      "episodes": 100000,
+      "seed": 202609303,
+      "updates": "earlier stages only; bootstrap A late model"
+    }
+  },
+  "late_evaluation": {
+    "normal_seed_first": 4910001,
+    "normal_games": 200,
+    "policy": "V2",
+    "continuations_per_playable_3072_state": 5,
+    "continuation_seed_first": 5910001,
+    "purpose": "secondary diagnostic, not selection"
+  },
+  "promotion": "Positive matched-seed difference with approximate paired 95% lower bound >0; also report exact McNemar p-value"
+}

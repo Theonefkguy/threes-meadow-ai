@@ -1,0 +1,59 @@
+done confirm A 1280
+done confirm CUR 1280
+done confirm A 1344
+done confirm CUR 1344
+done confirm A 1408
+done confirm CUR 1408
+done confirm A 1472
+done confirm CUR 1472
+done confirm A 1536
+done confirm CUR 1536
+done confirm A 1600
+done confirm CUR 1600
+done confirm A 1664
+done confirm CUR 1664
+done confirm A 1728
+done confirm CUR 1728
+done confirm A 1792
+done confirm CUR 1792
+done confirm A 1856
+done confirm CUR 1856
+done confirm A 1920
+done confirm CUR 1920
+done confirm A 1984
+done confirm CUR 1984
+done confirm A 2048
+done confirm CUR 2048
+done confirm A 2112
+done confirm CUR 2112
+done confirm A 2176
+done confirm CUR 2176
+done confirm A 2240
+done confirm CUR 2240
+done confirm A 2304
+done confirm CUR 2304
+done confirm A 2368
+done confirm CUR 2368
+done confirm A 2432
+done confirm CUR 2432
+done confirm A 2496
+done confirm CUR 2496
+{
+ "n": 2560,
+ "A": 1181,
+ "CUR": 1051,
+ "diffPP": 5.078125,
+ "onlyA": 647,
+ "onlyCUR": 517,
+ "p": 0.00015391128183589738,
+ "gainDiff": 13247.476171875,
+ "gainCI95": [
+  5852.56208202332,
+  20642.39026172668
+ ],
+ "avoidable": {
+  "A": 0,
+  "CUR": 0
+ },
+ "winner": "A"
+}

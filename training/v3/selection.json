@@ -1,0 +1,32 @@
+{
+  "winner": "c",
+  "screening": {
+    "v2": {
+      "games": 200,
+      "wins": 13,
+      "reached3072": 120
+    },
+    "a": {
+      "games": 200,
+      "wins": 22,
+      "reached3072": 120
+    },
+    "b": {
+      "games": 200,
+      "wins": 20,
+      "reached3072": 120
+    },
+    "c": {
+      "games": 200,
+      "wins": 23,
+      "reached3072": 137
+    }
+  },
+  "scoreSha256": "adfbad1882b42307fc39810d9f88bd59ed8005829570bacccaf174bcfc14f946",
+  "goalSha256": null,
+  "holdoutUsedForSelection": false,
+  "holdoutSeeds": [
+    3910001,
+    3915000
+  ]
+}

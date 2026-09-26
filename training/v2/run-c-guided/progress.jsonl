@@ -1,0 +1,13 @@
+{"episode":10000,"normal":5000,"normalSuccess":480,"middle":5000,"middleSuccess":870,"steps":4139908,"seconds":41.6612,"truncated":0,"hardPool":5000}
+{"episode":20000,"normal":5000,"normalSuccess":437,"middle":5000,"middleSuccess":862,"steps":8264153,"seconds":83.0225,"truncated":0,"hardPool":5000}
+{"episode":30000,"normal":5000,"normalSuccess":166,"middle":5000,"middleSuccess":334,"steps":12046315,"seconds":164.36,"truncated":0,"hardPool":5000}
+{"episode":40000,"normal":5000,"normalSuccess":342,"middle":5000,"middleSuccess":630,"steps":16142011,"seconds":253.079,"truncated":0,"hardPool":5000}
+{"episode":50000,"normal":5000,"normalSuccess":465,"middle":5000,"middleSuccess":756,"steps":20322439,"seconds":342.868,"truncated":0,"hardPool":5000}
+{"episode":60000,"normal":5000,"normalSuccess":515,"middle":5000,"middleSuccess":868,"steps":24523542,"seconds":437.935,"truncated":0,"hardPool":5000}
+{"episode":70000,"normal":5000,"normalSuccess":519,"middle":5000,"middleSuccess":902,"steps":28715287,"seconds":530.616,"truncated":0,"hardPool":5000}
+{"episode":80000,"normal":5000,"normalSuccess":549,"middle":5000,"middleSuccess":974,"steps":32939766,"seconds":622.235,"truncated":0,"hardPool":5000}
+{"episode":90000,"normal":5000,"normalSuccess":525,"middle":5000,"middleSuccess":956,"steps":37139357,"seconds":713.035,"truncated":0,"hardPool":5000}
+{"episode":100000,"normal":5000,"normalSuccess":569,"middle":5000,"middleSuccess":975,"steps":41326026,"seconds":805.804,"truncated":0,"hardPool":5000}
+{"episode":110000,"normal":5000,"normalSuccess":550,"middle":5000,"middleSuccess":981,"steps":45551326,"seconds":914.943,"truncated":0,"hardPool":5000}
+{"episode":120000,"normal":5000,"normalSuccess":554,"middle":5000,"middleSuccess":953,"steps":49738427,"seconds":1015.51,"truncated":0,"hardPool":5000}
+{"episode":130000,"normal":5000,"normalSuccess":551,"middle":5000,"middleSuccess":1039,"steps":53923923,"seconds":1119.93,"truncated":0,"hardPool":5000}

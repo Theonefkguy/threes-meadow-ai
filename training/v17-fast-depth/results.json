@@ -1,0 +1,104 @@
+{
+ "arms": {
+  "A": {
+   "depth": 3,
+   "threshold": 0,
+   "role": "reference: complete 3-ply (close to website 3-ply/24000 nodes)",
+   "success": 967,
+   "games": 1024,
+   "rate": 0.9443359375,
+   "meanMoveMs": 0.7107642829270638,
+   "meanGameCPU": 0.3753258818359375,
+   "p95MoveMsMedianGame": 1.388,
+   "maxMoveMs": 35.806999999999995
+  },
+  "B": {
+   "depth": 4,
+   "threshold": 0.003,
+   "role": "primary candidate",
+   "success": 1006,
+   "games": 1024,
+   "rate": 0.982421875,
+   "meanMoveMs": 7.331434912044301,
+   "meanGameCPU": 3.8840066347656257,
+   "p95MoveMsMedianGame": 14.8575,
+   "maxMoveMs": 55.599000000000004
+  },
+  "C": {
+   "depth": 4,
+   "threshold": 0.01,
+   "role": "secondary: cheaper cutoff",
+   "success": 1001,
+   "games": 1024,
+   "rate": 0.9775390625,
+   "meanMoveMs": 4.518839698994008,
+   "meanGameCPU": 2.3920239648437533,
+   "p95MoveMsMedianGame": 8.435500000000001,
+   "maxMoveMs": 67.798
+  },
+  "D": {
+   "depth": 5,
+   "threshold": 0.01,
+   "role": "secondary: pruned 5-ply at similar cost",
+   "success": 1019,
+   "games": 1024,
+   "rate": 0.9951171875,
+   "meanMoveMs": 11.959006874908248,
+   "meanGameCPU": 6.285357374023432,
+   "p95MoveMsMedianGame": 19.276,
+   "maxMoveMs": 73.119
+  }
+ },
+ "comparisons": {
+  "B-A": {
+   "diffPP": 3.80859375,
+   "ci95PP": [
+    2.1891800842052724,
+    5.428007415794728
+   ],
+   "onlyB": 56,
+   "onlyA": 17,
+   "mcnemarP": 5.268675318129165e-06
+  },
+  "C-A": {
+   "diffPP": 3.3203125,
+   "ci95PP": [
+    1.685612962024502,
+    4.955012037975498
+   ],
+   "onlyC": 54,
+   "onlyA": 20,
+   "mcnemarP": 9.612986582365393e-05
+  },
+  "D-A": {
+   "diffPP": 5.078125,
+   "ci95PP": [
+    3.6027413864429434,
+    6.5535086135570575
+   ],
+   "onlyD": 57,
+   "onlyA": 5,
+   "mcnemarP": 3.0655256978706635e-12
+  },
+  "D-B": {
+   "diffPP": 1.26953125,
+   "ci95PP": [
+    0.3544483657703509,
+    2.184614134229649
+   ],
+   "onlyD": 18,
+   "onlyB": 5,
+   "mcnemarP": 0.010622024536132812
+  },
+  "B-C": {
+   "diffPP": 0.48828125,
+   "ci95PP": [
+    -0.7072381344584572,
+    1.683800634458457
+   ],
+   "onlyB": 22,
+   "onlyC": 17,
+   "mcnemarP": 0.5223973804968409
+  }
+ }
+}
