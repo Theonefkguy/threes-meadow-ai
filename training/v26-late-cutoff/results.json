@@ -1,0 +1,168 @@
+{
+  "protocolSHA256": "9601e6b86edf9d74eef7a7e2d733b4f677f63e21a9e9ddda9973b4bb3d55cb8d",
+  "pool": {
+    "frozenUTC": "2026-09-29T02:25:49Z",
+    "openings": 3000,
+    "reached6144": 1173,
+    "terminalExcluded": 0,
+    "kept": 1173,
+    "used": 1024,
+    "lastUsedSeed": 26102622,
+    "pool6144.txt": "b4320124befac50efe074e1dc610b110eba11243a6c428909822af2d26e3f3d5",
+    "pool-log.jsonl": "f42e12fe1126d671236f7d7ba664df77eb816e8b4088f89319f45c140f4d0986",
+    "blocks": [
+      [
+        26100001,
+        26102600
+      ],
+      [
+        26102601,
+        26103000
+      ]
+    ],
+    "extension": "initial block kept 1019 < 1024; one 400-seed extension block added per protocol (recorded for run.py as data/pool-extra-1.json)"
+  },
+  "nPairs": 1024,
+  "arms": {
+    "B": {
+      "reach12288": 89,
+      "rate": 0.0869140625,
+      "wilson95": [
+        0.07116677927487734,
+        0.10574908382849667
+      ],
+      "meanScoreGained": 247547.35546875,
+      "medianScoreGained": 205650,
+      "meanMoves": 473.8447265625,
+      "avoidableCertainDeath": 0,
+      "cpuMsPerMove": 4.54622314139859,
+      "maxMoveCpuMs": 25.543
+    },
+    "A1": {
+      "reach12288": 83,
+      "rate": 0.0810546875,
+      "wilson95": [
+        0.06586242701394962,
+        0.09937848379301834
+      ],
+      "meanScoreGained": 248609.94140625,
+      "medianScoreGained": 206601,
+      "meanMoves": 483.845703125,
+      "avoidableCertainDeath": 0,
+      "cpuMsPerMove": 8.663661196307254,
+      "maxMoveCpuMs": 53.865
+    },
+    "A2": {
+      "reach12288": 101,
+      "rate": 0.0986328125,
+      "wilson95": [
+        0.0818429465595085,
+        0.11842282113667758
+      ],
+      "meanScoreGained": 274925.748046875,
+      "medianScoreGained": 222555,
+      "meanMoves": 510.4775390625,
+      "avoidableCertainDeath": 0,
+      "cpuMsPerMove": 19.49311917073665,
+      "maxMoveCpuMs": 105.27300000000001
+    }
+  },
+  "primary": {
+    "P1": {
+      "compare": "A1 vs B",
+      "candidateOnly": 71,
+      "baselineOnly": 77,
+      "difference": -0.005859375,
+      "mcnemarExactP": 0.6812170868939293,
+      "holmP": 0.7691343029555326
+    },
+    "P2": {
+      "compare": "A2 vs B",
+      "candidateOnly": 86,
+      "baselineOnly": 74,
+      "difference": 0.01171875,
+      "mcnemarExactP": 0.3845671514777663,
+      "holmP": 0.7691343029555326
+    }
+  },
+  "scoreGained": {
+    "A1-B": {
+      "meanDifference": 1062.5859375,
+      "approx95": [
+        -20635.24553550582,
+        22760.41741050582
+      ],
+      "pairedT": 0.095983332277685,
+      "pairedTp": 0.9235526091037024
+    },
+    "A2-B": {
+      "meanDifference": 27378.392578125,
+      "approx95": [
+        5102.315135628651,
+        49654.470020621346
+      ],
+      "pairedT": 2.4088919400753475,
+      "pairedTp": 0.016176940173216057
+    }
+  },
+  "exploratory": {
+    "A2 vs A1 reach12288": {
+      "A2only": 86,
+      "A1only": 68,
+      "mcnemarExactP": 0.17051654860818807
+    }
+  },
+  "browserSummary": [
+    {
+      "arm": "B",
+      "n": 384,
+      "meanMs": 7.829947913065553,
+      "p95Ms": 12.700000047683716,
+      "maxMs": 15.900000095367432,
+      "completedFullDepth": 384
+    },
+    {
+      "arm": "A1",
+      "n": 384,
+      "meanMs": 15.729947920888662,
+      "p95Ms": 27.799999952316284,
+      "maxMs": 36.90000009536743,
+      "completedFullDepth": 384
+    },
+    {
+      "arm": "A2",
+      "n": 384,
+      "meanMs": 32.91718749639889,
+      "p95Ms": 64.10000014305115,
+      "maxMs": 85.60000014305115,
+      "completedFullDepth": 384
+    }
+  ],
+  "browserUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Claude/2.9939.4 Chrome/152.0.7977.130 Safari/537.36",
+  "parityComparisons": 384,
+  "parityMismatches": [],
+  "adoptionGate": {
+    "A1": {
+      "holmSignificantGain": false,
+      "scoreNotSignificantlyWorse": true,
+      "browserPass": true,
+      "parityPass": true,
+      "qualifies": false
+    },
+    "A2": {
+      "holmSignificantGain": false,
+      "scoreNotSignificantlyWorse": true,
+      "browserPass": true,
+      "parityPass": true,
+      "qualifies": false
+    }
+  },
+  "adopt": null,
+  "fileSHA256": {
+    "games-B.jsonl": "96bdf6a0942c019cc31bcd4f5591542c491c66088b9a4b4f7f41a20d3d03ddd3",
+    "games-A1.jsonl": "9f3275c5e154209ccad77d975d8eb48d9a6570a0b0626c21dac6f4bf8b47e2d2",
+    "games-A2.jsonl": "3d504a3b6900d7ab7f015b440f64952b32660881afed911a8455e2c75423ff23",
+    "browser-results.json": "54b9b51c45cc199e174e0089913921256431f94e3fd87357689db490abe43aa5",
+    "browser-reference.jsonl": "34bddf8356f3a4c234adae14f401474a86783d3a24ece346e9734fe741daacdb"
+  }
+}
