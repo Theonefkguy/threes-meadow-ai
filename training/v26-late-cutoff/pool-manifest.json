@@ -1,0 +1,22 @@
+{
+  "frozenUTC": "2026-09-29T02:25:49Z",
+  "openings": 3000,
+  "reached6144": 1173,
+  "terminalExcluded": 0,
+  "kept": 1173,
+  "used": 1024,
+  "lastUsedSeed": 26102622,
+  "pool6144.txt": "b4320124befac50efe074e1dc610b110eba11243a6c428909822af2d26e3f3d5",
+  "pool-log.jsonl": "f42e12fe1126d671236f7d7ba664df77eb816e8b4088f89319f45c140f4d0986",
+  "blocks": [
+    [
+      26100001,
+      26102600
+    ],
+    [
+      26102601,
+      26103000
+    ]
+  ],
+  "extension": "initial block kept 1019 < 1024; one 400-seed extension block added per protocol (recorded for run.py as data/pool-extra-1.json)"
+}
