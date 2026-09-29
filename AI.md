@@ -4,8 +4,10 @@ Default: V23 four-stage weights, five-ply probability-cutoff expectimax (0.01),
 nonnegative leaf clamp and a 160 ms browser soft budget. See [README](README.md)
 and [V24 acceptance](RL-V24-ACCEPTANCE.md). The sections below are a chronological
 record: early statements about three-ply search and V2 defaults describe old releases.
+The website now offers only the default, V4 and classic search; the V1–V3 and V5–V8
+strategies and their models were removed (see docs/REPRODUCING.md).
 
-当前默认采用 V23 四阶段模型与五层剪枝搜索。下文为历史记录，早期默认配置以 README 为准。
+当前默认采用 V23 四阶段模型与五层剪枝搜索。网页只保留默认、第四版和经典搜索，第一至三版、第五至八版策略及模型已移除。下文为历史记录，早期默认配置以 README 为准。
 
 # Automatic player
 

@@ -77,7 +77,7 @@ test('a move that makes 12288 is terminal: merge points only, no spawn or future
 
 test('four-stage V21 model: stages 0-2 equal V4, stage 3 is used only from 6144 on', async () => {
   const { stageForRanks } = await import('../dist/rl-model.js');
-  const b21=readFileSync(new URL('../dist/models/ntuple-v21.bin',import.meta.url));
+  const b21=readFileSync(new URL('../training/v21-late-train/models/ntuple-v21.bin',import.meta.url));
   const v21=decodeModel(b21.buffer.slice(b21.byteOffset,b21.byteOffset+b21.byteLength));
   assert.equal(v21.stages,4);assert.equal(model.stages,3);
   const S=524288;
@@ -121,8 +121,8 @@ test('clampLeaf: a survivable move never ranks below certain death because of a 
 });
 
 test('V23 website model: V4 stages 0-1, retrained stage 2, V21 stage 3', () => {
-  const load=name=>{const b=readFileSync(new URL(`../dist/models/${name}`,import.meta.url));return decodeModel(b.buffer.slice(b.byteOffset,b.byteOffset+b.byteLength));};
-  const v23=load('ntuple-v23.bin'),v21=load('ntuple-v21.bin'),S=524288;
+  const load=path=>{const b=readFileSync(new URL(`../${path}`,import.meta.url));return decodeModel(b.buffer.slice(b.byteOffset,b.byteOffset+b.byteLength));};
+  const v23=load('dist/models/ntuple-v23.bin'),v21=load('training/v21-late-train/models/ntuple-v21.bin'),S=524288;
   assert.equal(v23.stages,4);
   assert.deepEqual(v23.weights.subarray(0,2*S),model.weights.subarray(0,2*S));
   assert.notDeepEqual(v23.weights.subarray(2*S,3*S),model.weights.subarray(2*S,3*S));

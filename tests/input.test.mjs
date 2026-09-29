@@ -245,66 +245,22 @@ test('manual play is counted before AI takeover and restart resets the visible m
 
 test('switching learned policy stops old work, and failed model load visibly falls back',()=>{
  const {ids,engine,flush,workers,setBoard}=setup();setBoard([0,3,0,0]);
- ids['#ai-policy'].value='rl';ids['#ai-policy'].emit('change');ids['#ai-toggle'].emit('click');flush();
- const worker=workers[0];assert.equal(worker.messages[0].policy,'rl');
+ ids['#ai-policy'].value='rl-v4';ids['#ai-policy'].emit('change');ids['#ai-toggle'].emit('click');flush();
+ const worker=workers[0];assert.equal(worker.messages[0].policy,'rl-v4');
  ids['#ai-policy'].value='classic';ids['#ai-policy'].emit('change');worker.reply('left');flush();
  assert(worker.terminated);assert.equal(engine.turns,0);
- ids['#ai-policy'].value='rl';ids['#ai-toggle'].emit('click');flush();const nextWorker=workers[1];
+ ids['#ai-policy'].value='rl-v4';ids['#ai-toggle'].emit('click');flush();const nextWorker=workers[1];
  nextWorker.onmessage({data:{id:nextWorker.messages[0].id,direction:'left',policy:'classic',fallback:'load'}});
  assert.equal(ids['#ai-policy'].value,'classic');assert.match(ids['#ai-status'].textContent,/切换经典/);flush();assert.equal(engine.turns,1);
 });
 
-test('V2 takeover sends only visible information and load fallback preserves V1 choice',async()=>{
- const {ids,workers,engine,flush}=await setup();
- ids['#ai-policy'].value='rl-v2';ids['#ai-toggle'].emit('click');flush();
+test('default takeover sends only visible information and load fallback keeps subsequent turns on V4',()=>{
+ const {ids,workers,engine,flush,setBoard}=setup();setBoard([0,3,0,0]);
+ ids['#ai-policy'].value='rl-fast';ids['#ai-toggle'].emit('click');flush();
  const worker=workers[0],message=worker.messages[0];
- assert.equal(message.policy,'rl-v2');assert(!('deck' in message));
- worker.onmessage({data:{id:message.id,direction:'left',policy:'rl',fallback:'v2-load'}});
- assert.equal(ids['#ai-policy'].value,'rl');assert.match(ids['#ai-status'].textContent,/切换第一版/);
+ assert.equal(message.policy,'rl-fast');assert(!('deck' in message));
+ worker.onmessage({data:{id:message.id,direction:'left',policy:'rl-v4',fallback:'fast-load'}});
+ assert.equal(ids['#ai-policy'].value,'rl-v4');assert.match(ids['#ai-status'].textContent,/切换第四版/);
  flush();assert.equal(engine.turns,1);
-});
-
-test('V3 load fallback keeps subsequent turns on V2',()=>{
- const {ids,workers,flush,setBoard}=setup();setBoard([0,3,0,0]);
- ids['#ai-policy'].value='rl-v3';ids['#ai-toggle'].emit('click');flush();
- const worker=workers[0],message=worker.messages[0];assert.equal(message.policy,'rl-v3');
- worker.onmessage({data:{id:message.id,direction:'left',policy:'rl-v2',fallback:'v3-load'}});
- assert.equal(ids['#ai-policy'].value,'rl-v2');assert.match(ids['#ai-status'].textContent,/切换第二版/);
- flush();flush();assert.equal(worker.messages.length,2);assert.equal(worker.messages.at(-1).policy,'rl-v2');
-});
-
-test('V4 load fallback keeps subsequent turns on V3',()=>{
- const {ids,workers,flush,setBoard}=setup();setBoard([0,3,0,0]);
- ids['#ai-policy'].value='rl-v4';ids['#ai-toggle'].emit('click');flush();
- const worker=workers[0],message=worker.messages[0];assert.equal(message.policy,'rl-v4');
- worker.onmessage({data:{id:message.id,direction:'left',policy:'rl-v3',fallback:'v4-load'}});
- assert.equal(ids['#ai-policy'].value,'rl-v3');assert.match(ids['#ai-status'].textContent,/切换第三版/);
- flush();flush();assert.equal(worker.messages.length,2);assert.equal(worker.messages.at(-1).policy,'rl-v3');
-});
-
-test('V5 load fallback keeps subsequent turns on V4',()=>{
- const {ids,workers,flush,setBoard}=setup();setBoard([0,3,0,0]);
- ids['#ai-policy'].value='rl-v5';ids['#ai-toggle'].emit('click');flush();
- const worker=workers[0],message=worker.messages[0];assert.equal(message.policy,'rl-v5');
- worker.onmessage({data:{id:message.id,direction:'left',policy:'rl-v4',fallback:'v5-load'}});
- assert.equal(ids['#ai-policy'].value,'rl-v4');assert.match(ids['#ai-status'].textContent,/切换第四版/);
- flush();flush();assert.equal(worker.messages.length,2);assert.equal(worker.messages.at(-1).policy,'rl-v4');
-});
-
-test('V6 load fallback keeps subsequent turns on V4',()=>{
- const {ids,workers,flush,setBoard}=setup();setBoard([0,3,0,0]);
- ids['#ai-policy'].value='rl-v6';ids['#ai-toggle'].emit('click');flush();
- const worker=workers[0],message=worker.messages[0];assert.equal(message.policy,'rl-v6');
- worker.onmessage({data:{id:message.id,direction:'left',policy:'rl-v4',fallback:'v6-load'}});
- assert.equal(ids['#ai-policy'].value,'rl-v4');assert.match(ids['#ai-status'].textContent,/切换第四版/);
- flush();flush();assert.equal(worker.messages.length,2);assert.equal(worker.messages.at(-1).policy,'rl-v4');
-});
-
-test('V7 load fallback keeps subsequent turns on V4',()=>{
- const {ids,workers,flush,setBoard}=setup();setBoard([0,3,0,0]);
- ids['#ai-policy'].value='rl-v7';ids['#ai-toggle'].emit('click');flush();
- const worker=workers[0],message=worker.messages[0];assert.equal(message.policy,'rl-v7');
- worker.onmessage({data:{id:message.id,direction:'left',policy:'rl-v4',fallback:'v7-load'}});
- assert.equal(ids['#ai-policy'].value,'rl-v4');assert.match(ids['#ai-status'].textContent,/切换第四版/);
- flush();flush();assert.equal(worker.messages.length,2);assert.equal(worker.messages.at(-1).policy,'rl-v4');
+ flush();assert.equal(worker.messages.length,2);assert.equal(worker.messages.at(-1).policy,'rl-v4');
 });

@@ -4,7 +4,7 @@
 // (product of all chance weights from the root) is below `threshold` is scored
 // with the one-move afterstate value instead of its remaining depth.
 // threshold=0 is the complete search. Only fully completed depths are used.
-import { bonusPreviews } from './engine.js?v=20';
+import { bonusPreviews } from './engine.js?v=21';
 
 const directions=['left','right','up','down'];
 const toRank=n=>n<3?n:Math.log2(n/3)+3;

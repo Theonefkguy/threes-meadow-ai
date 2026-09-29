@@ -32,7 +32,8 @@ def main():
     protocol = json.loads((ROOT / REL / 'protocol.json').read_text())
     for path, digest in protocol['modelSHA256'].items():
         require(hashlib.sha256((ROOT / path).read_bytes()).hexdigest() == digest, f'Model hash mismatch: {path}')
-    require((ROOT/'training/v7/base.ntd').read_bytes() == (ROOT/'dist/models/ntuple-v8.bin').read_bytes(), 'Training base mismatch')
+    # Formerly published as dist/models/ntuple-v8.bin (removed from the site in the slim release).
+    require(hashlib.sha256((ROOT/'training/v7/base.ntd').read_bytes()).hexdigest() == 'd863b01eb0b958237e5ba9833da38c8f57ec833c983e4add1a196a515cbff590', 'Training base mismatch')
     first, last = protocol['seeds']
     data = {}
     for arm in ('OLD', 'NEW'):

@@ -1,6 +1,6 @@
 import { t, locale, setLanguage, applyLanguage } from './i18n.js';
-import { createGame, projectMove, score } from './engine.js?v=20';
-import { initialCounts, observePreview } from './card-memory.js?v=20';
+import { createGame, projectMove, score } from './engine.js?v=21';
+import { initialCounts, observePreview } from './card-memory.js?v=21';
 
 const boardEl = document.querySelector('#board');
 const nextEl = document.querySelector('#next-tile');
@@ -50,7 +50,7 @@ aiButton.addEventListener('click', () => {
   if (game.over) { aiStatus.textContent = t('本局已结束，请先开始新一局。'); return; }
   cancelPreview();
   try {
-    aiWorker = new Worker('./ai-worker.js?v=20', { type:'module' });
+    aiWorker = new Worker('./ai-worker.js?v=21', { type:'module' });
     aiWorker.onmessage = ({ data }) => {
       if (!aiRunning || data.id !== aiRequest) return;
       clearTimeout(aiWatchdog); aiWatchdog = null;
@@ -58,8 +58,8 @@ aiButton.addEventListener('click', () => {
         stopAI(t('AI 暂时无法继续，可以手动操作或重新开启。')); return;
       }
       if(data.fallback) {
-        aiPolicy.value=['rl-fast','rl-v8','rl-v7','rl-v6','rl-v5','rl-v4','rl-v3','rl-v2','rl'].includes(data.policy)?data.policy:'classic';
-        aiStatus.textContent=data.fallback==='fast-load'?t('五层剪枝搜索暂时无法加载，已切换第四版。'):data.fallback==='v8-load'?t('蒙特卡洛策略暂时无法加载，已切换第四版。'):data.fallback==='v7-load'?t('第七版暂时无法加载，已切换第四版。'):data.fallback==='v6-load'?t('第六版暂时无法加载，已切换第四版。'):data.fallback==='v5-load'?t('第五版暂时无法加载，已切换第四版。'):data.fallback==='v4-load'?t('第四版暂时无法加载，已切换第三版。'):data.fallback==='v3-load'?t('第三版暂时无法加载，已切换第二版。'):data.fallback==='v2-load'?t('第二版暂时无法加载，已切换第一版。'):data.fallback==='load'?t('模型暂时无法加载，已切换经典搜索。'):t('已超过模型训练范围，切换经典搜索。');
+        aiPolicy.value=['rl-fast','rl-v4'].includes(data.policy)?data.policy:'classic';
+        aiStatus.textContent=data.fallback==='fast-load'?t('五层剪枝搜索暂时无法加载，已切换第四版。'):data.fallback==='load'?t('模型暂时无法加载，已切换经典搜索。'):t('已超过模型训练范围，切换经典搜索。');
       } else {
         const phase=data.policy?.startsWith('rl')?t(' · {stage}策略', {stage:[t('前期'),t('中期'),t('后期'),t('冲刺 12288')][data.stage]}):'';
         aiStatus.textContent=t('AI 向{direction}移动{phase} · 已完成 {turns} 步',{direction:t(directionNames[data.direction]),phase,turns:game.turns+1});

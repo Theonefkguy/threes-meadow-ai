@@ -37,8 +37,8 @@ export function decodeModel(buffer) {
 }
 
 const pending=new Map();
-export function loadModel(version='v1') {
-  if(!['v1','v2','v3','v4','v5','v6','v7','v8','v21','v23'].includes(version))return Promise.reject(new Error('未知模型版本'));
+export function loadModel(version) {
+  if(!['v4','v23'].includes(version))return Promise.reject(new Error('未知模型版本'));
   if(pending.has(version))return pending.get(version);
   const request=fetch(new URL(`./models/ntuple-${version}.bin`,import.meta.url)).then(async response=>{
     if(!response.ok)throw new Error('模型加载失败');

@@ -7,7 +7,7 @@
   <meta name="description" content="Play Threes Meadow with a five-ply AI. Free, on-device, no account required.">
   <title data-i18n="合三">Threes Meadow</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%2312363a'/%3E%3Cpath d='M18 19h16c9 0 14 4 14 11 0 4-2 7-6 9 5 1 8 5 8 10 0 8-6 12-16 12H18v-9h16c4 0 6-1 6-4s-2-4-6-4h-9v-9h9c3 0 5-1 5-4s-2-4-5-4H18z' fill='%23ffd05a'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="./styles.css?v=20">
+  <link rel="stylesheet" href="./styles.css?v=21">
 </head>
 <body>
   <main class="app" aria-label="Threes Meadow game" data-i18n-aria="合三游戏">
@@ -57,14 +57,7 @@
       <label class="ai-label" for="ai-policy" data-i18n="AI 策略">AI strategy</label>
       <select id="ai-policy">
         <option value="rl-fast" selected data-i18n="五层剪枝搜索（默认）">Five-ply search (default)</option>
-        <option value="rl-v8" data-i18n="蒙特卡洛搜索（实验）">Monte Carlo (experimental)</option>
-        <option value="rl-v7" data-i18n="强化学习 · 第七版（实验）">RL · V7 (experimental)</option>
-        <option value="rl-v6" data-i18n="强化学习 · 第六版（实验）">RL · V6 (experimental)</option>
-        <option value="rl-v5" data-i18n="强化学习 · 第五版（实验）">RL · V5 (experimental)</option>
         <option value="rl-v4" data-i18n="强化学习 · 第四版">RL · V4</option>
-        <option value="rl-v3" data-i18n="强化学习 · 第三版">RL · V3</option>
-        <option value="rl-v2" data-i18n="强化学习 · 第二版">RL · V2</option>
-        <option value="rl" data-i18n="强化学习 · 第一版">RL · V1</option>
         <option value="classic" data-i18n="经典搜索">Classic search</option>
       </select>
       <button id="ai-toggle" type="button" aria-pressed="false" data-i18n="AI 自动玩">Play with AI</button>
@@ -88,6 +81,6 @@
     <footer><a href="https://github.com/Theonefkguy/threes-meadow-ai" data-i18n="源码与评测">Source &amp; benchmarks</a><p data-i18n="独立研究项目，与 Threes! / Sirvo 无隶属关系。">Independent research project, not affiliated with Threes! or Sirvo.</p></footer>
     <p id="move-status" class="sr-only" role="status" aria-live="polite"></p>
   </main>
-  <script type="module" src="./game.js?v=20"></script>
+  <script type="module" src="./game.js?v=21"></script>
 </body>
 </html>

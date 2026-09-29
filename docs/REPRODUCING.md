@@ -37,7 +37,9 @@ NEW: V23 weights, depth 5, cutoff 0.01, no node cap, leaf clamp 0. OLD: V4 weigh
 
 ## Training / 训练
 
-The original protocols and reproduction recipes are retained in [V21](../RL-V21-LATE-TRAIN.md), [V23](../RL-V23-STAGE2.md), and earlier round reports. `training/v7/base.ntd` is included and is byte-identical to `dist/models/ntuple-v8.bin`. Historical runs through V19 used legacy bonus rules; set `THREES_BONUS_RULE=legacy` where required by their protocols, not for V24.
+The original protocols and reproduction recipes are retained in [V21](../RL-V21-LATE-TRAIN.md), [V23](../RL-V23-STAGE2.md), and earlier round reports. `training/v7/base.ntd` is included (SHA-256 `d863b01e…`; formerly also published as `dist/models/ntuple-v8.bin`). The V21 website model is kept at `training/v21-late-train/models/ntuple-v21.bin`.
+
+The slim release removed the V1–V3 and V5–V8 website models and their strategies, and purged those weight files from git history. Scripts of those earlier rounds that load `dist/models/ntuple-v1.bin`…`ntuple-v8.bin` no longer run from this repository; only `dist/models/ntuple-v4.bin` and `ntuple-v23.bin` are published. Historical runs through V19 used legacy bonus rules; set `THREES_BONUS_RULE=legacy` where required by their protocols, not for V24.
 
 These are archived research workflows, not a single deterministic end-to-end training command. Some scripts depend on earlier generated pools and stop by CPU time. Cross-platform bit-identical retraining has not been verified. V24 evaluates the released frozen weights, whose SHA-256 values are in its protocol.
 
