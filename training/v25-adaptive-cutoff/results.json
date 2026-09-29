@@ -1,0 +1,275 @@
+{
+  "protocol": {
+    "createdUTC": "2026-09-28T23:09:40.775587+00:00",
+    "status": "frozen before outcomes",
+    "sampleSizePerArm": 1024,
+    "seeds": [
+      2909202601,
+      2909203624
+    ],
+    "workers": 8,
+    "chunkSize": 8,
+    "model": "V23 frozen four-stage model",
+    "modelSHA256": "cdef81fd98ef0a96d14cb8f61265adc13e50146245f63e2d1d278ea4f84be0d9",
+    "sourceSHA256": {
+      "source/training/v6/model.h": "560bb7cad2c362352f33eedec9f3db2ba374ac9b799fc63b54f335ddffc57cda",
+      "source/training/v7/model.h": "9d420e6cc3d65038e7e045223c8ad54e4b1c250bedd10ec6c0ceea6e2155fb7d",
+      "source/training/v21-late-train/model4.h": "27305c197ba81b2ee05fda8c3589ed03c4d7d752dacc3e1367ca157a1eeb1ad5",
+      "source/training/v21-late-train/search.h": "f8cbf0f0def7ac1a3a242f73be72ad99d187503ca146b300b88c7ce7205c4442",
+      "source/training/v3/ntuple-fast.h": "0554764c4b571c431b8ec4feac83e906ed5bcf8e595dfc51e1839e3f617d243d",
+      "source/training/v3/common.h": "a0300e0cf937faaacb9b85d8b0c1fae8257bebdb3198b21245a778ff92cafefd",
+      "source/training/v3/goal.h": "2fd3d950e54b82fb9d943735188c6e61c76ff80e18fcb38137d92d37d6644ba1",
+      "source/training/v24-acceptance/game.cpp": "307dfff8885c1ab1344a3e269e80d08e0608c8471df7be8874c54ca4b84b92f8"
+    },
+    "binarySHA256": "2e4e8b439b755581142f817b07eb44f7be823907d840f88d43d1c07151ed4875",
+    "binaryLocalPath": "/Users/LuipY/Documents/Codex/2026-09-26/new-chat/work/adaptive-timing/v25-game",
+    "baseline": "depth 5, cutoff 0.01 throughout",
+    "adaptive": "depth 5, cutoff 0.01 if real root max <3072; 0.005 if max >=3072, including >=6144",
+    "common": "modern rules; zero leaf clamp; no node cap or wall-time cap; standard nine-card starts; stop at 12288 or death; 50000-move guard errors",
+    "pairing": "same opening seeds; subsequent events are not one-to-one after policy divergence",
+    "primary": [
+      "reach6144",
+      "reach12288"
+    ],
+    "analysis": "two-sided exact McNemar for each primary; Holm familywise alpha .05 for two tests; Wilson 95% intervals per arm; approximate paired difference 95% intervals; score/moves secondary descriptive",
+    "stopping": "fixed 1024 pairs; no interim outcome analysis; failure pauses/resumes same immutable configuration",
+    "browserCheck": "after native load ends, compare fixed and adaptive on the same fixed archived 3072 and 6144 boards, 160ms soft budget; report mean/p95/max and completed-depth share separately; a desktop-only check",
+    "adoption": "recommend only with Holm-significant improvement in at least one primary, no observed decline in the other, and >=99% full depth 5 in each browser phase with p95 <160ms; otherwise retain baseline or report inconclusive; no website deployment in this test",
+    "limits": "not a deterministic optimality claim; 12288 rare-event power may be limited; selection/training histories stay unchanged"
+  },
+  "nPairs": 1024,
+  "milestones": {
+    "r1536": {
+      "baseline": {
+        "count": 1015,
+        "rate": 0.9912109375,
+        "wilson95": [
+          0.9833809256772761,
+          0.9953692418380973
+        ]
+      },
+      "adaptive": {
+        "count": 1015,
+        "rate": 0.9912109375,
+        "wilson95": [
+          0.9833809256772761,
+          0.9953692418380973
+        ]
+      },
+      "difference": 0.0,
+      "pairedDifferenceApprox95": [
+        0.0,
+        0.0
+      ],
+      "adaptiveOnly": 0,
+      "baselineOnly": 0,
+      "mcnemarExactP": 1.0
+    },
+    "r3072": {
+      "baseline": {
+        "count": 896,
+        "rate": 0.875,
+        "wilson95": [
+          0.8533316818432658,
+          0.893865265126721
+        ]
+      },
+      "adaptive": {
+        "count": 896,
+        "rate": 0.875,
+        "wilson95": [
+          0.8533316818432658,
+          0.893865265126721
+        ]
+      },
+      "difference": 0.0,
+      "pairedDifferenceApprox95": [
+        0.0,
+        0.0
+      ],
+      "adaptiveOnly": 0,
+      "baselineOnly": 0,
+      "mcnemarExactP": 1.0
+    },
+    "r6144": {
+      "baseline": {
+        "count": 426,
+        "rate": 0.416015625,
+        "wilson95": [
+          0.3861950063937332,
+          0.4464640106911136
+        ]
+      },
+      "adaptive": {
+        "count": 429,
+        "rate": 0.4189453125,
+        "wilson95": [
+          0.3890838876985011,
+          0.44941260553454876
+        ]
+      },
+      "difference": 0.0029296875,
+      "pairedDifferenceApprox95": [
+        -0.03746609381747982,
+        0.04332546881747982
+      ],
+      "adaptiveOnly": 224,
+      "baselineOnly": 221,
+      "mcnemarExactP": 0.9244804854860741,
+      "holmP": 0.9244804854860741
+    },
+    "r12288": {
+      "baseline": {
+        "count": 27,
+        "rate": 0.0263671875,
+        "wilson95": [
+          0.018183454017356528,
+          0.038091235356488354
+        ]
+      },
+      "adaptive": {
+        "count": 43,
+        "rate": 0.0419921875,
+        "wilson95": [
+          0.03132325446943114,
+          0.056084641028163185
+        ]
+      },
+      "difference": 0.015625,
+      "pairedDifferenceApprox95": [
+        -0.00013713147129537293,
+        0.031387131471295376
+      ],
+      "adaptiveOnly": 42,
+      "baselineOnly": 26,
+      "mcnemarExactP": 0.06811867428409976,
+      "holmP": 0.13623734856819952
+    }
+  },
+  "secondary": {
+    "score": {
+      "baselineMean": 442181.091796875,
+      "adaptiveMean": 458522.7685546875,
+      "baselineMedian": 265749.0,
+      "adaptiveMedian": 265920.0,
+      "pairedDifferenceMean": 16341.6767578125,
+      "pairedDifferenceApprox95": [
+        -9349.384997610945,
+        42032.73851323595
+      ]
+    },
+    "moves": {
+      "baselineMean": 1493.041015625,
+      "adaptiveMean": 1504.1328125,
+      "baselineMedian": 1441.5,
+      "adaptiveMedian": 1446.0,
+      "pairedDifferenceMean": 11.091796875,
+      "pairedDifferenceApprox95": [
+        -15.831176763331243,
+        38.01477051333124
+      ]
+    },
+    "searchCPU": {
+      "baselineMean": 7.454191020507813,
+      "adaptiveMean": 9.965823650390625,
+      "baselineMedian": 7.325904000000004,
+      "adaptiveMedian": 9.494000499999999,
+      "pairedDifferenceMean": 2.5116326298828118,
+      "pairedDifferenceApprox95": [
+        2.3235496783097873,
+        2.6997155814558362
+      ]
+    },
+    "maxMoveCPU": {
+      "baselineMean": 0.016455334960937498,
+      "adaptiveMean": 0.02488469140625,
+      "baselineMedian": 0.0161655,
+      "adaptiveMedian": 0.0253,
+      "pairedDifferenceMean": 0.0084293564453125,
+      "pairedDifferenceApprox95": [
+        0.008127188138824659,
+        0.00873152475180034
+      ]
+    }
+  },
+  "browserSummary": [
+    {
+      "phase": "1536",
+      "arm": "baseline",
+      "n": 192,
+      "meanMs": 10.319791664679846,
+      "p95Ms": 33.700000047683716,
+      "maxMs": 66.70000004768372,
+      "completed5": 192
+    },
+    {
+      "phase": "1536",
+      "arm": "adaptive",
+      "n": 192,
+      "meanMs": 10.34895833581686,
+      "p95Ms": 35.10000014305115,
+      "maxMs": 51.39999985694885,
+      "completed5": 192
+    },
+    {
+      "phase": "3072",
+      "arm": "baseline",
+      "n": 384,
+      "meanMs": 6.839062500124176,
+      "p95Ms": 11.700000047683716,
+      "maxMs": 32.59999990463257,
+      "completed5": 384
+    },
+    {
+      "phase": "3072",
+      "arm": "adaptive",
+      "n": 384,
+      "meanMs": 13.393749999503294,
+      "p95Ms": 26.59999990463257,
+      "maxMs": 40.5,
+      "completed5": 384
+    },
+    {
+      "phase": "6144",
+      "arm": "baseline",
+      "n": 384,
+      "meanMs": 7.886458334202568,
+      "p95Ms": 12.300000190734863,
+      "maxMs": 16.299999952316284,
+      "completed5": 384
+    },
+    {
+      "phase": "6144",
+      "arm": "adaptive",
+      "n": 384,
+      "meanMs": 15.736458335692683,
+      "p95Ms": 27,
+      "maxMs": 38.299999952316284,
+      "completed5": 384
+    }
+  ],
+  "browserUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+  "parityComparisons": 640,
+  "parityMismatches": [],
+  "adoptionGate": {
+    "significantPrimaryGain": false,
+    "noObservedPrimaryDecline": true,
+    "browserPerformancePass": true,
+    "parityPass": true,
+    "recommend": false
+  },
+  "progress": {
+    "status": "complete",
+    "completedGames": 2048,
+    "checkpointedGames": 2048,
+    "totalGames": 2048,
+    "elapsedSeconds": 2360.1143021583557,
+    "etaSeconds": 0
+  },
+  "fileSHA256": {
+    "games-baseline.jsonl": "09ffb7141f32dd69be3a69f655003cbb998668c6c54a3f8f96e3864e46005a8f",
+    "games-adaptive.jsonl": "0671d4cfe821b9b9fe41f6998e3bcd97101a2e803dac2dbea39e463e48c9ae68",
+    "browser-results.json": "c15c951f352516be7f4c5bef5347b36f3903b1ae5bbc0ff50f345626e5955c77",
+    "browser-reference.jsonl": "ad3366e3287dc0f38525b937609024c734ac9880e2f4d5b9d387679654a4de2f"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "selectedBeforeFormalOutcomes": true,
+  "states": {
+    "1536": 64,
+    "3072": 128,
+    "6144": 128
+  },
+  "selection": "first states in supplied archived pools; bonus conditional weights normalized to modern uniform window semantics",
+  "statesSHA256": "8d435a3acdc3c56af39abbb81fde969ea6c6b5f16bae7edb6ab7d5881143844d",
+  "passes": 3,
+  "warmup": "first 10 states from each phase, both arms",
+  "order": "baseline/adaptive alternating by board index plus repetition",
+  "budgetMs": 160,
+  "maxNodes": 4000000,
+  "depth": 5,
+  "parity": "one untimed/unbudgeted JS pass compared to frozen native Search over all states and both arms",
+  "scope": "desktop Chromium on this M2 Pro; no mobile hardware performance claim"
+}

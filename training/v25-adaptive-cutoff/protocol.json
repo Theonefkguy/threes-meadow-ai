@@ -1,0 +1,38 @@
+{
+  "createdUTC": "2026-09-28T23:09:40.775587+00:00",
+  "status": "frozen before outcomes",
+  "sampleSizePerArm": 1024,
+  "seeds": [
+    2909202601,
+    2909203624
+  ],
+  "workers": 8,
+  "chunkSize": 8,
+  "model": "V23 frozen four-stage model",
+  "modelSHA256": "cdef81fd98ef0a96d14cb8f61265adc13e50146245f63e2d1d278ea4f84be0d9",
+  "sourceSHA256": {
+    "source/training/v6/model.h": "560bb7cad2c362352f33eedec9f3db2ba374ac9b799fc63b54f335ddffc57cda",
+    "source/training/v7/model.h": "9d420e6cc3d65038e7e045223c8ad54e4b1c250bedd10ec6c0ceea6e2155fb7d",
+    "source/training/v21-late-train/model4.h": "27305c197ba81b2ee05fda8c3589ed03c4d7d752dacc3e1367ca157a1eeb1ad5",
+    "source/training/v21-late-train/search.h": "f8cbf0f0def7ac1a3a242f73be72ad99d187503ca146b300b88c7ce7205c4442",
+    "source/training/v3/ntuple-fast.h": "0554764c4b571c431b8ec4feac83e906ed5bcf8e595dfc51e1839e3f617d243d",
+    "source/training/v3/common.h": "a0300e0cf937faaacb9b85d8b0c1fae8257bebdb3198b21245a778ff92cafefd",
+    "source/training/v3/goal.h": "2fd3d950e54b82fb9d943735188c6e61c76ff80e18fcb38137d92d37d6644ba1",
+    "source/training/v24-acceptance/game.cpp": "307dfff8885c1ab1344a3e269e80d08e0608c8471df7be8874c54ca4b84b92f8"
+  },
+  "binarySHA256": "2e4e8b439b755581142f817b07eb44f7be823907d840f88d43d1c07151ed4875",
+  "binaryLocalPath": "/Users/LuipY/Documents/Codex/2026-09-26/new-chat/work/adaptive-timing/v25-game",
+  "baseline": "depth 5, cutoff 0.01 throughout",
+  "adaptive": "depth 5, cutoff 0.01 if real root max <3072; 0.005 if max >=3072, including >=6144",
+  "common": "modern rules; zero leaf clamp; no node cap or wall-time cap; standard nine-card starts; stop at 12288 or death; 50000-move guard errors",
+  "pairing": "same opening seeds; subsequent events are not one-to-one after policy divergence",
+  "primary": [
+    "reach6144",
+    "reach12288"
+  ],
+  "analysis": "two-sided exact McNemar for each primary; Holm familywise alpha .05 for two tests; Wilson 95% intervals per arm; approximate paired difference 95% intervals; score/moves secondary descriptive",
+  "stopping": "fixed 1024 pairs; no interim outcome analysis; failure pauses/resumes same immutable configuration",
+  "browserCheck": "after native load ends, compare fixed and adaptive on the same fixed archived 3072 and 6144 boards, 160ms soft budget; report mean/p95/max and completed-depth share separately; a desktop-only check",
+  "adoption": "recommend only with Holm-significant improvement in at least one primary, no observed decline in the other, and >=99% full depth 5 in each browser phase with p95 <160ms; otherwise retain baseline or report inconclusive; no website deployment in this test",
+  "limits": "not a deterministic optimality claim; 12288 rare-event power may be limited; selection/training histories stay unchanged"
+}

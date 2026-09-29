@@ -1,0 +1,18 @@
+{
+  "createdUTC": "2026-09-28T23:17:44.494034+00:00",
+  "purpose": "Record analysis and browser implementation before viewing formal game outcomes",
+  "sha256": {
+    "analyze.py": "a508d0b675bd6328470ae242f55a4db109d5815a71e23e660f924e0860e7527b",
+    "run.py": "a58f456dee276ab521c4c5fdac1985f9e5ce4912d4cfd0b7466f8beb72c54d1d",
+    "browser-reference.cpp": "d7b41d25a94d61218325f1045073b42ee39a31b22dbad6e667f620260358e60d",
+    "browser-protocol.json": "53855d05bb35d6844f3e4c307f5487676e8e882172046f555f50df99b85270c2",
+    "browser/rl-model.js": "7f3989ba1c119155bbcb9001eefa61fb6cbd410a19dcbc5d3541d55d68256dbf",
+    "browser/model.bin": "cdef81fd98ef0a96d14cb8f61265adc13e50146245f63e2d1d278ea4f84be0d9",
+    "browser/index.html": "fd6f31a21cb123778752700b9a27f570d68bf749d4ee16ec9b6c0b55f4cf48a9",
+    "browser/states.json": "8d435a3acdc3c56af39abbb81fde969ea6c6b5f16bae7edb6ab7d5881143844d",
+    "browser/states.txt": "56264221a3f5e34548135b6b886469f325d60ed7f187879350122fe3e8ed6dab",
+    "browser/bench-worker.js": "bc5ce6960554e7b29a30dd1bbb25035627fd982d92cad193f2b1aa24d67ec0f9",
+    "browser/fast-search.js": "34ccd24f9177c17a1fd4570b882478ef9ff446cd76f21f9e4960db89644efc14",
+    "browser/engine.js": "db048a5638a617cbf2ae9352213e74c17217a2fe7cad0aeb56ec438286ec206b"
+  }
+}

@@ -10,6 +10,7 @@
 | V22 叶节点下限 0 | RL-V22-CLAMP.md | training/v22-clamp |
 | V23 第 2 段改进训练（当前网页模型） | RL-V23-STAGE2.md | training/v23-stage2, dist/models/ntuple-v23.bin |
 | V24 整局总验收 | RL-V24-ACCEPTANCE.md | training/v24-acceptance |
+| V25 3072 后降低剪枝阈值（未采用） | RL-V25-ADAPTIVE-CUTOFF.md | training/v25-adaptive-cutoff |
 
 网页入口：dist/index.html（静态文件，需通过 HTTP 服务打开，例如在 dist 目录运行 `python3 -m http.server`）。
 默认 AI：五层剪枝搜索（阈值 0.01，叶节点下限 0），模型 ntuple-v23.bin。

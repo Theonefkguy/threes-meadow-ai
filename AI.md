@@ -100,3 +100,5 @@ positions it made 6144 in 46.1% vs 41.1% (p=1.5e-4). See RL-V23-STAGE2.md.
 V24 whole-game acceptance (official-modern rules, 1024 paired openings): the current
 default AI reached 6144 in 39.1% and 12288 in 3.0% of games, versus 11.1% and 0% for
 the website AI at the start of this work. See RL-V24-ACCEPTANCE.md.
+V25 (not adopted): cutoff 0.005 once the board holds a 3072 left 6144 unchanged
+(429 vs 426/1024) and gave 12288 in 43 vs 27 games (Holm p=0.14). See RL-V25-ADAPTIVE-CUTOFF.md.
