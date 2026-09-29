@@ -1,0 +1,16 @@
+{
+  "createdUTC": "2026-09-29T01:41:17.884396+00:00",
+  "purpose": "Analysis code and browser harness fixed before any continuation outcome; tested only on synthetic data",
+  "sha256": {
+    "analyze.py": "1b72b9f2ea95e276cc4aecf2ceae3c45124d8dff79ec7f6436a281e8a64a5ae9",
+    "run.py": "7b65ae01568aa749dde3c882f71350eb465552dc967aeaa637eb7a5efdac9464",
+    "browser-reference.cpp": "dcce078b15e3e22ea7080e2ec7c385ebf39040ebaba10309c8e41007c17849e6",
+    "browser/index.html": "dec7e635cb0a9107183c906e99a9fb11c5e18549ce727b9b7904c33f971b59b5",
+    "browser/bench-worker.js": "f56753130df1b40e3922c399883736841611ef632727561139aa7f6de96aa475",
+    "dist/fast-search.js": "e792bde2e954a23ad7a8b5c5022108f9c71e00e99a7361f3ead28214a7439b2d",
+    "dist/rl-model.js": "0dcc8953821a97206454349fc2ed7a2e40feeabcf9aa7db7a1b2edeaaa7af66b",
+    "dist/engine.js": "db048a5638a617cbf2ae9352213e74c17217a2fe7cad0aeb56ec438286ec206b",
+    "training/v25-adaptive-cutoff/browser/states.json": "8d435a3acdc3c56af39abbb81fde969ea6c6b5f16bae7edb6ab7d5881143844d",
+    "training/v25-adaptive-cutoff/browser/states.txt": "56264221a3f5e34548135b6b886469f325d60ed7f187879350122fe3e8ed6dab"
+  }
+}
