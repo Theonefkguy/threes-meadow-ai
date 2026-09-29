@@ -1,0 +1,100 @@
+{
+  "round": "V26 late-game cutoff from first-6144 positions",
+  "createdUTC": "2026-09-29T01:38:04.291718+00:00",
+  "status": "frozen before pool generation and before any continuation outcome",
+  "motivation": "V25 (whole games) showed no effect of cutoff 0.005 on 3072->6144 but 43 vs 27 games reaching 12288 (exact McNemar p=0.068, Holm 0.14). This round tests the late phase directly.",
+  "rules": "official-modern (RULES.md); THREES_BONUS_RULE unset; 12288 ends the game",
+  "model": {
+    "path": "dist/models/ntuple-v23.bin",
+    "sha256": "cdef81fd98ef0a96d14cb8f61265adc13e50146245f63e2d1d278ea4f84be0d9"
+  },
+  "pool": {
+    "tool": "training/v26-late-cutoff/pool.cpp",
+    "policy": "website default AI: V23, depth 5, cutoff 0.01, leaf clamp 0, no node/time cap",
+    "openingSeeds": "26100001 upward, standard nine-card openings",
+    "initialBlock": [
+      26100001,
+      26102600
+    ],
+    "extension": "if fewer than 1024 kept states, add further blocks of 400 consecutive seeds until at least 1024",
+    "keep": "state right after the first 6144 appears, unless the game is already over (terminal states excluded)",
+    "selection": "sort kept states by opening seed; evaluation uses exactly the first 1024; no other filtering",
+    "freeze": "pool file SHA-256 recorded in pool-manifest.json before any continuation starts"
+  },
+  "continuation": {
+    "tool": "training/v21-late-train/snap.cpp cont with CLAMP=1",
+    "target": "rank 15 (12288) or death; 30000-move guard errors",
+    "rolloutSeed": "26200001 + pool index; unsent ordinary deck reshuffled with it; same seed for all arms",
+    "arms": {
+      "B": {
+        "depth": 5,
+        "threshold": 0.01,
+        "note": "current website setting"
+      },
+      "A1": {
+        "depth": 5,
+        "threshold": 0.005
+      },
+      "A2": {
+        "depth": 6,
+        "threshold": 0.005
+      }
+    },
+    "search": "every move must complete the full depth (no node or time cap)",
+    "websiteMapping": "a board holding 6144 keeps it until the game ends, so each arm equals switching to that setting once the real board max reaches 6144"
+  },
+  "sampleSize": 1024,
+  "power": "from V25 conditional rates (about 6.3% vs 10.0% after 6144), about 0.8 for one comparison at Holm alpha 0.025",
+  "primary": [
+    {
+      "id": "P1",
+      "endpoint": "reach 12288",
+      "compare": "A1 vs B"
+    },
+    {
+      "id": "P2",
+      "endpoint": "reach 12288",
+      "compare": "A2 vs B"
+    }
+  ],
+  "analysis": {
+    "primaryTest": "two-sided exact McNemar per comparison, Holm familywise alpha 0.05 over P1,P2",
+    "secondary": [
+      "scoreGained paired mean difference with normal-approximation 95% CI and paired t p-value, A1-B and A2-B",
+      "A2 vs A1 reach-12288 exact McNemar (exploratory)",
+      "Wilson 95% intervals per arm",
+      "CPU ms per move (8 concurrent processes; not a web latency)",
+      "avoidable certain-death final moves (lastKind=2)"
+    ],
+    "stopping": "fixed sample, no interim outcome analysis"
+  },
+  "browserCheck": {
+    "when": "after native continuations finish",
+    "states": "first 128 6144-phase states of training/v25-adaptive-cutoff/browser/states.txt (archived V21 pool; not evaluation positions)",
+    "budgetMs": 160,
+    "arms": "B, A1, A2",
+    "passes": 3,
+    "parity": "untimed JS vs native C++ directions on the same states for all arms",
+    "scope": "desktop Chromium on this M2 Pro; mobile not measured"
+  },
+  "adoption": "Adopt a candidate only if (1) its primary comparison is Holm-significant in favour of the candidate, (2) its scoreGained difference vs B is not significantly negative, (3) in the browser check it completes its full depth on >=99% of 6144-phase measurements with P95 < 160 ms, and (4) JS/native parity has no mismatch. If both candidates qualify, adopt A1 (cheaper) unless the exploratory A2-vs-A1 McNemar favours A2 with p<0.05. Otherwise keep the website default unchanged.",
+  "sourceSHA256": {
+    "training/v26-late-cutoff/pool.cpp": "fedd02ac2bc901c62b409d268139af50504b58a6ba521d099947256ff4706fdd",
+    "training/v21-late-train/snap.cpp": "47e64ea351d8dc915103e276d9a84c5a910e34b6802b77c75e604ad8ae0ba258",
+    "training/v21-late-train/search.h": "f8cbf0f0def7ac1a3a242f73be72ad99d187503ca146b300b88c7ce7205c4442",
+    "training/v21-late-train/model4.h": "27305c197ba81b2ee05fda8c3589ed03c4d7d752dacc3e1367ca157a1eeb1ad5",
+    "training/v7/model.h": "9d420e6cc3d65038e7e045223c8ad54e4b1c250bedd10ec6c0ceea6e2155fb7d",
+    "training/v6/model.h": "560bb7cad2c362352f33eedec9f3db2ba374ac9b799fc63b54f335ddffc57cda",
+    "training/v3/ntuple-fast.h": "0554764c4b571c431b8ec4feac83e906ed5bcf8e595dfc51e1839e3f617d243d",
+    "training/v3/common.h": "a0300e0cf937faaacb9b85d8b0c1fae8257bebdb3198b21245a778ff92cafefd",
+    "training/v3/goal.h": "2fd3d950e54b82fb9d943735188c6e61c76ff80e18fcb38137d92d37d6644ba1"
+  },
+  "compiler": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
+  "compile": "c++ -std=c++17 -O3 SOURCE -o BINARY (no -march)",
+  "binarySHA256": {
+    "pool": "a0a8a10dd0ff7e9849f4adf68d271df83329dcad251775f9e2b668721d4e0e0c",
+    "snap": "013c2a4c42830cedd8150ee7a30b67adb60ec59fc7193a6ffe128fb92d30cce8"
+  },
+  "workers": 8,
+  "pilot": "timing only, 8 positions of training/v21-late-train/pools/train-6144.txt, rollout base 99260001: ms/move D5/.01 3.7, D5/.005 6.6, D6/.01 6.8, D6/.005 16.1 (max 67 ms). Outcomes of the pilot were not examined."
+}

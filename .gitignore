@@ -111,3 +111,6 @@ __pycache__/
 .env.*
 # Required frozen training dependency
 !training/v7/base.ntd
+
+training/v26-late-cutoff/data/
+training/v26-late-cutoff/__pycache__/
