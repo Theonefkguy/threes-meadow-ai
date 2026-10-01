@@ -10,6 +10,12 @@ A high-performance Threes AI you can watch, interrupt and play alongside. Multi-
 
 Open the [live demo](https://theonefkguy.github.io/threes-meadow-ai/), use the English default or switch to 中文, and press **Play with AI**. Use arrow keys, swipe, or the direction buttons to take over. The default V23 model is about 8 MiB and loads on first use. The V4 search and a classic heuristic search remain selectable for comparison.
 
+## Video
+
+[![How a Threes AI Actually Thinks](https://i.ytimg.com/vi/Rov_8bpDScY/hqdefault.jpg)](https://www.youtube.com/watch?v=Rov_8bpDScY)
+
+Watch **How a Threes AI Actually Thinks** on YouTube.
+
 ## V24 results
 
 Standard nine-card openings under modern Threes core rules documented by community reverse engineering. Native C++ evaluation, from the opening until 12288 or death, on the same 1,024 opening seeds for each arm.

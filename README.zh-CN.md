@@ -10,6 +10,12 @@
 
 打开[游戏页面](https://theonefkguy.github.io/threes-meadow-ai/)，选择中文或 English，点击「AI 自动玩」。使用方向键、滑动或方向按钮即可手动接管。默认 V23 模型约 8 MiB，首次使用时下载；也可切换到第四版或经典搜索进行对比。
 
+## 视频介绍
+
+[![How a Threes AI Actually Thinks](https://i.ytimg.com/vi/Rov_8bpDScY/hqdefault.jpg)](https://www.youtube.com/watch?v=Rov_8bpDScY)
+
+在 YouTube 观看 **How a Threes AI Actually Thinks（Threes AI 如何思考）**。
+
 ## V24 整局验收
 
 遵循社区逆向确认的现代 Threes 核心规则，采用标准九张牌开局。使用原生 C++，从开局玩到合出 12288 或死亡，新旧两组使用相同的 1024 个开局种子。
