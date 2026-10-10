@@ -1,0 +1,9 @@
+{
+  "createdUTC": "2026-10-10T12:40:04.239030+00:00",
+  "purpose": "Runner and analysis fixed with the protocol, before any pool generation, training or outcome; analysis tested only on synthetic data",
+  "sha256": {
+    "analyze.py": "6e756e55187679a0fcabcfb1b4a5732c0f50c460fd4c397201a6897f7b25a2fd",
+    "run.py": "47aecb2cba836927fa2305cc7c2110e6678b71034c9bdd550ffe67750acd1fcf",
+    "protocol.json": "a6f1d86a0b5eb79b3fdf01f376629fce4d96bcabb74d591208602bd8a1accc2f"
+  }
+}

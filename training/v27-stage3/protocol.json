@@ -1,0 +1,105 @@
+{
+  "round": "V27: retrain stage 3 (>=6144, the 12288 sprint) with the V23 stage-2 method",
+  "createdUTC": "2026-10-10T12:39:20.533033+00:00",
+  "status": "frozen before any training-pool generation, training or evaluation",
+  "motivation": "V26 concluded the search settings are exhausted and recommended improving the evaluation tables. Stage 3 is still the V21 table (uniform first-6144 starts, two-move behaviour policy only); V23 raised stage 2 by +5.1 pp with on-policy starts and a strong sparring player.",
+  "machine": "Mac mini, Apple M5 Pro (6 super + 12 performance cores), 64 GB",
+  "rules": "official-modern (RULES.md); THREES_BONUS_RULE unset; 12288 ends the game",
+  "baseModel": {
+    "path": "dist/models/ntuple-v23.bin",
+    "sha256": "cdef81fd98ef0a96d14cb8f61265adc13e50146245f63e2d1d278ea4f84be0d9",
+    "note": "CUR = current website model; its stage 3 is V21 S3. Both arms start from this stage 3; stages 0-2 are never changed."
+  },
+  "trainingPool": {
+    "openings": [
+      27100001,
+      27102000
+    ],
+    "policy": "website default AI (V23, depth 5, cutoff 0.01, leaf clamp 0, no cap) from standard openings to the first 6144 (training/v26-late-cutoff/pool.cpp); terminal states excluded; all kept states used",
+    "sampleRolloutBase": 27110001,
+    "every": 25,
+    "onpolicy": "each first-6144 state continued with the same website search (unsent deck reshuffled with 27110001+index) to 12288 or death; the state is recorded every 25 moves from move 0 while alive with max card exactly 6144 (training/v27-stage3/sample.cpp). Training starts are drawn uniformly from these.",
+    "disjointness": "opening seeds 27100001-27102000 are used by no evaluation pool"
+  },
+  "training": {
+    "tool": "training/v27-stage3/train.cpp",
+    "method": "V23 method on stage 3: TD(lambda=.5) five-step truncated score return, multiplicity-normalised update, learning rates .02/.008/.003 (V21 stage 3) stepping down at 50% and 85% of the move budget; episodes to 12288 (terminal 0) or death",
+    "strongMoveShare": 0.003,
+    "strongPlayer": "complete 3-ply expectimax, no cutoff, clamped leaves, using the model being trained",
+    "deviationFromV23": "V23 set the strong share as 25% of CPU time and stopped by CPU seconds; both depend on the machine. V27 uses move counts instead so that training is deterministic given the seed: an episode is strong when strong moves so far < 0.003 x all moves so far. Pilot (timing only, V21 train-6144.txt, 3M moves, seed 99270001): strong share 0.002/0.005/0.01 of moves took 19/36/53% of CPU; a strong move costs ~0.27 ms vs ~2.4 us, so 0.003 is about 25% of CPU. Pilot models were discarded unevaluated.",
+    "budgetNote": "A (2e9 moves) is about 7200 CPU s on this machine; B is 4x A. For scale, V21 S3 made 5.4e8 updates and V23 arm A 8.3e8."
+  },
+  "arms": {
+    "A": {
+      "moves": 2000000000,
+      "seed": 27210001
+    },
+    "B": {
+      "moves": 8000000000,
+      "seed": 27210002
+    }
+  },
+  "screen": {
+    "pool": "training/v26-late-cutoff/pool6144.txt",
+    "poolManifest": "training/v26-late-cutoff/pool-manifest.json",
+    "size": 1024,
+    "rolloutBase": 26200001,
+    "arms": "A, B and CUR (each = CUR with that arm's stage 3; CUR unchanged), website search depth 5 / cutoff 0.01 / clamp, to 12288 or death",
+    "rule": "winner = arm with more 12288s; tie -> higher total scoreGained; exact tie -> A. No test.",
+    "v26Baseline": "training/v26-late-cutoff/games-B.jsonl",
+    "reproductionCheck": "CUR on this pool with these seeds is the V26 arm B run; its non-timing fields are compared with games-B.jsonl as a descriptive cross-machine determinism check. It does not affect any decision.",
+    "independence": "the V26 pool (openings 26100001-26103000) is disjoint from all V27 training data; V26 examined only search settings, never these tables"
+  },
+  "confirmPool": {
+    "initialBlock": [
+      27300001,
+      27305400
+    ],
+    "extensionBlock": 400,
+    "size": 2048,
+    "policy": "same as the training first-6144 generation; terminal states excluded; sorted by opening seed, the first 2048 used; if fewer than 2048, add 400-seed blocks until enough",
+    "freeze": "confirm6144.txt SHA-256 recorded in eval-pool-manifest.json before any continuation"
+  },
+  "confirm": {
+    "compare": "screen winner vs CUR, same search as the screen, same pool state and rollout seed per pair",
+    "rolloutBase": 27400001,
+    "primary": "reach 12288: two-sided exact McNemar, alpha 0.05 (single primary)",
+    "alpha": 0.05,
+    "interimPairs": 1024,
+    "interimStopP": 0.001,
+    "interim": "after the first 1024 pairs: stop and conclude only if p < 0.001 (Haybittle-Peto); otherwise continue to 2048 with no other look",
+    "secondary": [
+      "scoreGained paired mean difference, normal-approximation 95% CI",
+      "Wilson 95% intervals per arm",
+      "avoidable certain-death final moves (lastKind=2)",
+      "native CPU ms per move (16 concurrent processes; not a web latency)"
+    ],
+    "power": "V26: CUR reached 12288 from first 6144 in 8.7%, with few pairs succeeding in both arms. For +3 pp (8.7% -> 11.7%) about 21% of pairs are discordant; at 2048 pairs the approximate power is 0.85, at 1024 about 0.55."
+  },
+  "adoption": "Adopt the winner's stage 3 into a new website model (V23 stages 0-2 + winner stage 3) only if (1) the confirmation primary is significant in its favour (interim stop or final p<0.05), (2) its scoreGained difference vs CUR is not significantly negative, (3) on the first 128 6144-phase states of training/v25-adaptive-cutoff/browser/states.txt, untimed JS and native C++ choose the same direction for every state and the browser completes depth 5 on >=99% of timed measurements with P95 < 160 ms, and (4) all repository tests pass. Otherwise the website model is unchanged.",
+  "sourceSHA256": {
+    "training/v27-stage3/train.cpp": "584210404aa08027d748894c58778ae22c209d16224774366300cbf464aaae20",
+    "training/v27-stage3/sample.cpp": "48bee57cd690075d7bc77d3b87978f6658ea8be72061698c714a08f65f7b86d5",
+    "training/v27-stage3/compose.cpp": "aa43f3c12f85d6069c04ab44f3a7ee784f154388e9b62a08eb40f4fc0efbed7f",
+    "training/v26-late-cutoff/pool.cpp": "fedd02ac2bc901c62b409d268139af50504b58a6ba521d099947256ff4706fdd",
+    "training/v21-late-train/snap.cpp": "47e64ea351d8dc915103e276d9a84c5a910e34b6802b77c75e604ad8ae0ba258",
+    "training/v21-late-train/search.h": "f8cbf0f0def7ac1a3a242f73be72ad99d187503ca146b300b88c7ce7205c4442",
+    "training/v21-late-train/model4.h": "27305c197ba81b2ee05fda8c3589ed03c4d7d752dacc3e1367ca157a1eeb1ad5",
+    "training/v7/model.h": "9d420e6cc3d65038e7e045223c8ad54e4b1c250bedd10ec6c0ceea6e2155fb7d",
+    "training/v6/model.h": "560bb7cad2c362352f33eedec9f3db2ba374ac9b799fc63b54f335ddffc57cda",
+    "training/v3/ntuple-fast.h": "0554764c4b571c431b8ec4feac83e906ed5bcf8e595dfc51e1839e3f617d243d",
+    "training/v3/common.h": "a0300e0cf937faaacb9b85d8b0c1fae8257bebdb3198b21245a778ff92cafefd",
+    "training/v3/goal.h": "2fd3d950e54b82fb9d943735188c6e61c76ff80e18fcb38137d92d37d6644ba1"
+  },
+  "compiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)",
+  "compile": "from the repository root: c++ -std=c++17 -O3 SOURCE -o training/v27-stage3/bin/NAME (no -march), NAME in pool (training/v26-late-cutoff/pool.cpp), sample, train, compose (training/v27-stage3/*.cpp), snap (training/v21-late-train/snap.cpp). Apple ld embeds the output path, so binary hashes match only for these paths and this compiler.",
+  "binarySHA256": {
+    "pool": "7ac66586552340bb0c69f785ca74f2000f0980423db3be5e4f2bd39a4b34a724",
+    "sample": "1b268de09a7df2b8ff66a672e03c4a32f3b73014d44f8a53419cd87764fc86a7",
+    "train": "9d917b00c6eae3f61931b0bb09cd7784ca8d76a58c1cedc9f5b2814fa7b30a0c",
+    "compose": "74ff6aeb2f03912a21811900d5a4eb1f051a36d44ce22adcb6faefe0aade93cf",
+    "snap": "4b943b3e6048f309a5d6f93799f4f5826bfda705c07f282b09a672d686aece0a"
+  },
+  "workers": 16,
+  "workersNote": "16 concurrent simulation processes; the two training runs use one core each and may overlap pool generation"
+}
