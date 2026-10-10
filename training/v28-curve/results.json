@@ -1,0 +1,194 @@
+{
+ "pairs": 3072,
+ "curve": [
+  {
+   "arm": "CUR",
+   "trainingMoves": 0,
+   "reach12288": 241,
+   "rate": 0.07845052083333333,
+   "wilson95": [
+    0.06946024324018824,
+    0.08849375579556512
+   ],
+   "perPool": {
+    "v26": 89,
+    "v27": 152
+   },
+   "meanScoreGained": 241104.9501953125,
+   "avoidableCertainDeath": 0
+  },
+  {
+   "arm": "C10000000",
+   "trainingMoves": 10000000,
+   "reach12288": 169,
+   "rate": 0.055013020833333336,
+   "wilson95": [
+    0.047491915616666644,
+    0.06364562622261895
+   ],
+   "perPool": {
+    "v26": 48,
+    "v27": 121
+   },
+   "meanScoreGained": 211856.162109375,
+   "avoidableCertainDeath": 0,
+   "vsCUR": {
+    "armOnly": 140,
+    "curOnly": 212,
+    "mcnemarExactP_unadjusted": 0.00014679732169826435,
+    "scoreGained": {
+     "meanDifference": -29248.7880859375,
+     "approx95": [
+      -40577.34497867833,
+      -17920.231193196665
+     ]
+    }
+   }
+  },
+  {
+   "arm": "C30000000",
+   "trainingMoves": 30000000,
+   "reach12288": 145,
+   "rate": 0.047200520833333336,
+   "wilson95": [
+    0.040250264011528675,
+    0.05528179209560099
+   ],
+   "perPool": {
+    "v26": 48,
+    "v27": 97
+   },
+   "meanScoreGained": 206155.4609375,
+   "avoidableCertainDeath": 0,
+   "vsCUR": {
+    "armOnly": 123,
+    "curOnly": 219,
+    "mcnemarExactP_unadjusted": 2.3445322915804748e-07,
+    "scoreGained": {
+     "meanDifference": -34949.4892578125,
+     "approx95": [
+      -45958.524685723496,
+      -23940.453829901504
+     ]
+    }
+   }
+  },
+  {
+   "arm": "C100000000",
+   "trainingMoves": 100000000,
+   "reach12288": 127,
+   "rate": 0.041341145833333336,
+   "wilson95": [
+    0.034855279558296266,
+    0.048972662249716456
+   ],
+   "perPool": {
+    "v26": 44,
+    "v27": 83
+   },
+   "meanScoreGained": 203152.734375,
+   "avoidableCertainDeath": 0,
+   "vsCUR": {
+    "armOnly": 96,
+    "curOnly": 210,
+    "mcnemarExactP_unadjusted": 6.351498984794632e-11,
+    "scoreGained": {
+     "meanDifference": -37952.2158203125,
+     "approx95": [
+      -48622.85339996488,
+      -27281.57824066012
+     ]
+    }
+   }
+  },
+  {
+   "arm": "C300000000",
+   "trainingMoves": 300000000,
+   "reach12288": 127,
+   "rate": 0.041341145833333336,
+   "wilson95": [
+    0.034855279558296266,
+    0.048972662249716456
+   ],
+   "perPool": {
+    "v26": 42,
+    "v27": 85
+   },
+   "meanScoreGained": 205755.9873046875,
+   "avoidableCertainDeath": 0,
+   "vsCUR": {
+    "armOnly": 111,
+    "curOnly": 225,
+    "mcnemarExactP_unadjusted": 4.856188407129666e-10,
+    "scoreGained": {
+     "meanDifference": -35348.962890625,
+     "approx95": [
+      -46341.30706663893,
+      -24356.618714611068
+     ]
+    }
+   }
+  },
+  {
+   "arm": "C1000000000",
+   "trainingMoves": 1000000000,
+   "reach12288": 123,
+   "rate": 0.0400390625,
+   "wilson95": [
+    0.03366130980597157,
+    0.0475657177133485
+   ],
+   "perPool": {
+    "v26": 45,
+    "v27": 78
+   },
+   "meanScoreGained": 205373.9140625,
+   "avoidableCertainDeath": 0,
+   "vsCUR": {
+    "armOnly": 92,
+    "curOnly": 210,
+    "mcnemarExactP_unadjusted": 9.118077671005452e-12,
+    "scoreGained": {
+     "meanDifference": -35731.0361328125,
+     "approx95": [
+      -46155.811364260284,
+      -25306.260901364712
+     ]
+    }
+   }
+  },
+  {
+   "arm": "FINAL",
+   "trainingMoves": 2000000000,
+   "reach12288": 170,
+   "rate": 0.055338541666666664,
+   "wilson95": [
+    0.04779469858014763,
+    0.06399307183131113
+   ],
+   "perPool": {
+    "v26": 63,
+    "v27": 107
+   },
+   "meanScoreGained": 223086.046875,
+   "avoidableCertainDeath": 0,
+   "vsCUR": {
+    "armOnly": 130,
+    "curOnly": 201,
+    "mcnemarExactP_unadjusted": 0.00011285937708837325,
+    "scoreGained": {
+     "meanDifference": -18018.9033203125,
+     "approx95": [
+      -28976.192142750107,
+      -7061.614497874893
+     ]
+    }
+   }
+  }
+ ],
+ "readout": {
+  "everyCheckpointBelowCUR": true,
+  "checkpointsAboveCUR": [],
+  "rule": "Noise: about 15% of pairs are discordant, so a paired difference of about +/-40 games out of 3072 (~1.3 pp) is within 2 SE. (a) If every checkpoint reaches 12288 less often than CUR, the decline begins within the first 1e7 moves at learning rate .02, which points at the training target or rate rather than training length; next step: plan 2 (strong-player-heavy training) and/or a lower rate. (b) If a checkpoint exceeds CUR, it is only an early-stopping candidate: adoption would need a new pre-registered confirmation on fresh positions. No website change in V28 under any outcome."
+ }
+}
