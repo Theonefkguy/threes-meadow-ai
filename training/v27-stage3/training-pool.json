@@ -1,0 +1,7 @@
+{
+  "firstStates": 769,
+  "onpolicyStates": 14956,
+  "rolloutMoves": 364751,
+  "train-first6144.txt": "2d3b6f6a23419b1c4386ea445613227373cdf13fccb21466d287ad39b1f3500e",
+  "train-onpolicy.txt": "c84d4f37d7dbaaed5904926cc7d07c117ace245070c0dcfcc430b7767cbe55ae"
+}

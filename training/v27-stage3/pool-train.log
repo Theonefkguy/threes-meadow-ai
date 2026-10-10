@@ -1,0 +1,14 @@
+{"stage": "train", "jobsDone": 0, "jobs": 80, "elapsedSeconds": 60, "etaSeconds": null}
+{"stage": "train", "jobsDone": 0, "jobs": 80, "elapsedSeconds": 120, "etaSeconds": null}
+{"stage": "train", "jobsDone": 16, "jobs": 80, "elapsedSeconds": 180, "etaSeconds": 720}
+{"stage": "train", "jobsDone": 16, "jobs": 80, "elapsedSeconds": 240, "etaSeconds": 960}
+{"stage": "train", "jobsDone": 20, "jobs": 80, "elapsedSeconds": 300, "etaSeconds": 900}
+{"stage": "train", "jobsDone": 32, "jobs": 80, "elapsedSeconds": 360, "etaSeconds": 540}
+{"stage": "train", "jobsDone": 32, "jobs": 80, "elapsedSeconds": 420, "etaSeconds": 630}
+{"stage": "train", "jobsDone": 48, "jobs": 80, "elapsedSeconds": 480, "etaSeconds": 320}
+{"stage": "train", "jobsDone": 48, "jobs": 80, "elapsedSeconds": 540, "etaSeconds": 360}
+{"stage": "train", "jobsDone": 53, "jobs": 80, "elapsedSeconds": 600, "etaSeconds": 306}
+{"stage": "train", "jobsDone": 64, "jobs": 80, "elapsedSeconds": 660, "etaSeconds": 165}
+{"stage": "train", "jobsDone": 64, "jobs": 80, "elapsedSeconds": 720, "etaSeconds": 180}
+{"stage": "train", "jobsDone": 80, "jobs": 80, "elapsedSeconds": 769, "etaSeconds": 0}
+{"openings": 2000, "reached6144": 769, "kept": 769}
