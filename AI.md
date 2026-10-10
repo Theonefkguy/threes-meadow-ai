@@ -104,3 +104,6 @@ V25 (not adopted): cutoff 0.005 once the board holds a 3072 left 6144 unchanged
 (429 vs 426/1024) and gave 12288 in 43 vs 27 games (Holm p=0.14). See RL-V25-ADAPTIVE-CUTOFF.md.
 V26 (not adopted): from 1024 fresh first-6144 positions, 12288 in 89 (default), 83 (five-ply
 0.005) and 101 (six-ply 0.005) games; neither candidate passed Holm. See RL-V26-LATE-CUTOFF.md.
+V27 (not adopted): stage 3 retrained with the V23 method (on-policy starts, strong sparring)
+reached 12288 from 2048 fresh first-6144 positions in 107 vs 152 games for the current table
+(McNemar p=0.0027); four times the training was worse still. See RL-V27-STAGE3.md.

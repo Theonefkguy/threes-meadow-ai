@@ -1,0 +1,49 @@
+{
+ "phase": "interim",
+ "winner": "A",
+ "pairs": 1024,
+ "arms": {
+  "A": {
+   "n": 1024,
+   "reach12288": 55,
+   "rate": 0.0537109375,
+   "wilson95": [
+    0.04149582875413907,
+    0.06926197133626735
+   ],
+   "meanScoreGained": 219238.833984375,
+   "meanMoves": 470.0078125,
+   "avoidableCertainDeath": 0,
+   "cpuMsPerMove": 3.8522059265969646
+  },
+  "CUR": {
+   "n": 1024,
+   "reach12288": 74,
+   "rate": 0.072265625,
+   "wilson95": [
+    0.057954386041126314,
+    0.08977409632123258
+   ],
+   "meanScoreGained": 237230.935546875,
+   "meanMoves": 479.857421875,
+   "avoidableCertainDeath": 0,
+   "cpuMsPerMove": 3.911836867640541
+  }
+ },
+ "primary": {
+  "candidateOnly": 43,
+  "baselineOnly": 62,
+  "differencePP": -1.85546875,
+  "mcnemarExactP": 0.07848502733901777,
+  "scoreGained": {
+   "meanDifference": -17992.1015625,
+   "approx95": [
+    -36575.70780209967,
+    591.5046770996669
+   ],
+   "z": -1.8975795447894994,
+   "p": 0.05775149111562047
+  }
+ },
+ "stoppedEarly": false
+}

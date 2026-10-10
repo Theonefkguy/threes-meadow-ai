@@ -1,0 +1,10 @@
+{"stage": "confirm", "jobsDone": 26, "jobs": 128, "elapsedSeconds": 60, "etaSeconds": 236}
+{"stage": "confirm", "jobsDone": 54, "jobs": 128, "elapsedSeconds": 120, "etaSeconds": 165}
+{"stage": "confirm", "jobsDone": 83, "jobs": 128, "elapsedSeconds": 180, "etaSeconds": 98}
+{"stage": "confirm", "jobsDone": 114, "jobs": 128, "elapsedSeconds": 240, "etaSeconds": 29}
+{"stage": "confirm", "jobsDone": 128, "jobs": 128, "elapsedSeconds": 255, "etaSeconds": 0}
+{"stage": "confirm", "jobsDone": 154, "jobs": 256, "elapsedSeconds": 60, "etaSeconds": 40}
+{"stage": "confirm", "jobsDone": 186, "jobs": 256, "elapsedSeconds": 120, "etaSeconds": 45}
+{"stage": "confirm", "jobsDone": 215, "jobs": 256, "elapsedSeconds": 180, "etaSeconds": 34}
+{"stage": "confirm", "jobsDone": 245, "jobs": 256, "elapsedSeconds": 240, "etaSeconds": 11}
+{"stage": "confirm", "jobsDone": 256, "jobs": 256, "elapsedSeconds": 258, "etaSeconds": 0}
