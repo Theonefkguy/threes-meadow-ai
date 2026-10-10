@@ -1,0 +1,96 @@
+{
+ "winner": "A",
+ "rule": "winner = arm with more 12288s; tie -> higher total scoreGained; exact tie -> A. No test.",
+ "arms": {
+  "A": {
+   "n": 1024,
+   "reach12288": 63,
+   "rate": 0.0615234375,
+   "wilson95": [
+    0.048381236829309414,
+    0.07794316632297173
+   ],
+   "meanScoreGained": 230600.4111328125,
+   "meanMoves": 472.8662109375,
+   "avoidableCertainDeath": 0,
+   "cpuMsPerMove": 3.87348830581457
+  },
+  "B": {
+   "n": 1024,
+   "reach12288": 48,
+   "rate": 0.046875,
+   "wilson95": [
+    0.03553598554267857,
+    0.061601036868587464
+   ],
+   "meanScoreGained": 215798.5283203125,
+   "meanMoves": 467.068359375,
+   "avoidableCertainDeath": 0,
+   "cpuMsPerMove": 3.8404303062235763
+  },
+  "CUR": {
+   "n": 1024,
+   "reach12288": 89,
+   "rate": 0.0869140625,
+   "wilson95": [
+    0.07116677927487734,
+    0.10574908382849667
+   ],
+   "meanScoreGained": 247547.35546875,
+   "meanMoves": 473.8447265625,
+   "avoidableCertainDeath": 0,
+   "cpuMsPerMove": 3.926232500097892
+  }
+ },
+ "descriptive": {
+  "A vs CUR": {
+   "candidateOnly": 44,
+   "baselineOnly": 70,
+   "differencePP": -2.5390625,
+   "mcnemarExactP": 0.018810748824884052,
+   "scoreGained": {
+    "meanDifference": -16946.9443359375,
+    "approx95": [
+     -36169.240154683335,
+     2275.3514828083353
+    ],
+    "z": -1.7279621986698628,
+    "p": 0.08399500177798747
+   }
+  },
+  "B vs CUR": {
+   "candidateOnly": 36,
+   "baselineOnly": 77,
+   "differencePP": -4.00390625,
+   "mcnemarExactP": 0.00014401960112955247,
+   "scoreGained": {
+    "meanDifference": -31748.8271484375,
+    "approx95": [
+     -51004.01174273836,
+     -12493.64255413664
+    ],
+    "z": -3.231678068707936,
+    "p": 0.001230656191194565
+   }
+  },
+  "B vs A": {
+   "candidateOnly": 41,
+   "baselineOnly": 56,
+   "differencePP": -1.46484375,
+   "mcnemarExactP": 0.1548157850344286,
+   "scoreGained": {
+    "meanDifference": -14801.8828125,
+    "approx95": [
+     -32529.85230660448,
+     2926.08668160448
+    ],
+    "z": -1.6364624964821968,
+    "p": 0.10174282859798703
+   }
+  }
+ },
+ "v26Reproduction": {
+  "pairs": 1024,
+  "mismatchedIndices": []
+ }
+}

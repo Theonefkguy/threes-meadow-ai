@@ -1,0 +1,54 @@
+{
+ "phase": "final",
+ "winner": "A",
+ "pairs": 2048,
+ "arms": {
+  "A": {
+   "n": 2048,
+   "reach12288": 107,
+   "rate": 0.05224609375,
+   "wilson95": [
+    0.04341962695555322,
+    0.06274913081284647
+   ],
+   "meanScoreGained": 219328.86474609375,
+   "meanMoves": 470.44189453125,
+   "avoidableCertainDeath": 0,
+   "cpuMsPerMove": 3.8642637397310704
+  },
+  "CUR": {
+   "n": 2048,
+   "reach12288": 152,
+   "rate": 0.07421875,
+   "wilson95": [
+    0.06364598318869387,
+    0.0863858126390537
+   ],
+   "meanScoreGained": 237883.74755859375,
+   "meanMoves": 478.3486328125,
+   "avoidableCertainDeath": 0,
+   "cpuMsPerMove": 3.9230123114392974
+  }
+ },
+ "primary": {
+  "candidateOnly": 86,
+  "baselineOnly": 131,
+  "differencePP": -2.197265625,
+  "mcnemarExactP": 0.002734243747079894,
+  "scoreGained": {
+   "meanDifference": -18554.8828125,
+   "approx95": [
+    -31891.0455280043,
+    -5218.720096995701
+   ],
+   "z": -2.726938987298197,
+   "p": 0.006392485791944411
+  }
+ },
+ "gate": {
+  "primarySignificantGain": false,
+  "scoreNotSignificantlyWorse": false
+ },
+ "nativeGatesPass": false,
+ "note": "website adoption additionally requires the browser parity/timing checks in protocol.adoption"
+}

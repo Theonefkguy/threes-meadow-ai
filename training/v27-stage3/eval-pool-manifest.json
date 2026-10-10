@@ -1,0 +1,17 @@
+{
+  "frozenUTC": "2026-10-10T13:30:08Z",
+  "blocks": [
+    [
+      27300001,
+      27305400
+    ]
+  ],
+  "openings": 5400,
+  "reached6144": 2051,
+  "terminalExcluded": 2,
+  "kept": 2049,
+  "used": 2048,
+  "lastUsedSeed": 27305397,
+  "confirm6144.txt": "37053d898e5feceb879e8b24119e08fc03bde03ea7780523c9766b5d011a826f",
+  "eval-pool-log.jsonl": "f7879e991052dfb49ab91612e292630eb35403e7b69f05f715e044890fd23b5b"
+}

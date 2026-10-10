@@ -1,0 +1,9 @@
+{
+  "frozenUTC": "2026-10-10T20:02:16Z",
+  "sha256": {
+    "CUR": "cdef81fd98ef0a96d14cb8f61265adc13e50146245f63e2d1d278ea4f84be0d9",
+    "A": "b0cde68a12087c48209de5055023d4925bb9378ecdf715b602527140f800b000",
+    "B": "ae40d949c2a00aa26b4a4ac5cc5624d7b535277cc4cf6276c4fcde8d467e54d3"
+  },
+  "note": "recorded after training, before any evaluation run"
+}

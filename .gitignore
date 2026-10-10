@@ -114,3 +114,8 @@ __pycache__/
 
 training/v26-late-cutoff/data/
 training/v26-late-cutoff/__pycache__/
+
+training/v27-stage3/bin/
+training/v27-stage3/data/*.part
+training/v27-stage3/eval/*.part
+training/v27-stage3/models/*.bin
