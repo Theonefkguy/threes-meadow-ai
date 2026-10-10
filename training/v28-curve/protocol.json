@@ -1,0 +1,91 @@
+{
+  "round": "V28 (exploratory): training curve of the V27 stage-3 run",
+  "createdUTC": "2026-10-10T20:31:15.608595+00:00",
+  "status": "frozen before training replay and before any checkpoint outcome. CUR and the final model (= V27 arm A) outcomes on both pools are already known from V27.",
+  "question": "V27 arm A (2e9 moves) and B (8e9) were worse than the current stage 3 (V21). Does the decline start immediately, or does quality first rise and then fall (an early-stopping opportunity)?",
+  "baseModel": {
+    "path": "dist/models/ntuple-v23.bin",
+    "sha256": "cdef81fd98ef0a96d14cb8f61265adc13e50146245f63e2d1d278ea4f84be0d9",
+    "note": "CUR = current website model; its stage 3 is V21 S3. Both arms start from this stage 3; stages 0-2 are never changed."
+  },
+  "training": {
+    "tool": "training/v28-curve/train.cpp (V27 trainer + checkpoint saving; same trajectory)",
+    "moves": 2000000000,
+    "seed": 27210001,
+    "strongMoveShare": 0.003,
+    "pool": "training/v27-stage3/pools/train-onpolicy.txt",
+    "poolSHA256": "c84d4f37d7dbaaed5904926cc7d07c117ace245070c0dcfcc430b7767cbe55ae",
+    "expectedFinalSHA256": "b0cde68a12087c48209de5055023d4925bb9378ecdf715b602527140f800b000",
+    "replayCheck": "the final model must equal V27 A-train.bin; a 2e7-move replay with checkpoints already reproduced the plain V27 trainer's model hash"
+  },
+  "checkpoints": [
+    10000000,
+    30000000,
+    100000000,
+    300000000,
+    1000000000
+  ],
+  "checkpointNote": "saved at the end of the first episode reaching the count; learning rate is .02 throughout these (it drops at 1e9). Each is composed into CUR (only stage 3 replaced).",
+  "pools": [
+    {
+      "name": "v26",
+      "path": "training/v26-late-cutoff/pool6144.txt",
+      "sha256": "b4320124befac50efe074e1dc610b110eba11243a6c428909822af2d26e3f3d5",
+      "size": 1024,
+      "rolloutBase": 26200001,
+      "reuse": {
+        "CUR": {
+          "dir": "training/v27-stage3/eval",
+          "pattern": "screen-CUR-*.jsonl"
+        },
+        "FINAL": {
+          "dir": "training/v27-stage3/eval",
+          "pattern": "screen-A-*.jsonl"
+        }
+      }
+    },
+    {
+      "name": "v27",
+      "path": "training/v27-stage3/pools/confirm6144.txt",
+      "sha256": "37053d898e5feceb879e8b24119e08fc03bde03ea7780523c9766b5d011a826f",
+      "size": 2048,
+      "rolloutBase": 27400001,
+      "reuse": {
+        "CUR": {
+          "dir": "training/v27-stage3/eval",
+          "pattern": "confirm-CUR-*.jsonl"
+        },
+        "FINAL": {
+          "dir": "training/v27-stage3/eval",
+          "pattern": "confirm-A-*.jsonl"
+        }
+      }
+    }
+  ],
+  "search": "website default: depth 5, cutoff 0.01, leaf clamp 0, every move complete, to 12288 or death (training/v21-late-train/snap.cpp cont, CLAMP=1)",
+  "analysis": "training/v28-curve/analyze.py: per arm on all 3072 pairs, reach-12288 count, Wilson 95%, per-pool counts, mean scoreGained; paired McNemar vs CUR and score difference, unadjusted and descriptive only",
+  "readout": "Noise: about 15% of pairs are discordant, so a paired difference of about +/-40 games out of 3072 (~1.3 pp) is within 2 SE. (a) If every checkpoint reaches 12288 less often than CUR, the decline begins within the first 1e7 moves at learning rate .02, which points at the training target or rate rather than training length; next step: plan 2 (strong-player-heavy training) and/or a lower rate. (b) If a checkpoint exceeds CUR, it is only an early-stopping candidate: adoption would need a new pre-registered confirmation on fresh positions. No website change in V28 under any outcome.",
+  "sourceSHA256": {
+    "training/v28-curve/train.cpp": "8ee1f88ac7ce448a60ca496790f639777880291cd77a499168f78ac77cac3626",
+    "training/v27-stage3/train.cpp": "584210404aa08027d748894c58778ae22c209d16224774366300cbf464aaae20",
+    "training/v27-stage3/sample.cpp": "48bee57cd690075d7bc77d3b87978f6658ea8be72061698c714a08f65f7b86d5",
+    "training/v27-stage3/compose.cpp": "aa43f3c12f85d6069c04ab44f3a7ee784f154388e9b62a08eb40f4fc0efbed7f",
+    "training/v26-late-cutoff/pool.cpp": "fedd02ac2bc901c62b409d268139af50504b58a6ba521d099947256ff4706fdd",
+    "training/v21-late-train/snap.cpp": "47e64ea351d8dc915103e276d9a84c5a910e34b6802b77c75e604ad8ae0ba258",
+    "training/v21-late-train/search.h": "f8cbf0f0def7ac1a3a242f73be72ad99d187503ca146b300b88c7ce7205c4442",
+    "training/v21-late-train/model4.h": "27305c197ba81b2ee05fda8c3589ed03c4d7d752dacc3e1367ca157a1eeb1ad5",
+    "training/v7/model.h": "9d420e6cc3d65038e7e045223c8ad54e4b1c250bedd10ec6c0ceea6e2155fb7d",
+    "training/v6/model.h": "560bb7cad2c362352f33eedec9f3db2ba374ac9b799fc63b54f335ddffc57cda",
+    "training/v3/ntuple-fast.h": "0554764c4b571c431b8ec4feac83e906ed5bcf8e595dfc51e1839e3f617d243d",
+    "training/v3/common.h": "a0300e0cf937faaacb9b85d8b0c1fae8257bebdb3198b21245a778ff92cafefd",
+    "training/v3/goal.h": "2fd3d950e54b82fb9d943735188c6e61c76ff80e18fcb38137d92d37d6644ba1"
+  },
+  "compiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)",
+  "compile": "c++ -std=c++17 -O3 training/v28-curve/train.cpp -o training/v28-curve/bin/train; compose and snap are the V27 binaries at training/v27-stage3/bin/",
+  "binarySHA256": {
+    "train": "fcd052df0db446ce0e5f46739ac7cb8d0c42c36f7c5bd749d195108e5bb5544c",
+    "compose": "74ff6aeb2f03912a21811900d5a4eb1f051a36d44ce22adcb6faefe0aade93cf",
+    "snap": "4b943b3e6048f309a5d6f93799f4f5826bfda705c07f282b09a672d686aece0a"
+  },
+  "workers": 16
+}
