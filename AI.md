@@ -110,3 +110,7 @@ reached 12288 from 2048 fresh first-6144 positions in 107 vs 152 games for the c
 V28 (exploratory): replaying V27 arm A with checkpoints showed the decline within 1e7 moves at
 learning rate .02 (7.85% -> 5.5% reach 12288 over 3072 positions, ~4% thereafter); the learning
 rate, not training length, is the main cause. See RL-V28-CURVE.md.
+V29 (offline, not yet on the website): a zero-initialised five-cell residual (4 patterns) on
+stage 2 raised first-3072 -> 6144 from 44.8% to 58.1% over 2048 fresh positions (McNemar
+p=1.5e-18 vs the current model); the four-cell table alone, trained identically, did not
+change. See RL-V29-FIVE.md.

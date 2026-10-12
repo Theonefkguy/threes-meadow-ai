@@ -14,6 +14,7 @@
 | V26 6144 后加强搜索（未采用） | RL-V26-LATE-CUTOFF.md | training/v26-late-cutoff |
 | V27 第 3 段按 V23 方法重训（未采用） | RL-V27-STAGE3.md | training/v27-stage3 |
 | V28 V27 训练曲线（探索性） | RL-V28-CURVE.md | training/v28-curve |
+| V29 第 2 段加 5 格残差（离线，+13.3 个百分点） | RL-V29-FIVE.md | training/v29-five |
 
 网页入口：dist/index.html（静态文件，需通过 HTTP 服务打开，例如在 dist 目录运行 `python3 -m http.server`）。
 默认 AI：五层剪枝搜索（阈值 0.01，叶节点下限 0），模型 ntuple-v23.bin。
