@@ -119,3 +119,6 @@ training/v27-stage3/bin/
 training/v27-stage3/data/*.part
 training/v27-stage3/eval/*.part
 training/v27-stage3/models/*.bin
+training/v28-curve/bin/
+training/v28-curve/models/
+training/v28-curve/eval/*.part

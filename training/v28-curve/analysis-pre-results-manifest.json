@@ -1,0 +1,10 @@
+{
+  "createdUTC": "2026-10-10T20:31:15.608595+00:00",
+  "purpose": "runner and analysis fixed with the protocol, before any checkpoint outcome",
+  "sha256": {
+    "run.py": "5bd53639b7a0403a24eb1117f33a6d1f67f320943778e8a44609d8c367b5cd6f",
+    "analyze.py": "5fa5bec6ab1c3e4592b16869ee40999e89433af30102c6c85944e525b763ed5d",
+    "protocol.json": "5d18847eee6721c6b322a128e84283db84085ee2e82a7d3e6e6e4d1abb9a70ec",
+    "train.cpp": "8ee1f88ac7ce448a60ca496790f639777880291cd77a499168f78ac77cac3626"
+  }
+}

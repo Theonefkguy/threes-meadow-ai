@@ -1,0 +1,49 @@
+{"arms": ["C10000000", "C30000000"], "jobsDone": 20, "jobs": 384, "elapsedSeconds": 60}
+{"arms": ["C10000000", "C30000000"], "jobsDone": 49, "jobs": 384, "elapsedSeconds": 120}
+{"arms": ["C10000000", "C30000000"], "jobsDone": 82, "jobs": 384, "elapsedSeconds": 180}
+{"arms": ["C10000000", "C30000000"], "jobsDone": 114, "jobs": 384, "elapsedSeconds": 240}
+{"arms": ["C10000000", "C30000000"], "jobsDone": 146, "jobs": 384, "elapsedSeconds": 300}
+{"arms": ["C10000000", "C30000000"], "jobsDone": 177, "jobs": 384, "elapsedSeconds": 360}
+{"arms": ["C10000000", "C30000000"], "jobsDone": 209, "jobs": 384, "elapsedSeconds": 420}
+{"arms": ["C10000000", "C30000000"], "jobsDone": 237, "jobs": 384, "elapsedSeconds": 480}
+{"arms": ["C10000000", "C30000000"], "jobsDone": 271, "jobs": 384, "elapsedSeconds": 540}
+{"arms": ["C10000000", "C30000000"], "jobsDone": 301, "jobs": 384, "elapsedSeconds": 600}
+{"arms": ["C10000000", "C30000000"], "jobsDone": 336, "jobs": 384, "elapsedSeconds": 660}
+{"arms": ["C10000000", "C30000000"], "jobsDone": 368, "jobs": 384, "elapsedSeconds": 720}
+{"arms": ["C10000000", "C30000000"], "jobsDone": 384, "jobs": 384, "elapsedSeconds": 746}
+{"arms": ["C10000000", "C30000000", "C100000000"], "jobsDone": 119, "jobs": 576, "elapsedSeconds": 60}
+{"arms": ["C10000000", "C30000000", "C100000000"], "jobsDone": 209, "jobs": 576, "elapsedSeconds": 120}
+{"arms": ["C10000000", "C30000000", "C100000000"], "jobsDone": 308, "jobs": 576, "elapsedSeconds": 180}
+{"arms": ["C10000000", "C30000000", "C100000000"], "jobsDone": 401, "jobs": 576, "elapsedSeconds": 240}
+{"arms": ["C10000000", "C30000000", "C100000000"], "jobsDone": 500, "jobs": 576, "elapsedSeconds": 300}
+{"arms": ["C10000000", "C30000000", "C100000000"], "jobsDone": 575, "jobs": 576, "elapsedSeconds": 360}
+{"arms": ["C10000000", "C30000000", "C100000000"], "jobsDone": 576, "jobs": 576, "elapsedSeconds": 362}
+{"arms": ["C10000000", "C30000000", "C100000000", "C300000000"], "jobsDone": 168, "jobs": 768, "elapsedSeconds": 60}
+{"arms": ["C10000000", "C30000000", "C100000000", "C300000000"], "jobsDone": 284, "jobs": 768, "elapsedSeconds": 120}
+{"arms": ["C10000000", "C30000000", "C100000000", "C300000000"], "jobsDone": 412, "jobs": 768, "elapsedSeconds": 180}
+{"arms": ["C10000000", "C30000000", "C100000000", "C300000000"], "jobsDone": 532, "jobs": 768, "elapsedSeconds": 240}
+{"arms": ["C10000000", "C30000000", "C100000000", "C300000000"], "jobsDone": 664, "jobs": 768, "elapsedSeconds": 300}
+{"arms": ["C10000000", "C30000000", "C100000000", "C300000000"], "jobsDone": 763, "jobs": 768, "elapsedSeconds": 360}
+{"arms": ["C10000000", "C30000000", "C100000000", "C300000000"], "jobsDone": 768, "jobs": 768, "elapsedSeconds": 370}
+{"arms": ["C10000000", "C30000000", "C100000000", "C300000000"], "jobsDone": 768, "jobs": 768, "elapsedSeconds": 0}
+{"arms": ["C10000000", "C30000000", "C100000000", "C300000000"], "jobsDone": 768, "jobs": 768, "elapsedSeconds": 0}
+{"arms": ["C10000000", "C30000000", "C100000000", "C300000000"], "jobsDone": 768, "jobs": 768, "elapsedSeconds": 0}
+{"arms": ["C10000000", "C30000000", "C100000000", "C300000000"], "jobsDone": 768, "jobs": 768, "elapsedSeconds": 0}
+{"arms": ["C10000000", "C30000000", "C100000000", "C300000000"], "jobsDone": 768, "jobs": 768, "elapsedSeconds": 0}
+{"arms": ["C10000000", "C30000000", "C100000000", "C300000000"], "jobsDone": 768, "jobs": 768, "elapsedSeconds": 0}
+{"arms": ["C10000000", "C30000000", "C100000000", "C300000000"], "jobsDone": 768, "jobs": 768, "elapsedSeconds": 0}
+{"arms": ["C10000000", "C30000000", "C100000000", "C300000000"], "jobsDone": 768, "jobs": 768, "elapsedSeconds": 0}
+{"arms": ["C10000000", "C30000000", "C100000000", "C300000000"], "jobsDone": 768, "jobs": 768, "elapsedSeconds": 0}
+{"arms": ["C10000000", "C30000000", "C100000000", "C300000000"], "jobsDone": 768, "jobs": 768, "elapsedSeconds": 0}
+{"arms": ["C10000000", "C30000000", "C100000000", "C300000000"], "jobsDone": 768, "jobs": 768, "elapsedSeconds": 0}
+{"arms": ["C10000000", "C30000000", "C100000000", "C300000000"], "jobsDone": 768, "jobs": 768, "elapsedSeconds": 0}
+{"arms": ["C10000000", "C30000000", "C100000000", "C300000000"], "jobsDone": 768, "jobs": 768, "elapsedSeconds": 0}
+{"arms": ["C10000000", "C30000000", "C100000000", "C300000000"], "jobsDone": 768, "jobs": 768, "elapsedSeconds": 0}
+{"arms": ["C10000000", "C30000000", "C100000000", "C300000000"], "jobsDone": 768, "jobs": 768, "elapsedSeconds": 0}
+{"arms": ["C10000000", "C30000000", "C100000000", "C300000000", "C1000000000"], "jobsDone": 174, "jobs": 960, "elapsedSeconds": 60}
+{"arms": ["C10000000", "C30000000", "C100000000", "C300000000", "C1000000000"], "jobsDone": 324, "jobs": 960, "elapsedSeconds": 120}
+{"arms": ["C10000000", "C30000000", "C100000000", "C300000000", "C1000000000"], "jobsDone": 489, "jobs": 960, "elapsedSeconds": 180}
+{"arms": ["C10000000", "C30000000", "C100000000", "C300000000", "C1000000000"], "jobsDone": 644, "jobs": 960, "elapsedSeconds": 240}
+{"arms": ["C10000000", "C30000000", "C100000000", "C300000000", "C1000000000"], "jobsDone": 809, "jobs": 960, "elapsedSeconds": 300}
+{"arms": ["C10000000", "C30000000", "C100000000", "C300000000", "C1000000000"], "jobsDone": 949, "jobs": 960, "elapsedSeconds": 360}
+{"arms": ["C10000000", "C30000000", "C100000000", "C300000000", "C1000000000"], "jobsDone": 960, "jobs": 960, "elapsedSeconds": 372}

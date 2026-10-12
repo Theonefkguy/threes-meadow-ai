@@ -107,3 +107,6 @@ V26 (not adopted): from 1024 fresh first-6144 positions, 12288 in 89 (default), 
 V27 (not adopted): stage 3 retrained with the V23 method (on-policy starts, strong sparring)
 reached 12288 from 2048 fresh first-6144 positions in 107 vs 152 games for the current table
 (McNemar p=0.0027); four times the training was worse still. See RL-V27-STAGE3.md.
+V28 (exploratory): replaying V27 arm A with checkpoints showed the decline within 1e7 moves at
+learning rate .02 (7.85% -> 5.5% reach 12288 over 3072 positions, ~4% thereafter); the learning
+rate, not training length, is the main cause. See RL-V28-CURVE.md.
