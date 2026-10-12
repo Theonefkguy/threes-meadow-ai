@@ -1,0 +1,147 @@
+{
+  "round": "V29 (offline): does a five-cell residual improve stage 2 (3072 -> 6144)?",
+  "createdUTC": "2026-10-12T18:47:15.124175+00:00",
+  "status": "frozen before any pool generation, training or evaluation",
+  "motivation": "The website tables use eight four-cell patterns (8 MB for four stages). Strong 2048 programs use larger tuples. V4 arm B tried a five-cell residual with 450 CPU s (~43k episodes), far too little to conclude anything. This round tests capacity offline, ignoring web size.",
+  "rules": "official-modern (RULES.md); THREES_BONUS_RULE unset",
+  "baseModel": {
+    "path": "dist/models/ntuple-v23.bin",
+    "sha256": "cdef81fd98ef0a96d14cb8f61265adc13e50146245f63e2d1d278ea4f84be0d9",
+    "note": "CUR, the website model"
+  },
+  "residual": {
+    "patterns": [
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      [
+        0,
+        1,
+        2,
+        4,
+        5
+      ],
+      [
+        4,
+        5,
+        6,
+        8,
+        9
+      ]
+    ],
+    "symmetries": 8,
+    "tableEntries": 1048576,
+    "stage": 2,
+    "init": "all zero, so the residual arm starts exactly at CUR",
+    "update": "joint linear TD step: every active weight (64 four-cell + 32 five-cell features) moves by alpha*err/norm, norm = sum of squared multiplicities of all active features"
+  },
+  "arms": {
+    "C": {
+      "res": "-",
+      "seed": 29210001,
+      "what": "four-cell stage 2 only (control; also tests a low-rate fine-tune)"
+    },
+    "R": {
+      "res": "zero",
+      "seed": 29210001,
+      "what": "four-cell stage 2 plus five-cell residual, trained jointly"
+    }
+  },
+  "training": {
+    "tool": "training/v29-five/train.cpp",
+    "moves": 3000000000,
+    "checkpoints": [
+      300000000,
+      1000000000,
+      2000000000
+    ],
+    "strongMoveShare": 0.003,
+    "learningRates": [
+      0.001,
+      0.0005,
+      0.00025
+    ],
+    "rateSteps": "50% and 85% of the move budget",
+    "method": "V23 stage-2 method: TD(lambda=.5) five-step score return, a 6144 afterstate closes the episode with the frozen CUR stage-3 value, two-move behaviour policy, strong episodes by complete 3-ply clamped expectimax when strong moves < 0.003 of all moves; both players use the model being trained",
+    "rateChoice": "V28 showed that a large rate (.02) immediately degrades an already trained table; .001 is the rate CUR stage 2 finished on",
+    "pilot": "timing only, V23 onpolicy pool, 3e6 moves, seed 99290001: C 325k moves/CPU s (strong 21% of CPU), R 202k (18%); pilot models discarded unevaluated"
+  },
+  "pools": {
+    "train": {
+      "openings": [
+        29100001,
+        29101000
+      ],
+      "policy": "website default AI (CUR, depth 5, cutoff 0.01, clamp) to the first 3072; terminal states excluded"
+    },
+    "curve": {
+      "openings": [
+        29200001,
+        29201300
+      ],
+      "size": 1024,
+      "extensionBlock": 200,
+      "rolloutBase": 29400001
+    },
+    "confirm": {
+      "openings": [
+        29300001,
+        29302500
+      ],
+      "size": 2048,
+      "extensionBlock": 200,
+      "rolloutBase": 29500001
+    }
+  },
+  "poolRules": "same generation for all pools (training/v29-five/tools.cpp pool, rank 13); evaluation pools sorted by opening seed and cut to size, extended by 200-seed blocks if short; frozen with hashes before training ends",
+  "trainingPool": {
+    "sampleRolloutBase": 29110001,
+    "every": 25,
+    "onpolicy": "each training first-3072 state continued with the website search to 6144 or death; state recorded every 25 moves from move 0 while alive with max card exactly 3072"
+  },
+  "evaluation": "continue each pool state with the website search (depth 5, cutoff 0.01, clamp, every move complete) to the first 6144 or death; same rollout seed per state for every model",
+  "curve": "curve pool: CUR and every checkpoint and final model of both arms. Descriptive only.",
+  "confirm": {
+    "models": [
+      "CUR",
+      "C-final",
+      "R-final"
+    ],
+    "primary": "P1: R-final vs C-final, reach 6144, two-sided exact McNemar, alpha 0.05 (does the residual add strength under identical training?)",
+    "secondary": "P2: R-final vs CUR and P3: C-final vs CUR, exact McNemar, Holm over the two. scoreGained paired differences, Wilson intervals, avoidable deaths, CPU ms/move (descriptive).",
+    "power": "V23: about 46% of first-3072 states reach 6144 with the website AI. With ~25% discordant pairs, +3 pp has power about 0.7 at 2048 pairs."
+  },
+  "adoption": "No website change for R in V29 (a five-cell residual needs a separate web-size design). C uses the website format: it may replace the website stage 2 only if P3 is Holm-significant in its favour, its scoreGained is not significantly worse than CUR, and the V26/V27-style browser parity and timing checks pass in a follow-up.",
+  "sourceSHA256": {
+    "training/v29-five/model5.h": "54a8a9b596b92f4d0015dffb886975a0ad0be18e3b4abe0f74f5ffd1579ef7ff",
+    "training/v29-five/search5.h": "ff80d14c154ef65a39a95fde4b2064cb70021ed7f382d7fb25e4a29f8bfdad6b",
+    "training/v29-five/tools.cpp": "ae4ef4c936ee40cf177dff8ad82ddb977c0698276165fec8384994e02499961f",
+    "training/v29-five/train.cpp": "fa0af4acf7dcf889c1d29df075946c2d13e11382fe834c3df103d77d545371c4",
+    "training/v21-late-train/model4.h": "27305c197ba81b2ee05fda8c3589ed03c4d7d752dacc3e1367ca157a1eeb1ad5",
+    "training/v21-late-train/search.h": "f8cbf0f0def7ac1a3a242f73be72ad99d187503ca146b300b88c7ce7205c4442",
+    "training/v7/model.h": "9d420e6cc3d65038e7e045223c8ad54e4b1c250bedd10ec6c0ceea6e2155fb7d",
+    "training/v6/model.h": "560bb7cad2c362352f33eedec9f3db2ba374ac9b799fc63b54f335ddffc57cda",
+    "training/v3/ntuple-fast.h": "0554764c4b571c431b8ec4feac83e906ed5bcf8e595dfc51e1839e3f617d243d",
+    "training/v3/common.h": "a0300e0cf937faaacb9b85d8b0c1fae8257bebdb3198b21245a778ff92cafefd",
+    "training/v3/goal.h": "2fd3d950e54b82fb9d943735188c6e61c76ff80e18fcb38137d92d37d6644ba1"
+  },
+  "compiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)",
+  "compile": "c++ -std=c++17 -O3 training/v29-five/tools.cpp -o training/v29-five/bin/tools; c++ -std=c++17 -O3 training/v29-five/train.cpp -o training/v29-five/bin/train (no -march; Apple ld embeds the output path)",
+  "binarySHA256": {
+    "tools": "74b76b0bcb03c1228f363845fcc9988b1523cdd61321f741dbb2347feae3bac5",
+    "train": "fc0885be93f1d1f1eb353957a32611c24da9b934b8dde11395d0d704d550658b"
+  },
+  "parity": "before freezing: tools cont with no residual and with an all-zero residual matched training/v21-late-train/snap.cpp cont field-for-field (non-timing) on 6 V23 CONFIRM states (2837 moves); tools pool reproduced the V26 pool state for seed 26100001",
+  "workers": 16
+}

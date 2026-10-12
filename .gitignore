@@ -122,3 +122,7 @@ training/v27-stage3/models/*.bin
 training/v28-curve/bin/
 training/v28-curve/models/
 training/v28-curve/eval/*.part
+training/v29-five/bin/
+training/v29-five/models/
+training/v29-five/data/*.part
+training/v29-five/eval/*.part
