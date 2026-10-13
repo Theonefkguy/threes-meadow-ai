@@ -117,3 +117,7 @@ change. See RL-V29-FIVE.md.
 V30 (offline, not yet on the website): 16-thread lock-free training for 1.2e10 moves; over 2048
 fresh whole games the stage-2 residual raised reach-6144 from 39.7% to 52.7%, 12288 from 3.2% to
 4.5% and mean score by ~70k (Holm-significant). See RL-V30-PARALLEL.md.
+V31 (offline, not yet on the website): adding five-cell residuals to stages 1 and 3 on top of V30
+raised, over 2048 fresh whole games, reach-3072 from 87.4% to 92.8%, 6144 from 55.8% to 58.9% and
+12288 from 4.2% to 5.9% (P1-P3 Holm-significant); the stage-3 residual alone gave +1.0 pp (n.s.).
+See RL-V31-STAGES.md.
