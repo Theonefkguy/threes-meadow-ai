@@ -126,3 +126,6 @@ training/v29-five/bin/
 training/v29-five/models/
 training/v29-five/data/*.part
 training/v29-five/eval/*.part
+training/v30-parallel/bin/
+training/v30-parallel/models/
+training/v30-parallel/eval/*.part

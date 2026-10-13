@@ -1,0 +1,103 @@
+{
+  "round": "V30: more stage-2 residual training via parallel (Hogwild) TD, then a whole-game evaluation",
+  "createdUTC": "2026-10-13T03:46:24.375158+00:00",
+  "status": "frozen before training and before any outcome of this round",
+  "motivation": "V29: the five-cell residual raised first-3072 -> 6144 from 44.8% to 58.1% and its curve was still rising at 3e9 moves. Single-thread training runs ~0.2M moves/s; a 16-thread lock-free trainer measured 1.52M moves/s (pilot, 7.2x).",
+  "baseModel": {
+    "path": "dist/models/ntuple-v23.bin",
+    "sha256": "cdef81fd98ef0a96d14cb8f61265adc13e50146245f63e2d1d278ea4f84be0d9",
+    "note": "CUR, the website model"
+  },
+  "residual": "as V29 (model5.h): four five-cell patterns x 8 symmetries on stage 2, zero initialised, trained jointly with the four-cell stage-2 table",
+  "training": {
+    "tool": "training/v30-parallel/train.cpp",
+    "threads": 16,
+    "strongMoveShare": 0.003,
+    "learningRates": [
+      0.001,
+      0.0005,
+      0.00025
+    ],
+    "rateSteps": "50% and 85% of each arm's move budget (global move count)",
+    "pool": "training/v29-five/pools/train-onpolicy.txt",
+    "poolSHA256": "adb553b65291ccce125561715f6bb37067c0879ff65886ef3090411adfe475cb",
+    "nondeterminism": "lock-free shared updates are not bit-reproducible; model hashes are recorded after training and before evaluation",
+    "pilot": "throughput only, 1e7 moves per thread, seed 99300001: 1/6/12/16 threads = 0.21/0.82/1.33/1.52 M moves/s; pilot models discarded unevaluated"
+  },
+  "arms": {
+    "S": {
+      "moves": 3000000000,
+      "seed": 30210001,
+      "checkpoints": [],
+      "what": "same budget and rate schedule as V29 R, but 16 threads: checks whether Hogwild training loses quality"
+    },
+    "P": {
+      "moves": 12000000000,
+      "seed": 30220001,
+      "checkpoints": [
+        3000000000,
+        6000000000
+      ],
+      "what": "4x the V29 budget"
+    }
+  },
+  "candidates": [
+    "V29R",
+    "S-final",
+    "P-3000000000",
+    "P-6000000000",
+    "P-final"
+  ],
+  "select": {
+    "pool": "training/v29-five/pools/curve3072.txt (1024 first-3072 states, already used in V29 for descriptive curves)",
+    "size": 1024,
+    "rolloutBase": 29400001,
+    "search": "website default (depth 5, cutoff 0.01, clamp), to first 6144 or death; V29R and CUR reuse their V29 curve results",
+    "rule": "winner = candidate with most 6144s; ties go to the more-trained candidate (list order). Descriptive only, no test."
+  },
+  "games": {
+    "seeds": [
+      30100001,
+      30102048
+    ],
+    "size": 2048,
+    "arms": {
+      "CUR": "dist/models/ntuple-v23.bin, no residual (the website AI)",
+      "W": "the selected candidate: its four-stage file (stages 0,1,3 verified identical to CUR) plus its stage-2 residual"
+    },
+    "search": "website default: depth 5, cutoff 0.01, clamp, complete depth every move (no node or time cap), standard nine-card openings to 12288 or death (training/v30-parallel/game.cpp)",
+    "primary": {
+      "P1": "reach 6144, exact McNemar",
+      "P2": "reach 12288, exact McNemar",
+      "P3": "final score, paired normal approximation"
+    },
+    "multiplicity": "Holm across P1-P3 (as V24). No interim analysis.",
+    "secondary": "1536/3072 rates, Wilson intervals, CPU ms per move (16 concurrent processes), max move CPU, incomplete-depth moves",
+    "power": "V29 suggests ~39% -> ~50% for 6144; 2048 pairs detect a few percentage points with high power"
+  },
+  "adoption": "No website change in V30. A website release of the residual needs its own size/format design and browser parity and timing checks.",
+  "sourceSHA256": {
+    "training/v30-parallel/train.cpp": "a79f183aa83deebf1a769037bed3c2fcd824bf27549742e711f0ad2cd224523a",
+    "training/v30-parallel/game.cpp": "572e55f2e4342ae66eadd26a775ce8f16503cb347d089f332155557fff934fdd",
+    "training/v29-five/model5.h": "54a8a9b596b92f4d0015dffb886975a0ad0be18e3b4abe0f74f5ffd1579ef7ff",
+    "training/v29-five/search5.h": "ff80d14c154ef65a39a95fde4b2064cb70021ed7f382d7fb25e4a29f8bfdad6b",
+    "training/v29-five/tools.cpp": "ae4ef4c936ee40cf177dff8ad82ddb977c0698276165fec8384994e02499961f",
+    "training/v29-five/train.cpp": "fa0af4acf7dcf889c1d29df075946c2d13e11382fe834c3df103d77d545371c4",
+    "training/v21-late-train/model4.h": "27305c197ba81b2ee05fda8c3589ed03c4d7d752dacc3e1367ca157a1eeb1ad5",
+    "training/v21-late-train/search.h": "f8cbf0f0def7ac1a3a242f73be72ad99d187503ca146b300b88c7ce7205c4442",
+    "training/v7/model.h": "9d420e6cc3d65038e7e045223c8ad54e4b1c250bedd10ec6c0ceea6e2155fb7d",
+    "training/v6/model.h": "560bb7cad2c362352f33eedec9f3db2ba374ac9b799fc63b54f335ddffc57cda",
+    "training/v3/ntuple-fast.h": "0554764c4b571c431b8ec4feac83e906ed5bcf8e595dfc51e1839e3f617d243d",
+    "training/v3/common.h": "a0300e0cf937faaacb9b85d8b0c1fae8257bebdb3198b21245a778ff92cafefd",
+    "training/v3/goal.h": "2fd3d950e54b82fb9d943735188c6e61c76ff80e18fcb38137d92d37d6644ba1"
+  },
+  "compiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)",
+  "compile": "c++ -std=c++17 -O3 -pthread training/v30-parallel/train.cpp -o training/v30-parallel/bin/train; c++ -std=c++17 -O3 training/v30-parallel/game.cpp -o training/v30-parallel/bin/game; training/v29-five/bin/tools as in V29",
+  "binarySHA256": {
+    "training/v30-parallel/bin/train": "53c2be66e255f0c15456bc7f3b4843c5b1c31af4938e865402e29b91258ac60c",
+    "training/v30-parallel/bin/game": "4fffd1efdc9fd89c8a602ead9de005a4a1b97fa38a2f717c334194f947da498a",
+    "training/v29-five/bin/tools": "74b76b0bcb03c1228f363845fcc9988b1523cdd61321f741dbb2347feae3bac5"
+  },
+  "parity": "before freezing: game.cpp with no residual reproduced the first two V24 NEW games field-for-field (non-timing)",
+  "workers": 16
+}
