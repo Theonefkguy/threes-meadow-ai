@@ -1,0 +1,10 @@
+{
+  "createdUTC": "2026-10-13T09:10:46.121731+00:00",
+  "purpose": "runner, pipeline and analysis fixed with the protocol before any pool, training or outcome; analysis tested only on synthetic data",
+  "sha256": {
+    "run.py": "a28cf09cab034eabd6f40b0c35efab6e8b6787b29ca295c5cb5b224e6d2a0e07",
+    "analyze.py": "9fdd03092566c8cd3d27757352acaba881756a63f614a4f5460733308ebc84b7",
+    "protocol.json": "06456c8e3553a4383a011451aafd08f8e126f2f6422172f9b0ff5d8debe6ced6",
+    "pipeline.sh": "f5416c387a4580c84302d2437e5e0ef8a674cb0a5b087782bdea6b0edfeaecef"
+  }
+}

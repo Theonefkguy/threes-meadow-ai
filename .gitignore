@@ -129,3 +129,8 @@ training/v29-five/eval/*.part
 training/v30-parallel/bin/
 training/v30-parallel/models/
 training/v30-parallel/eval/*.part
+training/v31-stages/bin/
+training/v31-stages/models/
+training/v31-stages/data/*.part
+training/v31-stages/eval/*.part
+training/v31-stages/pipeline.done
