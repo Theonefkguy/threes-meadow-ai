@@ -1,0 +1,88 @@
+{
+ "winner": "P-final",
+ "rule": "winner = candidate with most 6144s; ties go to the more-trained candidate (list order). Descriptive only, no test.",
+ "arms": {
+  "CUR": {
+   "reach6144": 458,
+   "rate": 0.447265625,
+   "wilson95": [
+    0.41706540468689424,
+    0.47786002464545146
+   ],
+   "meanScoreGained": 198138.919921875,
+   "cpuMsPerMove": 3.9868532149235745
+  },
+  "V29R": {
+   "reach6144": 591,
+   "rate": 0.5771484375,
+   "wilson95": [
+    0.5466576265376245,
+    0.6070625786983884
+   ],
+   "meanScoreGained": 235229.8037109375,
+   "cpuMsPerMove": 5.795007616849393
+  },
+  "S-final": {
+   "reach6144": 563,
+   "rate": 0.5498046875,
+   "wilson95": [
+    0.5192028440507676,
+    0.5800342504686838
+   ],
+   "meanScoreGained": 227975.5224609375,
+   "cpuMsPerMove": 6.220121916778829
+  },
+  "P-3000000000": {
+   "reach6144": 595,
+   "rate": 0.5810546875,
+   "wilson95": [
+    0.5505873944654512,
+    0.610916112301499
+   ],
+   "meanScoreGained": 236249.671875,
+   "cpuMsPerMove": 6.221369368273725
+  },
+  "P-6000000000": {
+   "reach6144": 602,
+   "rate": 0.587890625,
+   "wilson95": [
+    0.5574691471183554,
+    0.6176551373277352
+   ],
+   "meanScoreGained": 238121.51953125,
+   "cpuMsPerMove": 6.220883756588997
+  },
+  "P-final": {
+   "reach6144": 636,
+   "rate": 0.62109375,
+   "wilson95": [
+    0.5909805655507901,
+    0.6503017819082682
+   ],
+   "meanScoreGained": 248154.8759765625,
+   "cpuMsPerMove": 6.2161880313185405
+  }
+ },
+ "descriptive": {
+  "S-final vs V29R": {
+   "firstOnly": 217,
+   "secondOnly": 245,
+   "mcnemarExactP": 0.20901295351149807
+  },
+  "P-3000000000 vs V29R": {
+   "firstOnly": 229,
+   "secondOnly": 225,
+   "mcnemarExactP": 0.8880504083018057
+  },
+  "P-6000000000 vs V29R": {
+   "firstOnly": 232,
+   "secondOnly": 221,
+   "mcnemarExactP": 0.6385169522220785
+  },
+  "P-final vs V29R": {
+   "firstOnly": 254,
+   "secondOnly": 209,
+   "mcnemarExactP": 0.0407536748658425
+  }
+ }
+}

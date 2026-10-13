@@ -114,3 +114,6 @@ V29 (offline, not yet on the website): a zero-initialised five-cell residual (4 
 stage 2 raised first-3072 -> 6144 from 44.8% to 58.1% over 2048 fresh positions (McNemar
 p=1.5e-18 vs the current model); the four-cell table alone, trained identically, did not
 change. See RL-V29-FIVE.md.
+V30 (offline, not yet on the website): 16-thread lock-free training for 1.2e10 moves; over 2048
+fresh whole games the stage-2 residual raised reach-6144 from 39.7% to 52.7%, 12288 from 3.2% to
+4.5% and mean score by ~70k (Holm-significant). See RL-V30-PARALLEL.md.
