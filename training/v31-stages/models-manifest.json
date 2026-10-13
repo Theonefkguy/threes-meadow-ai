@@ -1,0 +1,12 @@
+{
+  "frozenUTC": "2026-10-13T14:14:17Z",
+  "sha256": {
+    "W31.bin": "b94a7da2671fe28ad3390a5fcd2fbda59a599f50437b23d5e3cf7097e45f9617",
+    "S1-final.res": "a5c1d053a6eb5f4d02243328a70550435e9f74f39d2679e6c8a68b11068711e2",
+    "S3-final.res": "6429f239fe7908e4293a8c377f375c68d3478fd4daaf67f60f57c5983dc59b8f",
+    "W30.bin": "b79beee36ce713fe7336fa5bb33742828b2771b59adbf99d01d7e2348bf99933",
+    "W30.res": "e0cc549fc250ef979640549d8f286fefd2fdc947a0247c7dd28d320895155570"
+  },
+  "W31": "W30 stages 0 and 2 + S1 stage 1 + S3 stage 3; residuals W30 stage 2, S1 stage 1, S3 stage 3",
+  "note": "recorded after training, before any evaluation run"
+}
