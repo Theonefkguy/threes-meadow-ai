@@ -1,0 +1,23 @@
+{
+  "frozenUTC": "2026-10-13T09:19:26Z",
+  "eval1": {
+    "blocks": [
+      [
+        31200001,
+        31201100
+      ]
+    ],
+    "openings": 1100,
+    "reached1536": 1089,
+    "kept": 1089,
+    "used": 1024,
+    "lastUsedSeed": 31201035,
+    "sha256": "c694ca68acdffa08205aaf457ff64983960ed1e5f159206d77cfa10265ac9320"
+  },
+  "train1": {
+    "first1536": 986,
+    "onpolicy": 14396,
+    "train1-first1536.txt": "22d583526386dffa241189177567429132d2767da3910b8ddce7f35d1647dedc",
+    "train1-onpolicy.txt": "abb19a0f393fae0736633e1d44e1661e431f4c177e68748b3761158b11d9b049"
+  }
+}
