@@ -134,3 +134,4 @@ training/v31-stages/models/
 training/v31-stages/data/*.part
 training/v31-stages/eval/*.part
 training/v31-stages/pipeline.done
+training/web-release/models/
