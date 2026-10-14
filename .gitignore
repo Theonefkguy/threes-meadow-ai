@@ -140,3 +140,6 @@ training/v32-strong/models/
 training/v32-strong/data/*.part
 training/v32-strong/eval/*.part
 training/v32-strong/pipeline.done
+training/v33-patterns/bin/
+training/v33-patterns/data/
+training/v33-patterns/pipeline.done

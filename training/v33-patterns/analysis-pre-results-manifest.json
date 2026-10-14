@@ -1,0 +1,10 @@
+{
+  "createdUTC": "2026-10-14T13:31:14.513141+00:00",
+  "purpose": "pipeline and analysis fixed with the protocol before data collection",
+  "sha256": {
+    "analyze.py": "8a620628ffe64da343d89dde7bf41cb671e0b8e5831e2bc7826e03144009d423",
+    "protocol.json": "d88ba23634bf68e8faa292e2e88c58daae503a04a33dda3e8dd66a06845499e9",
+    "pipeline.sh": "b68d6ad488f122d1a34a64798f335c9db565eac7c14a57b9ee63739403eb7f7c",
+    "one.sh": "f694b96fadc09f5f5b360466207728156d2cc4614f6f06b633fd2a4203530932"
+  }
+}
