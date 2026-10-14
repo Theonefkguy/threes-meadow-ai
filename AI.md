@@ -125,3 +125,6 @@ See RL-V31-STAGES.md.
 V32 (not adopted): stage 3 fine-tuned only on strong-search episodes (3-ply or the website
 search itself, 3 h each) did not raise first-6144 -> 12288 (9.4% vs 9.3%, p=0.96). The 12288 gains
 of V30/V31 came from more games reaching 6144; P(12288 | 6144) stayed near 10%. See RL-V32-STRONG.md.
+V33 (stopped at screening): refitting stage-3 residuals to realised scores, corner-focused five-cell
+shapes beat the V29 shapes by only 1% of their gain over the four-cell table (pre-set threshold 5%);
+eight five-cell or four six-cell patterns underfit with 3.6M records. See RL-V33-PATTERNS.md.
