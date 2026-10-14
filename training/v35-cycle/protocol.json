@@ -1,0 +1,55 @@
+{
+  "round": "V35: bonus-cycle rule from the official app, and a search that uses it",
+  "createdUTC": "2026-10-14T22:04:52.497850+00:00",
+  "status": "frozen before any V35 evaluation game",
+  "evidence": "two complete games auto-played in the official iPhone app (moves 1530 and 1714): every complete block of 21 previews counted from the first draw after move 1 held exactly one bonus (70/70 and 78/78), no bonus gap above 41 (149 gaps), one back-to-back pair at a block boundary. An independent 1/21 chance per draw would give no gap above 41 in 149 gaps with probability ~4e-10.",
+  "rule": "opening preview = draw 0; draws 1-21, 22-42, ... are blocks; at each block start one position is drawn uniformly (hidden); at that draw the preview is a bonus if max card >= 48 (window rule unchanged), else the slot is lost; all other draws come from the 12-card basic deck (training/v35-cycle/cgame.h). Rule test: 20,000 random games, 1,410 blocks checked, all with exactly one bonus, max gap 41.",
+  "arms": {
+    "U": "website search (V31 float model, depth 5, cutoff 0.01, clamp) with the old constant 1/21 bonus chance",
+    "A": "the same search with the cycle-aware chance (search5c.h): 0 after the block bonus, else 1/(21 - excluded positions); the AI tracks the cycle from previews only"
+  },
+  "parity": "with cycleAware=false search5c.h equals search5s.h bit for bit (directions, depths, root values) on the 320 V25 browser states; aware changes the direction on 18 of 320 states with arbitrary cycle states",
+  "seeds": [
+    35100001,
+    35104096
+  ],
+  "games": "whole games, standard openings, to 12288 or death, same seed per pair (after decisions diverge the random events differ)",
+  "primary": {
+    "P1": "reach 6144, exact McNemar A vs U",
+    "P2": "reach 12288, exact McNemar",
+    "P3": "final score, paired normal approximation"
+  },
+  "multiplicity": "Holm across P1-P3; no interim analysis",
+  "secondary": "reach 3072, P(12288 | 6144), Wilson intervals, CPU ms per move; descriptive comparison of U under the cycle rule with V31 under the old rule (different seeds, unpaired)",
+  "adoption": "If A is Holm-significantly better on any primary and not significantly worse on the others, the website engine and AI move to the cycle rule in a later release (JS work, parity and timing checks needed then).",
+  "sourceSHA256": {
+    "training/v35-cycle/search5c.h": "3da7f2dd0fd0d0dff65a2948f9c1c7ae90323f0cb14cac71ee9331bf7d112b6a",
+    "training/v35-cycle/cgame.h": "448d956aa7b4d3e37f6a860415fdbfe9a3c24828e8e5559500018fe94dcadc5d",
+    "training/v35-cycle/game.cpp": "fab14f04580a4099eec38d837725c7c2b9c731320a57f50b3a182cb233d87bb7",
+    "training/v35-cycle/parity.cpp": "ab516c26c68fd08dc27b8f0fe03233a1f04043ad393e65643f2a1b20efda5609",
+    "training/v35-cycle/rule_test.cpp": "0d4e3ef2319239f614519c67bc13f30e18ed7e6cb8d315704621a71af6f3bfa4",
+    "training/v31-stages/search5s.h": "5648ba7cf05042805d46ab0b9b9407b57b229275c7c143c34810ea8578e01f87",
+    "training/v31-stages/model5s.h": "27138912331e7a5240080a77533b8b97d16c6cb611e19d1878788518fd6d9ac1",
+    "training/v29-five/model5.h": "54a8a9b596b92f4d0015dffb886975a0ad0be18e3b4abe0f74f5ffd1579ef7ff",
+    "training/v21-late-train/model4.h": "27305c197ba81b2ee05fda8c3589ed03c4d7d752dacc3e1367ca157a1eeb1ad5",
+    "training/v7/model.h": "9d420e6cc3d65038e7e045223c8ad54e4b1c250bedd10ec6c0ceea6e2155fb7d",
+    "training/v6/model.h": "560bb7cad2c362352f33eedec9f3db2ba374ac9b799fc63b54f335ddffc57cda",
+    "training/v3/ntuple-fast.h": "0554764c4b571c431b8ec4feac83e906ed5bcf8e595dfc51e1839e3f617d243d",
+    "training/v3/common.h": "a0300e0cf937faaacb9b85d8b0c1fae8257bebdb3198b21245a778ff92cafefd",
+    "training/v3/goal.h": "2fd3d950e54b82fb9d943735188c6e61c76ff80e18fcb38137d92d37d6644ba1"
+  },
+  "binarySHA256": {
+    "training/v35-cycle/bin/game": "04aeb5319ff2ef6cbce045c3aa62fe27166a5a302e3c99cfb9838fe9b3c464a1",
+    "training/v35-cycle/bin/parity": "060707b51b50766656b672a3a25a9e0ab48404b3ccecdf48d553e05c9d491855",
+    "training/v35-cycle/bin/rule_test": "1a07c3ad315bb370a774a0edfbe8e285d592ce86077b4a1b71620d762a3c7356"
+  },
+  "modelSHA256": {
+    "training/v31-stages/models/W31.bin": "b94a7da2671fe28ad3390a5fcd2fbda59a599f50437b23d5e3cf7097e45f9617",
+    "training/v30-parallel/models/P-final.res": "e0cc549fc250ef979640549d8f286fefd2fdc947a0247c7dd28d320895155570",
+    "training/v31-stages/models/S1-final.res": "a5c1d053a6eb5f4d02243328a70550435e9f74f39d2679e6c8a68b11068711e2",
+    "training/v31-stages/models/S3-final.res": "6429f239fe7908e4293a8c377f375c68d3478fd4daaf67f60f57c5983dc59b8f"
+  },
+  "compiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)",
+  "compile": "c++ -std=c++17 -O3 training/v35-cycle/{game,parity,rule_test}.cpp -o training/v35-cycle/bin/{game,parity,rule_test}",
+  "workersPerArm": 8
+}

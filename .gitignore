@@ -145,3 +145,5 @@ training/v33-patterns/data/
 training/v33-patterns/pipeline.done
 training/v34-lossy/models/
 training/v34-lossy/games/*.part
+training/v35-cycle/bin/
+training/v35-cycle/games/*.part
