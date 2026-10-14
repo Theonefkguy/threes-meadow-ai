@@ -81,7 +81,7 @@ export const english = {
   "是": "is",
   "第{row}行，第{col}列：{value}": "Row {row}, column {col}: {value}",
   " · {stage}策略": " · {stage}",
-  "AI 向{direction}移动{phase} · 已完成 {turns} 步": "AI moved {direction}{phase} · {turns} moves",
+  "AI 向{direction}移动{phase} · 已完成 {turns} 步": "AI moved {direction}{phase} · move {turns}",
   "{cleared}本局结束，得分 {score}。": "{cleared}Game over. Score: {score}.",
   "通关，": "You won! ",
   "第 {turns} 步，补入 {value}。": "Move {turns}: added {value}."

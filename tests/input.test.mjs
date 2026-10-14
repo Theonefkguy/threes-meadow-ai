@@ -186,11 +186,13 @@ test('AI starts from the current game, moves repeatedly, and stops without accep
   const worker = workers[0];
   assert.equal(JSON.stringify(engine.board), original);
   assert.equal(ids['#ai-toggle'].attrs['aria-pressed'], 'true');
-  assert.deepEqual(Object.keys(worker.messages[0]).sort(), ['board','id','next','policy','remaining']);
+  assert.deepEqual(Object.keys(worker.messages[0]).sort(), ['board','fresh','id','next','policy','remaining']);
+  assert.equal(worker.messages[0].fresh, true);
   worker.reply('left'); flush();
   assert.equal(engine.turns,1);
   flush();
   assert.equal(worker.messages.length,2, 'automatically requests the next move');
+  assert.equal(worker.messages[1].fresh, false, 'only the first request after a start is fresh');
   ids['#ai-toggle'].emit('click');
   worker.reply('right'); flush();
   assert.equal(engine.turns,1, 'stopped worker cannot move the board');

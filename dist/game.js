@@ -1,6 +1,6 @@
 import { t, locale, setLanguage, applyLanguage } from './i18n.js';
-import { createGame, projectMove, score } from './engine.js?v=23';
-import { initialCounts, observePreview } from './card-memory.js?v=23';
+import { createGame, projectMove, score } from './engine.js?v=24';
+import { initialCounts, observePreview } from './card-memory.js?v=24';
 
 const boardEl = document.querySelector('#board');
 const nextEl = document.querySelector('#next-tile');
@@ -17,7 +17,7 @@ const aiStatus = document.querySelector('#ai-status');
 const aiPolicy = document.querySelector('#ai-policy');
 const aiProgress = document.querySelector('#ai-progress');
 const aiProgressBar = aiProgress.querySelector('progress');
-let aiRunning = false, aiWorker = null, aiTimer = null, aiWatchdog = null, aiRequest = 0;
+let aiRunning = false, aiWorker = null, aiTimer = null, aiWatchdog = null, aiRequest = 0, aiFresh = false;
 const directionNames = { left:'左', right:'右', up:'上', down:'下' };
 
 // Model download progress (first use of the default model, a 17.4 MB gzip download).
@@ -63,7 +63,9 @@ function scheduleAI() {
     const id = ++aiRequest;
     armWatchdog();
     // Send visible state only, never game.deck or the random generator.
-    aiWorker.postMessage({ id, board:game.board, next:game.next, remaining:publicCounts, policy:aiPolicy.value });
+    // fresh: first request after a start, so the worker may retry a model that failed to load earlier.
+    aiWorker.postMessage({ id, board:game.board, next:game.next, remaining:publicCounts, policy:aiPolicy.value, fresh:aiFresh });
+    aiFresh = false;
   }, 230);
 }
 
@@ -74,6 +76,7 @@ aiButton.addEventListener('click', () => {
   try {
     if (!aiWorker) createWorker();
     aiRunning = true;
+    aiFresh = true;
     aiButton.textContent = t('停止 AI');
     aiButton.setAttribute('aria-pressed', 'true');
     aiStatus.textContent = aiPolicy.value.startsWith('rl')?t('正在加载强化学习模型…'):t('AI 已接手，正在观察棋盘…');
@@ -81,7 +84,7 @@ aiButton.addEventListener('click', () => {
   } catch { stopAI(t('当前浏览器无法启动 AI，可以继续手动玩。'), true); }
 });
 function createWorker() {
-    aiWorker = new Worker('./ai-worker.js?v=23', { type:'module' });
+    aiWorker = new Worker('./ai-worker.js?v=24', { type:'module' });
     aiWorker.onmessage = ({ data }) => {
       if (!aiRunning || data.id !== aiRequest) return;
       // Download progress keeps the request alive: restart the watchdog while bytes arrive.
