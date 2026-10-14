@@ -122,3 +122,6 @@ V31 (offline, not yet on the website): adding five-cell residuals to stages 1 an
 raised, over 2048 fresh whole games, reach-3072 from 87.4% to 92.8%, 6144 from 55.8% to 58.9% and
 12288 from 4.2% to 5.9% (P1-P3 Holm-significant); the stage-3 residual alone gave +1.0 pp (n.s.).
 See RL-V31-STAGES.md.
+V32 (not adopted): stage 3 fine-tuned only on strong-search episodes (3-ply or the website
+search itself, 3 h each) did not raise first-6144 -> 12288 (9.4% vs 9.3%, p=0.96). The 12288 gains
+of V30/V31 came from more games reaching 6144; P(12288 | 6144) stayed near 10%. See RL-V32-STRONG.md.
