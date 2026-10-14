@@ -1,13 +1,14 @@
-# Current release: V24 / 当前发布版
+# Current release: V31 / 当前发布版
 
-Default: V23 four-stage weights, five-ply probability-cutoff expectimax (0.01),
-nonnegative leaf clamp and a 160 ms browser soft budget. See [README](README.md)
-and [V24 acceptance](RL-V24-ACCEPTANCE.md). The sections below are a chronological
-record: early statements about three-ply search and V2 defaults describe old releases.
-The website now offers only the default, V4 and classic search; the V1–V3 and V5–V8
-strategies and their models were removed (see docs/REPRODUCING.md).
+Default: V31 model (V4 stage 0; stages 1-3 = four-cell tables plus float16 five-cell residuals,
+~32 MB, downloaded once with a progress bar), five-ply probability-cutoff expectimax (0.01),
+nonnegative leaf clamp and a 160 ms browser soft budget. Over 2048 fresh whole games the shipped
+weights reach 6144 in 59.3% and 12288 in 5.6% (V23: 38.6% / 3.9% on the same openings). See
+[README](README.md), [V31](RL-V31-STAGES.md) and training/web-release/v31-check. The sections
+below are a chronological record: statements about earlier defaults describe old releases.
+If V31 cannot load, the worker falls back to the V23 model.
 
-当前默认采用 V23 四阶段模型与五层剪枝搜索。网页只保留默认、第四版和经典搜索，第一至三版、第五至八版策略及模型已移除。下文为历史记录，早期默认配置以 README 为准。
+当前默认采用 V31 模型（第 0 段沿用 V4，第 1–3 段为 4 格表加 16 位浮点 5 格残差，约 32 MB）与五层剪枝搜索。网页只保留默认、第四版和经典搜索。下文为历史记录，早期默认配置以 README 为准。
 
 # Automatic player
 
