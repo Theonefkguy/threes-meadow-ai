@@ -94,7 +94,7 @@ export const MODEL_FILES = {
   // V31: four-cell tables plus float16 five-cell residuals for stages 1-3 (RL-V31-STAGES.md),
   // 32 MB decoded, 17.4 MB downloaded.
   v31:{base:'ntuple-v31.bin.gz',residuals:['ntuple-v31-s1.f16.gz','ntuple-v31-s2.f16.gz','ntuple-v31-s3.f16.gz'],
-    bytes:5040193+2993234+4262781+5955585}
+    bytes:5040193+2993234+4262781+5955585,cache:'threes-models-v31-b94a7da2'}
 };
 // Gzip bytes (magic 1f 8b) are decompressed with the browser's DecompressionStream; anything
 // else is returned unchanged (e.g. when a server already removed a gzip Content-Encoding).
@@ -111,6 +111,12 @@ export async function readBody(response,onBytes=()=>{}) {
   const out=new Uint8Array(size);let at=0;for(const c of chunks){out.set(c,at);at+=c.byteLength;}
   return out;
 }
+// Downloaded files of versions with a `cache` name are kept in Cache Storage under that name, so
+// a page reload or a site redeploy (which changes ETags) does not download them again. The name
+// changes whenever the model files change; other threes-models-* caches are then deleted. Any
+// Cache Storage failure (private mode, quota) silently falls back to the network.
+const cacheStore=name=>typeof caches==='object'&&name?caches.open(name).catch(()=>null):Promise.resolve(null);
+async function dropOtherCaches(keep){try{for(const k of await caches.keys())if(k.startsWith('threes-models-')&&k!==keep)await caches.delete(k);}catch{/* Optional. */}}
 const pending=new Map();
 // onProgress({loaded,total}) is called as bytes arrive (for every caller while a load is shared).
 export function loadModel(version,onProgress) {
@@ -120,15 +126,23 @@ export function loadModel(version,onProgress) {
   if(!entry){
     const listeners=new Set(),total=files.bytes||0;let loaded=0;
     const report=()=>{for(const f of listeners)try{f({loaded,total});}catch{/* Progress is optional. */}};
+    const store=cacheStore(files.cache);
     const get=async name=>{
-      const response=await fetch(new URL(`./models/${name}`,import.meta.url));
-      if(!response.ok)throw new Error('模型加载失败');
+      const url=new URL(`./models/${name}`,import.meta.url).href,cache=await store;
+      let response=cache&&await cache.match(url).catch(()=>undefined);const cached=!!response;
+      if(!response){response=await fetch(url);if(!response.ok)throw new Error('模型加载失败');}
       const bytes=await readBody(response,n=>{loaded+=n;if(total)report();});
+      if(cache&&!cached)await cache.put(url,new Response(bytes,{headers:{'content-type':'application/octet-stream'}})).catch(()=>{});
       return name.endsWith('.gz')?gunzipIfNeeded(bytes):bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength);
     };
     const request=Promise.all([get(files.base),...files.residuals.map(get)])
-      .then(([base,...residuals])=>decodeModel(base,residuals))
-      .catch(error=>{pending.delete(version);throw error;});
+      .then(([base,...residuals])=>{const model=decodeModel(base,residuals);if(files.cache)dropOtherCaches(files.cache);return model;})
+      .catch(async error=>{
+        pending.delete(version);
+        // A damaged cached copy must not block later attempts.
+        if(files.cache&&typeof caches==='object')await caches.delete(files.cache).catch(()=>{});
+        throw error;
+      });
     entry={request,listeners};pending.set(version,entry);
   }
   if(onProgress){entry.listeners.add(onProgress);entry.request.finally(()=>entry.listeners.delete(onProgress)).catch(()=>{});}
