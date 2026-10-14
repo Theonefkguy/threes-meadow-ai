@@ -53,3 +53,14 @@ test('fast leaf path with residuals equals the generic model.value path',()=>{
     }
   }
 });
+
+test('the shipped V31 model decodes with residuals for stages 1-3 and its declared size',async()=>{
+  const {MODEL_FILES}=await import('../dist/rl-model.js');const f=MODEL_FILES.v31;
+  const read=name=>{const b=readFileSync(new URL(`../dist/models/${name}`,import.meta.url));return b.buffer.slice(b.byteOffset,b.byteOffset+b.byteLength);};
+  const files=[f.base,...f.residuals].map(read);
+  assert.equal(files.reduce((s,b)=>s+b.byteLength,0),f.bytes);
+  const v31=decodeModel(files[0],files.slice(1)),v23=decodeModel(baseBuf()),S=524288;
+  assert.deepEqual(v31.residuals.map(r=>r!==null),[false,true,true,true]);
+  assert.deepEqual(v31.weights.subarray(0,S),v23.weights.subarray(0,S));          // stage 0 unchanged since V4
+  for(let s=1;s<4;s++)assert.notDeepEqual(v31.weights.subarray(s*S,(s+1)*S),v23.weights.subarray(s*S,(s+1)*S));
+});
