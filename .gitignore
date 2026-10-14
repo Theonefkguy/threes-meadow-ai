@@ -135,3 +135,8 @@ training/v31-stages/data/*.part
 training/v31-stages/eval/*.part
 training/v31-stages/pipeline.done
 training/web-release/models/
+training/v32-strong/bin/
+training/v32-strong/models/
+training/v32-strong/data/*.part
+training/v32-strong/eval/*.part
+training/v32-strong/pipeline.done
