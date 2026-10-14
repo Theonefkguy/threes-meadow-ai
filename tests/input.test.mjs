@@ -194,7 +194,7 @@ test('AI starts from the current game, moves repeatedly, and stops without accep
   ids['#ai-toggle'].emit('click');
   worker.reply('right'); flush();
   assert.equal(engine.turns,1, 'stopped worker cannot move the board');
-  assert(worker.terminated);
+  assert(!worker.terminated, 'the worker is kept for reuse');
   assert.equal(timers.size,0);
   assert.equal(ids['#ai-toggle'].attrs['aria-pressed'], 'false');
 });
@@ -210,7 +210,7 @@ test('manual input, new game, backgrounding and worker failure stop AI', () => {
     if (action === 'hidden') { document.hidden = true; document.emit('visibilitychange'); }
     if (action === 'failure') worker.onerror();
     worker.reply('left'); flush();
-    assert(worker.terminated,action);
+    assert.equal(worker.terminated, action === 'failure', action);
     assert.equal(ids['#ai-toggle'].attrs['aria-pressed'],'false',action);
     assert.equal(engine.turns, action === 'manual' ? 1 : 0, action);
   }
@@ -225,7 +225,7 @@ test('AI automatically stops at game over', () => {
   ids['#ai-toggle'].emit('click'); flush();
   workers[0].reply('left'); flush();
   assert(engine.over);
-  assert(workers[0].terminated);
+  assert(!workers[0].terminated);
   assert(ids['#ai-toggle'].disabled);
   assert.equal(ids['#ai-toggle'].attrs['aria-pressed'],'false');
 });
@@ -238,10 +238,10 @@ test('manual play is counted before AI takeover and restart resets the visible m
  }
  if(!engine.over){
   ids['#ai-toggle'].emit('click');flush();
-  assert.deepEqual(Array.from(workers.at(-1).messages[0].remaining),[1,2,3].map(n=>engine.deck.filter(v=>v===n).length));
+  assert.deepEqual(Array.from(workers.at(-1).messages.at(-1).remaining),[1,2,3].map(n=>engine.deck.filter(v=>v===n).length));
  }
  ids['#new-game'].emit('click');ids['#ai-toggle'].emit('click');flush();
- assert.deepEqual(Array.from(workers.at(-1).messages[0].remaining),[1,2,3].map(n=>engine.deck.filter(v=>v===n).length));
+ assert.deepEqual(Array.from(workers.at(-1).messages.at(-1).remaining),[1,2,3].map(n=>engine.deck.filter(v=>v===n).length));
 });
 
 test('switching learned policy stops old work, and failed model load visibly falls back',()=>{
@@ -249,9 +249,9 @@ test('switching learned policy stops old work, and failed model load visibly fal
  ids['#ai-policy'].value='rl-v4';ids['#ai-policy'].emit('change');ids['#ai-toggle'].emit('click');flush();
  const worker=workers[0];assert.equal(worker.messages[0].policy,'rl-v4');
  ids['#ai-policy'].value='classic';ids['#ai-policy'].emit('change');worker.reply('left');flush();
- assert(worker.terminated);assert.equal(engine.turns,0);
- ids['#ai-policy'].value='rl-v4';ids['#ai-toggle'].emit('click');flush();const nextWorker=workers[1];
- nextWorker.onmessage({data:{id:nextWorker.messages[0].id,direction:'left',policy:'classic',fallback:'load'}});
+ assert(!worker.terminated);assert.equal(engine.turns,0);
+ ids['#ai-policy'].value='rl-v4';ids['#ai-toggle'].emit('click');flush();assert.equal(workers.length,1,'the worker is reused');
+ worker.onmessage({data:{id:worker.messages.at(-1).id,direction:'left',policy:'classic',fallback:'load'}});
  assert.equal(ids['#ai-policy'].value,'classic');assert.match(ids['#ai-status'].textContent,/切换经典/);flush();assert.equal(engine.turns,1);
 });
 
@@ -288,4 +288,29 @@ test('a failed V31 download visibly falls back to the V23 model',()=>{
  const worker=workers[0];
  worker.onmessage({data:{id:worker.messages[0].id,direction:'left',policy:'rl-fast',fallback:'v31-load',stage:0}});
  assert.equal(ids['#ai-policy'].value,'rl-fast');assert.match(ids['#ai-status'].textContent,/已改用 V23/);flush();assert.equal(engine.turns,1);
+});
+
+test('hiding the page during a download keeps the worker, so the download continues and is reused',()=>{
+ const {ids,workers,engine,flush,setBoard,document}=setup();setBoard([0,3,0,0]);
+ ids['#ai-policy'].value='rl-fast';ids['#ai-toggle'].emit('click');flush();
+ const worker=workers[0],first=worker.messages[0].id;
+ worker.onmessage({data:{id:first,type:'progress',loaded:4*1048576,total:16*1048576}});
+ document.hidden=true;document.emit('visibilitychange');
+ assert(!worker.terminated);assert.equal(ids['#ai-progress'].hidden,true);assert.equal(ids['#ai-toggle'].attrs['aria-pressed'],'false');
+ worker.onmessage({data:{id:first,type:'progress',loaded:8*1048576,total:16*1048576}});
+ assert.match(ids['#ai-status'].textContent,/AI 已停止/);
+ document.hidden=false;ids['#ai-toggle'].emit('click');flush();
+ assert.equal(workers.length,1);const second=worker.messages.at(-1).id;assert(second>first);
+ worker.onmessage({data:{id:second,type:'progress',loaded:12*1048576,total:16*1048576}});
+ assert.equal(ids['#ai-progress'].querySelector('progress').value,75);
+ worker.onmessage({data:{id:first,direction:'left',policy:'rl-fast',stage:0}});assert.equal(engine.turns,0,'stale reply ignored');
+ worker.onmessage({data:{id:second,direction:'left',policy:'rl-fast',stage:0}});flush();assert.equal(engine.turns,1);
+});
+
+test('an unresponsive worker is terminated by the watchdog and replaced on the next start',()=>{
+ const {ids,workers,flush,setBoard,timers,context}=setup();setBoard([0,3,0,0]);
+ ids['#ai-policy'].value='rl-fast';ids['#ai-toggle'].emit('click');flush();
+ const [id,fn]=[...timers].at(-1);timers.delete(id);fn();
+ assert(workers[0].terminated);assert.equal(ids['#ai-toggle'].attrs['aria-pressed'],'false');
+ ids['#ai-toggle'].emit('click');flush();assert.equal(workers.length,2);assert.equal(workers[1].messages.length,1);
 });

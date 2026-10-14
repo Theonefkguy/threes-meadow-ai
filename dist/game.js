@@ -33,16 +33,19 @@ function hideProgress() { aiProgress.hidden = true; aiProgressBar.value = 0; }
 const watchdogMs = () => aiPolicy.value.startsWith('rl') ? 30000 : 10000;
 function armWatchdog() {
   clearTimeout(aiWatchdog);
-  aiWatchdog = setTimeout(() => stopAI(t('加载或思考超时，已停止。可以重试或手动继续。')), watchdogMs());
+  aiWatchdog = setTimeout(() => stopAI(t('加载或思考超时，已停止。可以重试或手动继续。'), true), watchdogMs());
 }
 
-function stopAI(message = t('已停止，可以手动继续。')) {
+// Stopping keeps the worker (and any model download in progress) alive, so a later start or a
+// return to the page reuses it; replies to old requests are ignored by id. Only a failed or
+// unresponsive worker is terminated and recreated on the next start.
+function stopAI(message = t('已停止，可以手动继续。'), terminate = false) {
   hideProgress();
   aiRunning = false;
   aiRequest++;
   clearTimeout(aiTimer); clearTimeout(aiWatchdog);
   aiTimer = aiWatchdog = null;
-  aiWorker?.terminate(); aiWorker = null;
+  if (terminate) { aiWorker?.terminate(); aiWorker = null; }
   aiButton.textContent = t('AI 自动玩');
   aiButton.setAttribute('aria-pressed', 'false');
   aiStatus.textContent = message;
@@ -69,6 +72,15 @@ aiButton.addEventListener('click', () => {
   if (game.over) { aiStatus.textContent = t('本局已结束，请先开始新一局。'); return; }
   cancelPreview();
   try {
+    if (!aiWorker) createWorker();
+    aiRunning = true;
+    aiButton.textContent = t('停止 AI');
+    aiButton.setAttribute('aria-pressed', 'true');
+    aiStatus.textContent = aiPolicy.value.startsWith('rl')?t('正在加载强化学习模型…'):t('AI 已接手，正在观察棋盘…');
+    scheduleAI();
+  } catch { stopAI(t('当前浏览器无法启动 AI，可以继续手动玩。'), true); }
+});
+function createWorker() {
     aiWorker = new Worker('./ai-worker.js?v=23', { type:'module' });
     aiWorker.onmessage = ({ data }) => {
       if (!aiRunning || data.id !== aiRequest) return;
@@ -90,15 +102,9 @@ aiButton.addEventListener('click', () => {
     };
     const activeWorker = aiWorker;
     aiWorker.onerror = () => {
-      if (aiWorker === activeWorker) stopAI(t('AI 加载失败，可以重试或手动继续。'));
+      if (aiWorker === activeWorker) stopAI(t('AI 加载失败，可以重试或手动继续。'), true);
     };
-    aiRunning = true;
-    aiButton.textContent = t('停止 AI');
-    aiButton.setAttribute('aria-pressed', 'true');
-    aiStatus.textContent = aiPolicy.value.startsWith('rl')?t('正在加载强化学习模型…'):t('AI 已接手，正在观察棋盘…');
-    scheduleAI();
-  } catch { stopAI(t('当前浏览器无法启动 AI，可以继续手动玩。')); }
-});
+}
 aiPolicy.addEventListener('change',()=>{
   if(aiRunning)stopAI(t('策略已切换，点击 AI 自动玩继续。'));
   else aiStatus.textContent=t('策略已切换，点击 AI 自动玩从当前棋盘开始。');
