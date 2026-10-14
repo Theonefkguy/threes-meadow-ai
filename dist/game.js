@@ -1,6 +1,6 @@
 import { t, locale, setLanguage, applyLanguage } from './i18n.js';
-import { createGame, projectMove, score } from './engine.js?v=21';
-import { initialCounts, observePreview } from './card-memory.js?v=21';
+import { createGame, projectMove, score } from './engine.js?v=22';
+import { initialCounts, observePreview } from './card-memory.js?v=22';
 
 const boardEl = document.querySelector('#board');
 const nextEl = document.querySelector('#next-tile');
@@ -15,10 +15,29 @@ let publicCounts = initialCounts(game.board, game.next);
 const aiButton = document.querySelector('#ai-toggle');
 const aiStatus = document.querySelector('#ai-status');
 const aiPolicy = document.querySelector('#ai-policy');
+const aiProgress = document.querySelector('#ai-progress');
+const aiProgressBar = aiProgress.querySelector('progress');
 let aiRunning = false, aiWorker = null, aiTimer = null, aiWatchdog = null, aiRequest = 0;
 const directionNames = { left:'左', right:'右', up:'上', down:'下' };
 
+// Model download progress (first use of the default model, ~32 MB).
+const megabytes = n => (n / 1048576).toLocaleString(locale(), { minimumFractionDigits:1, maximumFractionDigits:1 });
+function showProgress(loaded, total) {
+  if (!total) return;
+  const percent = Math.min(100, Math.floor(loaded / total * 100));
+  aiProgress.hidden = false;
+  aiProgressBar.value = percent;
+  aiStatus.textContent = t('正在下载模型 {loaded} / {total} MB（{percent}%）', { loaded:megabytes(loaded), total:megabytes(total), percent });
+}
+function hideProgress() { aiProgress.hidden = true; aiProgressBar.value = 0; }
+const watchdogMs = () => aiPolicy.value.startsWith('rl') ? 30000 : 10000;
+function armWatchdog() {
+  clearTimeout(aiWatchdog);
+  aiWatchdog = setTimeout(() => stopAI(t('加载或思考超时，已停止。可以重试或手动继续。')), watchdogMs());
+}
+
 function stopAI(message = t('已停止，可以手动继续。')) {
+  hideProgress();
   aiRunning = false;
   aiRequest++;
   clearTimeout(aiTimer); clearTimeout(aiWatchdog);
@@ -39,7 +58,7 @@ function scheduleAI() {
     if (busy) { scheduleAI(); return; }
     aiStatus.textContent = aiPolicy.value.startsWith('rl')?t('强化学习 AI 正在思考…'):t('AI 正在思考…');
     const id = ++aiRequest;
-    aiWatchdog = setTimeout(() => stopAI(t('加载或思考超时，已停止。可以重试或手动继续。')), aiPolicy.value.startsWith('rl')?30000:10000);
+    armWatchdog();
     // Send visible state only, never game.deck or the random generator.
     aiWorker.postMessage({ id, board:game.board, next:game.next, remaining:publicCounts, policy:aiPolicy.value });
   }, 230);
@@ -50,16 +69,19 @@ aiButton.addEventListener('click', () => {
   if (game.over) { aiStatus.textContent = t('本局已结束，请先开始新一局。'); return; }
   cancelPreview();
   try {
-    aiWorker = new Worker('./ai-worker.js?v=21', { type:'module' });
+    aiWorker = new Worker('./ai-worker.js?v=22', { type:'module' });
     aiWorker.onmessage = ({ data }) => {
       if (!aiRunning || data.id !== aiRequest) return;
+      // Download progress keeps the request alive: restart the watchdog while bytes arrive.
+      if (data.type === 'progress') { showProgress(data.loaded, data.total); armWatchdog(); return; }
       clearTimeout(aiWatchdog); aiWatchdog = null;
+      hideProgress();
       if (data.error || !directionNames[data.direction] || !projectMove(game.board,data.direction).changed) {
         stopAI(t('AI 暂时无法继续，可以手动操作或重新开启。')); return;
       }
       if(data.fallback) {
         aiPolicy.value=['rl-fast','rl-v4'].includes(data.policy)?data.policy:'classic';
-        aiStatus.textContent=data.fallback==='fast-load'?t('五层剪枝搜索暂时无法加载，已切换第四版。'):data.fallback==='load'?t('模型暂时无法加载，已切换经典搜索。'):t('已超过模型训练范围，切换经典搜索。');
+        aiStatus.textContent=data.fallback==='v31-load'?t('完整模型暂时无法加载，已改用 V23 模型。'):data.fallback==='fast-load'?t('五层剪枝搜索暂时无法加载，已切换第四版。'):data.fallback==='load'?t('模型暂时无法加载，已切换经典搜索。'):t('已超过模型训练范围，切换经典搜索。');
       } else {
         const phase=data.policy?.startsWith('rl')?t(' · {stage}策略', {stage:[t('前期'),t('中期'),t('后期'),t('冲刺 12288')][data.stage]}):'';
         aiStatus.textContent=t('AI 向{direction}移动{phase} · 已完成 {turns} 步',{direction:t(directionNames[data.direction]),phase,turns:game.turns+1});

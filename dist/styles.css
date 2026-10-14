@@ -58,6 +58,11 @@ button{font:inherit}
 .ai-controls .ai-label{font-size:.875rem;font-weight:750}
 .ai-controls select{width:min(100%,280px);min-height:44px;padding:10px 12px;border:1px solid #b4c4c0;border-radius:12px;background:white;color:var(--ink);font:inherit;font-size:1rem}
 .ai-controls .ai-note{max-width:360px;font-size:.875rem}
+.ai-progress{width:min(100%,280px)}.ai-progress[hidden]{display:none}
+.ai-progress progress{display:block;width:100%;height:10px;border:0;border-radius:999px;overflow:hidden;background:rgba(18,54,58,.12);appearance:none;-webkit-appearance:none}
+.ai-progress progress::-webkit-progress-bar{background:rgba(18,54,58,.12);border-radius:999px}
+.ai-progress progress::-webkit-progress-value{background:var(--yellow);border-radius:999px;transition:width .2s}
+.ai-progress progress::-moz-progress-bar{background:var(--yellow);border-radius:999px}
 select:focus-visible{outline:3px solid #28758a;outline-offset:3px}
 button:focus-visible,summary:focus-visible{outline:3px solid #28758a;outline-offset:4px}
 @media(max-width:430px){.app{width:min(94vw,430px);gap:14px}.brand p{display:none}.logo{width:46px;height:46px;border-radius:14px}.new-game{padding:10px 13px}.status{align-items:stretch;gap:10px}.score-card{min-width:0;flex:1;height:84px;padding:8px}.score-card>div:not(.divider){min-width:52px}.score-card strong{font-size:1.1rem}.next-wrap{min-width:136px;min-height:84px;padding:8px}.preview-card{width:34px;height:36px;font-size:1rem}.next-tiles{min-height:36px}.board{padding:9px;gap:7px;border-radius:24px}.cell,.tile{border-radius:16px}.rules{gap:10px;align-items:flex-start}.rules p{font-size:.875rem}.controls button{height:44px}}
