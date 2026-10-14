@@ -1,0 +1,27 @@
+{"stage": "pools", "jobsDone": 0, "jobs": 192, "elapsedSeconds": 60, "etaSeconds": null}
+{"stage": "pools", "jobsDone": 12, "jobs": 192, "elapsedSeconds": 120, "etaSeconds": 1800}
+{"stage": "pools", "jobsDone": 16, "jobs": 192, "elapsedSeconds": 180, "etaSeconds": 1980}
+{"stage": "pools", "jobsDone": 31, "jobs": 192, "elapsedSeconds": 240, "etaSeconds": 1247}
+{"stage": "pools", "jobsDone": 32, "jobs": 192, "elapsedSeconds": 300, "etaSeconds": 1500}
+{"stage": "pools", "jobsDone": 47, "jobs": 192, "elapsedSeconds": 360, "etaSeconds": 1111}
+{"stage": "pools", "jobsDone": 48, "jobs": 192, "elapsedSeconds": 420, "etaSeconds": 1260}
+{"stage": "pools", "jobsDone": 64, "jobs": 192, "elapsedSeconds": 480, "etaSeconds": 960}
+{"stage": "pools", "jobsDone": 64, "jobs": 192, "elapsedSeconds": 540, "etaSeconds": 1080}
+{"stage": "pools", "jobsDone": 80, "jobs": 192, "elapsedSeconds": 600, "etaSeconds": 840}
+{"stage": "pools", "jobsDone": 80, "jobs": 192, "elapsedSeconds": 660, "etaSeconds": 924}
+{"stage": "pools", "jobsDone": 96, "jobs": 192, "elapsedSeconds": 720, "etaSeconds": 720}
+{"stage": "pools", "jobsDone": 96, "jobs": 192, "elapsedSeconds": 780, "etaSeconds": 780}
+{"stage": "pools", "jobsDone": 112, "jobs": 192, "elapsedSeconds": 840, "etaSeconds": 600}
+{"stage": "pools", "jobsDone": 112, "jobs": 192, "elapsedSeconds": 900, "etaSeconds": 643}
+{"stage": "pools", "jobsDone": 128, "jobs": 192, "elapsedSeconds": 960, "etaSeconds": 480}
+{"stage": "pools", "jobsDone": 128, "jobs": 192, "elapsedSeconds": 1020, "etaSeconds": 510}
+{"stage": "pools", "jobsDone": 144, "jobs": 192, "elapsedSeconds": 1080, "etaSeconds": 360}
+{"stage": "pools", "jobsDone": 147, "jobs": 192, "elapsedSeconds": 1140, "etaSeconds": 349}
+{"stage": "pools", "jobsDone": 160, "jobs": 192, "elapsedSeconds": 1200, "etaSeconds": 240}
+{"stage": "pools", "jobsDone": 171, "jobs": 192, "elapsedSeconds": 1260, "etaSeconds": 155}
+{"stage": "pools", "jobsDone": 176, "jobs": 192, "elapsedSeconds": 1320, "etaSeconds": 120}
+{"stage": "pools", "jobsDone": 191, "jobs": 192, "elapsedSeconds": 1380, "etaSeconds": 7}
+{"stage": "pools", "jobsDone": 192, "jobs": 192, "elapsedSeconds": 1382, "etaSeconds": 0}
+{"pool": "train", "kept": 868, "need": null}
+{"pool": "curve", "kept": 1126, "need": 1024}
+{"pool": "confirm", "kept": 2198, "need": 2048}

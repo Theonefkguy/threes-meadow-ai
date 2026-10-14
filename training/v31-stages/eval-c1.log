@@ -1,0 +1,9 @@
+{"stage": "c1", "jobsDone": 8, "jobs": 128, "elapsedSeconds": 60, "etaSeconds": 901}
+{"stage": "c1", "jobsDone": 22, "jobs": 128, "elapsedSeconds": 120, "etaSeconds": 578}
+{"stage": "c1", "jobsDone": 38, "jobs": 128, "elapsedSeconds": 180, "etaSeconds": 426}
+{"stage": "c1", "jobsDone": 54, "jobs": 128, "elapsedSeconds": 240, "etaSeconds": 329}
+{"stage": "c1", "jobsDone": 67, "jobs": 128, "elapsedSeconds": 300, "etaSeconds": 273}
+{"stage": "c1", "jobsDone": 83, "jobs": 128, "elapsedSeconds": 360, "etaSeconds": 195}
+{"stage": "c1", "jobsDone": 98, "jobs": 128, "elapsedSeconds": 420, "etaSeconds": 129}
+{"stage": "c1", "jobsDone": 113, "jobs": 128, "elapsedSeconds": 480, "etaSeconds": 64}
+{"stage": "c1", "jobsDone": 128, "jobs": 128, "elapsedSeconds": 526, "etaSeconds": 0}

@@ -1,0 +1,9 @@
+{"stage": "pools", "jobsDone": 0, "jobs": 84, "elapsedSeconds": 60, "etaSeconds": null}
+{"stage": "pools", "jobsDone": 16, "jobs": 84, "elapsedSeconds": 120, "etaSeconds": 510}
+{"stage": "pools", "jobsDone": 32, "jobs": 84, "elapsedSeconds": 180, "etaSeconds": 293}
+{"stage": "pools", "jobsDone": 48, "jobs": 84, "elapsedSeconds": 240, "etaSeconds": 180}
+{"stage": "pools", "jobsDone": 61, "jobs": 84, "elapsedSeconds": 300, "etaSeconds": 113}
+{"stage": "pools", "jobsDone": 64, "jobs": 84, "elapsedSeconds": 360, "etaSeconds": 113}
+{"stage": "pools", "jobsDone": 84, "jobs": 84, "elapsedSeconds": 416, "etaSeconds": 0}
+{"pool": "train1", "kept": 986, "need": null}
+{"pool": "eval1", "kept": 1089, "need": 1024}

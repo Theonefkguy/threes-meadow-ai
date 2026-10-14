@@ -1,0 +1,12 @@
+{
+  "round": "V31 web release check 1: native strength of the float16-quantized V31 model",
+  "createdUTC": "2026-10-14T05:40:00Z",
+  "status": "written before the quantized games were run",
+  "models": {
+    "float": "training/v31-stages/models/W31.bin + float32 residuals (V31 arm W31; its 2048 games are already recorded in training/v31-stages/eval/games-W31-*.jsonl)",
+    "quantized": "the same W31.bin + scripts/quantize-residual.py outputs v31-s{1,2,3}q.res (the exact weights the browser decodes from v31-s{1,2,3}.f16)"
+  },
+  "games": "V31 whole-game seeds 31300001-31302048, website search (depth 5, cutoff 0.01, clamp, complete depth), training/v31-stages/bin/game",
+  "comparison": "paired by seed: reach 6144 and reach 12288 (two-sided exact McNemar), final score (paired normal approximation); also the number of games identical in every non-timing field",
+  "acceptance": "the quantized model passes if none of the three is significantly worse (p < 0.05 with a negative difference). Otherwise the release keeps float32 residuals (16 MB per stage) or uses another encoding."
+}

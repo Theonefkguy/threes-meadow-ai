@@ -1,0 +1,10 @@
+{
+  "round": "V31 web release check 4: current website AI (V23) vs the shipped quantized V31 on the same openings",
+  "createdUTC": "2026-10-14T07:10:00Z",
+  "status": "written before the V23 games were run; the quantized V31 games on these seeds are already recorded (check 1)",
+  "arms": {"V23": "dist/models/ntuple-v23.bin, no residual (website AI before this release)", "V31q": "W31.bin + v31-s{1,2,3}q.res (check 1 games)"},
+  "games": "seeds 31300001-31302048, website search (depth 5, cutoff 0.01, clamp, complete depth), training/v31-stages/bin/game",
+  "primary": {"P1": "reach 6144, exact McNemar", "P2": "reach 12288, exact McNemar", "P3": "final score, paired normal approximation"},
+  "multiplicity": "Holm across P1-P3",
+  "purpose": "README and release notes report this paired comparison of what users get before and after the release"
+}

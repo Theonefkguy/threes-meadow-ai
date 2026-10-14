@@ -1,0 +1,37 @@
+{
+  "curve": {
+    "blocks": [
+      [
+        29200001,
+        29201300
+      ]
+    ],
+    "openings": 1300,
+    "reached3072": 1126,
+    "kept": 1126,
+    "used": 1024,
+    "lastUsedSeed": 29201185,
+    "sha256": "cb4f71718be1b7011357fe2057400d4a4e44895479378420ae54537c47986b24"
+  },
+  "confirm": {
+    "blocks": [
+      [
+        29300001,
+        29302500
+      ]
+    ],
+    "openings": 2500,
+    "reached3072": 2198,
+    "kept": 2198,
+    "used": 2048,
+    "lastUsedSeed": 29302330,
+    "sha256": "7e78609ab598dcf1717c0d19fd72f4db9efeec7e65713b225f119815c9013417"
+  },
+  "train": {
+    "first3072": 868,
+    "onpolicy": 16487,
+    "train-first3072.txt": "2e96b7488fc695cb4aad6a748afa28a5adee91ae1e840fe9a2adb7729e8fd3c1",
+    "train-onpolicy.txt": "adb553b65291ccce125561715f6bb37067c0879ff65886ef3090411adfe475cb"
+  },
+  "frozenUTC": "2026-10-12T19:12:38Z"
+}

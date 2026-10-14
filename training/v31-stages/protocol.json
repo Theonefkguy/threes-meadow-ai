@@ -1,0 +1,131 @@
+{
+  "round": "V31: five-cell residuals for stage 1 (1536 -> 3072) and stage 3 (6144 -> 12288) on top of V30",
+  "createdUTC": "2026-10-13T09:10:22.387968+00:00",
+  "status": "frozen before any pool generation, training or outcome of this round",
+  "base": {
+    "name": "W30 = V30 P-final (website V23 tables with the V30 stage-2 table and residual)",
+    "bin": "training/v30-parallel/models/P-final.bin",
+    "res": "training/v30-parallel/models/P-final.res",
+    "binSHA256": "b79beee36ce713fe7336fa5bb33742828b2771b59adbf99d01d7e2348bf99933",
+    "resSHA256": "e0cc549fc250ef979640549d8f286fefd2fdc947a0247c7dd28d320895155570"
+  },
+  "residual": "as V29/V30: four five-cell patterns x 8 symmetries per stage, zero initialised, trained jointly with that stage's four-cell table (training/v31-stages/model5s.h)",
+  "training": {
+    "tool": "training/v31-stages/train.cpp (V30 parallel trainer generalised to any stage)",
+    "threads": 16,
+    "strongMoveShare": 0.003,
+    "learningRates": [
+      0.001,
+      0.0005,
+      0.00025
+    ],
+    "rateSteps": "50% and 85% of the move budget",
+    "boundaries": "stage 1: an afterstate with 3072 closes the episode with the W30 stage-2 value including its residual; stage 3: 12288 is terminal (value 0)",
+    "nondeterminism": "lock-free updates; hashes recorded after training and before evaluation"
+  },
+  "arms": {
+    "S1": {
+      "stage": 1,
+      "moves": 12000000000,
+      "seed": 31210001,
+      "checkpoints": [
+        3000000000,
+        6000000000
+      ],
+      "pool": "training/v31-stages/pools/train1-onpolicy.txt"
+    },
+    "S3": {
+      "stage": 3,
+      "moves": 12000000000,
+      "seed": 31230001,
+      "checkpoints": [
+        3000000000,
+        6000000000
+      ],
+      "pool": "training/v27-stage3/pools/train-onpolicy.txt",
+      "poolSHA256": "c84d4f37d7dbaaed5904926cc7d07c117ace245070c0dcfcc430b7767cbe55ae",
+      "poolNote": "V27 on-policy 6144-phase starts from CUR play; in stage 3 W30 plays exactly as CUR (every afterstate is stage 3), so they are on-policy for W30"
+    }
+  },
+  "checkpointNote": "checkpoints are saved for later study; only final models are evaluated in V31",
+  "pools": {
+    "train1": {
+      "openings": [
+        31100001,
+        31101000
+      ]
+    },
+    "eval1": {
+      "openings": [
+        31200001,
+        31201100
+      ],
+      "size": 1024,
+      "extensionBlock": 100
+    }
+  },
+  "poolRules": "website search with W30 (depth 5, cutoff 0.01, clamp) from standard openings to the first 1536; terminal states excluded; eval1 sorted by seed and cut to 1024",
+  "stage1Training": {
+    "sampleRolloutBase": 31110001,
+    "every": 25,
+    "onpolicy": "each train1 first-1536 state continued with the W30 website search to 3072 or death; state recorded every 25 moves from move 0 while alive with max card exactly 1536"
+  },
+  "W31": "W30 stage 0 and stage 2 tables and stage-2 residual + S1 stage-1 table and residual + S3 stage-3 table and residual (training/v31-stages/run.py compose; other stages verified byte-identical)",
+  "games": {
+    "seeds": [
+      31300001,
+      31302048
+    ],
+    "arms": "W30 vs W31",
+    "search": "website default: depth 5, cutoff 0.01, clamp, complete depth every move, standard openings to 12288 or death (training/v31-stages/game.cpp)",
+    "primary": {
+      "P1": "reach 6144, exact McNemar",
+      "P2": "reach 12288, exact McNemar",
+      "P3": "final score, paired normal approximation"
+    },
+    "multiplicity": "Holm across P1-P3; no interim analysis"
+  },
+  "conditional": {
+    "c1": {
+      "pool": "training/v31-stages/pools/eval1-first1536.txt",
+      "size": 1024,
+      "rolloutBase": 31400001,
+      "target": 13,
+      "endpoint": "first 1536 -> 3072 or death (attributes stage 1)"
+    },
+    "c3": {
+      "pool": "training/v27-stage3/pools/confirm6144.txt",
+      "poolSHA256": "37053d898e5feceb879e8b24119e08fc03bde03ea7780523c9766b5d011a826f",
+      "size": 2048,
+      "rolloutBase": 27400001,
+      "target": 15,
+      "endpoint": "first 6144 -> 12288 or death (attributes stage 3)",
+      "v27Reproduction": "W30 here must reproduce V27 confirm-CUR field for field (descriptive determinism check)"
+    }
+  },
+  "conditionalAnalysis": "secondary: exact McNemar per conditional pool, Holm across c1 and c3; scoreGained paired differences; Wilson intervals",
+  "adoption": "No website change in V31.",
+  "sourceSHA256": {
+    "training/v31-stages/model5s.h": "27138912331e7a5240080a77533b8b97d16c6cb611e19d1878788518fd6d9ac1",
+    "training/v31-stages/search5s.h": "5648ba7cf05042805d46ab0b9b9407b57b229275c7c143c34810ea8578e01f87",
+    "training/v31-stages/tools.cpp": "ad43a165172fd63a67827d9cac86be811d7ff51be2340c4b970bc762719d7cd8",
+    "training/v31-stages/train.cpp": "cb27b30e6f000094efbd3ed2255b9ec41d0b5fa78b88e0fb27a15793a78ef339",
+    "training/v31-stages/game.cpp": "9314c1b0188e0461198fa527cf72435feff3cef3b8b1616c221c32e4c6164209",
+    "training/v29-five/model5.h": "54a8a9b596b92f4d0015dffb886975a0ad0be18e3b4abe0f74f5ffd1579ef7ff",
+    "training/v21-late-train/model4.h": "27305c197ba81b2ee05fda8c3589ed03c4d7d752dacc3e1367ca157a1eeb1ad5",
+    "training/v7/model.h": "9d420e6cc3d65038e7e045223c8ad54e4b1c250bedd10ec6c0ceea6e2155fb7d",
+    "training/v6/model.h": "560bb7cad2c362352f33eedec9f3db2ba374ac9b799fc63b54f335ddffc57cda",
+    "training/v3/ntuple-fast.h": "0554764c4b571c431b8ec4feac83e906ed5bcf8e595dfc51e1839e3f617d243d",
+    "training/v3/common.h": "a0300e0cf937faaacb9b85d8b0c1fae8257bebdb3198b21245a778ff92cafefd",
+    "training/v3/goal.h": "2fd3d950e54b82fb9d943735188c6e61c76ff80e18fcb38137d92d37d6644ba1"
+  },
+  "compiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)",
+  "compile": "c++ -std=c++17 -O3 training/v31-stages/{tools,game}.cpp -o training/v31-stages/bin/{tools,game}; c++ -std=c++17 -O3 -pthread training/v31-stages/train.cpp -o training/v31-stages/bin/train",
+  "binarySHA256": {
+    "tools": "97dfb0c106b8dc156e435a0c7397a0a460ea455e4828b1902021b99601805075",
+    "game": "e6b234852291f92f27b156195dd4fa4b753730133703ce5e56323c1be528050b",
+    "train": "b964466973268c477a1859175382241cc111b00d9810a679d20a4f2e3df08595"
+  },
+  "parity": "before freezing, with W30 the V31 game and cont tools reproduced V30 games-W (2 games) and select P-final (4 states) field for field, and the V31 trainer with one thread and only a stage-2 residual produced the same model and residual hashes as the V30 trainer (2e6 moves)",
+  "workers": 16
+}

@@ -1,0 +1,11 @@
+{
+  "check": "V31 web release check 3: browser timing, desktop",
+  "dateUTC": "2026-10-14",
+  "browser": "Chromium 152 (Claude desktop app browser pane), Mac mini M5 Pro, hardwareConcurrency 18; one unrelated single-core Python process was running",
+  "page": "training/web-release/browser/ (320 V25 states x 3 passes, website settings, 160 ms soft budget)",
+  "V23 (current website, no residual)": {"decodeMs": 19.8, "all": {"n": 960, "meanMs": 4.06, "p95Ms": 6.8, "maxMs": 9.0, "completedFullDepth": 960},
+    "1536": {"meanMs": 3.75, "p95Ms": 6.9}, "3072": {"meanMs": 3.80, "p95Ms": 6.2}, "6144": {"meanMs": 4.47, "p95Ms": 7.0}},
+  "V31 quantized (W31.bin + v31-s{1,2,3}.f16)": {"decodeMs": 50.9, "all": {"n": 960, "meanMs": 5.39, "p95Ms": 9.0, "maxMs": 11.9, "completedFullDepth": 960},
+    "1536": {"meanMs": 5.03, "p95Ms": 9.1}, "3072": {"meanMs": 5.09, "p95Ms": 8.3}, "6144": {"meanMs": 5.88, "p95Ms": 9.1}},
+  "pass": "yes on desktop: P95 9.0 ms < 160 ms, depth 5 on 100% of measurements. Phone not yet measured."
+}

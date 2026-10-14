@@ -4,7 +4,7 @@
 // (product of all chance weights from the root) is below `threshold` is scored
 // with the one-move afterstate value instead of its remaining depth.
 // threshold=0 is the complete search. Only fully completed depths are used.
-import { bonusPreviews } from './engine.js?v=21';
+import { bonusPreviews } from './engine.js?v=22';
 
 const directions=['left','right','up','down'];
 const toRank=n=>n<3?n:Math.log2(n/3)+3;
@@ -34,10 +34,17 @@ let stamp=0;
 const PATTERNS=[[0,1,2,3],[4,5,6,7],[0,1,4,5],[1,2,5,6],[5,6,9,10],[0,1,2,4],[0,1,5,6],[0,1,4,8]];
 const FEAT=Int8Array.from(PATTERNS.flatMap(pattern=>Array.from({length:8},(_,sym)=>pattern.map(pos=>{
   let y=pos>>2,x=pos&3;if(sym>=4)x=3-x;for(let k=0;k<sym%4;k++)[y,x]=[x,3-y];return y*4+x;})).flat()));
+// Five-cell residual features (32 x 5 cells), same order as rl-model.js FEATURES5.
+const PATTERNS5=[[0,1,2,3,4],[4,5,6,7,8],[0,1,2,4,5],[4,5,6,8,9]];
+const FEAT5=Int8Array.from(PATTERNS5.flatMap(pattern=>Array.from({length:8},(_,sym)=>pattern.map(pos=>{
+  let y=pos>>2,x=pos&3;if(sym>=4)x=3-x;for(let k=0;k<sym%4;k++)[y,x]=[x,3-y];return y*4+x;})).flat()));
 // Same summation order as decodeModel().value; ranks here never exceed 15.
-function leafValue(W,b,stage){
+// R: per-stage five-cell residual weights (or null); summed separately, then added.
+function leafValue(W,R,b,stage){
   const off=stage*524288;let v=0;
   for(let f=0;f<64;f++){const o=f*4;v+=W[off+(f>>3)*65536+(b[FEAT[o]]|b[FEAT[o+1]]<<4|b[FEAT[o+2]]<<8|b[FEAT[o+3]]<<12)];}
+  const r5=R&&R[stage];
+  if(r5){let r=0;for(let f=0;f<32;f++){const o=f*5;r+=r5[(f>>3)*1048576+(b[FEAT5[o]]|b[FEAT5[o+1]]<<4|b[FEAT5[o+2]]<<8|b[FEAT5[o+3]]<<12|b[FEAT5[o+4]]<<16)];}v+=r;}
   return v;
 }
 const previewCache=new Map();
@@ -75,6 +82,7 @@ export function chooseFastMove(board,next,model,{remaining=null,maxDepth=4,thres
   // Transposition table (per call). Key: packed board (2x32 bits) + params.
   const stages=model.stages===4?4:3;
   const W=model.weights instanceof Float32Array&&model.weights.length===stages*524288?model.weights:null;
+  const R=W&&Array.isArray(model.residuals)?model.residuals:null;
   if(++stamp>2e9){stamp=1;used.fill(0);}
   const deadline=now()+budgetMs,timeout=Symbol();
   let nodes=0,completed=0,cutoffs=0,best=null,rootValues=null;
@@ -129,7 +137,7 @@ export function chooseFastMove(board,next,model,{remaining=null,maxDepth=4,thres
     for(let d=0;d<4;d++){
       const n=size[L][d];if(!n)continue;const after=moved[L][d];let q=rew[L][d];
       if(maxRank(after)>=15){}           // 12288 ends the game: merge points only, no spawn/future.
-      else if(depth===1){const v=W?leafValue(W,after,stageOf(after)):model.value(after,stageOf(after));q+=clampLeaf&&v<0?0:v;}
+      else if(depth===1){const v=W?leafValue(W,R,after,stageOf(after)):model.value(after,stageOf(after));q+=clampLeaf&&v<0?0:v;}
       else{
         let expected=0;const c=child[L],cards=preview.cards,weights=preview.weights,e=ent[L][d];
         for(let k=0;k<n;k++)for(let i=0;i<cards.length;i++){

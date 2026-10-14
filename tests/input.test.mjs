@@ -27,6 +27,7 @@ function setup() {
     append(node) { this.children.push(node); }
     replaceChildren() { this.children = []; }
     focus() {}
+    querySelector(selector) { return ((this.queried ||= {})[selector] ||= new Element()); }
     closest() { return null; }
     addEventListener(n, fn) { (this.events[n] ||= []).push(fn); }
     emit(n, e = {}) { for (const fn of this.events[n] || []) fn({ target:this, ...e }); }
@@ -38,7 +39,7 @@ function setup() {
       return { left:(i % 4) * 100, top:Math.floor(i / 4) * 100, width:90, height:90 };
     }
   }
-  const ids = Object.fromEntries(['board','next-tile','next-hint','score','best','game-over','move-status','final-score','play-again','new-game','ai-toggle','ai-status','ai-policy','over-kicker','over-title'].map(id => ['#'+id,new Element()]));
+  const ids = Object.fromEntries(['board','next-tile','next-hint','score','best','game-over','move-status','final-score','play-again','new-game','ai-toggle','ai-status','ai-policy','over-kicker','over-title','ai-progress'].map(id => ['#'+id,new Element()]));
   ids['#ai-policy'].value='classic';
   board = ids['#board'];
   const document = new Element();
@@ -263,4 +264,28 @@ test('default takeover sends only visible information and load fallback keeps su
  assert.equal(ids['#ai-policy'].value,'rl-v4');assert.match(ids['#ai-status'].textContent,/切换第四版/);
  flush();assert.equal(engine.turns,1);
  flush();assert.equal(worker.messages.length,2);assert.equal(worker.messages.at(-1).policy,'rl-v4');
+});
+
+test('model download progress shows a bar, keeps the watchdog alive and clears on the first move',()=>{
+ const {ids,workers,engine,flush,setBoard,timers}=setup();setBoard([0,3,0,0]);
+ ids['#ai-policy'].value='rl-fast';ids['#ai-toggle'].emit('click');flush();
+ const worker=workers[0],id=worker.messages[0].id,bar=ids['#ai-progress'].querySelector('progress');
+ const watchdogs=()=>[...timers.keys()].length;
+ assert.equal(ids['#ai-progress'].hidden,true);
+ worker.onmessage({data:{id,type:'progress',loaded:8*1048576,total:32*1048576}});
+ assert.equal(ids['#ai-progress'].hidden,false);assert.equal(bar.value,25);
+ assert.match(ids['#ai-status'].textContent,/正在下载模型 8\.0 \/ 32\.0 MB（25%）/);
+ const before=watchdogs();worker.onmessage({data:{id,type:'progress',loaded:16*1048576,total:32*1048576}});
+ assert.equal(watchdogs(),before);assert.equal(bar.value,50);assert.equal(engine.turns,0);
+ worker.onmessage({data:{id:id-1,type:'progress',loaded:32*1048576,total:32*1048576}});assert.equal(bar.value,50);
+ worker.onmessage({data:{id,direction:'left',policy:'rl-fast',stage:0}});
+ assert.equal(ids['#ai-progress'].hidden,true);flush();assert.equal(engine.turns,1);
+});
+
+test('a failed V31 download visibly falls back to the V23 model',()=>{
+ const {ids,workers,engine,flush,setBoard}=setup();setBoard([0,3,0,0]);
+ ids['#ai-policy'].value='rl-fast';ids['#ai-toggle'].emit('click');flush();
+ const worker=workers[0];
+ worker.onmessage({data:{id:worker.messages[0].id,direction:'left',policy:'rl-fast',fallback:'v31-load',stage:0}});
+ assert.equal(ids['#ai-policy'].value,'rl-fast');assert.match(ids['#ai-status'].textContent,/已改用 V23/);flush();assert.equal(engine.turns,1);
 });

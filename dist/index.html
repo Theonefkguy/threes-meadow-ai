@@ -7,7 +7,7 @@
   <meta name="description" content="Play Threes Meadow with a five-ply AI. Free, on-device, no account required.">
   <title data-i18n="合三">Threes Meadow</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%2312363a'/%3E%3Cpath d='M18 19h16c9 0 14 4 14 11 0 4-2 7-6 9 5 1 8 5 8 10 0 8-6 12-16 12H18v-9h16c4 0 6-1 6-4s-2-4-6-4h-9v-9h9c3 0 5-1 5-4s-2-4-5-4H18z' fill='%23ffd05a'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="./styles.css?v=21">
+  <link rel="stylesheet" href="./styles.css?v=22">
 </head>
 <body>
   <main class="app" aria-label="Threes Meadow game" data-i18n-aria="合三游戏">
@@ -62,7 +62,8 @@
       </select>
       <button id="ai-toggle" type="button" aria-pressed="false" data-i18n="AI 自动玩">Play with AI</button>
       <p id="ai-status" role="status" data-i18n="从当前棋盘接手，点击停止或手动操作即可接管。">Starts from your board. Stop the AI or make a move to take over.</p>
-      <p class="ai-note" data-i18n="默认使用 V23 模型与五层剪枝搜索。模型约 8 MB，下载后在你的设备上运行，无需账号。">The default uses the V23 model and five-ply search. The 8 MB model runs on your device after download. No account needed.</p>
+      <div class="ai-progress" id="ai-progress" hidden><progress max="100" value="0" aria-label="Model download" data-i18n-aria="模型下载进度"></progress></div>
+      <p class="ai-note" data-i18n="默认使用 V31 模型与五层剪枝搜索。模型约 32 MB，首次使用时下载，之后在你的设备上运行，无需账号。">The default uses the V31 model and five-ply search. The 32 MB model downloads on first use and then runs on your device. No account needed.</p>
     </section>
 
     <section class="rules">
@@ -81,6 +82,6 @@
     <footer><a href="https://github.com/Theonefkguy/threes-meadow-ai" data-i18n="源码与评测">Source &amp; benchmarks</a><p data-i18n="独立研究项目，与 Threes! / Sirvo 无隶属关系。">Independent research project, not affiliated with Threes! or Sirvo.</p></footer>
     <p id="move-status" class="sr-only" role="status" aria-live="polite"></p>
   </main>
-  <script type="module" src="./game.js?v=21"></script>
+  <script type="module" src="./game.js?v=22"></script>
 </body>
 </html>

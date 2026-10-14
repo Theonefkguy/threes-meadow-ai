@@ -122,3 +122,16 @@ training/v27-stage3/models/*.bin
 training/v28-curve/bin/
 training/v28-curve/models/
 training/v28-curve/eval/*.part
+training/v29-five/bin/
+training/v29-five/models/
+training/v29-five/data/*.part
+training/v29-five/eval/*.part
+training/v30-parallel/bin/
+training/v30-parallel/models/
+training/v30-parallel/eval/*.part
+training/v31-stages/bin/
+training/v31-stages/models/
+training/v31-stages/data/*.part
+training/v31-stages/eval/*.part
+training/v31-stages/pipeline.done
+training/web-release/models/
