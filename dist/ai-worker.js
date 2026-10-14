@@ -1,12 +1,14 @@
-import {loadV4Policy} from './v4-policy.js?v=23';
-import { chooseMove } from './ai.js?v=23';
-import { loadModel } from './rl-model.js?v=23';
-import { chooseLearnedMove } from './rl-search.js?v=23';
-import { chooseFastMove } from './fast-search.js?v=23';
-// A failed V31 download is not retried on every move of this worker (each AI start makes a new worker).
+import {loadV4Policy} from './v4-policy.js?v=24';
+import { chooseMove } from './ai.js?v=24';
+import { loadModel } from './rl-model.js?v=24';
+import { chooseLearnedMove } from './rl-search.js?v=24';
+import { chooseFastMove } from './fast-search.js?v=24';
+// A failed V31 download is not retried on every move; it is retried once when the AI is started
+// again (the page marks the first request of each start as fresh).
 let v31Failed=false;
 self.onmessage = async ({ data }) => {
   try {
+    if(data.fresh)v31Failed=false;
     const options={remaining:data.remaining};
     if(data.policy==='rl-fast'||data.policy==='rl-v4') {
       let result,policy=data.policy,fallback;
