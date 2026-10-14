@@ -1,0 +1,14 @@
+{"stage": "confirm", "jobsDone": 16, "jobs": 256, "elapsedSeconds": 60, "etaSeconds": 901}
+{"stage": "confirm", "jobsDone": 32, "jobs": 256, "elapsedSeconds": 120, "etaSeconds": 840}
+{"stage": "confirm", "jobsDone": 50, "jobs": 256, "elapsedSeconds": 180, "etaSeconds": 742}
+{"stage": "confirm", "jobsDone": 76, "jobs": 256, "elapsedSeconds": 240, "etaSeconds": 569}
+{"stage": "confirm", "jobsDone": 94, "jobs": 256, "elapsedSeconds": 300, "etaSeconds": 517}
+{"stage": "confirm", "jobsDone": 111, "jobs": 256, "elapsedSeconds": 360, "etaSeconds": 470}
+{"stage": "confirm", "jobsDone": 134, "jobs": 256, "elapsedSeconds": 420, "etaSeconds": 382}
+{"stage": "confirm", "jobsDone": 155, "jobs": 256, "elapsedSeconds": 480, "etaSeconds": 313}
+{"stage": "confirm", "jobsDone": 173, "jobs": 256, "elapsedSeconds": 540, "etaSeconds": 259}
+{"stage": "confirm", "jobsDone": 193, "jobs": 256, "elapsedSeconds": 600, "etaSeconds": 196}
+{"stage": "confirm", "jobsDone": 217, "jobs": 256, "elapsedSeconds": 660, "etaSeconds": 119}
+{"stage": "confirm", "jobsDone": 234, "jobs": 256, "elapsedSeconds": 720, "etaSeconds": 68}
+{"stage": "confirm", "jobsDone": 255, "jobs": 256, "elapsedSeconds": 780, "etaSeconds": 3}
+{"stage": "confirm", "jobsDone": 256, "jobs": 256, "elapsedSeconds": 783, "etaSeconds": 0}

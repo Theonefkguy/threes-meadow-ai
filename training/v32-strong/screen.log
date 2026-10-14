@@ -1,0 +1,13 @@
+{"stage": "screen", "jobsDone": 16, "jobs": 256, "elapsedSeconds": 60, "etaSeconds": 901}
+{"stage": "screen", "jobsDone": 32, "jobs": 256, "elapsedSeconds": 120, "etaSeconds": 840}
+{"stage": "screen", "jobsDone": 52, "jobs": 256, "elapsedSeconds": 180, "etaSeconds": 706}
+{"stage": "screen", "jobsDone": 79, "jobs": 256, "elapsedSeconds": 240, "etaSeconds": 538}
+{"stage": "screen", "jobsDone": 98, "jobs": 256, "elapsedSeconds": 300, "etaSeconds": 484}
+{"stage": "screen", "jobsDone": 116, "jobs": 256, "elapsedSeconds": 360, "etaSeconds": 435}
+{"stage": "screen", "jobsDone": 140, "jobs": 256, "elapsedSeconds": 420, "etaSeconds": 348}
+{"stage": "screen", "jobsDone": 160, "jobs": 256, "elapsedSeconds": 480, "etaSeconds": 288}
+{"stage": "screen", "jobsDone": 181, "jobs": 256, "elapsedSeconds": 540, "etaSeconds": 224}
+{"stage": "screen", "jobsDone": 201, "jobs": 256, "elapsedSeconds": 600, "etaSeconds": 164}
+{"stage": "screen", "jobsDone": 224, "jobs": 256, "elapsedSeconds": 660, "etaSeconds": 94}
+{"stage": "screen", "jobsDone": 243, "jobs": 256, "elapsedSeconds": 720, "etaSeconds": 39}
+{"stage": "screen", "jobsDone": 256, "jobs": 256, "elapsedSeconds": 747, "etaSeconds": 0}

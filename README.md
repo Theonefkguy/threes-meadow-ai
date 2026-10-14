@@ -8,7 +8,7 @@ A high-performance Threes AI you can watch, interrupt and play alongside. Multi-
 
 ## Play
 
-Open the [live demo](https://theonefkguy.github.io/threes-meadow-ai/), use the English default or switch to 中文, and press **Play with AI**. Use arrow keys, swipe, or the direction buttons to take over. The default V31 model is about 32 MB and downloads on first use, with a progress bar. The V4 search and a classic heuristic search remain selectable for comparison.
+Open the [live demo](https://theonefkguy.github.io/threes-meadow-ai/), use the English default or switch to 中文, and press **Play with AI**. Use arrow keys, swipe, or the direction buttons to take over. The default V31 model is a 17 MB gzip download (32 MB decoded) fetched on first use, with a progress bar. The V4 search and a classic heuristic search remain selectable for comparison.
 
 ## Video
 
@@ -27,7 +27,7 @@ Same rules and engine as below. Native C++ evaluation of the exact weights shipp
 | Reach 12288 | 79/2048 (3.9%) | **115/2048 (5.6%)** |
 | Mean final score | 438,894 | **561,463** |
 
-95% Wilson intervals for V31: 6144 **57.2–61.4%**; 12288 **4.7–6.7%**. All three primary comparisons pass Holm correction (6144 p = 1e-44, 12288 p = 0.009, score p = 3e-33). The gain comes from five-cell residual tables added to stages 1–3 (V29–V31): a four-cell table trained further did not improve, while the larger patterns did. JS and C++ choose identical moves on 320 sampled positions; desktop Chromium needs 5.4 ms per move on average (P95 9.0 ms).
+95% Wilson intervals for V31: 6144 **57.2–61.4%**; 12288 **4.7–6.7%**. All three primary comparisons pass Holm correction (6144 p = 1e-44, 12288 p = 0.009, score p = 3e-33). The 12288 gain comes from more games reaching 6144: once a 6144 exists, both AIs reach 12288 about 10% of the time (V23 79/790, V31 115/1215), and stage-3 experiments so far (V27, V31, [V32](RL-V32-STRONG.md)) have not improved that rate. The gain comes from five-cell residual tables added to stages 1–3 (V29–V31): a four-cell table trained further did not improve, while the larger patterns did. JS and C++ choose identical moves on 320 sampled positions; desktop Chromium needs 5.4 ms per move on average (P95 9.0 ms).
 
 [V31 report (Chinese)](RL-V31-STAGES.md) · [Release checks](training/web-release/v31-check/) · [V29 five-cell test](RL-V29-FIVE.md) · [V30 parallel training](RL-V30-PARALLEL.md)
 

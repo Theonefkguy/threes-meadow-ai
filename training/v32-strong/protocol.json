@@ -1,0 +1,104 @@
+{
+  "round": "V32: stage 3 trained on strong-search episodes only",
+  "createdUTC": "2026-10-14T06:38:58.729236+00:00",
+  "status": "frozen before pool generation, training and any outcome of this round",
+  "motivation": "V31's 12288 gain came from more games reaching 6144: P(12288|6144) stayed ~10% (V23 79/790, V31 115/1215) and the stage-3 residual gave +1.0 pp on fixed first-6144 states (n.s.). Stage-3 training moves were 99.7% two-move policy. Pilot (256 V27 training states, W31, timing/strength only): reach 12288 by depth 1/2/3/5(.01) = 0.4/2.0/5.9/13.3%, at 0.002/0.009/0.45/3.15 ms per move; 3(.01) 3.5% 0.10 ms; 4(.01) 7.0% 0.98 ms; 4(.03) 5.5% 0.51 ms.",
+  "base": {
+    "name": "W31 (float32): V31 model",
+    "bin": "training/v31-stages/models/W31.bin",
+    "binSHA256": "b94a7da2671fe28ad3390a5fcd2fbda59a599f50437b23d5e3cf7097e45f9617",
+    "residuals": {
+      "1": "training/v31-stages/models/S1-final.res",
+      "2": "training/v30-parallel/models/P-final.res",
+      "3": "training/v31-stages/models/S3-final.res"
+    },
+    "residualSHA256": {
+      "1": "a5c1d053a6eb5f4d02243328a70550435e9f74f39d2679e6c8a68b11068711e2",
+      "2": "e0cc549fc250ef979640549d8f286fefd2fdc947a0247c7dd28d320895155570",
+      "3": "6429f239fe7908e4293a8c377f375c68d3478fd4daaf67f60f57c5983dc59b8f"
+    }
+  },
+  "training": {
+    "tool": "training/v32-strong/train.cpp (V31 trainer; configurable strong player; wall-clock budget)",
+    "stage": 3,
+    "start": "W31 stage-3 four-cell table and residual (fine-tuning)",
+    "pool": "training/v27-stage3/pools/train-onpolicy.txt",
+    "poolSHA256": "c84d4f37d7dbaaed5904926cc7d07c117ace245070c0dcfcc430b7767cbe55ae",
+    "seconds": 10800,
+    "threadsPerArm": 8,
+    "concurrency": "T3 and T5 run at the same time, 8 threads each, so both get the same wall time on the same machine",
+    "strongShare": 1,
+    "learningRates": [
+      0.001,
+      0.0005,
+      0.00025
+    ],
+    "rateSteps": "50% and 85% of the wall budget",
+    "checkpointFractions": [
+      0.33,
+      0.67
+    ],
+    "throughputPilot": "60 s, both arms concurrently: T3 ~15.7k moves/s (3.8% of episodes reach 12288), T5 ~1.9k moves/s (12.8%); pilot models discarded unevaluated"
+  },
+  "arms": {
+    "T3": {
+      "depth": 3,
+      "threshold": 0,
+      "seed": 32210001,
+      "what": "every episode played by complete 3-ply expectimax (clamped): ~8x more data than T5"
+    },
+    "T5": {
+      "depth": 5,
+      "threshold": 0.01,
+      "seed": 32220001,
+      "what": "every episode played by the website search itself (5-ply, cutoff 0.01, clamped): on-policy values for the deployed search"
+    }
+  },
+  "pool": {
+    "openings": [
+      32300001,
+      32303600
+    ],
+    "size": 2048,
+    "extensionBlock": 200,
+    "policy": "W31 website search to the first 6144 (training/v31-stages/bin/tools pool rank 14); terminal states excluded; sorted by seed, first 2048"
+  },
+  "screen": {
+    "pool": "training/v27-stage3/pools/confirm6144.txt",
+    "poolSHA256": "37053d898e5feceb879e8b24119e08fc03bde03ea7780523c9766b5d011a826f",
+    "size": 2048,
+    "rolloutBase": 27400001,
+    "w31Results": "training/v31-stages/eval",
+    "w31Pattern": "c3-W31-*.jsonl",
+    "rule": "winner = more 12288s among T3 and T5; tie -> higher total scoreGained; then T3. W31 (reused V31 c3 results, same seeds) is descriptive. No test."
+  },
+  "confirm": {
+    "compare": "screen winner vs W31 on the fresh pool, website search (5-ply, cutoff 0.01, clamp), to 12288 or death",
+    "rolloutBase": 32400001,
+    "primary": "reach 12288, two-sided exact McNemar",
+    "alpha": 0.05,
+    "secondary": "scoreGained paired difference, Wilson intervals, avoidable deaths, CPU ms/move"
+  },
+  "adoption": "Offline round. A website update would need the V31 release checks again (quantization, parity, timing) and is decided separately; adoption requires a significant primary gain and no significantly worse scoreGained.",
+  "sourceSHA256": {
+    "training/v32-strong/train.cpp": "1dd67184e814d6265981309e142dff1949e77daf389edd0fd23ff4316bc64be0",
+    "training/v31-stages/model5s.h": "27138912331e7a5240080a77533b8b97d16c6cb611e19d1878788518fd6d9ac1",
+    "training/v31-stages/search5s.h": "5648ba7cf05042805d46ab0b9b9407b57b229275c7c143c34810ea8578e01f87",
+    "training/v31-stages/tools.cpp": "ad43a165172fd63a67827d9cac86be811d7ff51be2340c4b970bc762719d7cd8",
+    "training/v31-stages/game.cpp": "9314c1b0188e0461198fa527cf72435feff3cef3b8b1616c221c32e4c6164209",
+    "training/v29-five/model5.h": "54a8a9b596b92f4d0015dffb886975a0ad0be18e3b4abe0f74f5ffd1579ef7ff",
+    "training/v21-late-train/model4.h": "27305c197ba81b2ee05fda8c3589ed03c4d7d752dacc3e1367ca157a1eeb1ad5",
+    "training/v7/model.h": "9d420e6cc3d65038e7e045223c8ad54e4b1c250bedd10ec6c0ceea6e2155fb7d",
+    "training/v6/model.h": "560bb7cad2c362352f33eedec9f3db2ba374ac9b799fc63b54f335ddffc57cda",
+    "training/v3/ntuple-fast.h": "0554764c4b571c431b8ec4feac83e906ed5bcf8e595dfc51e1839e3f617d243d",
+    "training/v3/common.h": "a0300e0cf937faaacb9b85d8b0c1fae8257bebdb3198b21245a778ff92cafefd",
+    "training/v3/goal.h": "2fd3d950e54b82fb9d943735188c6e61c76ff80e18fcb38137d92d37d6644ba1"
+  },
+  "compiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)",
+  "compile": "c++ -std=c++17 -O3 -pthread training/v32-strong/train.cpp -o training/v32-strong/bin/train; tools as in V31",
+  "binarySHA256": {
+    "training/v32-strong/bin/train": "cec75cfebbb4b225d7229f0948b5535ed0206ed744cf4741c2698499a1a29ab5",
+    "training/v31-stages/bin/tools": "97dfb0c106b8dc156e435a0c7397a0a460ea455e4828b1902021b99601805075"
+  },
+  "workers": 16
+}

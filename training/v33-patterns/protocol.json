@@ -1,0 +1,65 @@
+{
+  "round": "V33 step 1: screen five-cell pattern sets for stage 3 by fitting realised scores",
+  "createdUTC": "2026-10-14T13:31:14.463431+00:00",
+  "status": "frozen before data collection and any fit",
+  "motivation": "Stage 3 (6144 -> 12288) did not improve with retraining (V27), lower rates (V28), the V29 five-cell shapes (V31) or strong-search episodes (V32). This step asks, cheaply, whether other pattern shapes describe stage-3 positions better before any TD training.",
+  "data": {
+    "tool": "training/v33-patterns/collect.cpp",
+    "policy": "W31 website search (5-ply, cutoff 0.01, clamp) to 12288 or death",
+    "model": "training/v31-stages/models/W31.bin + residuals V30 P-final.res, V31 S1-final.res, V31 S3-final.res",
+    "starts": "training/v27-stage3/pools/train-onpolicy.txt (14,956 stage-3 training starts; never an evaluation pool)",
+    "startsSHA256": "c84d4f37d7dbaaed5904926cc7d07c117ace245070c0dcfcc430b7767cbe55ae",
+    "passes": {
+      "A": {
+        "rolloutBase": 33100001
+      },
+      "B": {
+        "rolloutBase": 33200001
+      }
+    },
+    "every": 2,
+    "target": "G = realised future score after the afterstate (same reward definition as the TD trainers)"
+  },
+  "fit": {
+    "tool": "training/v33-patterns/fit.cpp",
+    "base": "dist/models/ntuple-v23.bin stage 3 (= V21 S3 four-cell table, standalone), fixed",
+    "baseSHA256": "cdef81fd98ef0a96d14cb8f61265adc13e50146245f63e2d1d278ea4f84be0d9",
+    "split": "validation = records whose start index % 5 == 0 (both passes of a start together)",
+    "sgd": "multiplicity-normalised, 4 shuffled epochs at .003/.001/.0003/.0001, seed 33; best validation epoch reported"
+  },
+  "candidates": {
+    "NONE": "none (base only)",
+    "P5": "0,1,2,3,4;4,5,6,7,8;0,1,2,4,5;4,5,6,8,9",
+    "C1": "0,1,2,3,4;0,1,2,4,8;0,1,4,5,8;0,1,2,4,5",
+    "C2": "0,1,2,3,4;4,5,6,7,8;0,1,2,4,5;4,5,6,8,9;0,1,2,4,8;0,1,4,5,8;1,2,5,6,9;0,1,2,5,6",
+    "C3": "0,1,2,3,4,5;4,5,6,7,8,9;0,1,2,4,5,6;4,5,6,8,9,10"
+  },
+  "candidateNotes": {
+    "P5": "current V29-V31 shapes refitted (control)",
+    "C1": "corner-focused five-cell shapes",
+    "C2": "P5 plus four more five-cell shapes (8 patterns, 32 MB per stage)",
+    "C3": "six-cell shapes from 2048 programs, informational only (not deployable on the web)"
+  },
+  "comparison": "per validation start index, sum of squared errors; paired difference vs P5 across start indices: mean, SE, z. Relative gain = (MSE_P5 - MSE_X) / (MSE_NONE - MSE_P5).",
+  "decision": "Go to TD training (a separate, later protocol) with the better of C1/C2 only if it beats P5 with z > 2 and relative gain >= 5%. If neither does, stop: pattern shape is not the stage-3 bottleneck under this proxy. C3 is reported but cannot trigger the go decision.",
+  "sourceSHA256": {
+    "training/v33-patterns/collect.cpp": "8b84bafa863e1c6f80be897c0604b9a9ae19b31293700c2730e0c5456f93ee5f",
+    "training/v33-patterns/fit.cpp": "16376fbd95eb660dcb9e7390c5c8580ac7fb7fe15cf21d1967ce21f3a080197a",
+    "training/v31-stages/model5s.h": "27138912331e7a5240080a77533b8b97d16c6cb611e19d1878788518fd6d9ac1",
+    "training/v31-stages/search5s.h": "5648ba7cf05042805d46ab0b9b9407b57b229275c7c143c34810ea8578e01f87",
+    "training/v29-five/model5.h": "54a8a9b596b92f4d0015dffb886975a0ad0be18e3b4abe0f74f5ffd1579ef7ff",
+    "training/v21-late-train/model4.h": "27305c197ba81b2ee05fda8c3589ed03c4d7d752dacc3e1367ca157a1eeb1ad5",
+    "training/v7/model.h": "9d420e6cc3d65038e7e045223c8ad54e4b1c250bedd10ec6c0ceea6e2155fb7d",
+    "training/v6/model.h": "560bb7cad2c362352f33eedec9f3db2ba374ac9b799fc63b54f335ddffc57cda",
+    "training/v3/ntuple-fast.h": "0554764c4b571c431b8ec4feac83e906ed5bcf8e595dfc51e1839e3f617d243d",
+    "training/v3/common.h": "a0300e0cf937faaacb9b85d8b0c1fae8257bebdb3198b21245a778ff92cafefd",
+    "training/v3/goal.h": "2fd3d950e54b82fb9d943735188c6e61c76ff80e18fcb38137d92d37d6644ba1"
+  },
+  "compiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)",
+  "compile": "c++ -std=c++17 -O3 training/v33-patterns/{collect,fit}.cpp -o training/v33-patterns/bin/{collect,fit}",
+  "binarySHA256": {
+    "collect": "872958b286e70d13745da5b7841a417d0f35c0f132f41c12bd7054930266b722",
+    "fit": "409394785bbb108a9495b195531a642f8e81fc23dd563522c761e59578c3f16f"
+  },
+  "workers": 16
+}

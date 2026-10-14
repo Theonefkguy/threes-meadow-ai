@@ -1,0 +1,86 @@
+{
+ "winner": "T3",
+ "rule": "winner = more 12288s among T3 and T5; tie -> higher total scoreGained; then T3. W31 (reused V31 c3 results, same seeds) is descriptive. No test.",
+ "arms": {
+  "W31": {
+   "reach12288": 173,
+   "rate": 0.08447265625,
+   "wilson95": [
+    0.07319259555553456,
+    0.09730861803324202
+   ],
+   "meanScoreGained": 255040.5849609375,
+   "meanMoves": 492.77490234375,
+   "avoidableCertainDeath": 0,
+   "cpuMsPerMove": 5.782462528351586
+  },
+  "T3": {
+   "reach12288": 180,
+   "rate": 0.087890625,
+   "wilson95": [
+    0.07638692209070685,
+    0.10093743075174606
+   ],
+   "meanScoreGained": 252814.82080078125,
+   "meanMoves": 483.37939453125,
+   "avoidableCertainDeath": 0,
+   "cpuMsPerMove": 5.471525970214983
+  },
+  "T5": {
+   "reach12288": 169,
+   "rate": 0.08251953125,
+   "wilson95": [
+    0.07136986329110788,
+    0.09523241358128223
+   ],
+   "meanScoreGained": 248220.732421875,
+   "meanMoves": 481.8388671875,
+   "avoidableCertainDeath": 0,
+   "cpuMsPerMove": 5.506844492230473
+  }
+ },
+ "descriptive": {
+  "T3 vs W31": {
+   "firstOnly": 150,
+   "secondOnly": 143,
+   "differencePP": 0.341796875,
+   "p": 0.7260116588465065,
+   "scoreGained": {
+    "meanDifference": -2225.76416015625,
+    "approx95": [
+     -17378.66953540184,
+     12927.141215089341
+    ],
+    "p": 0.7734285339930635
+   }
+  },
+  "T5 vs W31": {
+   "firstOnly": 137,
+   "secondOnly": 141,
+   "differencePP": -0.1953125,
+   "p": 0.8572502494932078,
+   "scoreGained": {
+    "meanDifference": -6819.8525390625,
+    "approx95": [
+     -21647.23803130247,
+     8007.532953177468
+    ],
+    "p": 0.3673305147617654
+   }
+  },
+  "T5 vs T3": {
+   "firstOnly": 141,
+   "secondOnly": 152,
+   "differencePP": -0.537109375,
+   "p": 0.5591557522591308,
+   "scoreGained": {
+    "meanDifference": -4594.08837890625,
+    "approx95": [
+     -19799.2637705685,
+     10611.087012756001
+    ],
+    "p": 0.5537279909228858
+   }
+  }
+ }
+}

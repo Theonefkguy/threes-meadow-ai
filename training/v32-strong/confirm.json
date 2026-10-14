@@ -1,0 +1,47 @@
+{
+ "winner": "T3",
+ "arms": {
+  "T3": {
+   "reach12288": 192,
+   "rate": 0.09375,
+   "wilson95": [
+    0.08187561403222146,
+    0.10714554895939091
+   ],
+   "meanScoreGained": 256085.841796875,
+   "meanMoves": 483.97705078125,
+   "avoidableCertainDeath": 0,
+   "cpuMsPerMove": 5.509536226839593
+  },
+  "W31": {
+   "reach12288": 190,
+   "rate": 0.0927734375,
+   "wilson95": [
+    0.0809597632235163,
+    0.10611193140990281
+   ],
+   "meanScoreGained": 265038.30029296875,
+   "meanMoves": 502.3974609375,
+   "avoidableCertainDeath": 0,
+   "cpuMsPerMove": 5.6522766898951255
+  }
+ },
+ "primary": {
+  "firstOnly": 170,
+  "secondOnly": 168,
+  "differencePP": 0.09765625,
+  "p": 0.9566328893494516,
+  "scoreGained": {
+   "meanDifference": -8952.45849609375,
+   "approx95": [
+    -25135.662744816196,
+    7230.745752628696
+   ],
+   "p": 0.27825788421712894
+  }
+ },
+ "gate": {
+  "significantGain": false,
+  "scoreNotSignificantlyWorse": true
+ }
+}

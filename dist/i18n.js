@@ -15,7 +15,7 @@ export const english = {
   "强化学习 · 第四版": "RL · V4",
   "经典搜索": "Classic search",
   "从当前棋盘接手，点击停止或手动操作即可接管。": "Starts from your board. Stop the AI or make a move to take over.",
-  "默认使用 V31 模型与五层剪枝搜索。模型约 32 MB，首次使用时下载，之后在你的设备上运行，无需账号。": "The default uses the V31 model and five-ply search. The 32 MB model downloads on first use and then runs on your device. No account needed.",
+  "默认使用 V31 模型与五层剪枝搜索。模型下载约 17 MB，首次使用时下载，之后在你的设备上运行，无需账号。": "The default uses the V31 model and five-ply search. The 17 MB model download happens on first use; it then runs on your device. No account needed.",
   "正在下载模型 {loaded} / {total} MB（{percent}%）": "Downloading the model: {loaded} / {total} MB ({percent}%)",
   "模型下载进度": "Model download",
   "完整模型暂时无法加载，已改用 V23 模型。": "The full model could not load. Using the V23 model instead.",

@@ -1,8 +1,8 @@
-import {loadV4Policy} from './v4-policy.js?v=22';
-import { chooseMove } from './ai.js?v=22';
-import { loadModel } from './rl-model.js?v=22';
-import { chooseLearnedMove } from './rl-search.js?v=22';
-import { chooseFastMove } from './fast-search.js?v=22';
+import {loadV4Policy} from './v4-policy.js?v=23';
+import { chooseMove } from './ai.js?v=23';
+import { loadModel } from './rl-model.js?v=23';
+import { chooseLearnedMove } from './rl-search.js?v=23';
+import { chooseFastMove } from './fast-search.js?v=23';
 // A failed V31 download is not retried on every move of this worker (each AI start makes a new worker).
 let v31Failed=false;
 self.onmessage = async ({ data }) => {
@@ -13,7 +13,7 @@ self.onmessage = async ({ data }) => {
       if(policy==='rl-fast'){
         // Default (V31 release): five-move search, probability cutoff 0.01, clamped leaves,
         // 160 ms soft budget, on the V31 model: four-cell tables plus float16 five-cell residuals
-        // for stages 1-3 (~32 MB, downloaded once with progress reports). If it cannot load,
+        // for stages 1-3 (17.4 MB gzip download, 32 MB decoded, with progress reports). If it cannot load,
         // fall back to the V23 four-cell model, then to V4.
         let model;
         const progress=({loaded,total})=>self.postMessage({id:data.id,type:'progress',loaded,total});

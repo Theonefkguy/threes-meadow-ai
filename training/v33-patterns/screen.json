@@ -1,0 +1,50 @@
+{
+ "validationMSE": {
+  "NONE": 108412009400.0,
+  "P5": 84814809420.0,
+  "C1": 84573475530.0,
+  "C2": 84854891760.0,
+  "C3": 90092867030.0
+ },
+ "bestEpoch": {
+  "NONE": 0,
+  "P5": 4,
+  "C1": 4,
+  "C2": 4,
+  "C3": 4
+ },
+ "records": {
+  "train": 3550577,
+  "validation": 886055
+ },
+ "vsP5": {
+  "C1": {
+   "mseDifference": 241333892.3438552,
+   "z": 5.0641269070136,
+   "starts": 2992,
+   "relativeGain": 0.010227225696461636
+  },
+  "C2": {
+   "mseDifference": -40082341.77625537,
+   "z": -3.286701626618382,
+   "starts": 2992,
+   "relativeGain": -0.0016986057682255571
+  },
+  "C3": {
+   "mseDifference": -5278057610.818243,
+   "z": -12.430744505483238,
+   "starts": 2992,
+   "relativeGain": -0.2236730465679598
+  }
+ },
+ "P5vsNONE": {
+  "mseDifference": 23597199943.124226,
+  "z": 16.573073747731115,
+  "starts": 2992
+ },
+ "decision": {
+  "candidate": "C1",
+  "go": false,
+  "rule": "Go to TD training (a separate, later protocol) with the better of C1/C2 only if it beats P5 with z > 2 and relative gain >= 5%. If neither does, stop: pattern shape is not the stage-3 bottleneck under this proxy. C3 is reported but cannot trigger the go decision."
+ }
+}

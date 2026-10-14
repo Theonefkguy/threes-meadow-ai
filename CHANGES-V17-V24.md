@@ -17,6 +17,8 @@
 | V29 第 2 段加 5 格残差（离线，+13.3 个百分点） | RL-V29-FIVE.md | training/v29-five |
 | V30 并行训练残差 + 整局评测（离线，6144：39.7% → 52.7%） | RL-V30-PARALLEL.md | training/v30-parallel |
 | V31 第 1、3 段加 5 格残差（离线，12288：4.2% → 5.9%） | RL-V31-STAGES.md | training/v31-stages |
+| V32 第 3 段用强搜索对局训练（无效） | RL-V32-STRONG.md | training/v32-strong |
+| V33 第 3 段换 5 格模式形状的筛选（停止） | RL-V33-PATTERNS.md | training/v33-patterns |
 
 网页入口：dist/index.html（静态文件，需通过 HTTP 服务打开，例如在 dist 目录运行 `python3 -m http.server`）。
 默认 AI：五层剪枝搜索（阈值 0.01，叶节点下限 0），模型 ntuple-v23.bin。

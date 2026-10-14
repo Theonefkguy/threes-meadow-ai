@@ -1,0 +1,14 @@
+{
+  "frozenUTC": "2026-10-14T10:12:56Z",
+  "sha256": {
+    "T3": {
+      "T3-final.bin": "ec66581d72efec57adb38b046eeaa05dd49bffa3408c191731af9dc18cb7065c",
+      "T3-final.res": "01579086401f25a6a489a69cef9861cb3152eaff4b75e393b27c4d4ed1580d29"
+    },
+    "T5": {
+      "T5-final.bin": "76fd5895cee28d4a69f9865724d2d1ea2c39f39cbe6faa508f762b182c96727e",
+      "T5-final.res": "a32f65154886a414250671326e3f34032e1f6a514016decf4a2dc9b3ca5446dc"
+    }
+  },
+  "note": "recorded after training, before any evaluation; stages 0-2 verified identical to W31"
+}

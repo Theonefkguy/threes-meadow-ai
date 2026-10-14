@@ -2,7 +2,9 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { chooseFastMove } from '../dist/fast-search.js';
-import { decodeModel, decodeResidual, halfToNumber, RESIDUAL_MAGIC, PATTERNS5, TABLE5, FEATURES5 } from '../dist/rl-model.js';
+import { decodeModel, decodeResidual, halfToNumber, RESIDUAL_MAGIC, PATTERNS5, TABLE5, FEATURES5, gunzipIfNeeded, readBody } from '../dist/rl-model.js';
+import { gunzipSync, gzipSync } from 'node:zlib';
+import { createHash } from 'node:crypto';
 import { createGame } from '../dist/engine.js';
 
 const N=PATTERNS5.length*TABLE5;
@@ -54,13 +56,26 @@ test('fast leaf path with residuals equals the generic model.value path',()=>{
   }
 });
 
-test('the shipped V31 model decodes with residuals for stages 1-3 and its declared size',async()=>{
+test('the shipped V31 gzip files decode to a model with residuals for stages 1-3 and match their declared size',async()=>{
   const {MODEL_FILES}=await import('../dist/rl-model.js');const f=MODEL_FILES.v31;
-  const read=name=>{const b=readFileSync(new URL(`../dist/models/${name}`,import.meta.url));return b.buffer.slice(b.byteOffset,b.byteOffset+b.byteLength);};
-  const files=[f.base,...f.residuals].map(read);
-  assert.equal(files.reduce((s,b)=>s+b.byteLength,0),f.bytes);
+  const names=[f.base,...f.residuals];assert(names.every(n=>n.endsWith('.gz')));
+  const gz=names.map(n=>readFileSync(new URL(`../dist/models/${n}`,import.meta.url)));
+  assert.equal(gz.reduce((s,b)=>s+b.byteLength,0),f.bytes);
+  const files=await Promise.all(gz.map(b=>gunzipIfNeeded(new Uint8Array(b.buffer,b.byteOffset,b.byteLength))));
+  files.forEach((buf,i)=>assert.deepEqual(new Uint8Array(buf),new Uint8Array(gunzipSync(gz[i]))));
   const v31=decodeModel(files[0],files.slice(1)),v23=decodeModel(baseBuf()),S=524288;
   assert.deepEqual(v31.residuals.map(r=>r!==null),[false,true,true,true]);
   assert.deepEqual(v31.weights.subarray(0,S),v23.weights.subarray(0,S));          // stage 0 unchanged since V4
   for(let s=1;s<4;s++)assert.notDeepEqual(v31.weights.subarray(s*S,(s+1)*S),v23.weights.subarray(s*S,(s+1)*S));
+  // SHA-256 of the decoded files equals the evaluated V31 release (training/web-release/v31-check/README.md).
+  const hash=b=>createHash('sha256').update(new Uint8Array(b)).digest('hex');
+  assert.equal(hash(files[0]),'b94a7da2671fe28ad3390a5fcd2fbda59a599f50437b23d5e3cf7097e45f9617');
+  assert.deepEqual(files.slice(1).map(b=>hash(b).slice(0,16)),['ef8673c9a38d6452','3d77ea6bb2643b3b','cc4ab3e129eaf3a6']);
+});
+
+test('gzip decoding passes plain bytes through and reads streamed bodies with byte counts',async()=>{
+  const plain=new Uint8Array([1,2,3,4]);assert.deepEqual(new Uint8Array(await gunzipIfNeeded(plain)),plain);
+  const packed=gzipSync(Buffer.from('threes'));assert.equal(Buffer.from(await gunzipIfNeeded(new Uint8Array(packed))).toString(),'threes');
+  let counted=0;const body=await readBody(new Response(packed),n=>counted+=n);
+  assert.equal(counted,packed.byteLength);assert.deepEqual(Buffer.from(body),packed);
 });
