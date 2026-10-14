@@ -1,6 +1,6 @@
 import { t, locale, setLanguage, applyLanguage } from './i18n.js';
-import { createGame, projectMove, score } from './engine.js?v=22';
-import { initialCounts, observePreview } from './card-memory.js?v=22';
+import { createGame, projectMove, score } from './engine.js?v=23';
+import { initialCounts, observePreview } from './card-memory.js?v=23';
 
 const boardEl = document.querySelector('#board');
 const nextEl = document.querySelector('#next-tile');
@@ -20,7 +20,7 @@ const aiProgressBar = aiProgress.querySelector('progress');
 let aiRunning = false, aiWorker = null, aiTimer = null, aiWatchdog = null, aiRequest = 0;
 const directionNames = { left:'左', right:'右', up:'上', down:'下' };
 
-// Model download progress (first use of the default model, ~32 MB).
+// Model download progress (first use of the default model, a 17.4 MB gzip download).
 const megabytes = n => (n / 1048576).toLocaleString(locale(), { minimumFractionDigits:1, maximumFractionDigits:1 });
 function showProgress(loaded, total) {
   if (!total) return;
@@ -69,7 +69,7 @@ aiButton.addEventListener('click', () => {
   if (game.over) { aiStatus.textContent = t('本局已结束，请先开始新一局。'); return; }
   cancelPreview();
   try {
-    aiWorker = new Worker('./ai-worker.js?v=22', { type:'module' });
+    aiWorker = new Worker('./ai-worker.js?v=23', { type:'module' });
     aiWorker.onmessage = ({ data }) => {
       if (!aiRunning || data.id !== aiRequest) return;
       // Download progress keeps the request alive: restart the watchdog while bytes arrive.

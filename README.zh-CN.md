@@ -8,7 +8,7 @@
 
 ## 试玩
 
-打开[游戏页面](https://theonefkguy.github.io/threes-meadow-ai/)，选择中文或 English，点击「AI 自动玩」。使用方向键、滑动或方向按钮即可手动接管。默认 V31 模型约 32 MB，首次使用时下载并显示进度条；也可切换到第四版或经典搜索进行对比。
+打开[游戏页面](https://theonefkguy.github.io/threes-meadow-ai/)，选择中文或 English，点击「AI 自动玩」。使用方向键、滑动或方向按钮即可手动接管。默认 V31 模型下载约 17 MB（解压后 32 MB），首次使用时下载并显示进度条；也可切换到第四版或经典搜索进行对比。
 
 ## 视频介绍
 

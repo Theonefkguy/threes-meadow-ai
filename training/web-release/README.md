@@ -24,3 +24,13 @@ default is unchanged until a release round adopts a model.
 Web residual format (`dist/rl-model.js` `decodeResidual`): 32-byte header
 `{0x3548444e, 4 patterns, 2^20 entries, stage, dtype 1 = float16, scaleExp (int32), 0, 0}`
 followed by 4 × 2^20 little-endian float16 values; weight = half × 2^scaleExp.
+
+## Compressed delivery (since the V31 gzip update)
+
+The website ships the V31 files gzip-compressed (`scripts/compress-models.py`: level 9, no name,
+mtime 0) and decompresses them in the worker with `DecompressionStream('gzip')`; bytes without
+the gzip magic are used as they are. Download 18,251,793 bytes (17.4 MB) instead of 33,554,544;
+the decoded files are byte-identical to the evaluated release (SHA-256 checked in
+`tests/residual.test.mjs`), so checks 1–4 still apply. The uncompressed files are rebuilt with
+`scripts/quantize-residual.py` and kept out of `dist/`. Browsers without DecompressionStream fall
+back to the V23 model.

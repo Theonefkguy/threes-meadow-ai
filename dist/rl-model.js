@@ -85,15 +85,32 @@ export function decodeModel(buffer,residualBuffers=[]) {
 }
 
 // Model files per version: the four-cell base and any residual files (one per stage), with
-// their exact sizes so download progress works even without a Content-Length header.
-const BASE_BYTES=16+4*PATTERNS.length*TABLE*4,RESIDUAL_BYTES=32+PATTERNS5.length*TABLE5*2;
+// the exact bytes to download so progress works even without a Content-Length header.
+// Files ending in .gz are gzip-compressed copies (scripts/compress-models.py) that decode to
+// the identical model bytes.
 export const MODEL_FILES = {
   v4:{base:'ntuple-v4.bin',residuals:[]},
   v23:{base:'ntuple-v23.bin',residuals:[]},
-  // V31: four-cell tables plus float16 five-cell residuals for stages 1-3 (RL-V31-STAGES.md).
-  v31:{base:'ntuple-v31.bin',residuals:['ntuple-v31-s1.f16','ntuple-v31-s2.f16','ntuple-v31-s3.f16'],
-    bytes:BASE_BYTES+3*RESIDUAL_BYTES}
+  // V31: four-cell tables plus float16 five-cell residuals for stages 1-3 (RL-V31-STAGES.md),
+  // 32 MB decoded, 17.4 MB downloaded.
+  v31:{base:'ntuple-v31.bin.gz',residuals:['ntuple-v31-s1.f16.gz','ntuple-v31-s2.f16.gz','ntuple-v31-s3.f16.gz'],
+    bytes:5040193+2993234+4262781+5955585}
 };
+// Gzip bytes (magic 1f 8b) are decompressed with the browser's DecompressionStream; anything
+// else is returned unchanged (e.g. when a server already removed a gzip Content-Encoding).
+export async function gunzipIfNeeded(bytes) {
+  if(bytes.byteLength<2||bytes[0]!==0x1f||bytes[1]!==0x8b)return bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength);
+  if(typeof DecompressionStream!=='function')throw new Error('浏览器不支持解压模型');
+  return new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'))).arrayBuffer();
+}
+// Reads a response body, reporting each received chunk's size through onBytes(n).
+export async function readBody(response,onBytes=()=>{}) {
+  if(!response.body){const buf=new Uint8Array(await response.arrayBuffer());onBytes(buf.byteLength);return buf;}
+  const reader=response.body.getReader(),chunks=[];let size=0;
+  for(;;){const {done,value}=await reader.read();if(done)break;chunks.push(value);size+=value.byteLength;onBytes(value.byteLength);}
+  const out=new Uint8Array(size);let at=0;for(const c of chunks){out.set(c,at);at+=c.byteLength;}
+  return out;
+}
 const pending=new Map();
 // onProgress({loaded,total}) is called as bytes arrive (for every caller while a load is shared).
 export function loadModel(version,onProgress) {
@@ -106,11 +123,8 @@ export function loadModel(version,onProgress) {
     const get=async name=>{
       const response=await fetch(new URL(`./models/${name}`,import.meta.url));
       if(!response.ok)throw new Error('模型加载失败');
-      if(!response.body||!total){const buf=await response.arrayBuffer();loaded+=buf.byteLength;report();return buf;}
-      const reader=response.body.getReader(),chunks=[];let size=0;
-      for(;;){const {done,value}=await reader.read();if(done)break;chunks.push(value);size+=value.byteLength;loaded+=value.byteLength;report();}
-      const out=new Uint8Array(size);let at=0;for(const c of chunks){out.set(c,at);at+=c.byteLength;}
-      return out.buffer;
+      const bytes=await readBody(response,n=>{loaded+=n;if(total)report();});
+      return name.endsWith('.gz')?gunzipIfNeeded(bytes):bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength);
     };
     const request=Promise.all([get(files.base),...files.residuals.map(get)])
       .then(([base,...residuals])=>decodeModel(base,residuals))
