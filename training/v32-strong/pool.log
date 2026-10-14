@@ -1,0 +1,4 @@
+{"stage": "pool", "jobsDone": 144, "jobs": 152, "elapsedSeconds": 60, "etaSeconds": 3}
+{"stage": "pool", "jobsDone": 144, "jobs": 152, "elapsedSeconds": 120, "etaSeconds": 7}
+{"stage": "pool", "jobsDone": 152, "jobs": 152, "elapsedSeconds": 159, "etaSeconds": 0}
+{"kept": 2151, "need": 2048}
