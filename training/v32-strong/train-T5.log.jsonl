@@ -1,0 +1,17 @@
+{"wall":729.563,"steps":1223265,"episodes":4119,"updates":1222831,"boundaries":0,"deaths":3685,"cleared":434,"meanAbsTDerrThread0":3658.08,"alpha":0.001,"strongEpisodes":4119,"strongSteps":1223265,"movesPerSecond":1676.71}
+{"wall":1534.05,"steps":2482389,"episodes":8255,"updates":2481483,"boundaries":0,"deaths":7349,"cleared":906,"meanAbsTDerrThread0":3528.74,"alpha":0.001,"strongEpisodes":8255,"strongSteps":2482389,"movesPerSecond":1618.19}
+{"wall":2303.5,"steps":3665514,"episodes":12155,"updates":3664132,"boundaries":0,"deaths":10773,"cleared":1382,"meanAbsTDerrThread0":3672.42,"alpha":0.001,"strongEpisodes":12155,"strongSteps":3665514,"movesPerSecond":1591.28}
+{"wall":3125.16,"steps":4950020,"episodes":16418,"updates":4948155,"boundaries":0,"deaths":14553,"cleared":1865,"meanAbsTDerrThread0":3576.14,"alpha":0.001,"strongEpisodes":16418,"strongSteps":4950020,"movesPerSecond":1583.93}
+{"checkpoint":0.33,"steps":5635675,"episodes":18695}
+{"wall":3879.84,"steps":6127703,"episodes":20319,"updates":6125344,"boundaries":0,"deaths":17960,"cleared":2359,"meanAbsTDerrThread0":3661.11,"alpha":0.001,"strongEpisodes":20319,"strongSteps":6127703,"movesPerSecond":1579.37}
+{"wall":4630.68,"steps":7280560,"episodes":24153,"updates":7277784,"boundaries":0,"deaths":21377,"cleared":2776,"meanAbsTDerrThread0":3699.97,"alpha":0.001,"strongEpisodes":24153,"strongSteps":7280560,"movesPerSecond":1572.24}
+{"wall":5391.14,"steps":8468231,"episodes":28167,"updates":8464986,"boundaries":0,"deaths":24922,"cleared":3245,"meanAbsTDerrThread0":3740.18,"alpha":0.001,"strongEpisodes":28167,"strongSteps":8468231,"movesPerSecond":1570.77}
+{"wall":6204.35,"steps":9741243,"episodes":32409,"updates":9737507,"boundaries":0,"deaths":28673,"cleared":3736,"meanAbsTDerrThread0":3691.72,"alpha":0.0005,"strongEpisodes":32409,"strongSteps":9741243,"movesPerSecond":1570.07}
+{"wall":6935.6,"steps":10881915,"episodes":36240,"updates":10877745,"boundaries":0,"deaths":32070,"cleared":4170,"meanAbsTDerrThread0":3723.39,"alpha":0.0005,"strongEpisodes":36240,"strongSteps":10881915,"movesPerSecond":1568.99}
+{"checkpoint":0.67,"steps":11360735,"episodes":37839}
+{"wall":7697.78,"steps":12080944,"episodes":40214,"updates":12076335,"boundaries":0,"deaths":35605,"cleared":4609,"meanAbsTDerrThread0":3815.52,"alpha":0.0005,"strongEpisodes":40214,"strongSteps":12080944,"movesPerSecond":1569.41}
+{"wall":8471.44,"steps":13289506,"episodes":44315,"updates":13284431,"boundaries":0,"deaths":39240,"cleared":5075,"meanAbsTDerrThread0":3734.12,"alpha":0.0005,"strongEpisodes":44315,"strongSteps":13289506,"movesPerSecond":1568.74}
+{"wall":9233.64,"steps":14485393,"episodes":48361,"updates":14479886,"boundaries":0,"deaths":42854,"cleared":5507,"meanAbsTDerrThread0":4021.03,"alpha":0.00025,"strongEpisodes":48361,"strongSteps":14485393,"movesPerSecond":1568.76}
+{"wall":9970.52,"steps":15658931,"episodes":52328,"updates":15652988,"boundaries":0,"deaths":46385,"cleared":5943,"meanAbsTDerrThread0":3836.95,"alpha":0.00025,"strongEpisodes":52328,"strongSteps":15658931,"movesPerSecond":1570.52}
+{"wall":10717.2,"steps":16860522,"episodes":56383,"updates":16854146,"boundaries":0,"deaths":50007,"cleared":6376,"meanAbsTDerrThread0":3701.62,"alpha":0.00025,"strongEpisodes":56383,"strongSteps":16860522,"movesPerSecond":1573.22}
+{"final":true,"stage":3,"threads":8,"wall":10803.1,"episodes":56845,"steps":16997291,"updates":16990864,"boundaries":0,"deaths":50418,"cleared":6427,"strongEpisodes":56845,"strongSteps":16997291}
