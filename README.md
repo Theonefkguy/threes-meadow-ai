@@ -4,7 +4,7 @@
 
 A high-performance Threes AI you can watch, interrupt and play alongside. Multi-stage temporal-difference learning of four- and five-cell n-tuple tables meets five-ply expectimax with probability cutoffs. The model runs entirely on your device: no account, API key or inference server needed.
 
-**59.3% reached 6144 · 5.6% reached 12288 · 2,048 fresh games.**
+**66.5% reached 6144 · 7.2% reached 12288 · 4,096 games under the official bonus cycle.**
 
 ## Play
 
@@ -16,9 +16,27 @@ Open the [live demo](https://theonefkguy.github.io/threes-meadow-ai/), use the E
 
 Watch **How a Threes AI Actually Thinks** on YouTube.
 
+## V35: the official bonus cycle
+
+The official app gives exactly one bonus in every block of 21 previews, not an independent 1/21 chance per preview. We confirmed this by letting the AI play two complete games of the iPhone app (148 complete blocks, every one with exactly one bonus; see [RULES.md](RULES.md)). The website engine now uses this rule, and the default AI tracks the cycle from the previews it has seen: no bonus once this block's bonus has appeared, otherwise 1/(21 − positions already ruled out).
+
+4,096 whole games per arm on the same seeds, V31 model, five-ply website search:
+
+| Metric | Old rule (V31 release, 2,048 games) | Cycle rule, AI unaware | Cycle rule, AI aware (website) |
+|---|---:|---:|---:|
+| Reach 1536 | 98.6% | 99.4% | 99.3% |
+| Reach 3072 | 92.9% | 95.8% | 96.0% |
+| Reach 6144 | 59.3% | 65.2% | **66.5%** |
+| Reach 12288 | 5.6% | 6.0% | **7.2%** |
+| Mean final score | 561,463 | 604,132 | **622,923** |
+
+Most of the gain comes from the rule itself (bonuses arrive evenly, never more than 41 previews apart). Knowing the cycle adds +18.8k mean score (Holm p = 0.041); the 6144 (+1.3 pp) and 12288 (+1.1 pp) gains are not significant on their own. The shipped float16 weights scored 65.1% / 6.7% in a separate 2,048-game check (not significantly different). JS and C++ choose identical moves on 320 positions with and without the cycle, and the cycle-aware search is not slower.
+
+[V35 report (Chinese)](RL-V35-CYCLE.md) · [Release check](training/web-release/v35-check/)
+
 ## V31 release results
 
-Same rules and engine as below. Native C++ evaluation of the exact weights shipped to the browser (float16 residuals), from standard openings until 12288 or death, on the same 2,048 opening seeds for both arms.
+Old independent 1/21 bonus rule; otherwise same rules and engine as below. Native C++ evaluation of the exact weights shipped to the browser (float16 residuals), from standard openings until 12288 or death, on the same 2,048 opening seeds for both arms.
 
 | Metric | Previous website AI (V23) | V31 (shipped) |
 |---|---:|---:|
