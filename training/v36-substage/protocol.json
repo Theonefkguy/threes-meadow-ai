@@ -1,0 +1,35 @@
+{
+  "round": "V36 step 1: screen a finer split of stage 3 (6144 and above) by fitting realised scores",
+  "createdUTC": "2026-10-15T18:21:22.866902+00:00",
+  "status": "frozen before any V36 fit",
+  "motivation": "Stage 3 holds every position from the first 6144 to 12288 in one table set, from rebuilding with small cards to the final 6144+3072+1536+768 chain. Earlier stage-3 work (V27, V28, V31, V32, V33) never split it. V33 ruled out other shapes of the same size, not more capacity; a split by the second-largest card is a cheap form of capacity that the stage design already uses for stages 0-2.",
+  "data": {
+    "records": "V33 records (training/v33-patterns/data/*.bin, 300 files): stage-3 afterstates of W31 website-search games from the 14,956 V27 training starts, 2 passes, every 2nd afterstate, target G = realised future score",
+    "files": 300,
+    "combinedSHA256": "58d38d1bd758278a1fd5c872b95d9e49cac463f87ebfbaba5931861100d6a1fe",
+    "limitation": "collected under the old independent 1/21 bonus rule (before V35); the screen asks about representation, so the rule difference is accepted for this step"
+  },
+  "fit": "training/v36-substage/fit.cpp: V33 fit.cpp unchanged except that the residual tables are indexed by the sub-stage group. Same fixed base (dist/models/ntuple-v23.bin stage 3 = V21 S3 four-cell table), same validation split (start index % 5 == 0), same SGD (4 epochs .003/.001/.0003/.0001, seed 33), best validation epoch. Residual shapes: V29-V31 P5 five-cell set for every candidate.",
+  "candidates": {
+    "none": "one P5 table set (control; must reproduce V33 P5 validation MSE exactly)",
+    "two": "second < 1536 | >= 1536",
+    "three": "second < 1536 | 1536 | >= 3072",
+    "four": "second < 1536 | 1536 | 3072 without 1536+768 | 3072+1536+768 present (the \"final 768\" chain) or a second 6144",
+    "bias3": "shared P5 tables + one bias per \"three\" group (control: how much of a gain is just a per-group level)"
+  },
+  "secondLargest": "largest rank on the afterstate after removing one 6144 card",
+  "comparison": "per validation start index, sum of squared errors; paired difference vs none: mean, SE, z (V33 method). Relative gain = (MSE_none - MSE_X) / (MSE_NONE_base_only - MSE_none), MSE_NONE_base_only from V33.",
+  "v33": {
+    "P5validationMSE": 84814809420.0,
+    "NONEvalidationMSE": 108412009400.0
+  },
+  "decision": "Go to TD training (a separate, later protocol, with each sub-stage started from the current stage-3 tables and a low rate) with the best of two/three/four only if it beats none with z > 2 and relative gain >= 5% (the V33 bar). Otherwise stop. bias3 is reported but cannot trigger go; if bias3 gets most of the best split's gain, the follow-up must say so.",
+  "fileSHA256": {
+    "training/v36-substage/fit.cpp": "1da623bb8fb906b512c044eabfd866a44c20ed426050afe0616ae8da69995280",
+    "training/v36-substage/bin/fit": "cf95b942774347448a2c8adb701a5d96d878b4683ed6ff3902d99a10e8af0e5e",
+    "training/v36-substage/run.sh": "3e1c85f96e07404788c14a6591d72a718f9c512a736405c05cd1c06193cb1924",
+    "training/v36-substage/analyze.py": "5379dd52967dd35cefe3b967fed7812e98b09b8763afd6525fefc3d44c21bfc5",
+    "training/v21-late-train/model4.h": "27305c197ba81b2ee05fda8c3589ed03c4d7d752dacc3e1367ca157a1eeb1ad5",
+    "dist/models/ntuple-v23.bin": "cdef81fd98ef0a96d14cb8f61265adc13e50146245f63e2d1d278ea4f84be0d9"
+  }
+}

@@ -149,3 +149,4 @@ training/v35-cycle/bin/
 training/v35-cycle/games/*.part
 training/web-release/v35-check/games/*.part
 training/web-release/v35-check/combo/*.part
+training/v36-substage/bin/
