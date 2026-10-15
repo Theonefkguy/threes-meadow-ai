@@ -1,0 +1,16 @@
+{"seed":35102001,"aware":1,"r1536":true,"r3072":true,"r6144":true,"r12288":false,"turn6144":1508,"moves":2112,"finalRank":14,"score":796275,"bonuses":98,"searchCPU":10.869075999999987}
+{"seed":35102002,"aware":1,"r1536":true,"r3072":true,"r6144":true,"r12288":true,"turn6144":1403,"moves":1981,"finalRank":15,"score":1594773,"bonuses":93,"searchCPU":10.135760000000005}
+{"seed":35102003,"aware":1,"r1536":true,"r3072":true,"r6144":true,"r12288":false,"turn6144":1266,"moves":1519,"finalRank":14,"score":563781,"bonuses":71,"searchCPU":7.9164659999999989}
+{"seed":35102004,"aware":1,"r1536":true,"r3072":true,"r6144":true,"r12288":false,"turn6144":1352,"moves":1626,"finalRank":14,"score":717702,"bonuses":77,"searchCPU":8.3255310000000016}
+{"seed":35102005,"aware":1,"r1536":true,"r3072":true,"r6144":true,"r12288":false,"turn6144":1214,"moves":2039,"finalRank":14,"score":796518,"bonuses":95,"searchCPU":9.9401089999999908}
+{"seed":35102006,"aware":1,"r1536":true,"r3072":true,"r6144":true,"r12288":false,"turn6144":1448,"moves":1872,"finalRank":14,"score":738360,"bonuses":88,"searchCPU":8.921102999999988}
+{"seed":35102007,"aware":1,"r1536":true,"r3072":true,"r6144":false,"r12288":false,"turn6144":-1,"moves":1021,"finalRank":13,"score":204300,"bonuses":47,"searchCPU":5.4460699999999997}
+{"seed":35102008,"aware":1,"r1536":true,"r3072":true,"r6144":true,"r12288":false,"turn6144":1285,"moves":1793,"finalRank":14,"score":621444,"bonuses":84,"searchCPU":9.6902240000000166}
+{"seed":35102009,"aware":1,"r1536":true,"r3072":true,"r6144":true,"r12288":false,"turn6144":1552,"moves":1622,"finalRank":14,"score":562458,"bonuses":76,"searchCPU":8.1509069999999948}
+{"seed":35102010,"aware":1,"r1536":true,"r3072":true,"r6144":false,"r12288":false,"turn6144":-1,"moves":1019,"finalRank":13,"score":207159,"bonuses":46,"searchCPU":5.1296569999999919}
+{"seed":35102011,"aware":1,"r1536":true,"r3072":true,"r6144":true,"r12288":false,"turn6144":1468,"moves":2195,"finalRank":14,"score":797199,"bonuses":103,"searchCPU":10.161345999999977}
+{"seed":35102012,"aware":1,"r1536":true,"r3072":true,"r6144":false,"r12288":false,"turn6144":-1,"moves":1180,"finalRank":13,"score":246066,"bonuses":55,"searchCPU":6.1914719999999983}
+{"seed":35102013,"aware":1,"r1536":true,"r3072":true,"r6144":false,"r12288":false,"turn6144":-1,"moves":1158,"finalRank":13,"score":240312,"bonuses":53,"searchCPU":6.4231130000000052}
+{"seed":35102014,"aware":1,"r1536":true,"r3072":true,"r6144":false,"r12288":false,"turn6144":-1,"moves":1131,"finalRank":13,"score":265752,"bonuses":53,"searchCPU":6.1268270000000076}
+{"seed":35102015,"aware":1,"r1536":true,"r3072":true,"r6144":true,"r12288":false,"turn6144":1488,"moves":1799,"finalRank":14,"score":617859,"bonuses":83,"searchCPU":9.5682169999999864}
+{"seed":35102016,"aware":1,"r1536":true,"r3072":false,"r6144":false,"r12288":false,"turn6144":-1,"moves":925,"finalRank":12,"score":89256,"bonuses":42,"searchCPU":4.4159429999999924}
