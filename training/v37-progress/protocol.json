@@ -1,0 +1,40 @@
+{
+  "round": "V37 step 1: screen \"progress\" features for stage 3 by fitting realised scores",
+  "createdUTC": "2026-10-15T18:40:06.686343+00:00",
+  "status": "frozen before any V37 fit",
+  "motivation": "V36: one bias per second-largest-card group (3 parameters) on top of the shared P5 residual lowered validation MSE by 5.4% of the P5 gain (z=8.2), while separate tables per group underfit. Local 4-5 cell patterns do not express how far the board is from the second 6144. This step compares small global \"progress\" keys, each adding one bias weight per key value.",
+  "data": {
+    "records": "V33 records (training/v33-patterns/data/*.bin, 300 files): stage-3 afterstates of W31 website-search games from the 14,956 V27 training starts, 2 passes, every 2nd afterstate, target G = realised future score",
+    "files": 300,
+    "combinedSHA256": "58d38d1bd758278a1fd5c872b95d9e49cac463f87ebfbaba5931861100d6a1fe",
+    "limitation": "collected under the old independent 1/21 bonus rule (before V35); the screen asks about representation, so the rule difference is accepted for this step"
+  },
+  "fit": "training/v37-progress/fit.cpp: V36 fit.cpp with the bias keys below; shared P5 residual tables; everything else as V33/V36 (fixed V21 S3 base, validation = start index % 5 == 0, SGD 4 epochs .003/.001/.0003/.0001 seed 33, best validation epoch). Each key value is one extra feature in the multiplicity-normalised update.",
+  "keys": {
+    "none": "no bias (must reproduce V33 P5 exactly)",
+    "bias3": "V36 bias3 (must reproduce exactly)",
+    "s2": "bucket of the second-largest card (6 values)",
+    "s23": "buckets of the 2nd and 3rd largest (36)",
+    "s234": "buckets of the 2nd, 3rd and 4th largest (216)",
+    "chain": "presence of 768, 1536, 3072 and a second 6144 (16)",
+    "mass": "sum of card values >= 192 except one 6144, in units of 192, capped at 40 (41)"
+  },
+  "buckets": "rank r (one 6144 removed, sorted with multiplicity): r<=9 (<=192) -> 0, 768/384... : 10 (384) -> 1, 11 (768) -> 2, 12 (1536) -> 3, 13 (3072) -> 4, 14 (6144) -> 5",
+  "comparison": "paired by validation start index vs none (z, V33 method); relative gain = (MSE_none - MSE_key) / (MSE_base_only - MSE_none); also each key vs bias3",
+  "v33": {
+    "P5validationMSE": 84814809420.0,
+    "NONEvalidationMSE": 108412009400.0
+  },
+  "v36": {
+    "bias3validationMSE": 83543564160.0
+  },
+  "decision": "Eligible: keys with z > 2 and relative gain >= 5% vs none (bias3 included). Choice: among eligible keys within 0.5 percentage points of the best relative gain, the one with the fewest values. If a choice exists, the next step (separate protocol) adds that key to stage 3, trains with TD from the current V31 stage-3 tables (bias starting at 0, so the start equals V31) and evaluates paired continuations from first-6144 positions under the cycle rule. If none is eligible, stop.",
+  "fileSHA256": {
+    "training/v37-progress/fit.cpp": "02fa85b76890b08c0921b2c6fb5af12c88bd24844773205de94543ce62caf188",
+    "training/v37-progress/bin/fit": "c109489538778c3101034e7626c5ec891e5af7b47b847d2cf30fc7c246bcfceb",
+    "training/v37-progress/run.sh": "ddecf76a969c1afd938627b900fb6ea7645810d0ae5973d2a627a287c8099d57",
+    "training/v37-progress/analyze.py": "7ac39072355a755a8c502d5876f00a377036277e158108c565bedb6fff78556c",
+    "training/v21-late-train/model4.h": "27305c197ba81b2ee05fda8c3589ed03c4d7d752dacc3e1367ca157a1eeb1ad5",
+    "dist/models/ntuple-v23.bin": "cdef81fd98ef0a96d14cb8f61265adc13e50146245f63e2d1d278ea4f84be0d9"
+  }
+}
