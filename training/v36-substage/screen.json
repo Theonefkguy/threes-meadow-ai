@@ -1,0 +1,145 @@
+{
+ "validationMSE": {
+  "none": 84814809420.0,
+  "two": 85338014910.0,
+  "three": 85989662320.0,
+  "four": 86743068010.0,
+  "bias3": 83543564160.0
+ },
+ "bestEpoch": {
+  "none": 4,
+  "two": 4,
+  "three": 4,
+  "four": 4,
+  "bias3": 4
+ },
+ "reproducesV33P5": true,
+ "groups": {
+  "none": {
+   "train": [
+    3550577
+   ],
+   "validation": [
+    {
+     "n": 886055,
+     "mse": 84814809420.0
+    }
+   ]
+  },
+  "two": {
+   "train": [
+    560021,
+    2990556
+   ],
+   "validation": [
+    {
+     "n": 138920,
+     "mse": 74726020250.0
+    },
+    {
+     "n": 747135,
+     "mse": 87311176790.0
+    }
+   ]
+  },
+  "three": {
+   "train": [
+    560021,
+    1112067,
+    1878489
+   ],
+   "validation": [
+    {
+     "n": 138920,
+     "mse": 74726020250.0
+    },
+    {
+     "n": 278458,
+     "mse": 73994178140.0
+    },
+    {
+     "n": 468677,
+     "mse": 96455257370.0
+    }
+   ]
+  },
+  "four": {
+   "train": [
+    560021,
+    1112067,
+    1627476,
+    251013
+   ],
+   "validation": [
+    {
+     "n": 138920,
+     "mse": 74726020250.0
+    },
+    {
+     "n": 278458,
+     "mse": 73994178140.0
+    },
+    {
+     "n": 405915,
+     "mse": 89325011310.0
+    },
+    {
+     "n": 62762,
+     "mse": 153206678700.0
+    }
+   ]
+  },
+  "bias3": {
+   "train": [
+    560021,
+    1112067,
+    1878489
+   ],
+   "validation": [
+    {
+     "n": 138920,
+     "mse": 70285795960.0
+    },
+    {
+     "n": 278458,
+     "mse": 71514245050.0
+    },
+    {
+     "n": 468677,
+     "mse": 94620338350.0
+    }
+   ]
+  }
+ },
+ "vsNone": {
+  "two": {
+   "mseDifference": -523205491.80436414,
+   "z": -9.693838101452782,
+   "starts": 2992,
+   "relativeGain": -0.022172354789697382
+  },
+  "three": {
+   "mseDifference": -1174852902.123197,
+   "z": -10.665241420642692,
+   "starts": 2992,
+   "relativeGain": -0.04978780961282509
+  },
+  "four": {
+   "mseDifference": -1928258589.843799,
+   "z": -10.64501243346716,
+   "starts": 2992,
+   "relativeGain": -0.08171556759421929
+  },
+  "bias3": {
+   "mseDifference": 1271245265.0365856,
+   "z": 8.213651750434027,
+   "starts": 2992,
+   "relativeGain": 0.05387271630013113
+  }
+ },
+ "decision": {
+  "candidate": "two",
+  "go": false,
+  "rule": "Go to TD training (a separate, later protocol, with each sub-stage started from the current stage-3 tables and a low rate) with the best of two/three/four only if it beats none with z > 2 and relative gain >= 5% (the V33 bar). Otherwise stop. bias3 is reported but cannot trigger go; if bias3 gets most of the best split's gain, the follow-up must say so."
+ }
+}
