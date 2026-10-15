@@ -1,0 +1,101 @@
+{
+ "reference": "shipped V31 (float32 base, float16 residuals)",
+ "arms": {
+  "C1": {
+   "identicalGames": 745,
+   "r6144": {
+    "armOnly": 271,
+    "shippedOnly": 295,
+    "differencePP": -1.171875,
+    "p": 0.33366779047303474
+   },
+   "r12288": {
+    "armOnly": 69,
+    "shippedOnly": 80,
+    "differencePP": -0.537109375,
+    "p": 0.4127425588241414
+   },
+   "score": {
+    "meanDifference": -8184.0791015625,
+    "approx95": [
+     -25342.020310270458,
+     8973.862107145458
+    ],
+    "p": 0.349844769372578
+   },
+   "counts": {
+    "r3072": 1896,
+    "r6144": 1191,
+    "r12288": 104
+   },
+   "downloadMB": 15.1,
+   "pass": false
+  },
+  "C2": {
+   "identicalGames": 37,
+   "r6144": {
+    "armOnly": 433,
+    "shippedOnly": 479,
+    "differencePP": -2.24609375,
+    "p": 0.13615456089692965
+   },
+   "r12288": {
+    "armOnly": 99,
+    "shippedOnly": 101,
+    "differencePP": -0.09765625,
+    "p": 0.9436515209907436
+   },
+   "score": {
+    "meanDifference": -10223.2822265625,
+    "approx95": [
+     -30919.415161146724,
+     10472.850708021724
+    ],
+    "p": 0.3329532467231123
+   },
+   "counts": {
+    "r3072": 1905,
+    "r6144": 1169,
+    "r12288": 113
+   },
+   "downloadMB": 11.44,
+   "pass": false
+  },
+  "C3": {
+   "identicalGames": 22,
+   "r6144": {
+    "armOnly": 433,
+    "shippedOnly": 466,
+    "differencePP": -1.611328125,
+    "p": 0.28584840774901277
+   },
+   "r12288": {
+    "armOnly": 100,
+    "shippedOnly": 106,
+    "differencePP": -0.29296875,
+    "p": 0.7276586764549052
+   },
+   "score": {
+    "meanDifference": -10427.3466796875,
+    "approx95": [
+     -31078.608111107416,
+     10223.914751732416
+    ],
+    "p": 0.32234336054185203
+   },
+   "counts": {
+    "r3072": 1905,
+    "r6144": 1182,
+    "r12288": 109
+   },
+   "downloadMB": 9.12,
+   "pass": false
+  }
+ },
+ "shippedCounts": {
+  "r3072": 1902,
+  "r6144": 1215,
+  "r12288": 115
+ },
+ "choice": null
+}
