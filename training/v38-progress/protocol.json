@@ -1,0 +1,89 @@
+{
+  "round": "V38: stage-3 progress bias (V37 \"mass\" key) trained by TD and tested on cycle-rule first-6144 positions",
+  "createdUTC": "2026-10-15T20:07:46.527121+00:00",
+  "status": "frozen before the pool, any training and any evaluation of this round",
+  "motivation": "V37: a 41-value bias keyed by the total value of cards >= 192 (one 6144 removed) lowered the stage-3 fit error by 6.2% beyond a global constant (z=15.9). V38 asks whether it raises P(12288 | first 6144) for the website search under the official bonus cycle.",
+  "model": "training/v38-progress/model5p.h: W31 (V31 float32) plus bias[massKey(b)] added to stage-3 values; bias file 41 float32. Zero bias equals W31 exactly: parity on 320 V25 states with V35 cycle states, 0 mismatches (bin/parity).",
+  "pool": {
+    "tool": "training/v38-progress/pool.cpp (W31, cycle rule, cycle-aware website search 5/0.01/clamp, stop at first 6144, full state incl. hidden bonus slot)",
+    "seeds": [
+      38100001,
+      38103400
+    ],
+    "size": 2048,
+    "selection": "states of games not over at their first 6144, sorted by seed, first 2048; if fewer, the round stops and a new block is added by an amendment before any training result is seen"
+  },
+  "training": {
+    "tool": "training/v38-progress/train.cpp (V32 trainer under the cycle rule; stage 3 only; complete 3-ply cycle-aware strong player, clamped; TD(lambda=.5) five-step return; rates .001/.0005/.00025 stepping at 50%/85% of the wall budget)",
+    "starts": "training/v27-stage3/pools/train-onpolicy.txt (old-rule stage-3 positions; each episode gets a fresh consistent cycle state)",
+    "arms": {
+      "P": {
+        "what": "joint: four-cell table, residual and bias (bias starts at 0, so the start equals W31)",
+        "seconds": 10800,
+        "threads": 8,
+        "seed": 38210001
+      },
+      "C": {
+        "what": "control: the same joint training without the bias",
+        "seconds": 10800,
+        "threads": 8,
+        "seed": 38220001,
+        "concurrency": "runs at the same time as P"
+      },
+      "B": {
+        "what": "bias only: tables and residual fixed at W31",
+        "seconds": 3600,
+        "threads": 8,
+        "seed": 38230001
+      }
+    },
+    "note": "Hogwild training is not bit-reproducible; wall-clock budgets mean a paused machine trains less (P and C pause together)."
+  },
+  "evaluation": {
+    "tool": "training/v38-progress/cont.cpp",
+    "arms": [
+      "W31",
+      "B",
+      "C",
+      "P"
+    ],
+    "states": "the 2048 pool states",
+    "rolloutSeeds": "38400001 + index (same for every arm)",
+    "search": "cycle-aware website search (depth 5, cutoff 0.01, clamp) to 12288 or death",
+    "freeze": "freeze.py records pool and model hashes before any evaluation game; P/C stages 0-2 and B tables must equal W31"
+  },
+  "primary": {
+    "E1": "B vs W31: reach 12288, two-sided exact McNemar",
+    "E2": "P vs C: reach 12288, exact McNemar"
+  },
+  "multiplicity": "Holm over E1 and E2, alpha 0.05",
+  "secondary": "score gained after 6144 (paired normal approximation), P vs W31, C vs W31, P vs B, Wilson intervals, CPU ms per move",
+  "adoption": "A significant positive primary makes that arm a web candidate (bias: 41 floats in JS); the web release then needs its own checks. If neither primary is significant, the progress bias is not adopted.",
+  "fileSHA256": {
+    "training/v38-progress/model5p.h": "42ad8c24dbf1cd2ece14174e179b31ccf070c718adbe804a0f5e2ec47185f1ce",
+    "training/v38-progress/search5p.h": "9b1e6f7d230c0f16013e41b2051d9577a4f47843db789dc4e4f06f8f3598a21a",
+    "training/v38-progress/cgame.h": "bdd9d97683ad088b858986875ca80706933b73de0ffa13d2268a40dadacc982e",
+    "training/v38-progress/pool.cpp": "b174cd833ab4cb09de2848cca4403d06afff2a8cb65afd0c87e74b2947134e3b",
+    "training/v38-progress/cont.cpp": "0e4b53697d15db1b460adc4839fe5582583e223d408de58739544357e04c49fd",
+    "training/v38-progress/train.cpp": "f88969285c02308e86f67185e85dcee538ffb73c44f1e57125b1044e194c9b28",
+    "training/v38-progress/parity.cpp": "fd3db11ea7fc0e5e4d12f99c99a2ba42a68cea9bb9a3a7010505eaffcc8afb95",
+    "training/v38-progress/common.sh": "4b3b07ad7cbd675ee5b6ded2c88aee3b453e500ed58323581f067e9346c252d5",
+    "training/v38-progress/pool.sh": "4a2f0eb95924462a90305bbff375c7674c60eef8bb96b2d8003a09d3e0fd325e",
+    "training/v38-progress/train.sh": "9b171d60fc0d0d1f2c928e4faae4098ad50eb0031e65ebeb69a3b18b8d6d63dd",
+    "training/v38-progress/eval.sh": "1d39c7644ac6500e1a6c4d97e8a22e0f4619fdafe29275e63feecf8ffda2f7ec",
+    "training/v38-progress/freeze.py": "54d3d4d4d0c3cbae9831bd7463ddf8425614e206b45105cfdf5fb2f551dc1ba6",
+    "training/v38-progress/analyze.py": "08a80352298efc1ae2491806f4b594e4ee83f78fedd3ea392938b511f87f358c",
+    "training/v38-progress/bin/pool": "7f56530d601dd089ffd23efec4329ed3a76927f1452c95ad6dbb552a83be00f2",
+    "training/v38-progress/bin/cont": "f27d57af7979fc9cc804aca66fb78ab9ac20e3e7bee62b50704e980674c2fc84",
+    "training/v38-progress/bin/train": "d9cc500c5eab905a162adce4c80b5cdbeaa6c7c943717ffb7b1294b2e5206a50",
+    "training/v38-progress/bin/parity": "e36b8eeeb15e75cdac242fe9f1a3b9b2f1c1b041beb0f5988bb0be5446c00791",
+    "training/v35-cycle/search5c.h": "3da7f2dd0fd0d0dff65a2948f9c1c7ae90323f0cb14cac71ee9331bf7d112b6a",
+    "training/v31-stages/model5s.h": "27138912331e7a5240080a77533b8b97d16c6cb611e19d1878788518fd6d9ac1",
+    "training/v32-strong/train.cpp": "1dd67184e814d6265981309e142dff1949e77daf389edd0fd23ff4316bc64be0",
+    "training/v31-stages/models/W31.bin": "b94a7da2671fe28ad3390a5fcd2fbda59a599f50437b23d5e3cf7097e45f9617",
+    "training/v30-parallel/models/P-final.res": "e0cc549fc250ef979640549d8f286fefd2fdc947a0247c7dd28d320895155570",
+    "training/v31-stages/models/S1-final.res": "a5c1d053a6eb5f4d02243328a70550435e9f74f39d2679e6c8a68b11068711e2",
+    "training/v31-stages/models/S3-final.res": "6429f239fe7908e4293a8c377f375c68d3478fd4daaf67f60f57c5983dc59b8f",
+    "training/v27-stage3/pools/train-onpolicy.txt": "c84d4f37d7dbaaed5904926cc7d07c117ace245070c0dcfcc430b7767cbe55ae"
+  }
+}

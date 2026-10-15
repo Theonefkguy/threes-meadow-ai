@@ -151,3 +151,7 @@ training/web-release/v35-check/games/*.part
 training/web-release/v35-check/combo/*.part
 training/v36-substage/bin/
 training/v37-progress/bin/
+training/v38-progress/bin/
+training/v38-progress/pool/
+training/v38-progress/models/
+training/v38-progress/eval/*.part
