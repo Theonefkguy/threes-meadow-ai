@@ -85,21 +85,33 @@ export function bonusPreviews(highest) {
   }));
 }
 
+// Draws per bonus cycle (one bonus slot per block).
+export const CYCLE = 21;
+
 // Combining two 6144s makes 12288, the final card: the game ends at once.
 export const FINAL_CARD = 12288;
 export const isCleared = board => board.some(row => row.includes(FINAL_CARD));
 
 export function createGame(rng = Math.random) {
-  const game = { board: [], deck: [], next: null, turns: 0, over: false };
+  const game = { board: [], deck: [], next: null, turns: 0, over: false, draws: 0, slot: -1 };
   const drawNormal = () => {
     if (!game.deck.length) game.deck = shuffled(BASE_DECK, rng);
     return game.deck.pop();
   };
+  // Bonus cycle of the official app (measured in RL-V35-CYCLE.md): the opening preview is draw 0;
+  // draws 1-21, 22-42, ... form blocks, and each block has one bonus slot chosen uniformly when the
+  // block starts. At that slot the preview is a bonus if one is possible (highest card >= 48);
+  // otherwise the slot is lost. Every other draw comes from the basic deck.
   const drawUpcoming = () => {
-    const previews = bonusPreviews(Math.max(...game.board.flat()));
-    if (previews.length && rng() < 1 / 21) {
-      const { candidates, probabilities } = previews[weightedIndex(previews.map(p => p.probability), rng)];
-      return { bonus: true, candidates, probabilities };
+    const draw = game.draws++;
+    if (draw >= 1) {
+      const position = (draw - 1) % CYCLE;
+      if (position === 0) game.slot = randomIndex(CYCLE, rng);
+      const previews = bonusPreviews(Math.max(...game.board.flat()));
+      if (position === game.slot && previews.length) {
+        const { candidates, probabilities } = previews[weightedIndex(previews.map(p => p.probability), rng)];
+        return { bonus: true, candidates, probabilities };
+      }
     }
     return { bonus: false, candidates: [drawNormal()] };
   };
@@ -109,6 +121,8 @@ export function createGame(rng = Math.random) {
     const cells = shuffled([...opening, ...Array(7).fill(0)], rng);
     game.board = Array.from({ length: 4 }, (_, y) => cells.slice(y * 4, y * 4 + 4));
     game.turns = 0;
+    game.draws = 0;
+    game.slot = -1;
     game.over = false;
     game.cleared = false;
     game.next = drawUpcoming(); // Continues the three cards left in the opening deck.

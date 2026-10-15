@@ -1,6 +1,6 @@
 import { t, locale, setLanguage, applyLanguage } from './i18n.js';
-import { createGame, projectMove, score } from './engine.js?v=24';
-import { initialCounts, observePreview } from './card-memory.js?v=24';
+import { createGame, projectMove, score } from './engine.js?v=25';
+import { initialCounts, observePreview, initialCycle, observeCycle } from './card-memory.js?v=25';
 
 const boardEl = document.querySelector('#board');
 const nextEl = document.querySelector('#next-tile');
@@ -12,6 +12,7 @@ const liveEl = document.querySelector('#move-status');
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const game = createGame();
 let publicCounts = initialCounts(game.board, game.next);
+let publicCycle = initialCycle();
 const aiButton = document.querySelector('#ai-toggle');
 const aiStatus = document.querySelector('#ai-status');
 const aiPolicy = document.querySelector('#ai-policy');
@@ -64,7 +65,7 @@ function scheduleAI() {
     armWatchdog();
     // Send visible state only, never game.deck or the random generator.
     // fresh: first request after a start, so the worker may retry a model that failed to load earlier.
-    aiWorker.postMessage({ id, board:game.board, next:game.next, remaining:publicCounts, policy:aiPolicy.value, fresh:aiFresh });
+    aiWorker.postMessage({ id, board:game.board, next:game.next, remaining:publicCounts, cycle:publicCycle, policy:aiPolicy.value, fresh:aiFresh });
     aiFresh = false;
   }, 230);
 }
@@ -84,7 +85,7 @@ aiButton.addEventListener('click', () => {
   } catch { stopAI(t('当前浏览器无法启动 AI，可以继续手动玩。'), true); }
 });
 function createWorker() {
-    aiWorker = new Worker('./ai-worker.js?v=24', { type:'module' });
+    aiWorker = new Worker('./ai-worker.js?v=25', { type:'module' });
     aiWorker.onmessage = ({ data }) => {
       if (!aiRunning || data.id !== aiRequest) return;
       // Download progress keeps the request alive: restart the watchdog while bytes arrive.
@@ -247,6 +248,7 @@ function commitMove(direction) {
     animationTimer = null;
     const result = game.move(direction);
     publicCounts = observePreview(publicCounts, game.next);
+    publicCycle = observeCycle(publicCycle, game.next, game.board);
     boardEl.classList.remove('animating');
     busy = false;
     render({ ...result, direction });
@@ -264,6 +266,7 @@ function startGame() {
   boardEl.classList.remove('animating', 'previewing');
   game.reset();
   publicCounts = initialCounts(game.board, game.next);
+  publicCycle = initialCycle();
   render();
   liveEl.textContent = t('新的一局。开局九张牌已发好。');
   boardEl.focus({ preventScroll: true });

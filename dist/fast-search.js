@@ -4,7 +4,10 @@
 // (product of all chance weights from the root) is below `threshold` is scored
 // with the one-move afterstate value instead of its remaining depth.
 // threshold=0 is the complete search. Only fully completed depths are used.
-import { bonusPreviews } from './engine.js?v=24';
+// V35: with `cycle` (public bonus-cycle state of the next draw, card-memory.js) the chance of a
+// bonus at a draw is 0 once the block's bonus has been shown, else 1/(21 - excluded positions);
+// without it, the constant 1/21 of the old rule (results identical to the V31 release).
+import { bonusPreviews } from './engine.js?v=25';
 
 const directions=['left','right','up','down'];
 const toRank=n=>n<3?n:Math.log2(n/3)+3;
@@ -53,6 +56,12 @@ function bonusList(high){
   if(!list){list=bonusPreviews(fromRank(high)).map(p=>({cards:p.candidates.map(toRank),weights:p.probabilities,probability:p.probability,bonus:true}));previewCache.set(high,list);}
   return list;
 }
+// Packed cycle: pos | used<<5 | excl<<6 (11 bits); -1 = not tracked (constant 1/21).
+function cycleAfter(c,bonus,possible){
+  const pos=(c&31)+1;let used=c>>5&1,excl=c>>6;
+  if(bonus)used=1;else if(possible)excl++;
+  return pos===21?0:pos|used<<5|excl<<6;
+}
 const NORMAL=[1,2,3].map(n=>({cards:[n],weights:[1],probability:1,bonus:false}));
 
 // Projection of board `b` in direction d into `out` (16 bytes). Returns the
@@ -73,7 +82,7 @@ function project(b,d,out,entries){
 
 // clampLeaf: the true future score is never negative, so leaf estimates below 0 are
 // raised to 0 (otherwise a certain-death move can outrank a survivable one).
-export function chooseFastMove(board,next,model,{remaining=null,maxDepth=4,threshold=0.003,maxNodes=4e6,budgetMs=160,now=()=>performance.now(),stats=null,clampLeaf=false}={}){
+export function chooseFastMove(board,next,model,{remaining=null,maxDepth=4,threshold=0.003,maxNodes=4e6,budgetMs=160,now=()=>performance.now(),stats=null,clampLeaf=false,cycle=null}={}){
   const root=Uint8Array.from(board.flat().map(toRank));
   if(!next?.candidates?.length)return {direction:null,depth:0,nodes:0};
   let rootHigh=0;for(const r of root)rootHigh=Math.max(rootHigh,r);
@@ -101,33 +110,37 @@ export function chooseFastMove(board,next,model,{remaining=null,maxDepth=4,thres
     return any;
   }
   // counts are packed as c1|c2<<3|c3<<6 (remaining 1s, 2s, 3s); -1 = unknown (equal thirds).
-  function future(b,counts,depth,prob,L){
+  // cyc: packed cycle state of the draw made at this chance node.
+  function future(b,counts,cyc,depth,prob,L){
     if(!expand(b,L))return 0;
     let high=0,lo=0,hi=0;for(let i=0;i<8;i++){const x=b[i],y=b[i+8];if(x>high)high=x;if(y>high)high=y;lo|=x<<(i*4);hi|=y<<(i*4);}
-    const list=bonusList(high),chance=list.length?1/21:0;let total=0,deck=counts;
+    const list=bonusList(high),possible=list.length>0;let total=0,deck=counts;
+    const chance=!possible?0:cyc<0?1/21:cyc>>5&1?0:1/(21-(cyc>>6));
+    const cn=cyc<0?-1:cycleAfter(cyc,false,possible),cb=cyc<0?-1:cycleAfter(cyc,true,possible);
     if(deck===0)deck=4|4<<3|4<<6;
     const d1=deck&7,d2=deck>>3&7,d3=deck>>6&7,sz=d1+d2+d3;
     // One-move values ignore the preview and counts, so every branch that is at
     // depth 1 (or cut to it) shares one value; accumulation order is unchanged.
     let one=NaN;
-    for(let n=1;n<=3;n++){
+    if(chance<1)for(let n=1;n<=3;n++){
       const cnt=n===1?d1:n===2?d2:d3;
       if(deck>=0&&!cnt)continue;const w=deck>=0?(1-chance)*cnt/sz:(1-chance)/3;
-      if(depth===1||prob*w<threshold){if(one!==one)one=decision(b,lo,hi,NORMAL[0],-1,1,0,L,false);total+=w*one;if(depth>1)cutoffs++;continue;}
-      total+=w*decision(b,lo,hi,NORMAL[n-1],deck>=0?deck-(1<<(3*(n-1))):-1,depth,prob*w,L,false);
+      if(depth===1||prob*w<threshold){if(one!==one)one=decision(b,lo,hi,NORMAL[0],-1,-1,1,0,L,false);total+=w*one;if(depth>1)cutoffs++;continue;}
+      total+=w*decision(b,lo,hi,NORMAL[n-1],deck>=0?deck-(1<<(3*(n-1))):-1,cn,depth,prob*w,L,false);
     }
-    for(const preview of list){
+    if(chance>0)for(const preview of list){
       const w=chance*preview.probability,pb=prob*chance*preview.probability;
-      if(depth===1||pb<threshold){if(one!==one)one=decision(b,lo,hi,NORMAL[0],-1,1,0,L,false);total+=w*one;if(depth>1)cutoffs++;continue;}
-      total+=w*decision(b,lo,hi,preview,counts,depth,pb,L,false);
+      if(depth===1||pb<threshold){if(one!==one)one=decision(b,lo,hi,NORMAL[0],-1,-1,1,0,L,false);total+=w*one;if(depth>1)cutoffs++;continue;}
+      total+=w*decision(b,lo,hi,preview,counts,cb,depth,pb,L,false);
     }
     return total;
   }
   // Returns the value; at the root also records direction and per-move values.
-  function decision(b,lo,hi,preview,counts,depth,prob,L,isRoot){
+  // cyc: packed cycle state of the next draw (the preview after the move being decided).
+  function decision(b,lo,hi,preview,counts,cyc,depth,prob,L,isRoot){
     if(depth>1&&!isRoot&&prob<threshold){depth=1;cutoffs++;}
     tick();
-    const par=depth===1?1:depth|preview.cards.length<<3|preview.cards[0]<<5|(counts>=0?counts:511)<<10;
+    const par=depth===1?1:depth|preview.cards.length<<3|preview.cards[0]<<5|(counts>=0?counts:511)<<10|(cyc>=0?cyc<<19:0);
     let h=Math.imul(lo^0x9e3779b9,0x85ebca6b)^Math.imul(hi^0xc2b2ae35,0x27d4eb2f)^Math.imul(par,0x165667b1);h^=h>>>15;h=Math.imul(h,0x2c1b3c6d);h^=h>>>12;
     let slot=-1;
     if(!isRoot)for(let i=0;i<8;i++){const s=(h+i)&MASK;
@@ -142,7 +155,7 @@ export function chooseFastMove(board,next,model,{remaining=null,maxDepth=4,thres
         let expected=0;const c=child[L],cards=preview.cards,weights=preview.weights,e=ent[L][d];
         for(let k=0;k<n;k++)for(let i=0;i<cards.length;i++){
           tick();c.set(after);c[e[k]]=cards[i];
-          expected+=weights[i]*(POINTS[cards[i]]+future(c,counts,depth-1,prob*weights[i]/n,L+1));
+          expected+=weights[i]*(POINTS[cards[i]]+future(c,counts,cyc,depth-1,prob*weights[i]/n,L+1));
         }
         q+=expected/n;
       }
@@ -156,9 +169,11 @@ export function chooseFastMove(board,next,model,{remaining=null,maxDepth=4,thres
   if(!expand(root,0))return {direction:null,depth:0,nodes:0,policy:'rl-fast'};
   let rootLo=0,rootHi=0;for(let i=0;i<8;i++){rootLo|=root[i]<<(i*4);rootHi|=root[i+8]<<(i*4);}
   const packed=Array.isArray(remaining)&&remaining.length===3&&remaining.every(v=>Number.isInteger(v)&&v>=0&&v<=4)?remaining[0]|remaining[1]<<3|remaining[2]<<6:-1;
+  const valid=cycle&&[cycle.pos,cycle.used,cycle.excl].every(Number.isInteger)&&cycle.pos>=0&&cycle.pos<21&&(cycle.used===0||cycle.used===1)&&cycle.excl>=0&&cycle.excl<=cycle.pos;
+  const rootCycle=valid?cycle.pos|cycle.used<<5|cycle.excl<<6:-1;
   let answer=null,answerValues=null;
   for(let depth=1;depth<=maxDepth;depth++){
-    try{decision(root,rootLo,rootHi,rootPreview,packed,depth,1,0,true);answer=best;answerValues=rootValues;completed=depth;}
+    try{decision(root,rootLo,rootHi,rootPreview,packed,rootCycle,depth,1,0,true);answer=best;answerValues=rootValues;completed=depth;}
     catch(e){if(e!==timeout)throw e;break;}
   }
   if(stats){stats.cutoffs=cutoffs;stats.values=answerValues;}

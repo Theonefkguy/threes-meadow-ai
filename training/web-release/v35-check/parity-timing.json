@@ -1,0 +1,52 @@
+{
+ "unaware (no cycle; vs training/web-release/reference.cpp)": {
+  "states": 320,
+  "byPhase": {
+   "1536": 64,
+   "3072": 128,
+   "6144": 128
+  },
+  "mismatches": 0,
+  "maxRootRelativeDifference": 7.609279935304337e-16,
+  "residualStages": [
+   1,
+   2,
+   3
+  ]
+ },
+ "aware (CYCLE=1; vs training/v35-cycle/web-reference.cpp)": {
+  "states": 320,
+  "byPhase": {
+   "1536": 64,
+   "3072": 128,
+   "6144": 128
+  },
+  "mismatches": 0,
+  "maxRootRelativeDifference": 4.2800222224039273e-16,
+  "residualStages": [
+   1,
+   2,
+   3
+  ]
+ },
+ "nodeTiming": {
+  "note": "node 22, 320 states x 3, aware and unaware interleaved, no time limit, machine busy with other jobs",
+  "unaware": {
+   "meanMs": 7.08,
+   "p95Ms": 12.25,
+   "nodes": 6981025
+  },
+  "aware": {
+   "meanMs": 6.82,
+   "p95Ms": 12.73,
+   "nodes": 6865327
+  }
+ },
+ "browserAware": {
+  "note": "desktop Chromium (Claude app browser), 160 ms budget, 960 measurements",
+  "meanMs": 6.5,
+  "p95Ms": 11.5,
+  "maxMs": 14.9,
+  "depth5": "960/960"
+ }
+}

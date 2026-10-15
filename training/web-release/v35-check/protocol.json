@@ -1,0 +1,20 @@
+{
+  "round": "V35 web release check: figures for the website under the bonus-cycle rule",
+  "createdUTC": "2026-10-15T14:11:46.830827+00:00",
+  "status": "written before any game of this check",
+  "model": "the exact weights the browser decodes: dist/models/ntuple-v31.bin and v31-s{1,2,3}.f16 (native dequantized copies v31-s{1,2,3}q.res)",
+  "games": "2048 whole games, V31 release seeds 31300001-31302048, standard openings until 12288 or death, cycle rule (training/v35-cycle/cgame.h), cycle-aware website search (depth 5, cutoff 0.01, clamp, complete depth), training/v35-cycle/bin/game AWARE=1",
+  "report": "reach 3072/6144/12288 with Wilson 95%, mean score; these become the website figures",
+  "sanity": "6144 and 12288 rates not significantly different (two-proportion z, p >= 0.05) from V35 arm A (float32 weights, same rule and search, other seeds). If either differs, the release waits for an investigation.",
+  "descriptive": "comparison with the V31 release check (old rule, same seeds; the rule changes the random events, so not paired)",
+  "fileSHA256": {
+    "training/web-release/models/ntuple-v31.bin": "b94a7da2671fe28ad3390a5fcd2fbda59a599f50437b23d5e3cf7097e45f9617",
+    "training/web-release/models/v31-s1q.res": "e033ffaf5a340d75ae54b3b03db77c6f2692e456340281117262340f4a39cab6",
+    "training/web-release/models/v31-s2q.res": "077f1082e27941be25a4a43355a4e9a46f5dd66ba733554e7df4dde69c54e4a5",
+    "training/web-release/models/v31-s3q.res": "c0271389706f0f8a1dd7f01f142f85987f707577373779a89d4f042bc8c25320",
+    "training/v35-cycle/bin/game": "04aeb5319ff2ef6cbce045c3aa62fe27166a5a302e3c99cfb9838fe9b3c464a1",
+    "training/v35-cycle/game.cpp": "fab14f04580a4099eec38d837725c7c2b9c731320a57f50b3a182cb233d87bb7",
+    "training/v35-cycle/cgame.h": "448d956aa7b4d3e37f6a860415fdbfe9a3c24828e8e5559500018fe94dcadc5d",
+    "training/v35-cycle/search5c.h": "3da7f2dd0fd0d0dff65a2948f9c1c7ae90323f0cb14cac71ee9331bf7d112b6a"
+  }
+}

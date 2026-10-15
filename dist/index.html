@@ -7,7 +7,7 @@
   <meta name="description" content="Play Threes Meadow with a five-ply AI. Free, on-device, no account required.">
   <title data-i18n="合三">Threes Meadow</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%2312363a'/%3E%3Cpath d='M18 19h16c9 0 14 4 14 11 0 4-2 7-6 9 5 1 8 5 8 10 0 8-6 12-16 12H18v-9h16c4 0 6-1 6-4s-2-4-6-4h-9v-9h9c3 0 5-1 5-4s-2-4-5-4H18z' fill='%23ffd05a'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="./styles.css?v=24">
+  <link rel="stylesheet" href="./styles.css?v=25">
 </head>
 <body>
   <main class="app" aria-label="Threes Meadow game" data-i18n-aria="合三游戏">
@@ -74,7 +74,7 @@
       <summary data-i18n="规则与来牌">Rules and incoming cards</summary>
       <p data-i18n="使用滑动、方向键或屏幕按钮操作。一次有效移动后，一张新牌从反方向的边缘进入，只会进入刚刚移动过的行或列。无法移动时不会补牌。">Use swipes, arrow keys or the on-screen buttons. After a valid move, a card enters from the opposite edge, uniformly among the rows or columns that moved. Blocked moves do not draw cards.</p>
       <p data-i18n="普通牌是一副 12 张的牌组：1、2、3 各四张。开局从中抽九张，之后继续抽剩余牌；抽完再洗牌。因此下一张普通牌的概率取决于牌组中还剩什么。">The basic deck contains twelve cards: four each of 1, 2 and 3. Nine cards are dealt at the start. Play continues through the remaining deck before reshuffling, so draw probabilities depend on what remains.</p>
-      <p data-i18n="最大数字达到 48 后，每次生成来牌提示有 1/21（约 4.76%）的机会出现奖励牌。奖励牌不消耗普通牌组，数值从 6 开始逐级翻倍，最高为棋盘最大数字的八分之一。">Once the highest card reaches 48, each new preview has a 1/21 chance of being a bonus. Bonuses do not consume the basic deck. Values double from 6 up to one eighth of the highest card.</p>
+      <p data-i18n="来牌每 21 张为一轮，每轮恰好有一张奖励牌，位置随机；轮到它时如果最大数字还不到 48，这一轮就没有奖励牌。奖励牌不消耗普通牌组，数值从 6 开始逐级翻倍，最高为棋盘最大数字的八分之一。">Previews come in rounds of 21, and each round has exactly one bonus at a random position. If the highest card is still below 48 when that position comes, the round has no bonus. Bonuses do not consume the basic deck. Values double from 6 up to one eighth of the highest card.</p>
       <p data-i18n="奖励牌先等概率选择一个合法候选窗口，再在窗口内等概率抽牌。预告最多显示三个连续候选值；中间数值因此可能比两端更常见。">A bonus window is chosen uniformly, then a card is drawn uniformly within it. The preview shows up to three consecutive values, making middle values more likely than the extremes when there are multiple windows.</p>
       <p data-i18n="1、2 不计分；3、6、12、24… 分别计 3、9、27、81… 分。无路可走时结束；两张 6144 合出 12288 时立即通关。">Cards 1 and 2 score zero; 3, 6, 12, 24… score 3, 9, 27, 81… points. The game ends when no move remains, or immediately when two 6144 cards merge into 12288.</p>
       <p class="rule-source"><span data-i18n="规则参考：">Rules reference:</span> <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=3155431026" target="_blank" rel="noopener noreferrer" data-i18n="社区逆向指南">Community reverse-engineering guide</a></p>
@@ -82,6 +82,6 @@
     <footer><a href="https://github.com/Theonefkguy/threes-meadow-ai" data-i18n="源码与评测">Source &amp; benchmarks</a><p data-i18n="独立研究项目，与 Threes! / Sirvo 无隶属关系。">Independent research project, not affiliated with Threes! or Sirvo.</p></footer>
     <p id="move-status" class="sr-only" role="status" aria-live="polite"></p>
   </main>
-  <script type="module" src="./game.js?v=24"></script>
+  <script type="module" src="./game.js?v=25"></script>
 </body>
 </html>

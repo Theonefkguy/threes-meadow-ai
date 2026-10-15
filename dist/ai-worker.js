@@ -1,8 +1,8 @@
-import {loadV4Policy} from './v4-policy.js?v=24';
-import { chooseMove } from './ai.js?v=24';
-import { loadModel } from './rl-model.js?v=24';
-import { chooseLearnedMove } from './rl-search.js?v=24';
-import { chooseFastMove } from './fast-search.js?v=24';
+import {loadV4Policy} from './v4-policy.js?v=25';
+import { chooseMove } from './ai.js?v=25';
+import { loadModel } from './rl-model.js?v=25';
+import { chooseLearnedMove } from './rl-search.js?v=25';
+import { chooseFastMove } from './fast-search.js?v=25';
 // A failed V31 download is not retried on every move; it is retried once when the AI is started
 // again (the page marks the first request of each start as fresh).
 let v31Failed=false;
@@ -16,7 +16,8 @@ self.onmessage = async ({ data }) => {
         // Default (V31 release): five-move search, probability cutoff 0.01, clamped leaves,
         // 160 ms soft budget, on the V31 model: four-cell tables plus float16 five-cell residuals
         // for stages 1-3 (17.4 MB gzip download, 32 MB decoded, with progress reports). If it cannot load,
-        // fall back to the V23 four-cell model, then to V4.
+        // fall back to the V23 four-cell model, then to V4. Since V35 the search also uses the public
+        // bonus-cycle state (data.cycle); the V4 and classic fallbacks keep the constant 1/21.
         let model;
         const progress=({loaded,total})=>self.postMessage({id:data.id,type:'progress',loaded,total});
         try{if(v31Failed)throw new Error('V31 unavailable');model=await loadModel('v31',progress);}
@@ -24,7 +25,7 @@ self.onmessage = async ({ data }) => {
           v31Failed=true;
           try{model=await loadModel('v23');fallback='v31-load';}catch{policy='rl-v4';fallback='fast-load';}
         }
-        if(model){result=chooseFastMove(data.board,data.next,model,{...options,maxDepth:5,threshold:0.01,clampLeaf:true});if(result.unsupported){policy='rl-v4';result=undefined;}}
+        if(model){result=chooseFastMove(data.board,data.next,model,{...options,maxDepth:5,threshold:0.01,clampLeaf:true,cycle:data.cycle});if(result.unsupported){policy='rl-v4';result=undefined;}}
       }
       if(policy==='rl-v4'){
         let model;

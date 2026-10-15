@@ -1,6 +1,8 @@
 // Web release parity: shipped dist/fast-search.js + dist/rl-model.js (website settings, no time
 // limit) against training/web-release/reference.cpp on the 320 V25 browser states.
 //   node training/web-release/parity.mjs BASE.bin REFERENCE.jsonl [RESIDUAL.f16 ...]
+// CYCLE=1: cycle-aware search (V35), state i with cycle {pos:i%21, used:i%3==0, excl:pos>>1}, against
+// training/v35-cycle/web-reference.cpp.
 // Checks every direction and completed depth for equality and the four root values to a relative
 // 1e-12 (JS and C++ accumulate some chance sums in a different order; V21 measured < 1e-15).
 import { readFileSync } from 'node:fs';
@@ -14,7 +16,8 @@ const ref=readFileSync(refPath,'utf8').trim().split('\n').map(l=>JSON.parse(l));
 if(states.length!==ref.length)throw Error('state count mismatch');
 const dirs=['left','right','up','down'];let bad=0,maxRel=0;const byPhase={};
 states.forEach((s,i)=>{
-  const stats={};const r=chooseFastMove(s.board,s.next,model,{remaining:s.remaining,maxDepth:5,threshold:0.01,clampLeaf:true,budgetMs:1e9,maxNodes:1e12,stats});
+  const stats={},pos=i%21,cycle=process.env.CYCLE==='1'?{pos,used:i%3===0?1:0,excl:pos>>1}:null;
+  const r=chooseFastMove(s.board,s.next,model,{remaining:s.remaining,maxDepth:5,threshold:0.01,clampLeaf:true,budgetMs:1e9,maxNodes:1e12,stats,cycle});
   const values=stats.values.map(v=>v===null?null:v);
   const close=(a,b)=>a===null||b===null?a===b:Math.abs(a-b)<=1e-12*Math.max(1,Math.abs(b));
   for(let d=0;d<4;d++)if(values[d]!==null&&ref[i].rootValues[d]!==null)maxRel=Math.max(maxRel,Math.abs(values[d]-ref[i].rootValues[d])/Math.max(1,Math.abs(ref[i].rootValues[d])));

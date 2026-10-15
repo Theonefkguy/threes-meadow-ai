@@ -6,12 +6,12 @@
 <button id="run">Run timing</button> <span id="status"></span>
 <pre id="result"></pre>
 <script>
-const q=new URLSearchParams(location.search),base=q.get('base')||'../../../dist/models/ntuple-v23.bin',res=(q.get('res')||'').split(',').filter(Boolean);
+const q=new URLSearchParams(location.search),base=q.get('base')||'../../../dist/models/ntuple-v23.bin',res=(q.get('res')||'').split(',').filter(Boolean),cycle=q.get('cycle')==='1';
 const status=document.getElementById('status'),result=document.getElementById('result');
 document.getElementById('run').onclick=e=>{e.target.disabled=true;status.textContent='Loading model and running timing checks…';
  const w=new Worker('./bench-worker.js',{type:'module'});
- w.onmessage=({data})=>{if(data.type==='result'){status.textContent='Complete';window.benchResult=data;result.textContent=JSON.stringify({loadMs:data.loadMs,summary:data.summary},null,1);w.terminate();}
+ w.onmessage=({data})=>{if(data.type==='result'){status.textContent='Complete';window.benchResult=data;result.textContent=JSON.stringify({cycle:data.cycle,loadMs:data.loadMs,summary:data.summary},null,1);w.terminate();}
   else{status.textContent=data.message;if(data.type==='error')w.terminate();}};
  w.onerror=e=>{status.textContent=String(e.message);w.terminate();};
- w.postMessage({base,res});};
+ w.postMessage({base,res,cycle});};
 </script></html>

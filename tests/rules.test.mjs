@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createGame, projectMove, bonusGroups, bonusPreviews, canMerge, score, hasMoves } from '../dist/engine.js';
+import { initialCycle, observeCycle } from '../dist/card-memory.js';
 
 const empty = () => Array.from({ length: 4 }, () => Array(4).fill(0));
 const withRow = row => [row, ...empty().slice(1)];
@@ -87,22 +88,64 @@ test('bonus windows are at most three consecutive legal values', () => {
   assert.deepEqual(bonusGroups(768), [[6,12,24],[12,24,48],[24,48,96]]);
 });
 
-test('bonus trial boundary and no ordinary-deck consumption on bonus', () => {
+test('bonus cycle: one slot per block of 21 draws, drawn at the block start, no deck consumption', () => {
   let draws = [];
   const game = createGame(() => draws.length ? draws.shift() : .5);
-  for (const [trial, bonus] of [[0,true], [1/21 - 1e-8,true], [1/21,false], [.99,false]]) {
-    game.board = withRow([0,384,0,0]); game.over = false;
-    game.next = { bonus:false, candidates:[1] }; game.deck = [1,2,3];
-    draws = [0, trial, .99]; // entry lane, bonus trial, candidate window
-    game.move('left');
-    assert.equal(game.next.bonus, bonus);
-    assert.equal(game.deck.length, bonus ? 3 : 2);
-    if (bonus) assert.deepEqual(game.next.candidates, [12,24,48]);
-  }
-  game.board = withRow([0,24,0,0]); game.next = { bonus:false, candidates:[1] };
-  draws = [0,0,0];
-  game.move('left');
+  const step = (row, rolls) => { game.board = withRow(row); game.over = false; game.next = { bonus:false, candidates:[1] }; draws = rolls; game.move('left'); };
+  game.deck = [1,2,3,1,2,3,1,2,3];
+  step([0,384,0,0], [0, 2/21 + 1e-9]); // draw 1 = block position 0: lane, slot roll -> slot 2
+  assert.equal(game.slot, 2); assert.equal(game.next.bonus, false);
+  step([0,384,0,0], [0]);               // position 1: not the slot
   assert.equal(game.next.bonus, false);
+  const deck = game.deck.length;
+  step([0,384,0,0], [0, .99]);          // position 2: the slot; window roll .99 -> last window
+  assert.equal(game.next.bonus, true);
+  assert.deepEqual(game.next.candidates, [12,24,48]);
+  assert.equal(game.deck.length, deck, 'a bonus does not consume the basic deck');
+  for (let i = 3; i < 21; i++) { step([0,384,0,0], [0]); assert.equal(game.next.bonus, false, `position ${i}`); }
+  step([0,384,0,0], [0, 0]);            // draw 22 starts the next block: new slot 0, bonus at once
+  assert.equal(game.slot, 0); assert.equal(game.next.bonus, true);
+  game.reset(); assert.equal(game.draws, 1); assert.equal(game.slot, -1);
+});
+
+test('a slot that comes while no bonus is possible is lost', () => {
+  let draws = [];
+  const game = createGame(() => draws.length ? draws.shift() : .5);
+  game.board = withRow([0,24,0,0]); game.next = { bonus:false, candidates:[1] };
+  draws = [0, 0]; game.move('left');
+  assert.equal(game.slot, 0); assert.equal(game.next.bonus, false);
+  for (let i = 1; i < 21; i++) {
+    game.board = withRow([0,384,0,0]); game.over = false; game.next = { bonus:false, candidates:[1] };
+    draws = [0]; game.move('left'); assert.equal(game.next.bonus, false);
+  }
+});
+
+test('random games: at most one bonus per block, exactly one when always possible, public cycle matches', () => {
+  let blocks = 0, full = 0, maxGap = 0;
+  for (let n = 1; n <= 300; n++) {
+    const rng = seed(n), game = createGame(rng);
+    if (n % 2) game.board[0][0] = 768; // keeps bonuses possible all game in half of the games
+    let cycle = initialCycle(), block = [], last = null;
+    for (let move = 1; !game.over && move < 3000; move++) {
+      const dirs = ['left','right','up','down'].filter(d => projectMove(game.board, d).changed);
+      game.move(dirs[Math.floor(rng() * dirs.length)]);
+      if (game.over) break;
+      const possible = Math.max(...game.board.flat()) >= 48;
+      cycle = observeCycle(cycle, game.next, game.board);
+      assert.equal(cycle.pos, (game.draws - 1) % 21);
+      block.push({ bonus:game.next.bonus, possible });
+      if (game.next.bonus) { if (last !== null) maxGap = Math.max(maxGap, move - last); last = move; }
+      if (block.length < 21) assert(cycle.used || game.slot >= block.length || !block[game.slot].possible, 'hidden slot is never excluded');
+      if (block.length === 21) {
+        const bonuses = block.filter(d => d.bonus).length;
+        assert(bonuses <= 1); blocks++;
+        if (block.every(d => d.possible)) { assert.equal(bonuses, 1); full++; }
+        block = [];
+      }
+    }
+  }
+  assert(full > 100, `blocks with bonus always possible: ${full} of ${blocks}`);
+  assert(maxGap <= 41, `max gap ${maxGap}`);
 });
 
 test('a committed bonus always belongs to the displayed candidates', () => {

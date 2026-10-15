@@ -43,14 +43,30 @@ each window, and uniform placement among moved rows/columns. This independently
 supports the modern core-rule implementation. Optional boosted starts are not included.
 This is community reverse engineering, not certification by the official developer.
 
+## Bonus cycle measured in the official app (2026-10)
+
+The independent 1/21 trial above is how third-party reconstructions describe the
+bonus frequency; a community comment pointed out that the official app instead
+spawns one bonus in each cycle of 21 draws. We checked this by letting our AI play
+two complete games of the official iPhone app through iPhone Mirroring, reading
+every preview (1530 and 1714 moves). Numbering draws from the first preview after
+move 1, every complete block of 21 held exactly one bonus (70/70 and 78/78
+blocks), and no gap between bonuses exceeded 41 (149 gaps). Independent 1/21
+trials would give no gap above 41 in 149 gaps with probability about 4e-10.
+Results and the effect on AI strength: [RL-V35-CYCLE.md](RL-V35-CYCLE.md).
+
 ## Implemented decisions
 
 - Draw nine starting cards without replacement from a shuffled 12-card deck.
   The first preview is the tenth draw, leaving two cards in the same deck.
 - Ordinary cards exhaust the deck before another balanced deck is shuffled.
-- At maximum tile >= 48, each new preview has a 1/21 chance to be a bonus.
-  A bonus does not consume the ordinary deck. These are random trials, not a
-  guaranteed interval of 21 moves.
+- Bonus cycle (since V35, measured in the official app; see below): the opening
+  preview is draw 0, and draws 1-21, 22-42, ... form blocks of 21. Each block has
+  one bonus slot, chosen uniformly when the block starts. At that slot the preview
+  is a bonus if the maximum tile is >= 48; otherwise the slot is lost. All other
+  draws come from the ordinary deck, and a bonus does not consume it. Before V35
+  every preview at maximum >= 48 was an independent 1/21 trial; the C++ training
+  engine still uses that rule (V35 measured the difference).
 - Eligible bonuses are 6, 12, 24, ... through maximum/8 (48 -> {6}, 96 -> {6,12},
   192 -> {6,12,24}, 384 -> {6,12,24,48}, ...).
 - Bonus card (official-modern rule, default since V20): choose uniformly among

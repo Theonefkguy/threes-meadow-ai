@@ -5,7 +5,7 @@ import vm from 'node:vm';
 import fs from 'node:fs';
 import { createGame, projectMove, score } from '../dist/engine.js';
 import { t, locale, setLanguage } from '../dist/i18n.js';
-import { initialCounts, observePreview } from '../dist/card-memory.js';
+import { initialCounts, observePreview, initialCycle, observeCycle } from '../dist/card-memory.js';
 
 function setup() {
   setLanguage("zh-CN");
@@ -62,7 +62,7 @@ function setup() {
   const context = vm.createContext({ document, window, Intl, console, Worker,
     localStorage: { getItem:() => { throw new Error('denied'); }, setItem:() => { throw new Error('denied'); } },
     t, locale, setLanguage, applyLanguage: () => {},
-    createGame: () => (engine = createGame(() => .5)), projectMove, score, initialCounts, observePreview,
+    createGame: () => (engine = createGame(() => .5)), projectMove, score, initialCounts, observePreview, initialCycle, observeCycle,
     setTimeout: (fn, delay) => { timers.set(++serial,fn); delays.set(serial,delay); return serial; },
     clearTimeout: id => timers.delete(id)
   });
@@ -186,7 +186,7 @@ test('AI starts from the current game, moves repeatedly, and stops without accep
   const worker = workers[0];
   assert.equal(JSON.stringify(engine.board), original);
   assert.equal(ids['#ai-toggle'].attrs['aria-pressed'], 'true');
-  assert.deepEqual(Object.keys(worker.messages[0]).sort(), ['board','fresh','id','next','policy','remaining']);
+  assert.deepEqual(Object.keys(worker.messages[0]).sort(), ['board','cycle','fresh','id','next','policy','remaining']);
   assert.equal(worker.messages[0].fresh, true);
   worker.reply('left'); flush();
   assert.equal(engine.turns,1);
@@ -241,9 +241,11 @@ test('manual play is counted before AI takeover and restart resets the visible m
  if(!engine.over){
   ids['#ai-toggle'].emit('click');flush();
   assert.deepEqual(Array.from(workers.at(-1).messages.at(-1).remaining),[1,2,3].map(n=>engine.deck.filter(v=>v===n).length));
+  assert.equal(workers.at(-1).messages.at(-1).cycle.pos,(engine.draws-1)%21,'cycle position of the next draw');
  }
  ids['#new-game'].emit('click');ids['#ai-toggle'].emit('click');flush();
  assert.deepEqual(Array.from(workers.at(-1).messages.at(-1).remaining),[1,2,3].map(n=>engine.deck.filter(v=>v===n).length));
+ assert.deepEqual({...workers.at(-1).messages.at(-1).cycle},{pos:0,used:0,excl:0});
 });
 
 test('switching learned policy stops old work, and failed model load visibly falls back',()=>{
