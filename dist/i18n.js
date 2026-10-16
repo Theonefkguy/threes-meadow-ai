@@ -16,7 +16,7 @@ export const english = {
   "强化学习 · 第四版": "RL · V4",
   "经典搜索": "Classic search",
   "从当前棋盘接手，点击停止或手动操作即可接管。": "Starts from your board. Stop the AI or make a move to take over.",
-  "默认使用 V31 模型与五层剪枝搜索，合出 6144 后改为六层。模型下载约 17 MB，首次使用时下载，之后在你的设备上运行。完整精度版使用未压缩精度的 5 格表（下载约 30 MB），测试中两者成绩基本相同。": "The default uses the V31 model and five-ply search, six-ply once a 6144 is on the board. The 17 MB model download happens on first use; it then runs on your device. The full-precision option uses the 5-cell tables at their original 32-bit precision (30 MB download); in testing both scored about the same.",
+  "默认使用 V31 模型与五层剪枝搜索，合出 6144 后改为六层。模型下载约 17 MB，首次使用时下载，之后在你的设备上运行。完整精度版使用 32 位原始精度的 5 格表（下载约 30 MB）；旧版本的配对测试中，两种精度的成绩没有显著差别。": "The default uses the V31 model and five-ply search, six-ply once a 6144 is on the board. The 17 MB model download happens on first use; it then runs on your device. The full-precision option uses the 5-cell tables at their original 32-bit precision (30 MB download); in an earlier paired test the two precisions showed no significant difference.",
   "正在下载模型 {loaded} / {total} MB（{percent}%）": "Downloading the model: {loaded} / {total} MB ({percent}%)",
   "模型下载进度": "Model download",
   "完整模型暂时无法加载，已改用 V23 模型。": "The full model could not load. Using the V23 model instead.",

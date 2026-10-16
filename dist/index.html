@@ -64,7 +64,7 @@
       <button id="ai-toggle" type="button" aria-pressed="false" data-i18n="AI 自动玩">Play with AI</button>
       <p id="ai-status" role="status" data-i18n="从当前棋盘接手，点击停止或手动操作即可接管。">Starts from your board. Stop the AI or make a move to take over.</p>
       <div class="ai-progress" id="ai-progress" hidden><progress max="100" value="0" aria-label="Model download" data-i18n-aria="模型下载进度"></progress></div>
-      <p class="ai-note" data-i18n="默认使用 V31 模型与五层剪枝搜索，合出 6144 后改为六层。模型下载约 17 MB，首次使用时下载，之后在你的设备上运行。完整精度版使用未压缩精度的 5 格表（下载约 30 MB），测试中两者成绩基本相同。">The default uses the V31 model and five-ply search, six-ply once a 6144 is on the board. The 17 MB model download happens on first use; it then runs on your device. The full-precision option uses the 5-cell tables at their original 32-bit precision (30 MB download); in testing both scored about the same.</p>
+      <p class="ai-note" data-i18n="默认使用 V31 模型与五层剪枝搜索，合出 6144 后改为六层。模型下载约 17 MB，首次使用时下载，之后在你的设备上运行。完整精度版使用 32 位原始精度的 5 格表（下载约 30 MB）；旧版本的配对测试中，两种精度的成绩没有显著差别。">The default uses the V31 model and five-ply search, six-ply once a 6144 is on the board. The 17 MB model download happens on first use; it then runs on your device. The full-precision option uses the 5-cell tables at their original 32-bit precision (30 MB download); in an earlier paired test the two precisions showed no significant difference.</p>
     </section>
 
     <section class="rules">
