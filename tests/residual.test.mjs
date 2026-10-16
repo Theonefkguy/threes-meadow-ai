@@ -79,3 +79,22 @@ test('gzip decoding passes plain bytes through and reads streamed bodies with by
   let counted=0;const body=await readBody(new Response(packed),n=>counted+=n);
   assert.equal(counted,packed.byteLength);assert.deepEqual(Buffer.from(body),packed);
 });
+
+test('the full-precision V31 files decode to the native float32 residuals exactly as trained', async () => {
+  const {MODEL_FILES}=await import('../dist/rl-model.js');const f=MODEL_FILES.v31f,s=MODEL_FILES.v31;
+  assert.equal(f.base,s.base);assert.notEqual(f.cache,s.cache);
+  const names=[f.base,...f.residuals];
+  const gz=names.map(n=>readFileSync(new URL(`../dist/models/${n}`,import.meta.url)));
+  assert.equal(gz.reduce((t,b)=>t+b.byteLength,0),f.bytes);
+  const files=await Promise.all(gz.map(b=>gunzipIfNeeded(new Uint8Array(b.buffer,b.byteOffset,b.byteLength))));
+  // SHA-256 of V31 S1-final.res, V30 P-final.res and V31 S3-final.res (training/v32-strong/protocol.json).
+  const hash=b=>createHash('sha256').update(new Uint8Array(b)).digest('hex');
+  assert.deepEqual(files.slice(1).map(hash),['a5c1d053a6eb5f4d02243328a70550435e9f74f39d2679e6c8a68b11068711e2',
+    'e0cc549fc250ef979640549d8f286fefd2fdc947a0247c7dd28d320895155570','6429f239fe7908e4293a8c377f375c68d3478fd4daaf67f60f57c5983dc59b8f']);
+  const full=decodeModel(files[0],files.slice(1));
+  assert.deepEqual(full.residuals.map(r=>r!==null),[false,true,true,true]);
+  files.slice(1).forEach((buf,i)=>assert.deepEqual(full.residuals[i+1],new Float32Array(buf.slice(16))));
+  const std=decodeModel(files[0],await Promise.all(s.residuals.map(n=>{const b=readFileSync(new URL(`../dist/models/${n}`,import.meta.url));return gunzipIfNeeded(new Uint8Array(b.buffer,b.byteOffset,b.byteLength));})));
+  let diff=0;for(let i=0;i<full.residuals[3].length;i+=997)diff=Math.max(diff,Math.abs(full.residuals[3][i]-std.residuals[3][i]));
+  assert(diff>0&&diff<64,'float16 copy is close to, but not equal to, the float32 weights');
+});

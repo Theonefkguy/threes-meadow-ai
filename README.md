@@ -8,7 +8,7 @@ A high-performance Threes AI you can watch, interrupt and play alongside. Multi-
 
 ## Play
 
-Open the [live demo](https://theonefkguy.github.io/threes-meadow-ai/), use the English default or switch to 中文, and press **Play with AI**. Use arrow keys, swipe, or the direction buttons to take over. The default V31 model is a 17 MB gzip download (32 MB decoded) fetched on first use, with a progress bar. The V4 search and a classic heuristic search remain selectable for comparison.
+Open the [live demo](https://theonefkguy.github.io/threes-meadow-ai/), use the English default or switch to 中文, and press **Play with AI**. Use arrow keys, swipe, or the direction buttons to take over. The default V31 model is a 17 MB gzip download (32 MB decoded) fetched on first use, with a progress bar. A full-precision option (30 MB download) uses the 5-cell tables at their original 32-bit precision instead of 16-bit; in testing both scored about the same. The V4 search and a classic heuristic search remain selectable for comparison.
 
 ## Video
 

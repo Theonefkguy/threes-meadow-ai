@@ -1,17 +1,26 @@
-import {loadV4Policy} from './v4-policy.js?v=26';
-import { chooseMove } from './ai.js?v=26';
-import { loadModel } from './rl-model.js?v=26';
-import { chooseLearnedMove } from './rl-search.js?v=26';
-import { chooseFastMove, webSearchOptions } from './fast-search.js?v=26';
+import {loadV4Policy} from './v4-policy.js?v=27';
+import { chooseMove } from './ai.js?v=27';
+import { loadModel } from './rl-model.js?v=27';
+import { chooseLearnedMove } from './rl-search.js?v=27';
+import { chooseFastMove, webSearchOptions } from './fast-search.js?v=27';
 // A failed V31 download is not retried on every move; it is retried once when the AI is started
 // again (the page marks the first request of each start as fresh).
-let v31Failed=false;
+let v31Failed=false,fullFailed=false;
 self.onmessage = async ({ data }) => {
   try {
-    if(data.fresh)v31Failed=false;
+    if(data.fresh)v31Failed=fullFailed=false;
     const options={remaining:data.remaining};
-    if(data.policy==='rl-fast'||data.policy==='rl-v4') {
+    if(data.policy==='rl-fast'||data.policy==='rl-full'||data.policy==='rl-v4') {
       let result,policy=data.policy,fallback;
+      if(policy==='rl-full'){
+        // Full precision: the same search on the float32 residuals (30.4 MB download). If it cannot
+        // load, continue with the standard model below.
+        try{if(fullFailed)throw new Error('full unavailable');
+          const model=await loadModel('v31f',({loaded,total})=>self.postMessage({id:data.id,type:'progress',loaded,total}));
+          result=chooseFastMove(data.board,data.next,model,{...options,...webSearchOptions(data.board),clampLeaf:true,cycle:data.cycle});
+          if(result.unsupported){policy='rl-v4';result=undefined;}
+        }catch{fullFailed=true;policy='rl-fast';fallback='full-load';}
+      }
       if(policy==='rl-fast'){
         // Default (V31 release): five-move search, probability cutoff 0.01, clamped leaves,
         // 160 ms soft budget (since V41: six moves, cutoff 0.005, 400 ms once a 6144 is on the board), on the V31 model: four-cell tables plus float16 five-cell residuals

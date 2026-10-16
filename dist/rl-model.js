@@ -31,8 +31,18 @@ export function halfToNumber(h) {
 // half * 2^scaleExp (scripts/quantize-residual.py). Decoded to float32, which holds these
 // values exactly, so native evaluation of the same quantized weights matches bit for bit.
 export const RESIDUAL_MAGIC = 0x3548444e;
+// Full-precision residual (the native training format, model5s.h): 16-byte header {0x3554444e,
+// patterns, table, stage} then patterns*table little-endian float32 values, used as they are.
+export const NATIVE_RESIDUAL_MAGIC = 0x3554444e;
 export function decodeResidual(buffer) {
   const view=new DataView(buffer),n=PATTERNS5.length*TABLE5;
+  if(buffer.byteLength>=16&&view.getUint32(0,true)===NATIVE_RESIDUAL_MAGIC){
+    if(buffer.byteLength!==16+n*4||view.getUint32(4,true)!==PATTERNS5.length||view.getUint32(8,true)!==TABLE5)throw new Error('残差格式不匹配');
+    const stage=view.getUint32(12,true);if(stage<1||stage>3)throw new Error('残差阶段无效');
+    const weights=new Float32Array(buffer.slice(16));
+    for(const v of weights)if(!Number.isFinite(v))throw new Error('残差包含无效数值');
+    return {stage,weights};
+  }
   if(buffer.byteLength!==32+n*2 || view.getUint32(0,true)!==RESIDUAL_MAGIC || view.getUint32(4,true)!==PATTERNS5.length ||
     view.getUint32(8,true)!==TABLE5 || view.getUint32(16,true)!==1) throw new Error('残差格式不匹配');
   const stage=view.getUint32(12,true),scale=2**view.getInt32(20,true);
@@ -94,7 +104,11 @@ export const MODEL_FILES = {
   // V31: four-cell tables plus float16 five-cell residuals for stages 1-3 (RL-V31-STAGES.md),
   // 32 MB decoded, 17.4 MB downloaded.
   v31:{base:'ntuple-v31.bin.gz',residuals:['ntuple-v31-s1.f16.gz','ntuple-v31-s2.f16.gz','ntuple-v31-s3.f16.gz'],
-    bytes:5040193+2993234+4262781+5955585,cache:'threes-models-v31-b94a7da2'}
+    bytes:5040193+2993234+4262781+5955585,cache:'threes-models-v31-b94a7da2'},
+  // V31 full precision: the same four-cell tables plus the float32 residuals exactly as trained and
+  // evaluated natively (S1-final, V30 P-final, S3-final), 64 MB decoded, 30.4 MB downloaded.
+  v31f:{base:'ntuple-v31.bin.gz',residuals:['ntuple-v31-s1.res.gz','ntuple-v31-s2.res.gz','ntuple-v31-s3.res.gz'],
+    bytes:5040193+5720853+8153302+11480934,cache:'threes-models-v31f-a5c1d053'}
 };
 // Gzip bytes (magic 1f 8b) are decompressed with the browser's DecompressionStream; anything
 // else is returned unchanged (e.g. when a server already removed a gzip Content-Encoding).
@@ -116,7 +130,9 @@ export async function readBody(response,onBytes=()=>{}) {
 // changes whenever the model files change; other threes-models-* caches are then deleted. Any
 // Cache Storage failure (private mode, quota) silently falls back to the network.
 const cacheStore=name=>typeof caches==='object'&&name?caches.open(name).catch(()=>null):Promise.resolve(null);
-async function dropOtherCaches(keep){try{for(const k of await caches.keys())if(k.startsWith('threes-models-')&&k!==keep)await caches.delete(k);}catch{/* Optional. */}}
+// Caches of every current version are kept (standard and full precision can both stay downloaded).
+const CURRENT_CACHES=new Set(Object.values(MODEL_FILES).map(f=>f.cache).filter(Boolean));
+async function dropOtherCaches(){try{for(const k of await caches.keys())if(k.startsWith('threes-models-')&&!CURRENT_CACHES.has(k))await caches.delete(k);}catch{/* Optional. */}}
 const pending=new Map();
 // onProgress({loaded,total}) is called as bytes arrive (for every caller while a load is shared).
 export function loadModel(version,onProgress) {

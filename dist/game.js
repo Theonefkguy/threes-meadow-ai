@@ -1,6 +1,6 @@
 import { t, locale, setLanguage, applyLanguage } from './i18n.js';
-import { createGame, projectMove, score } from './engine.js?v=26';
-import { initialCounts, observePreview, initialCycle, observeCycle } from './card-memory.js?v=26';
+import { createGame, projectMove, score } from './engine.js?v=27';
+import { initialCounts, observePreview, initialCycle, observeCycle } from './card-memory.js?v=27';
 
 const boardEl = document.querySelector('#board');
 const nextEl = document.querySelector('#next-tile');
@@ -85,7 +85,7 @@ aiButton.addEventListener('click', () => {
   } catch { stopAI(t('当前浏览器无法启动 AI，可以继续手动玩。'), true); }
 });
 function createWorker() {
-    aiWorker = new Worker('./ai-worker.js?v=26', { type:'module' });
+    aiWorker = new Worker('./ai-worker.js?v=27', { type:'module' });
     aiWorker.onmessage = ({ data }) => {
       if (!aiRunning || data.id !== aiRequest) return;
       // Download progress keeps the request alive: restart the watchdog while bytes arrive.
@@ -96,8 +96,8 @@ function createWorker() {
         stopAI(t('AI 暂时无法继续，可以手动操作或重新开启。')); return;
       }
       if(data.fallback) {
-        aiPolicy.value=['rl-fast','rl-v4'].includes(data.policy)?data.policy:'classic';
-        aiStatus.textContent=data.fallback==='v31-load'?t('完整模型暂时无法加载，已改用 V23 模型。'):data.fallback==='fast-load'?t('剪枝搜索暂时无法加载，已切换第四版。'):data.fallback==='load'?t('模型暂时无法加载，已切换经典搜索。'):t('已超过模型训练范围，切换经典搜索。');
+        aiPolicy.value=['rl-fast','rl-full','rl-v4'].includes(data.policy)?data.policy:'classic';
+        aiStatus.textContent=data.fallback==='full-load'?t('完整精度模型暂时无法加载，已改用标准模型。'):data.fallback==='v31-load'?t('完整模型暂时无法加载，已改用 V23 模型。'):data.fallback==='fast-load'?t('剪枝搜索暂时无法加载，已切换第四版。'):data.fallback==='load'?t('模型暂时无法加载，已切换经典搜索。'):t('已超过模型训练范围，切换经典搜索。');
       } else {
         const phase=data.policy?.startsWith('rl')?t(' · {stage}策略', {stage:[t('前期'),t('中期'),t('后期'),t('冲刺 12288')][data.stage]}):'';
         aiStatus.textContent=t('AI 向{direction}移动{phase} · 已完成 {turns} 步',{direction:t(directionNames[data.direction]),phase,turns:game.turns+1});
