@@ -1,0 +1,31 @@
+{
+  "round": "V40: deeper search late in stage 3",
+  "createdUTC": "2026-10-16T08:08:41.424701+00:00",
+  "status": "frozen before any V40 game",
+  "motivation": "V39: after the first 6144, 473 of 1811 failures happen between the final-768 chain (3072+1536+768 besides the 6144) and having every card for 12288; only 34 after that. V26 (old rule, V23 model) saw a score gain after 6144 with 6-ply / 0.005 (secondary, n.s. for 12288).",
+  "arms": {
+    "base": "website search (5-ply, cutoff 0.01) throughout: the V39 replay records (= V38 W31 arm), not rerun",
+    "L": "switch to 6-ply / cutoff 0.005 from the first move at which the final-768 milestone holds, until the end",
+    "S": "6-ply / cutoff 0.005 from the first 6144 (every move)"
+  },
+  "games": "the 2048 V38 first-6144 states (cycle rule), rollout seeds 38400001+index, W31 float32, cycle-aware search, clamp, complete depth; training/v40-late-depth/deep.cpp (TRIGGER never reproduces V39 exactly, checked on states 0-1)",
+  "primary": {
+    "L": "reach 12288, L vs base, exact McNemar",
+    "S": "reach 12288, S vs base, exact McNemar"
+  },
+  "multiplicity": "Holm over the two, alpha 0.05",
+  "secondary": "score gained, P(12288 | final 768), reaching ready, CPU ms per deep move, S vs L",
+  "adoption": "A Holm-significant gain makes that setting a web candidate, subject to a browser timing check (160 ms budget).",
+  "fileSHA256": {
+    "training/v40-late-depth/deep.cpp": "97e2046fa81bde97889d43400750d6a1561f850fd7cd0dcf5a7f3f1d14934840",
+    "training/v40-late-depth/bin/deep": "24e5b0395cb3d25356228024eff4ed9d20890b4bceb97a943affe3f388172aa2",
+    "training/v40-late-depth/run.sh": "51fa716a685c6ddc50ba2414c9227d8596dd06d35e971351f20a271e510579c2",
+    "training/v40-late-depth/analyze.py": "70be09190d606f3146f5b22e5378d41ff308a09004bb7888b080c8d14a82e122",
+    "training/v38-progress/pool/first6144.txt": "4fb36557ba843a198cdea4e2aed3247c41994bb13026c1bfb54d001f82efd9a8",
+    "training/v31-stages/models/W31.bin": "b94a7da2671fe28ad3390a5fcd2fbda59a599f50437b23d5e3cf7097e45f9617",
+    "training/v30-parallel/models/P-final.res": "e0cc549fc250ef979640549d8f286fefd2fdc947a0247c7dd28d320895155570",
+    "training/v31-stages/models/S1-final.res": "a5c1d053a6eb5f4d02243328a70550435e9f74f39d2679e6c8a68b11068711e2",
+    "training/v31-stages/models/S3-final.res": "6429f239fe7908e4293a8c377f375c68d3478fd4daaf67f60f57c5983dc59b8f",
+    "training/v39-endgame/results.json": "ff3b1553930370178f8e79062a3d972a984e734e9d2827a88e178a0af1dc672e"
+  }
+}

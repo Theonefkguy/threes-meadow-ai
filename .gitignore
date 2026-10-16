@@ -157,3 +157,5 @@ training/v38-progress/models/
 training/v38-progress/eval/*.part
 training/v39-endgame/bin/
 training/v39-endgame/games/*.part
+training/v40-late-depth/bin/
+training/v40-late-depth/games/*.part
