@@ -1,0 +1,16 @@
+{"index":912,"success":false,"moves":2,"scoreGained":9,"m3072":-1,"m1536":-1,"m768":-1,"ready":-1,"chain768":-1,"deepMoves":0,"searchCPU":1.8e-05,"deepCPU":0}
+{"index":913,"success":false,"moves":487,"scoreGained":244632,"m3072":255,"m1536":358,"m768":-1,"ready":-1,"chain768":-1,"deepMoves":0,"searchCPU":2.1957320000000005,"deepCPU":0}
+{"index":914,"success":false,"moves":656,"scoreGained":262824,"m3072":398,"m1536":590,"m768":590,"ready":-1,"chain768":0,"deepMoves":66,"searchCPU":3.6859139999999972,"deepCPU":0.81086099999999983}
+{"index":915,"success":false,"moves":698,"scoreGained":265200,"m3072":395,"m1536":608,"m768":660,"ready":-1,"chain768":0,"deepMoves":38,"searchCPU":3.0009159999999988,"deepCPU":0.042388000000000002}
+{"index":916,"success":false,"moves":644,"scoreGained":238848,"m3072":419,"m1536":599,"m768":-1,"ready":-1,"chain768":-1,"deepMoves":0,"searchCPU":3.0791999999999993,"deepCPU":0}
+{"index":917,"success":false,"moves":250,"scoreGained":81234,"m3072":-1,"m1536":-1,"m768":-1,"ready":-1,"chain768":-1,"deepMoves":0,"searchCPU":1.166919,"deepCPU":0}
+{"index":918,"success":false,"moves":441,"scoreGained":88452,"m3072":-1,"m1536":-1,"m768":-1,"ready":-1,"chain768":-1,"deepMoves":0,"searchCPU":2.2304179999999998,"deepCPU":0}
+{"index":919,"success":false,"moves":304,"scoreGained":88422,"m3072":-1,"m1536":-1,"m768":-1,"ready":-1,"chain768":-1,"deepMoves":0,"searchCPU":1.577565000000001,"deepCPU":0}
+{"index":920,"success":false,"moves":351,"scoreGained":197169,"m3072":304,"m1536":-1,"m768":-1,"ready":-1,"chain768":-1,"deepMoves":0,"searchCPU":1.6843910000000004,"deepCPU":0}
+{"index":921,"success":false,"moves":561,"scoreGained":210234,"m3072":421,"m1536":-1,"m768":-1,"ready":-1,"chain768":-1,"deepMoves":0,"searchCPU":2.8616669999999984,"deepCPU":0}
+{"index":922,"success":false,"moves":584,"scoreGained":243747,"m3072":230,"m1536":468,"m768":-1,"ready":-1,"chain768":-1,"deepMoves":0,"searchCPU":2.6572650000000033,"deepCPU":0}
+{"index":923,"success":true,"moves":735,"scoreGained":1062996,"m3072":356,"m1536":492,"m768":571,"ready":731,"chain768":1,"deepMoves":164,"searchCPU":4.9561040000000087,"deepCPU":1.8801369999999993}
+{"index":924,"success":false,"moves":584,"scoreGained":198816,"m3072":424,"m1536":-1,"m768":-1,"ready":-1,"chain768":-1,"deepMoves":0,"searchCPU":2.9155280000000001,"deepCPU":0}
+{"index":925,"success":false,"moves":163,"scoreGained":27387,"m3072":-1,"m1536":-1,"m768":-1,"ready":-1,"chain768":-1,"deepMoves":0,"searchCPU":0.96516400000000024,"deepCPU":0}
+{"index":926,"success":false,"moves":702,"scoreGained":263475,"m3072":364,"m1536":612,"m768":627,"ready":-1,"chain768":0,"deepMoves":75,"searchCPU":4.0146070000000051,"deepCPU":0.72834599999999983}
+{"index":927,"success":false,"moves":419,"scoreGained":204276,"m3072":332,"m1536":-1,"m768":-1,"ready":-1,"chain768":-1,"deepMoves":0,"searchCPU":2.0568709999999992,"deepCPU":0}
