@@ -1,0 +1,11 @@
+{
+ "note": "Desktop Chromium (Claude app browser) on the M5 Pro after the V43 games finished; dist/fast-search.js, shipped float16 weights, cycle-aware, clamp, 160 ms budget; all 320 V25 browser states x 3 (no states before the first 1536 exist in this set).",
+ "results": [
+  {"setting": "5/0.01", "phase": "1536", "n": 192, "meanMs": 5.5, "p95Ms": 10.3, "maxMs": 11.9, "fullDepth": 192},
+  {"setting": "5/0.01", "phase": "3072", "n": 384, "meanMs": 6.0, "p95Ms": 11.2, "maxMs": 14.7, "fullDepth": 384},
+  {"setting": "5/0.01", "phase": "6144", "n": 384, "meanMs": 6.8, "p95Ms": 11.2, "maxMs": 14.1, "fullDepth": 384},
+  {"setting": "6/0.005", "phase": "1536", "n": 192, "meanMs": 23.5, "p95Ms": 44.0, "maxMs": 64.7, "fullDepth": 192},
+  {"setting": "6/0.005", "phase": "3072", "n": 384, "meanMs": 23.9, "p95Ms": 50.8, "maxMs": 79.1, "fullDepth": 384},
+  {"setting": "6/0.005", "phase": "6144", "n": 384, "meanMs": 27.7, "p95Ms": 57.4, "maxMs": 81.3, "fullDepth": 384}
+ ]
+}
