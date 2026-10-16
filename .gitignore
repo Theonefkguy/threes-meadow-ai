@@ -155,3 +155,5 @@ training/v38-progress/bin/
 training/v38-progress/pool/
 training/v38-progress/models/
 training/v38-progress/eval/*.part
+training/v39-endgame/bin/
+training/v39-endgame/games/*.part
