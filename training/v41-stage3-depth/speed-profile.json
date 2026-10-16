@@ -1,0 +1,8 @@
+{
+ "note": "Node 22 on the M5 Pro while 16 lq threads ran V41 whole games (absolute times are slow; compare within this file). dist/fast-search.js copies, 6-ply / 0.005, cycle-aware, the 128 V25 6144-phase states.",
+ "profile": {"msPerState": 42.4, "nodesPerState": 110680, "leafEvaluationsPerState": 71079, "nsPerLeafEvaluation": 352, "leafShareOfTime": 0.59,
+   "transpositionProbes": 7531815, "hitRate": 0.473, "failedStoreRate": 0.0000337},
+ "tableSize": {"note": "3 interleaved passes; identical directions, depths and root values on all 128 states", "bits18": {"meanMs": 42.71, "p95Ms": 87.58}, "bits20": {"meanMs": 43.77, "p95Ms": 91.69}, "bits22": {"meanMs": 44.95, "p95Ms": 92.71}},
+ "duplicateChanceChildren": {"states": 32, "children": 1660210, "unique": 1660210},
+ "conclusion": "The transposition table is not full at 6-ply (0.003% failed stores), so a larger table only adds cache misses; chance children are never duplicates. About 60% of the time goes to leaf evaluation (96 table lookups each, memory bound)."
+}
