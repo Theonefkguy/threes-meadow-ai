@@ -1,0 +1,15 @@
+{
+  "frozenUTC": "2026-10-16T00:45:51Z",
+  "sha256": {
+    "training/v38-progress/pool/first6144.txt": "4fb36557ba843a198cdea4e2aed3247c41994bb13026c1bfb54d001f82efd9a8",
+    "training/v38-progress/models/P-final.bin": "d946877083ab51c07e6c5bcf2b5bcd71ecbbf728c159b112fe4785d380930155",
+    "training/v38-progress/models/P-final.res": "ba044814e160c1b7a9d96c5771625a10cb299aa07a0f2312159ad00c45d2a57a",
+    "training/v38-progress/models/P-final.bias": "e4884ef8f141ba47d47af26f41b7fe6aed289bd3cfe084faf2b0abdd346c78da",
+    "training/v38-progress/models/C-final.bin": "c4fc1e47c9b889c97285f7982f204e56a36433c08a04db24c48743b055a74bba",
+    "training/v38-progress/models/C-final.res": "026454707c264cc99b159f12e5624ded2294ab7616ee6feb7348a9025f76f30d",
+    "training/v38-progress/models/B-final.bin": "b94a7da2671fe28ad3390a5fcd2fbda59a599f50437b23d5e3cf7097e45f9617",
+    "training/v38-progress/models/B-final.res": "6429f239fe7908e4293a8c377f375c68d3478fd4daaf67f60f57c5983dc59b8f",
+    "training/v38-progress/models/B-final.bias": "9ee27ae90f20673a49ba2babff5aa128f765b14eb64a0b6c56753e5927047df8"
+  },
+  "note": "written after pool generation and training, before any evaluation game; P/C stages 0-2 and all of B tables verified identical to W31"
+}
