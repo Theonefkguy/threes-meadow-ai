@@ -1,6 +1,6 @@
-import { t, locale, setLanguage, applyLanguage } from './i18n.js';
-import { createGame, projectMove, score } from './engine.js?v=27';
-import { initialCounts, observePreview, initialCycle, observeCycle } from './card-memory.js?v=27';
+import { t, locale, setLanguage, applyLanguage } from './i18n.js?v=28';
+import { createGame, projectMove, score } from './engine.js?v=28';
+import { initialCounts, observePreview, initialCycle, observeCycle } from './card-memory.js?v=28';
 
 const boardEl = document.querySelector('#board');
 const nextEl = document.querySelector('#next-tile');
@@ -85,7 +85,7 @@ aiButton.addEventListener('click', () => {
   } catch { stopAI(t('当前浏览器无法启动 AI，可以继续手动玩。'), true); }
 });
 function createWorker() {
-    aiWorker = new Worker('./ai-worker.js?v=27', { type:'module' });
+    aiWorker = new Worker('./ai-worker.js?v=28', { type:'module' });
     aiWorker.onmessage = ({ data }) => {
       if (!aiRunning || data.id !== aiRequest) return;
       // Download progress keeps the request alive: restart the watchdog while bytes arrive.
