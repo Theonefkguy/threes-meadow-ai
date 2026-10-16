@@ -165,3 +165,6 @@ training/v41-stage3-depth/whole/*.part
 training/v41-stage3-depth/snaps/
 training/v42-precision/games/*.part
 training/v42-precision/snaps/
+training/v43-early-depth/bin/
+training/v43-early-depth/games/*.part
+training/v43-early-depth/snaps/

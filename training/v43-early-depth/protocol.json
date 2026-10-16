@@ -1,0 +1,28 @@
+{
+  "round": "V43: six-ply search before the first 6144 as well",
+  "createdUTC": "2026-10-16T17:34:58.229855+00:00",
+  "status": "frozen before any V43 game",
+  "arms": {
+    "E": "6-ply / 0.005 from the first move",
+    "D": "website setting (V41 arm D records, not rerun): 5-ply / 0.01 until a 6144, then 6-ply / 0.005"
+  },
+  "games": "seeds 41100001-41104096, whole games, cycle rule, cycle-aware search, shipped float16 weights (native copies), complete depth; training/v43-early-depth/bin/game (EARLY 5 0.01 reproduces V41 arm D, checked on 2 seeds); one 6-ply game took ~35 s CPU",
+  "primary": {
+    "P1": "reach 6144, E vs D, exact McNemar",
+    "P2": "reach 12288, E vs D, exact McNemar"
+  },
+  "multiplicity": "Holm over P1 and P2, alpha 0.05",
+  "secondary": "reach 3072/1536, score (paired normal), P(12288 | 6144), native ms per move",
+  "adoption": "A Holm-significant gain makes six-ply before 6144 a web candidate, subject to a browser timing check on early-phase states.",
+  "fileSHA256": {
+    "training/v43-early-depth/game.cpp": "97163b1677d41c122a5c1ac2db13ab1485d23f05e047e08e850afd8836baf5f1",
+    "training/v43-early-depth/bin/game": "935f68369ec4bcc7cb27201723b52799cc48811c9b9aa4ce3d6bc6ad347b8a35",
+    "training/v43-early-depth/one.sh": "0c61abb8c8e8fe4321def26be5cdf6a16b81688dbf2d11ef916ffbcaf8b3d7a8",
+    "training/v43-early-depth/analyze.py": "5b0a78fe2ed428c963fb9716d52ad9d5dc46f89cb6588a9c68199479e4ac01b9",
+    "training/web-release/models/ntuple-v31.bin": "b94a7da2671fe28ad3390a5fcd2fbda59a599f50437b23d5e3cf7097e45f9617",
+    "training/web-release/models/v31-s1q.res": "e033ffaf5a340d75ae54b3b03db77c6f2692e456340281117262340f4a39cab6",
+    "training/web-release/models/v31-s2q.res": "077f1082e27941be25a4a43355a4e9a46f5dd66ba733554e7df4dde69c54e4a5",
+    "training/web-release/models/v31-s3q.res": "c0271389706f0f8a1dd7f01f142f85987f707577373779a89d4f042bc8c25320",
+    "training/v41-stage3-depth/whole-results.json": "945aafb3ed2447752fb35dbae50cad9e95dd383c25f0566aea31ad028cd776b9"
+  }
+}
