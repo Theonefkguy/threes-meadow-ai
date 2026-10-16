@@ -1,0 +1,86 @@
+{
+ "arms": {
+  "base": {
+   "12288": 237,
+   "rate": 0.11572265625,
+   "meanScoreGained": 292878.54638671875
+  },
+  "S": {
+   "12288": 392,
+   "rate": 0.19140625,
+   "meanScoreGained": 366629.9150390625,
+   "nativeMsPerMove": 25.948973624872256
+  },
+  "D6": {
+   "12288": 307,
+   "rate": 0.14990234375,
+   "meanScoreGained": 326462.4140625,
+   "nativeMsPerMove": 7.710401363487425
+  },
+  "T5": {
+   "12288": 259,
+   "rate": 0.12646484375,
+   "meanScoreGained": 305663.771484375,
+   "nativeMsPerMove": 8.12473187185056
+  }
+ },
+ "primary": {
+  "D6 vs base": {
+   "onlyFirst": 249,
+   "onlySecond": 179,
+   "differencePP": 3.41796875,
+   "p": 0.0008321388788244661,
+   "scoreDifference": 33583.86767578125,
+   "scoreApprox95": [
+    15870.858198055008,
+    51296.87715350749
+   ],
+   "holmP": 0.0016642777576489321
+  },
+  "T5 vs base": {
+   "onlyFirst": 206,
+   "onlySecond": 184,
+   "differencePP": 1.07421875,
+   "p": 0.2875981767162056,
+   "scoreDifference": 12785.22509765625,
+   "scoreApprox95": [
+    -4128.137325715597,
+    29698.587521028097
+   ],
+   "holmP": 0.2875981767162056
+  }
+ },
+ "vsS": {
+  "D6": {
+   "onlyFirst": 210,
+   "onlySecond": 295,
+   "differencePP": -4.150390625,
+   "p": 0.00017965268175416864,
+   "scoreDifference": -40167.5009765625,
+   "scoreApprox95": [
+    -59173.82521827008,
+    -21161.176734854922
+   ]
+  },
+  "T5": {
+   "onlyFirst": 184,
+   "onlySecond": 317,
+   "differencePP": -6.494140625,
+   "p": 3.0050878768073166e-09,
+   "scoreDifference": -60966.1435546875,
+   "scoreApprox95": [
+    -79641.61423971373,
+    -42290.67286966127
+   ]
+  }
+ },
+ "eligible": [
+  "S"
+ ],
+ "choice": "S",
+ "choiceSetting": [
+  6,
+  0.005
+ ],
+ "rule": "Web setting for stage 3 = the eligible setting with the lowest mean browser time on 6144-phase states. Eligible: browser P95 <= 160 ms with full depth on >= 99% of measurements (browser-6144.json), and for D6/T5 also Holm-significantly better than base and not significantly worse than S (p<0.05 with a negative difference); S is eligible on timing alone (V40 result)."
+}

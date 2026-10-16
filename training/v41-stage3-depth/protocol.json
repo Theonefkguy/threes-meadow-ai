@@ -28,6 +28,24 @@
     "training/v30-parallel/models/P-final.res": "e0cc549fc250ef979640549d8f286fefd2fdc947a0247c7dd28d320895155570",
     "training/v31-stages/models/S1-final.res": "a5c1d053a6eb5f4d02243328a70550435e9f74f39d2679e6c8a68b11068711e2",
     "training/v31-stages/models/S3-final.res": "6429f239fe7908e4293a8c377f375c68d3478fd4daaf67f60f57c5983dc59b8f",
-    "training/v40-late-depth/results.json": "1cde5643f1c3fac9b59a3b1e2f15a63d0e155b46900b6c74c006c1ac48eb43db"
+    "training/v40-late-depth/results.json": "1cde5643f1c3fac9b59a3b1e2f15a63d0e155b46900b6c74c006c1ac48eb43db",
+    "training/v41-stage3-depth/game.cpp": "1eb9cc9ead03a559aa6709ff4bf8f6dafa59b2e71eafcd5bfeddd2862670f9d8",
+    "training/v41-stage3-depth/bin/game": "99e74336def40848946c121b43970bb1025cd18c10d6eb6f619e1bc27a714f80",
+    "training/v41-stage3-depth/whole.sh": "f37935ecff68a0c518541c2dafd05a955dca19446f5e1932fd571059489e1a8b",
+    "training/v41-stage3-depth/whole-analyze.py": "0771e758087328610e6b2e7dc8aac595d84eb74bbf8a1027dc4514c3aa3ea6c7",
+    "training/v41-stage3-depth/parity-deep.txt": "06a786d2ef54e7acfbcf785f6c324db5ac1c54adbec8add6f131d958929516bb",
+    "training/v41-stage3-depth/web-reference.cpp": "887c53166599d044cb9219f7f51f205f703e81438cfc8a076d96c93dd5551533",
+    "training/web-release/models/ntuple-v31.bin": "b94a7da2671fe28ad3390a5fcd2fbda59a599f50437b23d5e3cf7097e45f9617",
+    "training/web-release/models/v31-s1q.res": "e033ffaf5a340d75ae54b3b03db77c6f2692e456340281117262340f4a39cab6",
+    "training/web-release/models/v31-s2q.res": "077f1082e27941be25a4a43355a4e9a46f5dd66ba733554e7df4dde69c54e4a5",
+    "training/web-release/models/v31-s3q.res": "c0271389706f0f8a1dd7f01f142f85987f707577373779a89d4f042bc8c25320"
+  },
+  "step3protocol": {
+    "createdUTC": "2026-10-16T10:09:00.115098+00:00",
+    "status": "written after step 2 (choice S = 6-ply / 0.005), before any step-3 game",
+    "games": "4096 whole games, seeds 41100001-41104096, standard openings until 12288 or death, cycle rule, cycle-aware website search (5-ply / 0.01) until the board holds a 6144; then arm W keeps 5 / 0.01 and arm D uses 6 / 0.005. training/v41-stage3-depth/bin/game (LATE 5 0.01 reproduces training/v35-cycle/bin/game AWARE=1, checked on 2 seeds). Shipped float16 weights (native copies). Both arms are identical up to the first 6144 (checked).",
+    "primary": "reach 12288, D vs W, exact McNemar, alpha 0.05",
+    "secondary": "score (paired normal), P(12288 | 6144), combos, Wilson intervals, native ms per late move",
+    "adoption": "If D is significantly better on reaching 12288, the website switches to 6-ply / 0.005 once a 6144 is on the board (JS parity at this setting: 0 mismatches on 320 states, parity-deep.txt; desktop browser P95 62 ms on 6144 states), and its figures become the website figures."
   }
 }

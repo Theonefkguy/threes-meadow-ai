@@ -160,3 +160,6 @@ training/v39-endgame/games/*.part
 training/v40-late-depth/bin/
 training/v40-late-depth/games/*.part
 training/v41-stage3-depth/games/*.part
+training/v41-stage3-depth/bin/
+training/v41-stage3-depth/whole/*.part
+training/v41-stage3-depth/snaps/

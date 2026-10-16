@@ -1,0 +1,3 @@
+6/0.005 {"states":320,"byPhase":{"1536":64,"3072":128,"6144":128},"mismatches":0,"maxRootRelativeDifference":4.3264286873913846e-16,"residualStages":[1,2,3]}
+6/0.01 {"states":320,"byPhase":{"1536":64,"3072":128,"6144":128},"mismatches":0,"maxRootRelativeDifference":4.36924458234706e-16,"residualStages":[1,2,3]}
+5/0.005 {"states":320,"byPhase":{"1536":64,"3072":128,"6144":128},"mismatches":0,"maxRootRelativeDifference":4.3143496700952843e-16,"residualStages":[1,2,3]}
