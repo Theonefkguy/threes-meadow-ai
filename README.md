@@ -2,9 +2,9 @@
 
 [Play in your browser](https://theonefkguy.github.io/threes-meadow-ai/) · **English** | [简体中文](README.zh-CN.md)
 
-A high-performance Threes AI you can watch, interrupt and play alongside. Multi-stage temporal-difference learning of four- and five-cell n-tuple tables meets five-ply expectimax with probability cutoffs. The model runs entirely on your device: no account, API key or inference server needed.
+A high-performance Threes AI you can watch, interrupt and play alongside. Multi-stage temporal-difference learning of four- and five-cell n-tuple tables meets five- to six-ply expectimax with probability cutoffs. The model runs entirely on your device: no account, API key or inference server needed.
 
-**66.5% reached 6144 · 7.2% reached 12288 · 4,096 games under the official bonus cycle.**
+**67.9% reached 6144 · 9.9% reached 12288 · 4,096 games of the website AI under the official bonus cycle.**
 
 ## Play
 
@@ -16,13 +16,29 @@ Open the [live demo](https://theonefkguy.github.io/threes-meadow-ai/), use the E
 
 Watch **How a Threes AI Actually Thinks** on YouTube.
 
+## V41: deeper search after 6144
+
+Once a 6144 is on the board, the website AI now searches 6 moves ahead with finer pruning (cutoff 0.005) instead of 5 (cutoff 0.01), with up to 400 ms per move. In 4,096 paired whole games (shipped float16 weights, official bonus cycle, identical until the first 6144):
+
+| Metric | 5-ply after 6144 | 6-ply after 6144 (website) |
+|---|---:|---:|
+| Reach 6144 | 67.9% | 67.9% |
+| 6144+3072+1536+768 on the board | 24.2% | 30.7% |
+| Reach 12288 | 6.5% | **9.9%** |
+| 12288 after 6144 | 9.5% | **14.5%** |
+| Mean final score | 624,319 | **659,680** |
+
+The 12288 gain is +3.4 pp (exact McNemar p = 1.4e-9). Depth was the main part (6-ply alone: +3.4 pp from first-6144 positions; finer pruning alone: +1.1 pp, n.s.), but the two together worked best. A desktop browser needs 29 ms per move on average in this phase (P95 62 ms); slower devices fall back to the completed 5-ply result if 6 plies do not finish in time. JS and C++ choose identical moves on 320 positions at this setting. Earlier attempts to improve the stage-3 evaluation itself (V27–V38) did not help; a diagnostic (V39) showed that most losses happen while building the last 768, not in the final merges.
+
+[V41 report (Chinese)](RL-V41-STAGE3-DEPTH.md) · [V40](RL-V40-LATE-DEPTH.md) · [V39 diagnostic](RL-V39-ENDGAME.md)
+
 ## V35: the official bonus cycle
 
 The official app gives exactly one bonus in every block of 21 previews, not an independent 1/21 chance per preview. We confirmed this by letting the AI play two complete games of the iPhone app (148 complete blocks, every one with exactly one bonus; see [RULES.md](RULES.md)). The website engine now uses this rule, and the default AI tracks the cycle from the previews it has seen: no bonus once this block's bonus has appeared, otherwise 1/(21 − positions already ruled out).
 
 4,096 whole games per arm on the same seeds, V31 model, five-ply website search:
 
-| Metric | Old rule (V31 release, 2,048 games) | Cycle rule, AI unaware | Cycle rule, AI aware (website) |
+| Metric | Old rule (V31 release, 2,048 games) | Cycle rule, AI unaware | Cycle rule, AI aware |
 |---|---:|---:|---:|
 | Reach 1536 | 98.6% | 99.4% | 99.3% |
 | Reach 3072 | 92.9% | 95.8% | 96.0% |

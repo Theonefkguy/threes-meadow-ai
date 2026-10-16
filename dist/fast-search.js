@@ -7,7 +7,7 @@
 // V35: with `cycle` (public bonus-cycle state of the next draw, card-memory.js) the chance of a
 // bonus at a draw is 0 once the block's bonus has been shown, else 1/(21 - excluded positions);
 // without it, the constant 1/21 of the old rule (results identical to the V31 release).
-import { bonusPreviews } from './engine.js?v=25';
+import { bonusPreviews } from './engine.js?v=26';
 
 const directions=['left','right','up','down'];
 const toRank=n=>n<3?n:Math.log2(n/3)+3;
@@ -78,6 +78,13 @@ function project(b,d,out,entries){
     out[i0]=m&15;out[i1]=m>>4&15;out[i2]=m>>8&15;out[i3]=m>>12;entries[n++]=i3;reward+=ROW_REWARD[key];
   }
   lastReward=reward;return n;
+}
+
+// Website setting (V41): the default five-ply search with cutoff 0.01 and a 160 ms soft budget; once
+// the board holds a 6144, six-ply with cutoff 0.005 (6144 -> 12288 from 11.6% to 19.1% in V40) and a
+// 400 ms budget so slower devices can still finish six plies (otherwise the last completed depth is used).
+export function webSearchOptions(board){
+  return board.flat().some(n=>n>=6144)?{maxDepth:6,threshold:0.005,budgetMs:400}:{maxDepth:5,threshold:0.01,budgetMs:160};
 }
 
 // clampLeaf: the true future score is never negative, so leaf estimates below 0 are
