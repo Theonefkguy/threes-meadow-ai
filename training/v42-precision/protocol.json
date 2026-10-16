@@ -1,0 +1,24 @@
+{
+  "round": "V42: full precision vs the website float16 residuals with the current website search",
+  "createdUTC": "2026-10-16T14:47:13.004748+00:00",
+  "status": "frozen before any V42 game",
+  "arms": {
+    "full": "W31 float32 (= the website full-precision option: dist/models/ntuple-v31-s{1,2,3}.res.gz decode to these exact files)",
+    "half": "V41 arm D records (shipped float16 weights), not rerun"
+  },
+  "games": "seeds 41100001-41104096 (V41), whole games, cycle rule, cycle-aware website search: 5-ply / 0.01 until a 6144, then 6-ply / 0.005; training/v41-stage3-depth/bin/game; complete depth (no time budget)",
+  "primary": "reach 12288, full vs half, exact McNemar, alpha 0.05",
+  "secondary": "reach 6144 and 3072 (McNemar), score (paired normal), P(12288 | 6144), identical games",
+  "note": "Low priority (lq --prio -1), chunked job; the two arms differ only in residual precision.",
+  "fileSHA256": {
+    "training/v42-precision/one.sh": "cb53d8f264b6a3322a75c46fb451000928789e8f48655acbf1f29cfe2cc4b297",
+    "training/v42-precision/analyze.py": "939b50c538ebf2ca55f35bc7d5d00b20bb69b3ad9d0d803293020d9822cbb82f",
+    "training/v41-stage3-depth/bin/game": "99e74336def40848946c121b43970bb1025cd18c10d6eb6f619e1bc27a714f80",
+    "training/v41-stage3-depth/game.cpp": "1eb9cc9ead03a559aa6709ff4bf8f6dafa59b2e71eafcd5bfeddd2862670f9d8",
+    "training/v31-stages/models/W31.bin": "b94a7da2671fe28ad3390a5fcd2fbda59a599f50437b23d5e3cf7097e45f9617",
+    "training/v30-parallel/models/P-final.res": "e0cc549fc250ef979640549d8f286fefd2fdc947a0247c7dd28d320895155570",
+    "training/v31-stages/models/S1-final.res": "a5c1d053a6eb5f4d02243328a70550435e9f74f39d2679e6c8a68b11068711e2",
+    "training/v31-stages/models/S3-final.res": "6429f239fe7908e4293a8c377f375c68d3478fd4daaf67f60f57c5983dc59b8f",
+    "training/v41-stage3-depth/whole-results.json": "945aafb3ed2447752fb35dbae50cad9e95dd383c25f0566aea31ad028cd776b9"
+  }
+}
