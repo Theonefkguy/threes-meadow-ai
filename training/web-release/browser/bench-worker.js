@@ -3,6 +3,7 @@
 // 128 at 3072, 128 at 6144). Model files come from the page's query string:
 //   ?base=PATH&res=PATH,PATH   (paths relative to this page; res optional)
 //   &cycle=1: cycle-aware search (V35) with state i at cycle {pos:i%21, used:i%3==0, excl:pos>>1}
+//   &depth=D&thr=T: search depth and cutoff (default 5 and 0.01, the website setting); &phase=P: only states of phase P
 import {chooseFastMove} from '../../../dist/fast-search.js';
 import {decodeModel} from '../../../dist/rl-model.js';
 self.onmessage=async({data})=>{
@@ -14,11 +15,11 @@ self.onmessage=async({data})=>{
   const states=await (await fetch('../../v25-adaptive-cutoff/browser/states.json')).json();
   if(states.length!==320)throw Error('expected 320 states');
   const cycleOf=i=>data.cycle?{pos:i%21,used:i%3===0?1:0,excl:(i%21)>>1}:null;
-  const choose=(s,budgetMs,i)=>chooseFastMove(s.board,s.next,model,{remaining:s.remaining,maxDepth:5,threshold:0.01,clampLeaf:true,budgetMs,maxNodes:4e6,cycle:cycleOf(i)});
+  const choose=(s,budgetMs,i)=>chooseFastMove(s.board,s.next,model,{remaining:s.remaining,maxDepth:data.depth||5,threshold:data.thr||0.01,clampLeaf:true,budgetMs,maxNodes:4e6,cycle:cycleOf(i)});
   states.slice(0,10).forEach((s,i)=>choose(s,1e9,i));
   const measurements=[];
   for(let rep=0;rep<3;rep++){
-   for(let index=0;index<states.length;index++){
+   for(let index=0;index<states.length;index++){if(data.phase&&states[index].phase!==data.phase)continue;
     const start=performance.now();const r=choose(states[index],160,index);const ms=performance.now()-start;
     measurements.push({rep,index,phase:states[index].phase,ms,depth:r.depth,direction:r.direction,nodes:r.nodes});
    }
@@ -26,8 +27,8 @@ self.onmessage=async({data})=>{
   }
   const summary=['1536','3072','6144','all'].map(phase=>{
    const r=measurements.filter(m=>phase==='all'||m.phase===phase),t=r.map(m=>m.ms).sort((a,b)=>a-b);
-   return {phase,n:r.length,meanMs:t.reduce((a,b)=>a+b,0)/t.length,p95Ms:t[Math.ceil(.95*t.length)-1],maxMs:t.at(-1),completedFullDepth:r.filter(m=>m.depth===5).length};
+   return {phase,n:r.length,meanMs:t.reduce((a,b)=>a+b,0)/t.length,p95Ms:t[Math.ceil(.95*t.length)-1],maxMs:t.at(-1),completedFullDepth:r.filter(m=>m.depth===(data.depth||5)).length};
   });
-  self.postMessage({type:'result',base:data.base,res:data.res,cycle:!!data.cycle,loadMs,userAgent:navigator.userAgent,hardwareConcurrency:navigator.hardwareConcurrency,summary,measurements});
+  self.postMessage({type:'result',base:data.base,res:data.res,cycle:!!data.cycle,depth:data.depth||5,thr:data.thr||0.01,loadMs,userAgent:navigator.userAgent,hardwareConcurrency:navigator.hardwareConcurrency,summary,measurements});
  }catch(e){self.postMessage({type:'error',message:String(e&&e.message||e)});}
 };

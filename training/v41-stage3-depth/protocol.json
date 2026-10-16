@@ -1,0 +1,33 @@
+{
+  "round": "V41 step 2: which part of the V40 gain (6-ply / 0.005 from the first 6144) matters, and the web setting",
+  "createdUTC": "2026-10-16T09:31:14.127253+00:00",
+  "status": "frozen before any V41 game; browser timing (browser-6144.json) was measured before this protocol",
+  "arms": {
+    "D6": "6-ply / cutoff 0.01 from the first 6144",
+    "T5": "5-ply / cutoff 0.005 from the first 6144",
+    "base": "V39 replay (website setting)",
+    "S": "V40 arm S (6-ply / 0.005)"
+  },
+  "games": "V38 pool (2048 first-6144 states, cycle rule), rollout seeds 38400001+index, W31 float32, cycle-aware, clamp, complete depth, training/v40-late-depth/bin/deep TRIGGER start",
+  "primary": {
+    "D6": "reach 12288 vs base, exact McNemar",
+    "T5": "reach 12288 vs base, exact McNemar"
+  },
+  "multiplicity": "Holm over the two",
+  "secondary": "each vs S (McNemar), score gained, native ms per move",
+  "choice": "Web setting for stage 3 = the eligible setting with the lowest mean browser time on 6144-phase states. Eligible: browser P95 <= 160 ms with full depth on >= 99% of measurements (browser-6144.json), and for D6/T5 also Holm-significantly better than base and not significantly worse than S (p<0.05 with a negative difference); S is eligible on timing alone (V40 result).",
+  "step3": "Whole-game validation of the choice (separate protocol): 4096 paired games, website setting vs website setting with the chosen stage-3 setting, shipped float16 weights, saving first-6144 checkpoints.",
+  "fileSHA256": {
+    "training/v41-stage3-depth/run.sh": "15279bba41b396f1c8ec373b20f7ca6b92339f1115042ba97c38f65023283fb4",
+    "training/v41-stage3-depth/analyze.py": "7799213d6388d2b3692c9ff4e1f9e4add9aa6dda17943bff19f85d4e19bbaa5b",
+    "training/v41-stage3-depth/browser-6144.json": "4d336727250b5118eddc6d898e5733d41769817aad1844d963791504ffa9403a",
+    "training/v40-late-depth/deep.cpp": "97e2046fa81bde97889d43400750d6a1561f850fd7cd0dcf5a7f3f1d14934840",
+    "training/v40-late-depth/bin/deep": "24e5b0395cb3d25356228024eff4ed9d20890b4bceb97a943affe3f388172aa2",
+    "training/v38-progress/pool/first6144.txt": "4fb36557ba843a198cdea4e2aed3247c41994bb13026c1bfb54d001f82efd9a8",
+    "training/v31-stages/models/W31.bin": "b94a7da2671fe28ad3390a5fcd2fbda59a599f50437b23d5e3cf7097e45f9617",
+    "training/v30-parallel/models/P-final.res": "e0cc549fc250ef979640549d8f286fefd2fdc947a0247c7dd28d320895155570",
+    "training/v31-stages/models/S1-final.res": "a5c1d053a6eb5f4d02243328a70550435e9f74f39d2679e6c8a68b11068711e2",
+    "training/v31-stages/models/S3-final.res": "6429f239fe7908e4293a8c377f375c68d3478fd4daaf67f60f57c5983dc59b8f",
+    "training/v40-late-depth/results.json": "1cde5643f1c3fac9b59a3b1e2f15a63d0e155b46900b6c74c006c1ac48eb43db"
+  }
+}

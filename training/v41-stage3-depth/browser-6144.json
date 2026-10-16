@@ -1,0 +1,10 @@
+{
+ "note": "Desktop Chromium (Claude app browser) on the M5 Pro Mac mini, other lq jobs idle; dist/fast-search.js with the shipped float16 V31 weights, cycle-aware, clamp, 160 ms soft budget, maxNodes 4e6; the 128 V25 browser states of the 6144 phase x 3 passes (training/web-release/browser/?cycle=1&depth=D&thr=T&phase=6144). Measured 2026-10-16 before any V41 game.",
+ "results": [
+  {"depth": 5, "thr": 0.01, "n": 384, "meanMs": 7.48, "p95Ms": 12.8, "p99Ms": 15.2, "maxMs": 16.4, "fullDepth": 384},
+  {"depth": 6, "thr": 0.005, "n": 384, "meanMs": 29.41, "p95Ms": 62.0, "p99Ms": 77.9, "maxMs": 79.6, "fullDepth": 384},
+  {"depth": 6, "thr": 0.01, "n": 384, "meanMs": 12.13, "p95Ms": 24.8, "p99Ms": 34.4, "maxMs": 46.5, "fullDepth": 384},
+  {"depth": 5, "thr": 0.005, "n": 384, "meanMs": 14.41, "p95Ms": 24.7, "p99Ms": 29.0, "maxMs": 35.0, "fullDepth": 384}
+ ],
+ "phone": "not measured"
+}
