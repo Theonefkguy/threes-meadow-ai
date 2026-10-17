@@ -1,8 +1,8 @@
-import {loadV4Policy} from './v4-policy.js?v=28';
-import { chooseMove } from './ai.js?v=28';
-import { loadModel } from './rl-model.js?v=28';
-import { chooseLearnedMove } from './rl-search.js?v=28';
-import { chooseFastMove, webSearchOptions } from './fast-search.js?v=28';
+import {loadV4Policy} from './v4-policy.js?v=29';
+import { chooseMove } from './ai.js?v=29';
+import { loadModel } from './rl-model.js?v=29';
+import { chooseLearnedMove } from './rl-search.js?v=29';
+import { chooseFastMove, webSearchOptions } from './fast-search.js?v=29';
 // A failed V31 download is not retried on every move; it is retried once when the AI is started
 // again (the page marks the first request of each start as fresh).
 let v31Failed=false,fullFailed=false;
@@ -23,7 +23,7 @@ self.onmessage = async ({ data }) => {
       }
       if(policy==='rl-fast'){
         // Default (V31 release): five-move search, probability cutoff 0.01, clamped leaves,
-        // 160 ms soft budget (since V41: six moves, cutoff 0.005, 400 ms once a 6144 is on the board), on the V31 model: four-cell tables plus float16 five-cell residuals
+        // 160 ms soft budget (since V43: six moves, cutoff 0.005, 400 ms on every move), on the V31 model: four-cell tables plus float16 five-cell residuals
         // for stages 1-3 (17.4 MB gzip download, 32 MB decoded, with progress reports). If it cannot load,
         // fall back to the V23 four-cell model, then to V4. Since V35 the search also uses the public
         // bonus-cycle state (data.cycle); the V4 and classic fallbacks keep the constant 1/21.

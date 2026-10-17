@@ -2,19 +2,33 @@
 
 [Play in your browser](https://theonefkguy.github.io/threes-meadow-ai/) · **English** | [简体中文](README.zh-CN.md)
 
-A high-performance Threes AI you can watch, interrupt and play alongside. Multi-stage temporal-difference learning of four- and five-cell n-tuple tables meets five- to six-ply expectimax with probability cutoffs. The model runs entirely on your device: no account, API key or inference server needed.
+A high-performance Threes AI you can watch, interrupt and play alongside. Multi-stage temporal-difference learning of four- and five-cell n-tuple tables meets six-ply expectimax with probability cutoffs. The model runs entirely on your device: no account, API key or inference server needed.
 
-**67.9% reached 6144 · 9.9% reached 12288 · 4,096 games of the website AI under the official bonus cycle.**
+**74.0% reached 6144 · 11.7% reached 12288 · 4,096 games of the website AI under the official bonus cycle.**
 
 ## Play
 
-Open the [live demo](https://theonefkguy.github.io/threes-meadow-ai/), use the English default or switch to 中文, and press **Play with AI**. Use arrow keys, swipe, or the direction buttons to take over. The default V31 model is a 17 MB gzip download (32 MB decoded) fetched on first use, with a progress bar. A full-precision option (30 MB download) uses the 5-cell tables at their original 32-bit precision instead of 16-bit; an earlier paired test (old bonus rule, five-ply) found no significant difference between the two precisions. The V4 search and a classic heuristic search remain selectable for comparison.
+Open the [live demo](https://theonefkguy.github.io/threes-meadow-ai/), use the English default or switch to 中文, and press **Play with AI**. Use arrow keys, swipe, or the direction buttons to take over. The default V31 model is a 17 MB gzip download (32 MB decoded) fetched on first use, with a progress bar. A full-precision option (30 MB download) uses the 5-cell tables at their original 32-bit precision instead of 16-bit; in 4,096 paired games both scored the same (12288: 9.8% vs 9.9%, 91% of games identical move for move; [V42](RL-V42-PRECISION.md)). The V4 search and a classic heuristic search remain selectable for comparison.
 
 ## Video
 
 [![How a Threes AI Actually Thinks](https://i.ytimg.com/vi/Rov_8bpDScY/hqdefault.jpg)](https://www.youtube.com/watch?v=Rov_8bpDScY)
 
 Watch **How a Threes AI Actually Thinks** on YouTube.
+
+## V43: six-ply from the first move
+
+V41 used six-ply search only once a 6144 was on the board. Using it from the first move (cutoff 0.005, up to 400 ms per move) helps the middle game too. 4,096 paired whole games, same seeds and weights as V41:
+
+| Metric | 5-ply until 6144, then 6-ply (V41) | 6-ply throughout (website) |
+|---|---:|---:|
+| Reach 3072 | 96.7% | 97.0% |
+| Reach 6144 | 67.9% | **74.0%** |
+| Reach 12288 | 9.9% | **11.7%** |
+| 12288 after 6144 | 14.5% | 15.8% |
+| Mean final score | 659,680 | **704,718** |
+
+Both primary comparisons pass Holm correction (6144 +6.1 pp, p = 1.4e-9; 12288 +1.8 pp, p = 0.007). Native search is about 2.8x slower per move; a desktop browser needs 24–28 ms per move on average (P95 44–57 ms) on 1536–6144 positions. [V43 report (Chinese)](RL-V43-EARLY-DEPTH.md)
 
 ## V41: deeper search after 6144
 

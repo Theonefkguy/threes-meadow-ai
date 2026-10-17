@@ -129,10 +129,10 @@ test('V23 website model: V4 stages 0-1, retrained stage 2, V21 stage 3', () => {
   assert.deepEqual(v23.weights.subarray(3*S),v21.weights.subarray(3*S));
 });
 
-test('website search setting: five-ply before the first 6144, six-ply / 0.005 / 400 ms once a 6144 is on the board', async () => {
+test('website search setting: six-ply / 0.005 / 400 ms on every move (V43)', async () => {
   const { webSearchOptions } = await import('../dist/fast-search.js');
   const board = [[3072,1536,768,384],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
-  assert.deepEqual(webSearchOptions(board), { maxDepth:5, threshold:0.01, budgetMs:160 });
+  assert.deepEqual(webSearchOptions(board), { maxDepth:6, threshold:0.005, budgetMs:400 });
   board[1][0] = 6144;
   assert.deepEqual(webSearchOptions(board), { maxDepth:6, threshold:0.005, budgetMs:400 });
 });
