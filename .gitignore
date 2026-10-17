@@ -168,3 +168,5 @@ training/v42-precision/snaps/
 training/v43-early-depth/bin/
 training/v43-early-depth/games/*.part
 training/v43-early-depth/snaps/
+training/v44-shape/bin/
+training/v44-shape/games/*.part
