@@ -1,8 +1,8 @@
-import {loadV4Policy} from './v4-policy.js?v=29';
-import { chooseMove } from './ai.js?v=29';
-import { loadModel } from './rl-model.js?v=29';
-import { chooseLearnedMove } from './rl-search.js?v=29';
-import { chooseFastMove, webSearchOptions } from './fast-search.js?v=29';
+import {loadV4Policy} from './v4-policy.js?v=30';
+import { chooseMove } from './ai.js?v=30';
+import { loadModel } from './rl-model.js?v=30';
+import { chooseLearnedMove } from './rl-search.js?v=30';
+import { chooseFastMove, webSearchOptions } from './fast-search.js?v=30';
 // A failed V31 download is not retried on every move; it is retried once when the AI is started
 // again (the page marks the first request of each start as fresh).
 let v31Failed=false,fullFailed=false;
@@ -16,9 +16,9 @@ self.onmessage = async ({ data }) => {
         // Full precision: the same search on the float32 residuals (30.4 MB download). If it cannot
         // load, continue with the standard model below.
         try{if(fullFailed)throw new Error('full unavailable');
-          const model=await loadModel('v31f',({loaded,total})=>self.postMessage({id:data.id,type:'progress',loaded,total}));
-          result=chooseFastMove(data.board,data.next,model,{...options,...webSearchOptions(data.board),clampLeaf:true,cycle:data.cycle});
-          if(result.unsupported){policy='rl-v4';result=undefined;}
+          const model=await loadModel('v31f',({loaded,total})=>self.postMessage({id:data.id,analysis:data.analysis,type:'progress',loaded,total}));
+          const stats={};result=chooseFastMove(data.board,data.next,model,{...options,...webSearchOptions(data.board),clampLeaf:true,cycle:data.cycle,stats});
+          if(result.unsupported){policy='rl-v4';result=undefined;}else result.values=stats.values;
         }catch{fullFailed=true;policy='rl-fast';fallback='full-load';}
       }
       if(policy==='rl-fast'){
@@ -28,24 +28,24 @@ self.onmessage = async ({ data }) => {
         // fall back to the V23 four-cell model, then to V4. Since V35 the search also uses the public
         // bonus-cycle state (data.cycle); the V4 and classic fallbacks keep the constant 1/21.
         let model;
-        const progress=({loaded,total})=>self.postMessage({id:data.id,type:'progress',loaded,total});
+        const progress=({loaded,total})=>self.postMessage({id:data.id,analysis:data.analysis,type:'progress',loaded,total});
         try{if(v31Failed)throw new Error('V31 unavailable');model=await loadModel('v31',progress);}
         catch{
           v31Failed=true;
           try{model=await loadModel('v23');fallback='v31-load';}catch{policy='rl-v4';fallback='fast-load';}
         }
-        if(model){result=chooseFastMove(data.board,data.next,model,{...options,...webSearchOptions(data.board),clampLeaf:true,cycle:data.cycle});if(result.unsupported){policy='rl-v4';result=undefined;}}
+        if(model){const stats={};result=chooseFastMove(data.board,data.next,model,{...options,...webSearchOptions(data.board),clampLeaf:true,cycle:data.cycle,stats});if(result.unsupported){policy='rl-v4';result=undefined;}else result.values=stats.values;}
       }
       if(policy==='rl-v4'){
         let model;
         try{model=await loadV4Policy();}
-        catch{self.postMessage({id:data.id,...chooseMove(data.board,data.next,options),policy:'classic',fallback:'load'});return;}
+        catch{self.postMessage({id:data.id,analysis:data.analysis,...chooseMove(data.board,data.next,options),policy:'classic',fallback:'load'});return;}
         result=chooseLearnedMove(data.board,data.next,model.score,options);
       }
-      if(!result.unsupported){self.postMessage({id:data.id,...result,policy,...(fallback?{fallback}:{})});return;}
-      self.postMessage({id:data.id,...chooseMove(data.board,data.next,options),policy:'classic',fallback:'range'});
-    } else self.postMessage({id:data.id,...chooseMove(data.board,data.next,options),policy:'classic'});
+      if(!result.unsupported){self.postMessage({id:data.id,analysis:data.analysis,...result,policy,...(fallback?{fallback}:{})});return;}
+      self.postMessage({id:data.id,analysis:data.analysis,...chooseMove(data.board,data.next,options),policy:'classic',fallback:'range'});
+    } else self.postMessage({id:data.id,analysis:data.analysis,...chooseMove(data.board,data.next,options),policy:'classic'});
   } catch {
-    self.postMessage({ id:data.id, error:true });
+    self.postMessage({ id:data.id, analysis:data.analysis, error:true });
   }
 };

@@ -1,6 +1,7 @@
-import { t, locale, setLanguage, applyLanguage } from './i18n.js?v=29';
-import { createGame, projectMove, score } from './engine.js?v=29';
-import { initialCounts, observePreview, initialCycle, observeCycle } from './card-memory.js?v=29';
+import { t, locale, setLanguage, applyLanguage } from './i18n.js?v=30';
+import { createGame, projectMove, score } from './engine.js?v=30';
+import { initialCounts, observePreview, initialCycle, observeCycle } from './card-memory.js?v=30';
+import { createAnalysis } from './analysis.js?v=30';
 
 const boardEl = document.querySelector('#board');
 const nextEl = document.querySelector('#next-tile');
@@ -84,9 +85,15 @@ aiButton.addEventListener('click', () => {
     scheduleAI();
   } catch { stopAI(t('当前浏览器无法启动 AI，可以继续手动玩。'), true); }
 });
+// Analysis mode (analysis.js): its requests share the AI worker and are marked data.analysis.
+const analysis = createAnalysis({
+  getState: () => ({ board: game.board, next: game.next, remaining: publicCounts, cycle: publicCycle, over: game.over, aiRunning, policy: aiPolicy.value }),
+  send: message => { try { if (!aiWorker) createWorker(); aiWorker.postMessage(message); } catch { /* Analysis is optional. */ } }
+});
 function createWorker() {
-    aiWorker = new Worker('./ai-worker.js?v=29', { type:'module' });
+    aiWorker = new Worker('./ai-worker.js?v=30', { type:'module' });
     aiWorker.onmessage = ({ data }) => {
+      if (data.analysis) { analysis?.onReply(data); return; }
       if (!aiRunning || data.id !== aiRequest) return;
       // Download progress keeps the request alive: restart the watchdog while bytes arrive.
       if (data.type === 'progress') { showProgress(data.loaded, data.total); armWatchdog(); return; }
@@ -102,6 +109,7 @@ function createWorker() {
         const phase=data.policy?.startsWith('rl')?t(' · {stage}策略', {stage:[t('前期'),t('中期'),t('后期'),t('冲刺 12288')][data.stage]}):'';
         aiStatus.textContent=t('AI 向{direction}移动{phase} · 已完成 {turns} 步',{direction:t(directionNames[data.direction]),phase,turns:game.turns+1});
       }
+      analysis?.onAIReply(data);
       commitMove(data.direction);
     };
     const activeWorker = aiWorker;
@@ -148,6 +156,7 @@ function render(effects = {}) {
   }
   scoreEl.textContent = format(currentScore);
   bestEl.textContent = format(best);
+  analysis?.update();
   renderNext();
   boardEl.replaceChildren();
   cells = []; tiles = [];

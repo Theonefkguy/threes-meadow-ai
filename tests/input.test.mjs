@@ -62,7 +62,7 @@ function setup() {
   const context = vm.createContext({ document, window, Intl, console, Worker,
     localStorage: { getItem:() => { throw new Error('denied'); }, setItem:() => { throw new Error('denied'); } },
     t, locale, setLanguage, applyLanguage: () => {},
-    createGame: () => (engine = createGame(() => .5)), projectMove, score, initialCounts, observePreview, initialCycle, observeCycle,
+    createGame: () => (engine = createGame(() => .5)), projectMove, score, initialCounts, observePreview, initialCycle, observeCycle, createAnalysis: () => null,
     setTimeout: (fn, delay) => { timers.set(++serial,fn); delays.set(serial,delay); return serial; },
     clearTimeout: id => timers.delete(id)
   });

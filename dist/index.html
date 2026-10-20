@@ -7,7 +7,7 @@
   <meta name="description" content="Play Threes Meadow with a six-ply AI. Free, on-device, no account required.">
   <title data-i18n="合三">Threes Meadow</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%2312363a'/%3E%3Cpath d='M18 19h16c9 0 14 4 14 11 0 4-2 7-6 9 5 1 8 5 8 10 0 8-6 12-16 12H18v-9h16c4 0 6-1 6-4s-2-4-6-4h-9v-9h9c3 0 5-1 5-4s-2-4-5-4H18z' fill='%23ffd05a'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="./styles.css?v=29">
+  <link rel="stylesheet" href="./styles.css?v=30">
 </head>
 <body>
   <main class="app" aria-label="Threes Meadow game" data-i18n-aria="合三游戏">
@@ -34,6 +34,7 @@
 
     <section class="game-shell">
       <div class="board" id="board" role="grid" aria-label="4 by 4 game board" data-i18n-aria="4乘4游戏棋盘" tabindex="0"></div>
+      <div class="rec-arrow" id="rec-arrow" hidden aria-hidden="true"></div>
       <div class="game-over" id="game-over" hidden>
         <div class="over-card">
           <span class="over-kicker" id="over-kicker" data-i18n="无路可走">No moves left</span>
@@ -67,6 +68,15 @@
       <p class="ai-note" data-i18n="默认使用 V31 模型与六层剪枝搜索。模型下载约 17 MB，首次使用时下载，之后在你的设备上运行。完整精度版使用 32 位原始精度的 5 格表（下载约 30 MB）；配对测试中两种精度的成绩相同。">The default uses the V31 model and six-ply search. The 17 MB model download happens on first use; it then runs on your device. The full-precision option uses the 5-cell tables at their original 32-bit precision (30 MB download); in a paired test both precisions scored the same.</p>
     </section>
 
+    <section class="analysis" aria-label="Analysis" data-i18n-aria="分析模式">
+      <button id="analysis-toggle" type="button" aria-pressed="false" data-i18n="分析模式">Analysis mode</button>
+      <div class="analysis-panel" id="analysis-panel" hidden>
+        <div class="an-block"><h3 data-i18n="牌袋">Card bag</h3><div class="an-bag" id="an-bag"></div><p class="an-sub" id="an-bag-note"></p></div>
+        <div class="an-block"><h3 data-i18n="奖励牌周期">Bonus cycle</h3><div class="an-cycle" id="an-cycle"></div><p class="an-sub" id="an-cycle-note"></p></div>
+        <div class="an-block"><h3 data-i18n="AI 推荐">AI suggestion</h3><div class="an-rec" id="an-rec"></div><p class="an-sub" id="an-rec-note"></p></div>
+      </div>
+    </section>
+
     <section class="rules">
       <div class="rule"><span class="mini one">1</span><b>+</b><span class="mini two">2</span><b>=</b><span class="mini three">3</span></div>
       <p data-i18n="每次移动一格。1 与 2 相合，3 以上相同数字相合。拖动可预览，拉回可取消。">Slide one cell at a time. Merge 1 with 2, or equal cards of 3 and above. Drag to preview; pull back to cancel.</p>
@@ -83,6 +93,6 @@
     <footer><a href="https://github.com/Theonefkguy/threes-meadow-ai" data-i18n="源码与评测">Source &amp; benchmarks</a><p data-i18n="独立研究项目，与 Threes! / Sirvo 无隶属关系。">Independent research project, not affiliated with Threes! or Sirvo.</p></footer>
     <p id="move-status" class="sr-only" role="status" aria-live="polite"></p>
   </main>
-  <script type="module" src="./game.js?v=29"></script>
+  <script type="module" src="./game.js?v=30"></script>
 </body>
 </html>
