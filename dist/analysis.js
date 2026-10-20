@@ -1,6 +1,6 @@
 // Analysis mode: shows the public hidden state (the 12-card bag, the bonus cycle) and the AI's view of
 // the four directions. Uses only information a player could infer; never reads the shuffled deck.
-import { t } from './i18n.js?v=30';
+import { t } from './i18n.js?v=31';
 
 const DIRS = ['left', 'right', 'up', 'down'];
 const NAMES = { left:'左', right:'右', up:'上', down:'下' };
@@ -15,7 +15,8 @@ export function createAnalysis({ getState, send }) {
   const recEl = document.querySelector('#an-rec'), recNote = document.querySelector('#an-rec-note');
   const arrow = document.querySelector('#rec-arrow'), app = document.querySelector('.app');
   const bagLeft = document.querySelector('#an-bag-left'), cyclePos = document.querySelector('#an-cycle-pos');
-  let on = false, request = 0, timer = null, lastKey = '';
+  let on = false, request = 0, timer = null, lastKey = '', sentKey = '', lastRec = null;
+  const keyOf = s => JSON.stringify([s.board, s.next, s.remaining, s.cycle]);
 
   function renderBag(s) {
     bagEl.replaceChildren();
@@ -52,7 +53,8 @@ export function createAnalysis({ getState, send }) {
       : t('本轮奖励牌还没出现。预告之后那张是奖励牌的概率：{p}', { p: pct(chance, 1) });
   }
 
-  function showRec(values, direction, fromAI = false) {
+  function showRec(values, direction, fromAI = false, key = '') {
+    lastRec = { values, direction, fromAI, key };
     recEl.replaceChildren();
     if (!values || !direction) { recNote.textContent = t('当前策略不提供各方向估值。'); setArrow(null); return; }
     const rows = DIRS.map((d, i) => ({ d, v: values[i] })).filter(r => r.v !== null && r.v !== undefined).sort((a, b) => b.v - a.v);
@@ -62,7 +64,8 @@ export function createAnalysis({ getState, send }) {
     const span = Math.max(0.005, ...rows.map(r => (best - r.v) / scale));
     for (const r of rows) {
       const diff = (best - r.v) / scale, row = el('div', `an-bar${r.d === direction ? ' an-best' : ''}`);
-      row.append(el('span', 'an-dir', t(NAMES[r.d])));
+      const name = t(NAMES[r.d]);
+      row.append(el('span', 'an-dir', name.charAt(0).toUpperCase() + name.slice(1)));
       const track = el('span', 'an-track'), fill = el('span', 'an-fill');
       fill.style.width = `${Math.max(8, 100 - 85 * diff / span)}%`;
       track.append(fill); row.append(track);
@@ -88,9 +91,9 @@ export function createAnalysis({ getState, send }) {
     timer = setTimeout(() => {
       const s = getState();
       if (!on || s.over || s.aiRunning) return;
-      const key = JSON.stringify([s.board, s.next, s.remaining, s.cycle]);
+      const key = keyOf(s);
       if (key === lastKey) return;
-      lastKey = key;
+      lastKey = sentKey = key;
       recNote.textContent = t('AI 正在计算…');
       send({ id: ++request, analysis: true, board: s.board, next: s.next, remaining: s.remaining, cycle: s.cycle, policy: s.policy === 'rl-full' ? 'rl-full' : 'rl-fast' });
     }, 120);
@@ -100,6 +103,8 @@ export function createAnalysis({ getState, send }) {
     if (!on) return;
     const s = getState();
     renderBag(s); renderCycle(s);
+    // Re-draw the last suggestion (for example after a language change) if it still belongs here.
+    if (lastRec && (lastRec.fromAI || lastRec.key === keyOf(s))) showRec(lastRec.values, lastRec.direction, lastRec.fromAI, lastRec.key);
     if (s.over) { recEl.replaceChildren(); recNote.textContent = t('本局已结束。'); setArrow(null); return; }
     if (!s.aiRunning) requestRec();
   }
@@ -118,7 +123,7 @@ export function createAnalysis({ getState, send }) {
       if (!on || data.id !== request) return;
       if (data.type === 'progress') { if (data.total) recNote.textContent = t('正在下载模型 {p}', { p: pct(data.loaded / data.total) }); return; }
       if (data.error) { recNote.textContent = t('AI 暂时无法计算。'); return; }
-      showRec(data.values, data.direction);
+      showRec(data.values, data.direction, false, sentKey);
     },
     // The AI's own replies while it plays carry the same values.
     onAIReply(data) { if (on) showRec(data.values, data.direction, true); },
