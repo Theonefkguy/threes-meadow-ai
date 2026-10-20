@@ -1,4 +1,4 @@
-import { chooseMove as searchMove } from './ai-search.js?v=32';
+import { chooseMove as searchMove } from './ai-search.js?v=33';
 
 // Selected after the six-policy pilot and independent-seed validation.
 // Keep the original 160 ms / 24,000-node / three-move limits.

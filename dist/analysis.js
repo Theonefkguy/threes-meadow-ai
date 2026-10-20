@@ -1,6 +1,6 @@
 // Analysis mode: shows the public hidden state (the 12-card bag, the bonus cycle) and the AI's view of
 // the four directions. Uses only information a player could infer; never reads the shuffled deck.
-import { t } from './i18n.js?v=32';
+import { t } from './i18n.js?v=33';
 
 const DIRS = ['left', 'right', 'up', 'down'];
 const NAMES = { left:'左', right:'右', up:'上', down:'下' };
@@ -14,7 +14,7 @@ export function createAnalysis({ getState, send }) {
   const bagEl = document.querySelector('#an-bag'), bagNote = document.querySelector('#an-bag-note');
   const cycleEl = document.querySelector('#an-cycle'), cycleNote = document.querySelector('#an-cycle-note');
   const recEl = document.querySelector('#an-rec'), recNote = document.querySelector('#an-rec-note');
-  const arrow = document.querySelector('#rec-arrow'), app = document.querySelector('.app');
+  const arrows = document.querySelector('#rec-arrows'), app = document.querySelector('.app');
   const bagLeft = document.querySelector('#an-bag-left'), cyclePos = document.querySelector('#an-cycle-pos');
   let on = false, request = 0, timer = null, lastKey = '', sentKey = '', lastRec = null;
   const keyOf = s => JSON.stringify([s.board, s.next, s.remaining, s.cycle]);
@@ -57,7 +57,7 @@ export function createAnalysis({ getState, send }) {
   function showRec(values, direction, fromAI = false, key = '') {
     lastRec = { values, direction, fromAI, key };
     recEl.replaceChildren();
-    if (!values || !direction) { recNote.textContent = t('当前策略不提供各方向估值。'); setArrow(null); return; }
+    if (!values || !direction) { recNote.textContent = t('当前策略不提供各方向估值。'); setArrows(null); return; }
     const rows = DIRS.map((d, i) => ({ d, v: values[i] })).filter(r => r.v !== null && r.v !== undefined).sort((a, b) => b.v - a.v);
     const best = rows[0].v, scale = Math.max(1, Math.abs(best));
     // Bars: the best move is full; the others shrink with their gap, on a scale of the largest gap
@@ -78,13 +78,24 @@ export function createAnalysis({ getState, send }) {
       : margin < 0.0025 ? t('险胜：前几个方向几乎一样好，选哪个差别很小。')
       : margin < 0.01 ? t('推荐方向略好一些。') : t('推荐方向明显更好。');
     recNote.textContent = fromAI ? t('AI 刚才这一步：{verdict}', { verdict }) : verdict;
-    setArrow(fromAI ? null : direction);
+    setArrows(fromAI ? null : rows.map(r => ({ d: r.d, shade: 1 - (best - r.v) / scale / span })), direction);
   }
 
-  function setArrow(direction) {
-    if (!arrow) return;
-    arrow.hidden = !on || !direction;
-    if (direction) arrow.dataset.dir = direction;
+  // One arrow per legal direction on the board edge: the best is solid and ringed, the others fade
+  // and shrink with their gap to the best (same scale as the bars); illegal directions get none.
+  function setArrows(list, direction) {
+    if (!arrows) return;
+    arrows.hidden = !on || !list;
+    if (!list) return;
+    for (const a of arrows.children) {
+      const r = list.find(x => x.d === a.dataset.dir);
+      a.hidden = !r;
+      if (!r) continue;
+      const s = Math.max(0, Math.min(1, r.shade));
+      a.style.setProperty('--shade', String(0.18 + 0.82 * s));
+      a.style.setProperty('--size', String(0.7 + 0.3 * s));
+      a.classList.toggle('rec-best', a.dataset.dir === direction);
+    }
   }
 
   function requestRec() {
@@ -106,13 +117,13 @@ export function createAnalysis({ getState, send }) {
     renderBag(s); renderCycle(s);
     // Re-draw the last suggestion (for example after a language change) if it still belongs here.
     if (lastRec && (lastRec.fromAI || lastRec.key === keyOf(s))) showRec(lastRec.values, lastRec.direction, lastRec.fromAI, lastRec.key);
-    if (s.over) { recEl.replaceChildren(); recNote.textContent = t('本局已结束。'); setArrow(null); return; }
+    if (s.over) { recEl.replaceChildren(); recNote.textContent = t('本局已结束。'); setArrows(null); return; }
     if (!s.aiRunning) requestRec();
   }
 
   toggle.addEventListener('click', () => {
     on = !on; toggle.setAttribute('aria-pressed', String(on)); panel.hidden = !on; app?.classList.toggle('analysis-on', on);
-    if (!on) { setArrow(null); return; }
+    if (!on) { setArrows(null); return; }
     lastKey = ''; update();
   });
 

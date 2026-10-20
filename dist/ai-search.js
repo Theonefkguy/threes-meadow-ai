@@ -1,4 +1,4 @@
-import { bonusPreviews } from './engine.js?v=32';
+import { bonusPreviews } from './engine.js?v=33';
 
 const dirs = ['left','right','up','down'];
 const lines = dirs.map((d) => Array.from({length:4},(_,i) => Array.from({length:4},(_,j) =>
@@ -29,7 +29,7 @@ function move(board, dir) {
   return entries.length?{board:result,entries}:null;
 }
 
-export { initialCounts, observePreview } from './card-memory.js?v=32';
+export { initialCounts, observePreview } from './card-memory.js?v=33';
 
 // Reuse the verified, pure rank-board movement in the learned search.
 export const projectRanks = move;
