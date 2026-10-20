@@ -1,5 +1,16 @@
 // Text-only localization; gameplay and model inputs are language-independent.
 export const english = {
+  "与最佳的差距": "Gap to best",
+  "还在袋里": "In the bag",
+  "已发出": "Dealt",
+  "预告的下一张": "Previewed card",
+  "袋里还剩 {n} 张": "{n} left in the bag",
+  "百分比：预告之后那张普通牌是 1、2、3 的概率。": "Percentages: chance that the normal card after the preview is a 1, 2 or 3.",
+  "本袋已发完，预告之后那张普通牌来自新的一袋。": "This bag is empty; the normal card after the preview comes from a fresh bag.",
+  "第 {pos} / 21 张": "Draw {pos} of 21",
+  "最大数字到 48 后才会出现奖励牌。": "Bonus cards appear once the highest card reaches 48.",
+  "本轮的奖励牌已经出现，本轮不会再有。": "This round's bonus has already appeared; no more this round.",
+  "本轮奖励牌还没出现。预告之后那张是奖励牌的概率：{p}": "This round's bonus hasn't appeared yet. Chance that the card after the preview is a bonus: {p}",
   "分析模式": "Analysis mode",
   "牌袋": "Card bag",
   "奖励牌周期": "Bonus cycle",

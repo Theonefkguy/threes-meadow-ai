@@ -13,7 +13,8 @@ export function createAnalysis({ getState, send }) {
   const bagEl = document.querySelector('#an-bag'), bagNote = document.querySelector('#an-bag-note');
   const cycleEl = document.querySelector('#an-cycle'), cycleNote = document.querySelector('#an-cycle-note');
   const recEl = document.querySelector('#an-rec'), recNote = document.querySelector('#an-rec-note');
-  const arrow = document.querySelector('#rec-arrow');
+  const arrow = document.querySelector('#rec-arrow'), app = document.querySelector('.app');
+  const bagLeft = document.querySelector('#an-bag-left'), cyclePos = document.querySelector('#an-cycle-pos');
   let on = false, request = 0, timer = null, lastKey = '';
 
   function renderBag(s) {
@@ -36,9 +37,8 @@ export function createAnalysis({ getState, send }) {
       row.append(el('span', 'an-pct', pct(left ? rem[i] / left : 1 / 3)));
       bagEl.append(row);
     });
-    bagNote.textContent = left
-      ? t('本袋还剩 {n} 张。实心 = 还在袋里，虚线 = 已发出，金框 = 预告的下一张；右边是再下一张普通牌的概率。', { n: left })
-      : t('本袋已发完，再下一张普通牌来自新的一袋。');
+    bagLeft.textContent = t('袋里还剩 {n} 张', { n: left });
+    bagNote.textContent = left ? t('百分比：预告之后那张普通牌是 1、2、3 的概率。') : t('本袋已发完，预告之后那张普通牌来自新的一袋。');
   }
 
   function renderCycle(s) {
@@ -46,9 +46,10 @@ export function createAnalysis({ getState, send }) {
     const c = s.cycle, possible = Math.max(...s.board.flat()) >= 48;
     for (let i = 0; i < 21; i++) cycleEl.append(el('span', `cy${i < c.pos ? ' cy-past' : ''}${i === c.pos ? ' cy-now' : ''}`));
     const chance = !possible ? 0 : c.used ? 0 : 1 / (21 - c.excl);
-    cycleNote.textContent = !possible ? t('第 {pos} / 21 张。最大数字到 48 后才会出现奖励牌。', { pos: c.pos + 1 })
-      : c.used ? t('第 {pos} / 21 张。本轮的奖励牌已经出现，本轮不会再有。', { pos: c.pos + 1 })
-      : t('第 {pos} / 21 张，本轮奖励牌还没出现。再下一张是奖励牌的概率：{p}', { pos: c.pos + 1, p: pct(chance, 1) });
+    cyclePos.textContent = t('第 {pos} / 21 张', { pos: c.pos + 1 });
+    cycleNote.textContent = !possible ? t('最大数字到 48 后才会出现奖励牌。')
+      : c.used ? t('本轮的奖励牌已经出现，本轮不会再有。')
+      : t('本轮奖励牌还没出现。预告之后那张是奖励牌的概率：{p}', { p: pct(chance, 1) });
   }
 
   function showRec(values, direction, fromAI = false) {
@@ -56,11 +57,14 @@ export function createAnalysis({ getState, send }) {
     if (!values || !direction) { recNote.textContent = t('当前策略不提供各方向估值。'); setArrow(null); return; }
     const rows = DIRS.map((d, i) => ({ d, v: values[i] })).filter(r => r.v !== null && r.v !== undefined).sort((a, b) => b.v - a.v);
     const best = rows[0].v, scale = Math.max(1, Math.abs(best));
+    // Bars: the best move is full; the others shrink with their gap, on a scale of the largest gap
+    // (at least 0.5%), so small but real differences stay visible without being exaggerated.
+    const span = Math.max(0.005, ...rows.map(r => (best - r.v) / scale));
     for (const r of rows) {
       const diff = (best - r.v) / scale, row = el('div', `an-bar${r.d === direction ? ' an-best' : ''}`);
       row.append(el('span', 'an-dir', t(NAMES[r.d])));
       const track = el('span', 'an-track'), fill = el('span', 'an-fill');
-      fill.style.width = `${Math.max(6, 100 - Math.min(94, diff * 100 * 50))}%`;
+      fill.style.width = `${Math.max(8, 100 - 85 * diff / span)}%`;
       track.append(fill); row.append(track);
       row.append(el('span', 'an-diff', r.d === direction ? t('推荐') : `−${pct(diff, 2)}`));
       recEl.append(row);
@@ -101,7 +105,7 @@ export function createAnalysis({ getState, send }) {
   }
 
   toggle.addEventListener('click', () => {
-    on = !on; toggle.setAttribute('aria-pressed', String(on)); panel.hidden = !on;
+    on = !on; toggle.setAttribute('aria-pressed', String(on)); panel.hidden = !on; app?.classList.toggle('analysis-on', on);
     if (!on) { setArrow(null); return; }
     lastKey = ''; update();
   });

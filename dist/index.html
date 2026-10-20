@@ -71,9 +71,11 @@
     <section class="analysis" aria-label="Analysis" data-i18n-aria="分析模式">
       <button id="analysis-toggle" type="button" aria-pressed="false" data-i18n="分析模式">Analysis mode</button>
       <div class="analysis-panel" id="analysis-panel" hidden>
-        <div class="an-block"><h3 data-i18n="牌袋">Card bag</h3><div class="an-bag" id="an-bag"></div><p class="an-sub" id="an-bag-note"></p></div>
-        <div class="an-block"><h3 data-i18n="奖励牌周期">Bonus cycle</h3><div class="an-cycle" id="an-cycle"></div><p class="an-sub" id="an-cycle-note"></p></div>
-        <div class="an-block"><h3 data-i18n="AI 推荐">AI suggestion</h3><div class="an-rec" id="an-rec"></div><p class="an-sub" id="an-rec-note"></p></div>
+        <div class="an-block"><div class="an-head"><h3 data-i18n="AI 推荐">AI suggestion</h3><small data-i18n="与最佳的差距">Gap to best</small></div><div class="an-rec" id="an-rec"></div><p class="an-sub" id="an-rec-note"></p></div>
+        <div class="an-block"><div class="an-head"><h3 data-i18n="牌袋">Card bag</h3><small id="an-bag-left"></small></div>
+          <p class="an-legend"><span><i class="lg-left"></i><b data-i18n="还在袋里">In the bag</b></span><span><i class="lg-used"></i><b data-i18n="已发出">Dealt</b></span><span><i class="lg-next"></i><b data-i18n="预告的下一张">Previewed card</b></span></p>
+          <div class="an-bag" id="an-bag"></div><p class="an-sub" id="an-bag-note"></p></div>
+        <div class="an-block"><div class="an-head"><h3 data-i18n="奖励牌周期">Bonus cycle</h3><small id="an-cycle-pos"></small></div><div class="an-cycle" id="an-cycle"></div><p class="an-sub" id="an-cycle-note"></p></div>
       </div>
     </section>
 
