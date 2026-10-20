@@ -170,3 +170,6 @@ training/v43-early-depth/games/*.part
 training/v43-early-depth/snaps/
 training/v44-shape/bin/
 training/v44-shape/games/*.part
+training/v45-explain/bin/
+training/v45-explain/scan/*.part
+training/v45-explain/rollouts/*.part
