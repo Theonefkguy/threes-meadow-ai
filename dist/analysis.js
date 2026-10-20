@@ -1,9 +1,10 @@
 // Analysis mode: shows the public hidden state (the 12-card bag, the bonus cycle) and the AI's view of
 // the four directions. Uses only information a player could infer; never reads the shuffled deck.
-import { t } from './i18n.js?v=31';
+import { t } from './i18n.js?v=32';
 
 const DIRS = ['left', 'right', 'up', 'down'];
 const NAMES = { left:'左', right:'右', up:'上', down:'下' };
+const ARROWS = { left:'←', right:'→', up:'↑', down:'↓' };
 const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text !== undefined) e.textContent = text; return e; };
 const pct = (x, digits = 0) => `${(100 * x).toFixed(digits)}%`;
 
@@ -64,8 +65,8 @@ export function createAnalysis({ getState, send }) {
     const span = Math.max(0.005, ...rows.map(r => (best - r.v) / scale));
     for (const r of rows) {
       const diff = (best - r.v) / scale, row = el('div', `an-bar${r.d === direction ? ' an-best' : ''}`);
-      const name = t(NAMES[r.d]);
-      row.append(el('span', 'an-dir', name.charAt(0).toUpperCase() + name.slice(1)));
+      const name = t(NAMES[r.d]), dir = el('span', 'an-dir', ARROWS[r.d]);
+      dir.setAttribute('aria-label', name); dir.title = name; row.append(dir);
       const track = el('span', 'an-track'), fill = el('span', 'an-fill');
       fill.style.width = `${Math.max(8, 100 - 85 * diff / span)}%`;
       track.append(fill); row.append(track);

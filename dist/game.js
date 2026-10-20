@@ -1,7 +1,7 @@
-import { t, locale, setLanguage, applyLanguage } from './i18n.js?v=31';
-import { createGame, projectMove, score } from './engine.js?v=31';
-import { initialCounts, observePreview, initialCycle, observeCycle } from './card-memory.js?v=31';
-import { createAnalysis } from './analysis.js?v=31';
+import { t, locale, setLanguage, applyLanguage } from './i18n.js?v=32';
+import { createGame, projectMove, score } from './engine.js?v=32';
+import { initialCounts, observePreview, initialCycle, observeCycle } from './card-memory.js?v=32';
+import { createAnalysis } from './analysis.js?v=32';
 
 const boardEl = document.querySelector('#board');
 const nextEl = document.querySelector('#next-tile');
@@ -91,7 +91,7 @@ const analysis = createAnalysis({
   send: message => { try { if (!aiWorker) createWorker(); aiWorker.postMessage(message); } catch { /* Analysis is optional. */ } }
 });
 function createWorker() {
-    aiWorker = new Worker('./ai-worker.js?v=31', { type:'module' });
+    aiWorker = new Worker('./ai-worker.js?v=32', { type:'module' });
     aiWorker.onmessage = ({ data }) => {
       if (data.analysis) { analysis?.onReply(data); return; }
       if (!aiRunning || data.id !== aiRequest) return;

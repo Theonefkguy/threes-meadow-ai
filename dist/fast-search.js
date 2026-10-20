@@ -7,7 +7,7 @@
 // V35: with `cycle` (public bonus-cycle state of the next draw, card-memory.js) the chance of a
 // bonus at a draw is 0 once the block's bonus has been shown, else 1/(21 - excluded positions);
 // without it, the constant 1/21 of the old rule (results identical to the V31 release).
-import { bonusPreviews } from './engine.js?v=31';
+import { bonusPreviews } from './engine.js?v=32';
 
 const directions=['left','right','up','down'];
 const toRank=n=>n<3?n:Math.log2(n/3)+3;
