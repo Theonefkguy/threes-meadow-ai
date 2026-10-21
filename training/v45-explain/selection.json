@@ -1,0 +1,12 @@
+{
+ "R": {
+  "eligibleMoves": 33674,
+  "eligibleGames": 2710,
+  "picked": 120
+ },
+ "C": {
+  "eligibleMoves": 7532,
+  "eligibleGames": 2511,
+  "picked": 120
+ }
+}

@@ -9,7 +9,7 @@ scan = {'games': len(games), 'moves': total, 'P12288': sum(g['success'] for g in
         'rearrangingPerMove': sum(g['rearranging'] for g in games) / total, 'cornerLeavePerMove': sum(g['cornerLeave'] for g in games) / total}
 samp = [m for m in moves if m['sample']]
 def margin(m):
-    v = sorted((m['values'][d] for d in range(4) if m['legal'][d]), reverse=True); return (v[0] - v[1]) / abs(v[0]) if len(v) > 1 else None
+    v = sorted((m['values'][d] for d in range(4) if m['legal'][d]), reverse=True); return (v[0] - v[1]) / abs(v[0]) if len(v) > 1 and v[0] != 0 else None
 ms = sorted(x for x in map(margin, samp) if x is not None); scan['baselineMedianRelativeMargin'] = ms[len(ms) // 2]
 re = sorted(margin(m) for m in moves if m['rearranging'] and margin(m) is not None); scan['rearrangingMedianRelativeMargin'] = re[len(re) // 2]
 jobs = {j['position']: j for j in map(json.loads, (L / 'jobs.jsonl').read_text().splitlines())}

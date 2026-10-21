@@ -1,0 +1,392 @@
+<title>AI 抉择图鉴</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap">
+<style>
+/* Layout: one reading column; each finding is a section with its picture first, then the numbers. Look borrowed from the Threes Meadow site. */
+:root{
+  --bg:#f7f4e9; --panel:#fffdf6; --ink:#12363a; --soft:#56716f; --line:#d8ddd2;
+  --board:#d9e3d9; --slot:#c8d4cc; --c1:#58c5e7; --c1ink:#063f51; --c2:#ef6d72; --c2ink:#5b1320; --c3:#ffffff; --c3ink:#344f53;
+  --go:#23925b; --no:#9aa7a2; --gold:#e2a925;
+  --k-clear:#c2453f; --k-mixed:#bdb8a8; --k-tie2:#3a9d93; --k-tie3:#1f6a78; --k-tie4:#123f4a;
+  --s-early:#2a78d6; --s-late:#eb6834; --heat:#1f6a78;
+  --display:"Nunito",ui-rounded,"SF Pro Rounded","PingFang SC","Hiragino Sans GB",system-ui,sans-serif;
+  --body:"Nunito",ui-rounded,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f2326; --panel:#15302f; --ink:#e6efe9; --soft:#9db5b1; --line:#2a4744;
+  --board:#24433f; --slot:#2f524d; --c3:#f3f1e7;
+  --go:#4cc489; --no:#5f716d; --gold:#f0bf4a;
+  --k-clear:#e46a5f; --k-mixed:#5f6c68; --k-tie2:#45b5a9; --k-tie3:#7ccbd8; --k-tie4:#c3e9ec;
+  --s-early:#3987e5; --s-late:#d95926; --heat:#7ccbd8; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f2326; --panel:#15302f; --ink:#e6efe9; --soft:#9db5b1; --line:#2a4744;
+  --board:#24433f; --slot:#2f524d; --c3:#f3f1e7;
+  --go:#4cc489; --no:#5f716d; --gold:#f0bf4a;
+  --k-clear:#e46a5f; --k-mixed:#5f6c68; --k-tie2:#45b5a9; --k-tie3:#7ccbd8; --k-tie4:#c3e9ec;
+  --s-early:#3987e5; --s-late:#d95926; --heat:#7ccbd8; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.65;margin:0}
+.wrap{max-width:1000px;margin:0 auto;padding-block:40px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:56px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.2;margin:0}
+h1{font-size:clamp(1.9rem,5vw,2.8rem);font-weight:900;letter-spacing:-.01em}
+h2{font-size:1.5rem;font-weight:900}
+h3{font-size:1.05rem;font-weight:800}
+p{margin:0;max-width:68ch}
+.lede{color:var(--soft);font-size:1.05rem}
+.eyebrow{font-size:.78rem;font-weight:800;letter-spacing:.12em;color:var(--soft);text-transform:uppercase}
+section{display:grid;gap:18px;min-width:0}
+.num{font-variant-numeric:tabular-nums}
+.muted{color:var(--soft)}
+.small{font-size:.86rem}
+header{display:grid;gap:14px}
+.keys{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:6px}
+.key{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:grid;gap:4px;align-content:start}
+.key b{font-size:1.5rem;font-weight:900;font-variant-numeric:tabular-nums;line-height:1.2}
+.key span{font-size:.9rem;color:var(--soft)}
+/* legend + stacked bars */
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.88rem}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.bars{display:grid;gap:10px}
+.barrow{display:grid;grid-template-columns:112px 1fr;gap:12px;align-items:center}
+.barrow .lab{font-size:.9rem;font-weight:700;text-align:right;line-height:1.25}
+.barrow .lab small{display:block;font-weight:600;color:var(--soft);font-size:.76rem}
+.stack{display:flex;gap:2px;height:28px;min-width:0}
+.seg{height:100%;min-width:0;display:grid;place-items:center;font-size:.74rem;font-weight:800;color:#fff;overflow:hidden;white-space:nowrap;cursor:default}
+.seg:first-child{border-radius:4px 0 0 4px}.seg:last-child{border-radius:0 4px 4px 0}
+.seg.light{color:var(--ink)}
+.seg:hover,.seg:focus-visible{filter:brightness(1.08);outline:2px solid var(--ink);outline-offset:1px}
+#tip{position:fixed;z-index:20;pointer-events:none;background:var(--ink);color:var(--bg);font-size:.82rem;padding:6px 10px;border-radius:8px;max-width:260px;line-height:1.4}
+/* boards */
+.boards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px}
+figure.ex{margin:0;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:12px 12px 14px;display:grid;gap:10px;align-content:start;min-width:0}
+.bw{display:grid;grid-template-columns:34px 1fr 34px;grid-template-rows:34px auto 34px;align-items:center;justify-items:center}
+.bw .u{grid-area:1/2}.bw .l{grid-area:2/1}.bw .g{grid-area:2/2;width:100%}.bw .r{grid-area:2/3}.bw .d{grid-area:3/2}
+.arr{display:grid;justify-items:center;line-height:1;font-weight:900}
+.arr .a{font-size:1.4rem;color:var(--go)}
+.arr .t{font-size:.66rem;font-weight:800;color:var(--soft);font-variant-numeric:tabular-nums;margin-top:1px;white-space:nowrap}
+.l .t,.r .t{writing-mode:horizontal-tb}
+.arr.best .a{background:color-mix(in srgb,var(--go) 18%,transparent);border-radius:8px;padding:0 4px;outline:2px solid var(--go)}
+.arr.off .a{color:var(--no);font-size:1rem}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;background:var(--board);border-radius:12px;padding:5px;aspect-ratio:1;width:100%}
+.cell{border-radius:7px;background:var(--slot);display:grid;place-items:center;font-weight:900;font-size:clamp(.7rem,2.6vw,.95rem);font-variant-numeric:tabular-nums;min-width:0}
+.cell.k1{background:var(--c1);color:var(--c1ink)}.cell.k2{background:var(--c2);color:var(--c2ink)}.cell.k3{background:var(--c3);color:var(--c3ink);box-shadow:0 2px 0 rgba(18,54,58,.18)}
+.cell.top{outline:2px solid var(--gold);outline-offset:-2px}
+.cell.s{font-size:clamp(.6rem,2vw,.78rem);letter-spacing:-.04em}
+figcaption{display:grid;gap:4px;font-size:.82rem;line-height:1.45}
+figcaption .meta{display:flex;gap:8px;flex-wrap:wrap;color:var(--soft);font-weight:700}
+.nx{display:inline-grid;place-items:center;min-width:20px;height:20px;padding:0 4px;border-radius:5px;font-weight:900;font-size:.74rem;vertical-align:middle}
+figcaption ul{margin:0;padding-left:18px}
+/* tabs */
+.tabs{display:flex;flex-wrap:wrap;gap:8px}
+.tabs button{font:inherit;font-size:.9rem;font-weight:800;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:999px;padding:6px 14px;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.tabs button i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.tabs button[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.tabs button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.panel{display:grid;gap:16px}
+.facts{display:flex;flex-wrap:wrap;gap:8px}
+.fact{border:1px solid var(--line);border-radius:10px;padding:6px 10px;font-size:.86rem;background:var(--panel)}
+.fact b{font-variant-numeric:tabular-nums}
+/* tables */
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:.88rem;font-variant-numeric:tabular-nums}
+th,td{padding:8px 12px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+thead th{font-weight:800;color:var(--soft);font-size:.8rem}
+tbody tr:last-child td{border-bottom:0}
+td .sw{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:8px;vertical-align:0}
+.cellbar{display:inline-block;height:8px;border-radius:0 4px 4px 0;background:var(--soft);opacity:.45;margin-left:8px;vertical-align:1px}
+/* corner rule */
+.corner{display:grid;grid-template-columns:minmax(200px,260px) 1fr;gap:28px;align-items:start}
+.cmp{display:grid;gap:14px}
+.cmp .row{display:grid;gap:6px}
+.cmp .row p{font-size:.95rem}
+.pair{display:grid;grid-template-columns:76px 1fr 54px;gap:8px;align-items:center;font-size:.8rem}
+.pair .tr{height:12px;background:color-mix(in srgb,var(--line) 70%,transparent);border-radius:4px;overflow:hidden}
+.pair .fill{height:100%;border-radius:0 4px 4px 0}
+.pair .v{font-weight:800;font-variant-numeric:tabular-nums;text-align:right}
+/* grouped bars for reasons */
+.reasons{display:grid;gap:12px}
+.rrow{display:grid;grid-template-columns:200px 1fr;gap:12px;align-items:center}
+.rrow .lab{font-size:.9rem;font-weight:700;line-height:1.3}
+.rrow .two{display:grid;gap:3px}
+.rbar{display:grid;grid-template-columns:1fr 50px;gap:8px;align-items:center}
+.rbar .tr{height:11px}
+.rbar .fill{height:100%;border-radius:0 4px 4px 0}
+.rbar .v{font-size:.78rem;font-weight:800;font-variant-numeric:tabular-nums}
+/* heatmaps */
+.heats{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px}
+.heat{display:grid;gap:6px}
+.heat .grid4{background:transparent;padding:0;gap:3px}
+.heat .cell{font-size:.7rem;font-weight:800;color:var(--ink)}
+.heat h3{font-size:.86rem}
+.note{border-left:3px solid var(--gold);padding:4px 0 4px 14px;color:var(--soft);font-size:.92rem}
+details{border-top:1px solid var(--line);padding-top:14px}
+details summary{cursor:pointer;font-weight:800}
+details p,details ul{margin-top:10px;color:var(--soft);font-size:.92rem;max-width:72ch}
+@media (max-width:640px){
+  .corner{grid-template-columns:1fr}
+  .corner>.ex{max-width:280px}
+  .rrow{grid-template-columns:1fr}
+  .barrow{grid-template-columns:84px 1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+<header>
+  <span class="eyebrow">Threes Meadow AI · V46 · 200 局 · 351,353 步</span>
+  <h1>AI 什么时候果断，什么时候都行</h1>
+  <p class="lede">用网站上同一个 AI（6 层搜索）打了 200 局，记下每一步四个方向各自的估分。按"最佳方向比其他方向高多少"把每一步分成几类，再看这些局面长什么样。</p>
+  <div class="keys" id="keys"></div>
+  <p class="small muted">怎么读棋盘图：四周的绿色箭头越深，AI 越看好这个方向；有框的是 AI 的最佳方向；箭头下的数字是它比最佳方向低多少（按 AI 估计的"之后还能拿的分"算），✕ 表示这一步走不了。金色描边是盘面上最大的牌。</p>
+</header>
+
+<section>
+  <span class="eyebrow">分类</span>
+  <h2>越到后期，越常出现"只有一个好方向"</h2>
+  <div class="legend" id="legend"></div>
+  <div class="bars" id="phaseBars"></div>
+  <p class="small muted" id="clsDefs"></p>
+  <p>开局时，四分之三的步属于"略有偏好"（最佳和第二名差 0.25%–2%），真正一边倒的只有 2%。到了 6144 之后，一半的步是一边倒。"三个都差不多"几乎只出现在开局。</p>
+</section>
+
+<section>
+  <span class="eyebrow">最清楚的规律</span>
+  <h2>朝着大牌所在的角走</h2>
+  <div class="corner">
+    <figure class="ex" id="cornerDemo"></figure>
+    <div class="cmp" id="cornerCmp"></div>
+  </div>
+  <p class="note" id="cornerNote"></p>
+</section>
+
+<section>
+  <span class="eyebrow">典型局面</span>
+  <h2>每一类局面长什么样</h2>
+  <div class="tabs" role="tablist" id="clsTabs"></div>
+  <div class="tabs" role="tablist" id="stageTabs"></div>
+  <div class="panel" id="clsPanel" role="tabpanel"></div>
+</section>
+
+<section>
+  <span class="eyebrow">特征对比</span>
+  <h2>果断的局面更挤，持平的局面更空</h2>
+  <div class="tabs" role="tablist" id="featTabs"></div>
+  <div class="tw"><table id="featTable"></table></div>
+  <p>果断的局面空格最少，下一张更常是奖励大牌，也更常有一个方向会让下一张牌进来后直接无路可走。持平的局面空格更多，大牌更常稳稳待在角上。四个方向都行的情况几乎全在开局（盘面最空）。</p>
+</section>
+
+<section>
+  <span class="eyebrow">走法受限时</span>
+  <h2>只能走两个或三个方向</h2>
+  <div class="keys" id="legalKeys"></div>
+  <div class="bars" id="legalBars"></div>
+  <div class="tw"><table id="legalTable"></table></div>
+  <div class="tabs" role="tablist" id="legalTabs"></div>
+  <div class="boards" id="legalBoards"></div>
+</section>
+
+<section>
+  <span class="eyebrow">为什么不走</span>
+  <h2>被强烈避开的方向错在哪</h2>
+  <p>"强烈避开"指比最佳方向低 5% 以上的方向。下面每个原因都是能在盘面上直接核对的事实，一个方向可以同时有几个原因。</p>
+  <div class="legend" id="reasonLegend"></div>
+  <div class="reasons" id="reasons"></div>
+  <p id="runnerText"></p>
+</section>
+
+<section>
+  <span class="eyebrow">位置</span>
+  <h2>最大的牌在哪里</h2>
+  <p>每格的数字是"最大的牌在这一格"的步数占比。</p>
+  <div class="tabs" role="tablist" id="heatTabs"></div>
+  <div class="heats" id="heats"></div>
+</section>
+
+<details>
+  <summary>口径和局限</summary>
+  <ul>
+    <li>数据：200 局（种子 46100001–46100200），网站同款设置：V31 模型（float16 权重）、6 层搜索、概率截断 0.005、奖励牌周期感知。11% 的局合出 12288。</li>
+    <li>方向差距 =（最佳估分 − 该方向估分）÷ 最佳估分。估分是 AI 自己对"之后还能拿多少分"的估计，不是真实结果。同样的分差，开局时"之后还能拿的分"大，所以百分比显得更小。</li>
+    <li>分类：一边倒 = 第二名差 ≥2%；两个差不多 = 前两名差 &lt;0.25%，且第三名差 ≥1%（或只有两个方向能走）；三个、四个差不多同理；其余算"略有偏好"。阈值在看数据前定下，没有为这份图调整过。</li>
+    <li>"朝角走"只统计最大的牌在角上的步（前期约 31%，后期约 51%）。最大的牌有多张时取靠上靠左的那张。</li>
+    <li>原因标签：挪动大牌 = 768 以上的牌换了位置且比最佳方向多；背离角 = 不是朝角的两个方向之一而最佳方向是；离开角 = 最大的牌原本在角上、走完不在了；错过大合成 = 最佳方向能合出 96 以上的牌而它合不出或合得更小；合并更少 = 合并数和能进新牌的行列都比最佳方向少；可能直接死 = 新牌进来后无路可走的概率比最佳方向高。</li>
+    <li>这些是"相关"不是"原因"：AI 不会按这些规则思考，它看的是 6 层之后的局面。规则只是帮人看懂它的选择大致落在哪里。</li>
+  </ul>
+</details>
+</div>
+<div id="tip" hidden></div>
+
+<script>
+const D = __DATA__;
+const CLS = [
+  {k:'clear', name:'一边倒', def:'第二名比最佳低 2% 以上'},
+  {k:'mixed', name:'略有偏好', def:'介于两者之间'},
+  {k:'tie2', name:'两个差不多', def:'前两名差不到 0.25%，其余明显更差'},
+  {k:'tie3', name:'三个差不多', def:'前三名差不到 0.25%'},
+  {k:'tie4', name:'四个都行', def:'四个方向差不到 0.25%'},
+];
+const DIR = ['←','→','↑','↓'], DIRN = ['左','右','上','下'];
+const TOWARD = {0:[0,2],3:[1,2],12:[0,3],15:[1,3]};
+const pct = (x,d=1) => (100*x).toFixed(d)+'%';
+const el = (tag, attrs={}, html='') => { const e = document.createElement(tag); for (const [k,v] of Object.entries(attrs)) e.setAttribute(k,v); if (html) e.innerHTML = html; return e; };
+const cardLabel = r => r===0 ? '' : r<3 ? String(r) : String(3*2**(r-3));
+const sum = o => Object.values(o).reduce((a,b)=>a+b,0);
+const tip = document.getElementById('tip');
+function hoverTip(node, text){
+  node.tabIndex = 0; node.setAttribute('aria-label', text);
+  const show = e => { tip.textContent = text; tip.hidden = false; const r = node.getBoundingClientRect(); const x = e && e.clientX ? e.clientX : r.left + r.width/2; const y = e && e.clientY ? e.clientY : r.top; tip.style.left = Math.min(window.innerWidth - tip.offsetWidth - 8, Math.max(8, x - tip.offsetWidth/2)) + 'px'; tip.style.top = Math.max(8, y - tip.offsetHeight - 12) + 'px'; };
+  node.addEventListener('pointermove', show); node.addEventListener('focus', () => show()); node.addEventListener('pointerleave', () => tip.hidden = true); node.addEventListener('blur', () => tip.hidden = true);
+}
+function tabs(host, items, onPick, start=0){
+  host.innerHTML = '';
+  const bs = items.map((it,i) => { const b = el('button',{role:'tab','aria-selected':String(i===start)}, (it.color?`<i style="background:var(${it.color})"></i>`:'')+it.label); b.onclick = () => { bs.forEach(x => x.setAttribute('aria-selected','false')); b.setAttribute('aria-selected','true'); onPick(it, i); }; host.append(b); return b; });
+  onPick(items[start], start);
+}
+
+/* key numbers */
+const P = D.phases, BP = D.byPhase;
+const share = (p,c) => BP[p][c]/sum(BP[p]);
+const late = D.corner.True, early = D.corner.False;
+document.getElementById('keys').innerHTML = [
+  [pct(share(0,'clear')) + ' → ' + pct(share(4,'clear')), '一边倒的比例：开局 → 6144 之后'],
+  [pct(late['tie2|pairToward']/late['tie2|n'],0), '后期"两个差不多"时，正好是朝大牌所在角的那两个方向（随机约 17%）'],
+  [pct(late['tie3k4|excludedAway']/late['tie3k4|n'],0), '后期"三个差不多"时，被排除的那个方向背离大牌所在的角'],
+  ['0 步', '35 万步里没有一步只能走一个方向'],
+].map(([b,s]) => `<div class="key"><b>${b}</b><span>${s}</span></div>`).join('');
+
+/* stacked bars by phase */
+document.getElementById('legend').innerHTML = CLS.map(c => `<span><i style="background:var(--k-${c.k})"></i>${c.name}</span>`).join('');
+document.getElementById('clsDefs').textContent = CLS.map(c => `${c.name}：${c.def}`).join('；') + '。';
+function stackRow(label, sub, counts, host){
+  const row = el('div',{class:'barrow'}); row.append(el('div',{class:'lab'}, label + (sub?`<small>${sub}</small>`:'')));
+  const st = el('div',{class:'stack'}); const n = sum(counts);
+  for (const c of CLS) { const v = counts[c.k]||0; if (!v) continue; const s = el('div',{class:'seg'+(['mixed','tie4'].includes(c.k)?' light':'')}); s.style.flex = String(v); s.style.background = `var(--k-${c.k})`; if (v/n >= .07) s.textContent = pct(v/n,0); hoverTip(s, `${label} · ${c.name}：${pct(v/n)}（${v.toLocaleString()} 步）`); st.append(s); }
+  row.append(st); host.append(row);
+}
+const pb = document.getElementById('phaseBars');
+P.forEach((p,i) => stackRow(p, sum(BP[i]).toLocaleString()+' 步', BP[i], pb));
+
+/* corner rule */
+function boardFig(ex, opts={}){
+  const f = el('figure',{class:'ex'}); const b = ex.board; const legal = ex.dirs.map(d => !!d);
+  const best = ex.dirs.reduce((bi,d,i) => d && (bi<0 || d.gap < ex.dirs[bi].gap) ? i : bi, -1);
+  const mc = b.reduce((bi,v,i) => v > b[bi] ? i : bi, 0);
+  const bw = el('div',{class:'bw'});
+  ['l','r','u','d'].forEach((pos,i) => {
+    const d = ex.dirs[i]; const a = el('div',{class:'arr '+pos+(d?'':' off')+(i===best?' best':'')});
+    if (!d) { a.innerHTML = `<span class="a">✕</span>`; a.setAttribute('aria-label', DIRN[i]+'：走不了'); }
+    else { const s = Math.max(0, 1 - d.gap/0.05); a.innerHTML = `<span class="a" style="opacity:${(0.18+0.82*s).toFixed(2)}">${DIR[i]}</span><span class="t">${i===best?'最佳':d.gap<0.0005?'≈0':'−'+pct(d.gap,d.gap<0.1?1:0)}</span>`; a.setAttribute('aria-label', `${DIRN[i]}：${i===best?'最佳':'低 '+pct(d.gap)}`); }
+    bw.append(a);
+  });
+  const g = el('div',{class:'grid4 g'});
+  b.forEach((r,i) => { const c = el('div',{class:'cell'+(r===1?' k1':r===2?' k2':r>=3?' k3':'')+(i===mc&&r>=3?' top':'')+(r>=12?' s':'')}, cardLabel(r)); g.append(c); });
+  bw.append(g); f.append(bw);
+  if (opts.bare) return f;
+  const cap = el('figcaption');
+  const nx = ex.next.bonus ? `<span class="nx" style="background:var(--gold);color:#3b2a00">${ex.next.cards.map(cardLabel).join('/')}</span> 奖励大牌` : `<span class="nx ${['','k1','k2','k3'][Math.min(ex.next.cards[0],3)]}" style="background:var(--${['','c1','c2','c3'][Math.min(ex.next.cards[0],3)]});color:var(--${['','c1ink','c2ink','c3ink'][Math.min(ex.next.cards[0],3)]})">${cardLabel(ex.next.cards[0])}</span>`;
+  const empty = b.filter(v=>!v).length;
+  cap.innerHTML = `<div class="meta"><span>下一张 ${nx}</span><span>空格 ${empty}</span><span>${legal.filter(Boolean).length} 个方向能走</span></div>`;
+  const notes = [];
+  ex.dirs.forEach((d,i) => {
+    if (!d || i===best) return; const B = ex.dirs[best]; const t = [];
+    if (d.pDeath > B.pDeath + 1e-9) t.push(`可能直接死 ${pct(d.pDeath,0)}`);
+    if (d.big > B.big) t.push(`挪动 ${d.big} 张大牌`);
+    if (TOWARD[mc] && !TOWARD[mc].includes(i) && TOWARD[mc].includes(best)) t.push('背离角');
+    if (d.merges < B.merges) t.push(`少合并 ${B.merges-d.merges} 次`);
+    if (t.length) notes.push(`<li>${DIR[i]} ${t.join('，')}</li>`);
+  });
+  if (notes.length) cap.innerHTML += `<ul>${notes.join('')}</ul>`;
+  f.append(cap); return f;
+}
+(() => {
+  const demo = {board:[14,12,9,3, 11,10,4,1, 6,3,2,0, 2,0,0,0], next:{cards:[1],bonus:false}, dirs:[{gap:0},{gap:0.09},{gap:0.001},{gap:0.07}]};
+  const fig = boardFig(demo,{bare:true}); fig.append(el('figcaption',{}, '<span class="muted">示意：6144 在左上角。←和↑是"朝角"的两个方向，→和↓"背离角"。</span>'));
+  document.getElementById('cornerDemo').replaceWith(Object.assign(fig,{id:'cornerDemo'}));
+  const rows = [
+    ['"两个差不多"时，持平的正好是朝角的两个方向', 'tie2|pairToward', 'tie2|n', 1/6, '随机配对'],
+    ['"三个差不多"时，被排除的方向背离角', 'tie3k4|excludedAway', 'tie3k4|n', .5, '随机'],
+    ['被强烈避开（低 5% 以上）的方向背离角', 'avoid|away', 'avoid|n', .5, '随机'],
+    ['"一边倒"时，最佳方向是朝角的方向', 'clear|bestToward', 'clear|n', .5, '随机'],
+  ];
+  const host = document.getElementById('cornerCmp');
+  for (const [t,a,b,base,bl] of rows) {
+    const r = el('div',{class:'row'}); r.append(el('p',{},t));
+    for (const [lab,c,col] of [['前期 ≤1536',early,'--s-early'],['后期 3072+',late,'--s-late']]) { const v = c[a]/c[b]; const p = el('div',{class:'pair'}, `<span>${lab}</span><div class="tr"><div class="fill" style="width:${100*v}%;background:var(${col})"></div></div><span class="v">${pct(v,0)}</span>`); hoverTip(p, `${lab}：${pct(v)}（${c[a].toLocaleString()} / ${c[b].toLocaleString()}）`); r.append(p); }
+    r.append(el('div',{class:'pair'}, `<span class="muted">${bl}</span><div class="tr"><div class="fill" style="width:${100*base}%;background:var(--no)"></div></div><span class="v muted">${pct(base,0)}</span>`));
+    host.append(r);
+  }
+  const c1 = x => x['clear|towardLegal1']/x.towardLegal1, c2 = x => x['clear|towardLegal2']/x.towardLegal2;
+  document.getElementById('cornerNote').textContent = `朝角的两个方向里有一个被堵住时，AI 就很容易变成"一边倒"：后期一边倒的比例从 ${pct(c2(late),0)}（两个朝角方向都能走）升到 ${pct(c1(late),0)}（只剩一个能走）；前期从 ${pct(c2(early),0)} 升到 ${pct(c1(early),0)}。以上只统计最大的牌在角上的步。`;
+})();
+
+/* examples by class */
+let curCls = CLS[0], curStage = true;
+function drawClass(){
+  const host = document.getElementById('clsPanel'); host.innerHTML = '';
+  const F = D.features[`${curStage?'True':'False'}|${curCls.k}`];
+  host.append(el('p',{},`<b>${curCls.name}</b>：${curCls.def}。${curStage?'后期（3072 及以后）':'前期（1536 及以前）'}共 ${F.n.toLocaleString()} 步。`));
+  const fx = el('div',{class:'facts'}); fx.innerHTML = [['平均空格',F.empty.toFixed(1)],['下一张是奖励大牌',pct(F.next.bonus||0)],['最大的牌在角上',pct(F.maxCorner,0)],['有方向可能直接死',pct(F.anyDeathRisk)]].map(([a,b])=>`<span class="fact">${a} <b>${b}</b></span>`).join(''); host.append(fx);
+  const bs = el('div',{class:'boards'}); (D.examples[`${curCls.k}|4|${curStage?'True':'False'}`]||[]).slice(0,3).forEach(e => bs.append(boardFig(e))); host.append(bs);
+  host.append(el('p',{class:'small muted'},'随机抽取的 3 个四个方向都能走的局面（固定随机种子，不挑选）。'));
+}
+tabs(document.getElementById('clsTabs'), CLS.map(c => ({label:c.name, color:`--k-${c.k}`, c})), it => { curCls = it.c; drawClass(); });
+tabs(document.getElementById('stageTabs'), [{label:'后期 3072+', v:true},{label:'前期 ≤1536', v:false}], it => { curStage = it.v; drawClass(); });
+
+/* feature table */
+function featTable(isLate){
+  const rows = CLS.map(c => [c, D.features[`${isLate?'True':'False'}|${c.k}`]]).filter(([,f]) => f && f.n >= 50);
+  const cols = [['步数', f => f.n.toLocaleString(), null],['平均空格', f => f.empty.toFixed(2), f => f.empty/6],['1 和 2 的数量差', f => f.imbalance.toFixed(2), f => f.imbalance/2],['下一张是奖励大牌', f => pct(f.next.bonus||0), f => (f.next.bonus||0)/.15],['最大的牌在角上', f => pct(f.maxCorner,0), f => f.maxCorner],['有方向可能直接死', f => pct(f.anyDeathRisk), f => f.anyDeathRisk/.12]];
+  document.getElementById('featTable').innerHTML = `<thead><tr><th>类别</th>${cols.map(c=>`<th>${c[0]}</th>`).join('')}</tr></thead><tbody>${rows.map(([c,f]) => `<tr><td><span class="sw" style="background:var(--k-${c.k})"></span>${c.name}</td>${cols.map(([,g,w]) => `<td>${g(f)}${w?`<span class="cellbar" style="width:${Math.min(40,40*w(f)).toFixed(0)}px"></span>`:''}</td>`).join('')}</tr>`).join('')}</tbody>`;
+}
+tabs(document.getElementById('featTabs'), [{label:'后期 3072+', v:true},{label:'前期 ≤1536', v:false}], it => featTable(it.v));
+
+/* legal-move counts */
+(() => {
+  const LP = D.legalByPhase, BL = D.byLegal; const tot = k => LP.reduce((a,p)=>a+p[k],0); const all = LP.reduce((a,p)=>a+sum(p),0);
+  document.getElementById('legalKeys').innerHTML = [
+    [pct(tot('2')/all), `只能走两个方向（开局 ${pct(LP[0]['2']/sum(LP[0]))}，6144 之后 ${pct(LP[4]['2']/sum(LP[4]))}）`],
+    [pct(tot('3')/all), `只能走三个方向（开局 ${pct(LP[0]['3']/sum(LP[0]))}，6144 之后 ${pct(LP[4]['3']/sum(LP[4]))}）`],
+    [pct(BL['2'].clear/sum(BL['2']),0), '只能走两个方向时，85% 是一边倒：通常其中一个方向明显会出事'],
+  ].map(([b,s]) => `<div class="key"><b>${b}</b><span>${s}</span></div>`).join('');
+  const host = document.getElementById('legalBars');
+  for (const k of ['2','3','4']) stackRow(`${k} 个方向能走`, sum(BL[k]).toLocaleString()+' 步', BL[k], host);
+  const rows = []; for (const lt of [false,true]) for (const k of ['2','3','4']) { const f = D.featuresByLegal[`${lt?'True':'False'}|${k}`]; rows.push(`<tr><td>${lt?'后期':'前期'} · ${k} 个方向</td><td>${f.n.toLocaleString()}</td><td>${f.empty.toFixed(2)}</td><td>${f.pairs.toFixed(2)}</td><td>${pct(f.maxCorner,0)}</td><td>${pct(f.anyDeathRisk)}</td></tr>`); }
+  document.getElementById('legalTable').innerHTML = `<thead><tr><th>情形</th><th>步数</th><th>平均空格</th><th>相邻可合并对</th><th>最大的牌在角上</th><th>有方向可能直接死</th></tr></thead><tbody>${rows.join('')}</tbody>`;
+  const sets = [
+    {label:'2 个方向 · 一边倒', key:'clear|2|True'}, {label:'2 个方向 · 两个差不多', key:'tie2|2|True'},
+    {label:'3 个方向 · 一边倒', key:'clear|3|True'}, {label:'3 个方向 · 两个差不多', key:'tie2|3|True'}, {label:'3 个方向 · 三个差不多', key:'tie3|3|True'},
+  ].filter(s => (D.examples[s.key]||[]).length);
+  tabs(document.getElementById('legalTabs'), sets, it => { const h = document.getElementById('legalBoards'); h.innerHTML = ''; D.examples[it.key].slice(0,3).forEach(e => h.append(boardFig(e))); });
+})();
+
+/* reasons */
+(() => {
+  const TAG = [['bigMoved','会挪动 768 以上的大牌'],['away','背离大牌所在的角'],['cornerLeft','最大的牌会离开角落'],['fewerMerges','合并更少、能进新牌的行列更少'],['missesBigMerge','错过一次 96 以上的合成'],['death','新牌进来后可能直接死'],['other','以上都不是']];
+  const agg = idx => { const o = {n:0}; idx.forEach(i => { for (const [k,v] of Object.entries(D.avoid[i])) o[k] = (o[k]||0) + v; }); return o; };
+  const E = agg([0,1,2]), L = agg([3,4]);
+  document.getElementById('reasonLegend').innerHTML = `<span><i style="background:var(--s-early)"></i>前期 ≤1536（${E.n.toLocaleString()} 个方向）</span><span><i style="background:var(--s-late)"></i>后期 3072+（${L.n.toLocaleString()} 个方向）</span>`;
+  const host = document.getElementById('reasons');
+  for (const [k,name] of TAG) {
+    const r = el('div',{class:'rrow'}); r.append(el('div',{class:'lab'},name)); const two = el('div',{class:'two'});
+    for (const [o,col,lab] of [[E,'--s-early','前期'],[L,'--s-late','后期']]) { const v = (o[k]||0)/o.n; const b = el('div',{class:'rbar'}, `<div class="tr"><div class="fill" style="width:${(100*v).toFixed(1)}%;background:var(${col})"></div></div><span class="v">${pct(v,0)}</span>`); hoverTip(b, `${lab} · ${name}：${pct(v)}`); two.append(b); }
+    r.append(two); host.append(r);
+  }
+  const RU = D.runnerUp;
+  document.getElementById('runnerText').innerHTML = `反过来看"一边倒"的步：第二名为什么比最佳差那么多？只有约 4 成能用上面这些规则解释（后期挪动大牌 ${pct(RU.True.bigMoved/RU.True.n,0)}，背离角 ${pct(RU.True.away/RU.True.n,0)}，下一张是奖励大牌 ${pct(RU.True.bonusNext/RU.True.n,0)}）；<b>剩下 ${pct(RU.False.other/RU.False.n,0)}（前期）和 ${pct(RU.True.other/RU.True.n,0)}（后期）看不出简单原因</b>，差别来自 AI 往后看了几步之后的局面。这也和之前的发现一致：后期加深搜索提升很大。`;
+})();
+
+/* heatmaps */
+function heats(isLate){
+  const host = document.getElementById('heats'); host.innerHTML = '';
+  for (const c of CLS) {
+    const h = D.heat[`${isLate?'True':'False'}|${c.k}`]; if (!h || h.n < 200) continue;
+    const box = el('div',{class:'heat'}); box.append(el('h3',{},`${c.name} <span class="muted small">${h.n.toLocaleString()} 步</span>`));
+    const g = el('div',{class:'grid4'}); const mx = Math.max(...h.max);
+    h.max.forEach(v => { const s = v/h.n; const cell = el('div',{class:'cell'}, s >= .005 ? pct(s,0) : ''); cell.style.background = `color-mix(in oklab, var(--heat) ${(8+80*v/mx).toFixed(0)}%, var(--panel))`; if (v/mx > .55) cell.style.color = 'var(--bg)'; g.append(cell); });
+    box.append(g); host.append(box);
+  }
+}
+tabs(document.getElementById('heatTabs'), [{label:'后期 3072+', v:true},{label:'前期 ≤1536', v:false}], it => heats(it.v));
+</script>

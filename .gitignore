@@ -173,3 +173,7 @@ training/v44-shape/games/*.part
 training/v45-explain/bin/
 training/v45-explain/scan/*.part
 training/v45-explain/rollouts/*.part
+training/v46-margins/bin/
+training/v46-margins/data/*.part
+training/v45-explain/scan/m-*.jsonl
+training/v46-margins/data/m-*
