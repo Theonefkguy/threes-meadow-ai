@@ -38,11 +38,15 @@ class Net(nn.Module):
     def forward(self, board, cards, bonus, counts, cycle, legal):
         """board [B,16] long ranks; cards [B,3] long (0 = none); bonus [B] bool; counts [B,3] long 0-4;
         cycle [B,3] long (pos 0-20, used 0/1, excl 0-21); legal [B,4] bool -> (logits [B,4], gaps [B,4])."""
+        h = self.head(self.features(board, cards, bonus, counts, cycle))
+        return h[:, :4].masked_fill(~legal, -1e9), h[:, 4:]
+
+    def features(self, board, cards, bonus, counts, cycle):
+        """The normalised summary token [B, d]."""
         B = board.shape[0]
         x = self.cell(board.clamp(max=15)) + self.pos
         pv = torch.zeros(B, 17, device=board.device).scatter_(1, cards, 1.0); pv[:, 0] = 0; pv[:, 16] = bonus.float()
         cn = nn.functional.one_hot(counts.clamp(0, 4), 5).flatten(1).float()
         cy = torch.cat([nn.functional.one_hot(cycle[:, 0].clamp(0, 20), 21), cycle[:, 1:2].clamp(0, 1), nn.functional.one_hot(cycle[:, 2].clamp(0, 21), 22)], 1).float()
         t = torch.cat([self.summary.expand(B, -1, -1), x, self.preview(pv)[:, None], self.counts(cn)[:, None], self.cycle(cy)[:, None]], 1)
-        h = self.head(self.norm(self.enc(t)[:, 0]))
-        return h[:, :4].masked_fill(~legal, -1e9), h[:, 4:]
+        return self.norm(self.enc(t)[:, 0])

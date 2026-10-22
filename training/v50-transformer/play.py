@@ -6,7 +6,7 @@ per move. Seeds 50900001.. (not used for training). Reports how many games reach
   POLICY: runs/NAME/model.pt (transformer), random, rules (the V49 four-rule list)
 Late starts (aistart.py): the 100 validation AI games, from where the AI first had 1536 / 3072;
 compared with what the AI itself reached in the same games.
-  uv run python play.py POLICY late [OUT.json]"""
+  uv run python play.py POLICY late [OUT.json] [RESEEDS]"""
 import json, sys, time, random
 from pathlib import Path
 import numpy as np
@@ -53,11 +53,18 @@ def run(games, choose):
         for g, d in zip(alive, choose(alive)): g.step(d)
         alive = [g for g in alive if not g.over and g.turns < 50000]
 
-def late(pol, choose):
+def late(pol, choose, reseeds=0):
+    """reseeds > 0: each start is played that many more times with the RNG re-seeded (70000001..),
+    for a larger sample; the AI's numbers stay those of its own game."""
+    import copy
     from aistart import late_games, ai_seeds
+    from engine import RNG
     res = {'policy': pol, 'late': {}}
     for r, c in ((12, '1536'), (13, '3072')):
-        lg = late_games(ai_seeds(True), r); run([g for g, _ in lg], choose)
+        lg = late_games(ai_seeds(True), r); k = 70000000
+        for g, t in list(lg):
+            for _ in range(reseeds): k += 1; h = copy.deepcopy(g); h.rng = RNG(k); lg.append((h, t))
+        run([g for g, _ in lg], choose)
         res['late'][c] = {'games': len(lg), **{f'{who} reach {x}': sum(t >= k for t in tops) / len(lg) for who, tops in (('student', [max(g.b) for g, _ in lg]), ('AI', [t for _, t in lg]))
                                                for x, k in (('3072', 13), ('6144', 14), ('12288', 15)) if k > r and not (who == 'AI' and k == 15)}}
     return res
@@ -66,7 +73,7 @@ if __name__ == '__main__':
     pol = sys.argv[1]
     choose = uniform() if pol == 'random' else rules() if pol == 'rules' else transformer(pol)
     if sys.argv[2] == 'late':
-        res = late(pol, choose); print(json.dumps(res))
+        res = late(pol, choose, int(sys.argv[4]) if len(sys.argv) > 4 else 0); print(json.dumps(res))
         if len(sys.argv) > 3: Path(sys.argv[3]).write_text(json.dumps(res) + '\n')
         sys.exit(0)
     n = int(sys.argv[2])

@@ -17,14 +17,23 @@ L = Path(__file__).resolve().parent; DATA = Path('/Volumes/Extreme SSD/Datasets/
 TAU, BATCH, LR = 0.002, 2048, 1e-3
 dev = torch.device('mps' if torch.backends.mps.is_available() else 'cpu')
 
-def tensors(d, rows):
+def arrays(d, rows):
+    """Compact numpy arrays (uint8 inputs, float32 gaps) of the selected rows."""
     v = d['values'][rows].astype(np.float64); legal = ~np.isnan(v)
     with np.errstate(invalid='ignore', divide='ignore'):
         top = np.nanmax(v, 1); gap = (top[:, None] - v) / np.abs(top)[:, None]
     gap = np.where(legal, np.nan_to_num(gap, nan=9.0), 9.0)
-    t = lambda a, dt=torch.long: torch.as_tensor(np.ascontiguousarray(a)).to(dev, dt)
-    return {'board': t(d['board'][rows]), 'cards': t(d['cards'][rows]), 'bonus': t(d['bonus'][rows], torch.bool), 'counts': t(d['counts'][rows]),
-            'cycle': t(d['cycle'][rows]), 'legal': t(legal, torch.bool), 'gap': t(gap, torch.float32)}
+    return {'board': d['board'][rows].astype(np.uint8), 'cards': d['cards'][rows].astype(np.uint8), 'bonus': d['bonus'][rows].astype(bool),
+            'counts': d['counts'][rows].astype(np.uint8), 'cycle': d['cycle'][rows].astype(np.uint8), 'legal': legal, 'gap': gap.astype(np.float32)}
+def on_dev(a):
+    """Arrays -> device tensors, kept compact (uint8); see batch() for the model's dtypes."""
+    return {k: torch.as_tensor(np.ascontiguousarray(v)).to(dev) for k, v in a.items()}
+def batch(b, idx=None):
+    """A slice of compact tensors with the model's dtypes (long inputs)."""
+    out = {k: (v if idx is None else v[idx]) for k, v in b.items()}
+    for k in ('board', 'cards', 'counts', 'cycle'): out[k] = out[k].long()
+    return out
+def tensors(d, rows): return batch(on_dev(arrays(d, rows)))
 def usable(d):
     v = d['values']; legal = ~np.isnan(v)
     return (legal.sum(1) >= 2) & (np.nanmax(np.where(legal, v, -np.inf), 1) != 0)
@@ -49,7 +58,7 @@ def loss_fn(net, b):
 def evaluate(net, b, human=None):
     net.eval(); picks = []
     for i in range(0, len(b['board']), 8192):
-        logits, _ = net(*(b[k][i:i + 8192] for k in ('board', 'cards', 'bonus', 'counts', 'cycle', 'legal'))); picks.append(logits.argmax(1))
+        x = batch(b, slice(i, i + 8192)); logits, _ = net(*(x[k] for k in ('board', 'cards', 'bonus', 'counts', 'cycle', 'legal'))); picks.append(logits.argmax(1))
     net.train(); p = torch.cat(picks); g = b['gap'].gather(1, p[:, None])[:, 0]
     best = b['gap'].argmin(1)
     out = {'n': len(p), 'near': (g < 0.0025).float().mean().item(), 'match': (p == best).float().mean().item(), 'bad5': (g >= 0.05).float().mean().item(),
@@ -63,18 +72,17 @@ if __name__ == '__main__':
     args = ap.parse_args(); epochs = args.epochs; LR = args.lr
     run = L / 'runs' / args.name; run.mkdir(parents=True, exist_ok=True)
     d = dict(np.load(DATA / 'positions.npz')); ok = usable(d)
-    tr, va = tensors(d, ok & ~d['val']), tensors(d, ok & d['val'])
+    parts, va = [arrays(d, ok & ~d['val'])], on_dev(arrays(d, ok & d['val']))
     lf = set(filter(None, args.late_extra.split(',')))
     for f in [*filter(None, args.extra.split(',')), *lf]:
-        e = dict(np.load(f)); x = tensors(e, usable(e))
-        for _ in range(args.repeat): tr = {k: torch.cat([tr[k], x[k]]) for k in tr}
-        if f in lf:
-            y = tensors(e, usable(e) & (e['board'].max(1) >= 12))
-            for _ in range(args.late): tr = {k: torch.cat([tr[k], y[k]]) for k in tr}
+        e = dict(np.load(f)); parts += [arrays(e, usable(e))] * args.repeat
+        if f in lf: parts += [arrays(e, usable(e) & (e['board'].max(1) >= 12))] * args.late
+    tr = on_dev({k: np.concatenate([a[k] for a in parts]) for k in parts[0]}); del parts
     h = dict(np.load(DATA / 'human.npz')); hok = usable(h)
-    hum = {s: (tensors(h, hok & m), torch.as_tensor(h['human'][hok & m].astype(np.int64), device=dev)) for s, m in (('v47', h['seed'] == 47), ('v48', h['seed'] != 47))}
+    hum = {s: (on_dev(arrays(h, hok & m)), torch.as_tensor(h['human'][hok & m].astype(np.int64), device=dev)) for s, m in (('v47', h['seed'] == 47), ('v48', h['seed'] != 47))}
     n = len(tr['board']); steps = epochs * (n // BATCH)
-    print(f'train {n} val {len(va["board"])} human {[len(v[1]) for v in hum.values()]} steps {steps} on {dev}', flush=True)
+    print(f'train {n} val {len(va["board"])} human {[len(v[1]) for v in hum.values()]} steps {steps} on {dev}'
+          + (f', GPU memory {torch.mps.driver_allocated_memory() / 2**30:.1f}G' if dev.type == 'mps' else ''), flush=True)
     torch.manual_seed(50)
     net = Net(**({'d': 64, 'layers': 2, 'heads': 4, 'ff': 256} if args.small else {})).to(dev)
     if args.init: net.load_state_dict(torch.load(args.init, map_location=dev))
@@ -91,7 +99,7 @@ if __name__ == '__main__':
     for epoch in range(start, epochs):
         t0 = time.time(); perm = torch.randperm(n, device=dev); tot = [0.0, 0.0, 0.0]; k = 0
         for i in range(0, n - BATCH + 1, BATCH):
-            b = augment({key: v[perm[i:i + BATCH]] for key, v in tr.items()})
+            b = augment(batch(tr, perm[i:i + BATCH]))
             loss, ce, reg = loss_fn(net, b); opt.zero_grad(); loss.backward()
             torch.nn.utils.clip_grad_norm_(net.parameters(), 1.0); opt.step(); sched.step()
             tot[0] += loss.item() if k % 50 == 0 else 0; k += 1
