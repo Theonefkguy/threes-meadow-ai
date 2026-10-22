@@ -177,3 +177,8 @@ training/v46-margins/bin/
 training/v46-margins/data/*.part
 training/v45-explain/scan/m-*.jsonl
 training/v46-margins/data/m-*
+training/v48-logiccube/raw/
+training/v49-rules/cache.npz
+training/v50-transformer/.venv/
+training/v50-transformer/runs/
+training/v50-transformer/bin/
