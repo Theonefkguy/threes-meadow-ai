@@ -1,0 +1,246 @@
+{
+ "baseline": {
+  "near": 0.7948,
+  "bad5": 0.021466666666666665,
+  "meanScore": 189422.28,
+  "reach1536": 0.87,
+  "reach3072": 0.54
+ },
+ "summaryAblation": {
+  "1": {
+   "near": 0.7793666666666667,
+   "bad5": 0.026733333333333335,
+   "meanScore": 157439.13,
+   "reach1536": 0.85,
+   "reach3072": 0.47
+  },
+  "2": {
+   "near": 0.7613333333333333,
+   "bad5": 0.02896666666666667,
+   "meanScore": 114342.21,
+   "reach1536": 0.7833333333333333,
+   "reach3072": 0.30333333333333334
+  },
+  "3": {
+   "near": 0.7528333333333334,
+   "bad5": 0.031033333333333333,
+   "meanScore": 103134.0,
+   "reach1536": 0.7666666666666667,
+   "reach3072": 0.23333333333333334
+  }
+ },
+ "directLogit": {
+  "AI首选": {
+   "features": 20,
+   "ownDirectionPushedUp(sign-adjusted)": 1.0,
+   "meanEffect": 0.3515440072864294
+  },
+  "balance": {
+   "features": 8,
+   "ownDirectionPushedUp(sign-adjusted)": 0.625,
+   "meanEffect": -0.01029322631075047
+  },
+  "bigStill": {
+   "features": 2,
+   "ownDirectionPushedUp(sign-adjusted)": 1.0,
+   "meanEffect": 0.07002093829214573
+  },
+  "chain": {
+   "features": 11,
+   "ownDirectionPushedUp(sign-adjusted)": 0.7272727272727273,
+   "meanEffect": 0.05235537332059308
+  },
+  "edgeSum": {
+   "features": 3,
+   "ownDirectionPushedUp(sign-adjusted)": 1.0,
+   "meanEffect": 0.017738682217895985
+  },
+  "empties": {
+   "features": 23,
+   "ownDirectionPushedUp(sign-adjusted)": 0.5652173913043478,
+   "meanEffect": 0.022113900049589574
+  },
+  "fit": {
+   "features": 1,
+   "ownDirectionPushedUp(sign-adjusted)": 1.0,
+   "meanEffect": 0.13928431272506714
+  },
+  "lanes": {
+   "features": 14,
+   "ownDirectionPushedUp(sign-adjusted)": 0.14285714285714285,
+   "meanEffect": -0.11631465244239994
+  },
+  "legal": {
+   "features": 29,
+   "ownDirectionPushedUp(sign-adjusted)": 0.6551724137931034,
+   "meanEffect": 0.016555694325281114
+  },
+  "lineStill": {
+   "features": 1,
+   "ownDirectionPushedUp(sign-adjusted)": 1.0,
+   "meanEffect": 0.0025479039177298546
+  },
+  "mergeMax": {
+   "features": 9,
+   "ownDirectionPushedUp(sign-adjusted)": 0.4444444444444444,
+   "meanEffect": 0.0075826989486813545
+  },
+  "merges": {
+   "features": 4,
+   "ownDirectionPushedUp(sign-adjusted)": 0.5,
+   "meanEffect": -0.00483852531760931
+  },
+  "mono": {
+   "features": 5,
+   "ownDirectionPushedUp(sign-adjusted)": 0.6,
+   "meanEffect": -0.001105434074997902
+  },
+  "movedBig": {
+   "features": 79,
+   "ownDirectionPushedUp(sign-adjusted)": 0.12658227848101267,
+   "meanEffect": -0.18833365597868268
+  },
+  "movedMax": {
+   "features": 36,
+   "ownDirectionPushedUp(sign-adjusted)": 0.2777777777777778,
+   "meanEffect": -0.11112855090242293
+  },
+  "pairs": {
+   "features": 1,
+   "ownDirectionPushedUp(sign-adjusted)": 1.0,
+   "meanEffect": 0.03953173756599426
+  },
+  "safe": {
+   "features": 25,
+   "ownDirectionPushedUp(sign-adjusted)": 0.6,
+   "meanEffect": 0.005361970448866486
+  },
+  "secondAdj": {
+   "features": 1,
+   "ownDirectionPushedUp(sign-adjusted)": 0.0,
+   "meanEffect": -0.04753626137971878
+  },
+  "setup": {
+   "features": 3,
+   "ownDirectionPushedUp(sign-adjusted)": 0.6666666666666666,
+   "meanEffect": 0.05768538018067678
+  },
+  "setupBig": {
+   "features": 1,
+   "ownDirectionPushedUp(sign-adjusted)": 1.0,
+   "meanEffect": 0.03310798108577728
+  },
+  "smooth": {
+   "features": 15,
+   "ownDirectionPushedUp(sign-adjusted)": 0.6666666666666666,
+   "meanEffect": 0.006952660468717416
+  },
+  "toward": {
+   "features": 4,
+   "ownDirectionPushedUp(sign-adjusted)": 0.75,
+   "meanEffect": 0.06824932456947863
+  },
+  "trapped": {
+   "features": 2,
+   "ownDirectionPushedUp(sign-adjusted)": 0.0,
+   "meanEffect": -0.12229709886014462
+  }
+ },
+ "steer": {
+  "probeR2train": null,
+  "projSd": 0.37952306523434903,
+  "alphas": {
+   "-3": {
+    "near": 0.7935333333333333,
+    "bad5": 0.021933333333333332,
+    "changed": 0.029566666666666668,
+    "merges": 1.0285333333333333,
+    "mergeMax": 3.5871333333333335,
+    "movedBig": 0.3492,
+    "bigStill": 0.9633,
+    "setup": 4.748466666666666,
+    "empties": 3.574866666666667,
+    "mono": 4.665933333333333,
+    "trapped": 0.9967666666666667
+   },
+   "-2": {
+    "near": 0.7948,
+    "bad5": 0.021666666666666667,
+    "changed": 0.019266666666666668,
+    "merges": 1.0284666666666666,
+    "mergeMax": 3.585166666666667,
+    "movedBig": 0.3463,
+    "bigStill": 0.9633333333333334,
+    "setup": 4.7433,
+    "empties": 3.5748,
+    "mono": 4.6691,
+    "trapped": 0.9978
+   },
+   "-1": {
+    "near": 0.7948333333333333,
+    "bad5": 0.021433333333333332,
+    "changed": 0.0097,
+    "merges": 1.0292666666666668,
+    "mergeMax": 3.586866666666667,
+    "movedBig": 0.34403333333333336,
+    "bigStill": 0.9633666666666667,
+    "setup": 4.7366,
+    "empties": 3.5756,
+    "mono": 4.6726,
+    "trapped": 0.9966666666666667
+   },
+   "0": {
+    "near": 0.7948,
+    "bad5": 0.021466666666666665,
+    "changed": 0.0,
+    "merges": 1.0307,
+    "mergeMax": 3.5881,
+    "movedBig": 0.3429333333333333,
+    "bigStill": 0.9635666666666667,
+    "setup": 4.7308,
+    "empties": 3.5770333333333335,
+    "mono": 4.6763,
+    "trapped": 0.9956
+   },
+   "1": {
+    "near": 0.7952,
+    "bad5": 0.0217,
+    "changed": 0.011,
+    "merges": 1.0305333333333333,
+    "mergeMax": 3.5854,
+    "movedBig": 0.34153333333333336,
+    "bigStill": 0.9634666666666667,
+    "setup": 4.7264333333333335,
+    "empties": 3.5768666666666666,
+    "mono": 4.677466666666667,
+    "trapped": 0.9945
+   },
+   "2": {
+    "near": 0.7946333333333333,
+    "bad5": 0.021533333333333335,
+    "changed": 0.021466666666666665,
+    "merges": 1.0298,
+    "mergeMax": 3.5808,
+    "movedBig": 0.3386,
+    "bigStill": 0.9634333333333334,
+    "setup": 4.722833333333333,
+    "empties": 3.5761333333333334,
+    "mono": 4.679633333333333,
+    "trapped": 0.9928
+   },
+   "3": {
+    "near": 0.7944333333333333,
+    "bad5": 0.0214,
+    "changed": 0.0322,
+    "merges": 1.0303333333333333,
+    "mergeMax": 3.5815333333333332,
+    "movedBig": 0.3365666666666667,
+    "bigStill": 0.9634333333333334,
+    "setup": 4.718233333333333,
+    "empties": 3.5766666666666667,
+    "mono": 4.684333333333333,
+    "trapped": 0.9915333333333334
+   }
+  }
+ }
+}

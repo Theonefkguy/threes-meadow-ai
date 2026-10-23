@@ -182,3 +182,6 @@ training/v49-rules/cache.npz
 training/v50-transformer/.venv/
 training/v50-transformer/runs/
 training/v50-transformer/bin/
+
+# V52 sparse autoencoder weights (rebuilt by sae.py)
+training/v52-interpret2/*.pt
