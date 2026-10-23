@@ -185,3 +185,7 @@ training/v50-transformer/bin/
 
 # V52 sparse autoencoder weights (rebuilt by sae.py)
 training/v52-interpret2/*.pt
+
+# V54 / V55 checkpoints
+training/v54-symmetry/runs/
+training/v55-shared-dagger/runs/
