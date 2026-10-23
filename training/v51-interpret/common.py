@@ -3,7 +3,7 @@ written out by hand (same arithmetic as model.Net) that returns the residual str
 and every head's attention, and can replace any head's or MLP's output by its mean (mean ablation).
 Tokens: 0 summary, 1-16 cells (row-major, cell i = token i + 1), 17 preview, 18 counts, 19 cycle.
 Run from the repo root:  uv run --project training/v50-transformer python training/v51-interpret/X.py"""
-import math, sys
+import math, os, sys
 from pathlib import Path
 import numpy as np
 import torch
@@ -12,7 +12,7 @@ L = Path(__file__).resolve().parent; V50 = L.parent / 'v50-transformer'
 sys.path.insert(0, str(V50))
 from model import Net, SYM
 from train import arrays, usable, DATA
-dev = torch.device('mps' if torch.backends.mps.is_available() else 'cpu')
+dev = torch.device(os.environ.get('TORCH_DEVICE') or ('mps' if torch.backends.mps.is_available() else 'cpu'))   # TORCH_DEVICE=cpu to override
 MODEL = V50 / 'runs' / 'dag14' / 'model.pt'
 TOK = ['summary'] + [f'c{i}' for i in range(16)] + ['preview', 'counts', 'cycle']
 
