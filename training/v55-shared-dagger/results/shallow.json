@@ -1,0 +1,47 @@
+{
+ "depth1": {
+  "meanScore": 3655.524,
+  "meanMoves": 143.91,
+  "reach1536": 0.0,
+  "reach3072": 0.0,
+  "reach6144": 0.0,
+  "reach12288": 0.0,
+  "sec": 1
+ },
+ "depth2": {
+  "meanScore": 143106.9,
+  "meanMoves": 900.68,
+  "reach1536": 0.706,
+  "reach3072": 0.412,
+  "reach6144": 0.046,
+  "reach12288": 0.0,
+  "sec": 5
+ },
+ "depth3": {
+  "meanScore": 372603.876,
+  "meanMoves": 1383.956,
+  "reach1536": 0.95,
+  "reach3072": 0.832,
+  "reach6144": 0.344,
+  "reach12288": 0.01,
+  "sec": 22
+ },
+ "depth4": {
+  "meanScore": 536986.596,
+  "meanMoves": 1605.27,
+  "reach1536": 0.994,
+  "reach3072": 0.93,
+  "reach6144": 0.55,
+  "reach12288": 0.046,
+  "sec": 173
+ },
+ "depth5": {
+  "meanScore": 681451.884,
+  "meanMoves": 1757.466,
+  "reach1536": 1.0,
+  "reach3072": 0.982,
+  "reach6144": 0.726,
+  "reach12288": 0.098,
+  "sec": 817
+ }
+}

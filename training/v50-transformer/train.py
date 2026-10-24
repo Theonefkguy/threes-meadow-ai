@@ -15,7 +15,7 @@ import torch
 from model import Net, SYM
 L = Path(__file__).resolve().parent; DATA = Path('/Volumes/Extreme SSD/Datasets/threes-v50')
 TAU, BATCH, LR = 0.002, 2048, 1e-3
-dev = torch.device('mps' if torch.backends.mps.is_available() else 'cpu')
+dev = torch.device('cuda' if torch.cuda.is_available() else 'mps' if torch.backends.mps.is_available() else 'cpu')
 
 def arrays(d, rows):
     """Compact numpy arrays (uint8 inputs, float32 gaps) of the selected rows."""
