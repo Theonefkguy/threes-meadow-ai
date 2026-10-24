@@ -1,0 +1,327 @@
+{
+ "baseline": {
+  "near": 0.8309333333333333,
+  "bad5": 0.017666666666666667,
+  "meanScore": 324628.46,
+  "meanMoves": 1306.41,
+  "reach1536": 0.9633333333333334,
+  "reach3072": 0.8066666666666666,
+  "reach6144": 0.28
+ },
+ "summaryAblation": {
+  "1": {
+   "near": 0.7923666666666667,
+   "bad5": 0.029333333333333333,
+   "meanScore": 161879.29,
+   "meanMoves": 988.41,
+   "reach1536": 0.87,
+   "reach3072": 0.51,
+   "reach6144": 0.04
+  },
+  "2": {
+   "near": 0.7781,
+   "bad5": 0.030966666666666667,
+   "meanScore": 139647.17,
+   "meanMoves": 902.2266666666667,
+   "reach1536": 0.8333333333333334,
+   "reach3072": 0.39666666666666667,
+   "reach6144": 0.03
+  },
+  "3": {
+   "near": 0.7510666666666667,
+   "bad5": 0.0322,
+   "meanScore": 89755.0,
+   "meanMoves": 760.8466666666667,
+   "reach1536": 0.7,
+   "reach3072": 0.19333333333333333,
+   "reach6144": 0.0
+  }
+ },
+ "directEffect": {
+  "这一步：比首选差(≤10%)": {
+   "features": 112,
+   "highQuantityRaisesScore": 0.044642857142857144,
+   "meanSignedEffect": -0.21977669890371285
+  },
+  "这一步 empties": {
+   "features": 100,
+   "highQuantityRaisesScore": 0.57,
+   "meanSignedEffect": 0.011727971704676748
+  },
+  "这一步 movedMax": {
+   "features": 61,
+   "highQuantityRaisesScore": 0.22950819672131148,
+   "meanSignedEffect": -0.10678670430158982
+  },
+  "这一步 edgeSum": {
+   "features": 61,
+   "highQuantityRaisesScore": 0.6721311475409836,
+   "meanSignedEffect": 0.06701313701198726
+  },
+  "这一步 smooth": {
+   "features": 50,
+   "highQuantityRaisesScore": 0.38,
+   "meanSignedEffect": -0.03854679625481367
+  },
+  "这一步 lanes": {
+   "features": 50,
+   "highQuantityRaisesScore": 0.3,
+   "meanSignedEffect": -0.08166246492415667
+  },
+  "奖励牌提示": {
+   "features": 48,
+   "highQuantityRaisesScore": 0.3958333333333333,
+   "meanSignedEffect": -0.045553633787979685
+  },
+  "视角里最大牌在第1列": {
+   "features": 45,
+   "highQuantityRaisesScore": 0.7111111111111111,
+   "meanSignedEffect": 0.05703277194665538
+  },
+  "这一步 mono": {
+   "features": 45,
+   "highQuantityRaisesScore": 0.8222222222222222,
+   "meanSignedEffect": 0.0808364225551486
+  },
+  "这一步：AI首选": {
+   "features": 38,
+   "highQuantityRaisesScore": 1.0,
+   "meanSignedEffect": 0.2321353094946397
+  },
+  "视角里最大牌在第4列": {
+   "features": 37,
+   "highQuantityRaisesScore": 0.21621621621621623,
+   "meanSignedEffect": -0.0672701557443754
+  },
+  "空 的张数": {
+   "features": 36,
+   "highQuantityRaisesScore": 0.3055555555555556,
+   "meanSignedEffect": -0.04926081039270179
+  },
+  "这一步 movedBig": {
+   "features": 19,
+   "highQuantityRaisesScore": 0.2631578947368421,
+   "meanSignedEffect": -0.13205760835032715
+  },
+  "提示牌含3": {
+   "features": 15,
+   "highQuantityRaisesScore": 0.6,
+   "meanSignedEffect": 0.026187656571467717
+  },
+  "这一步 trapped": {
+   "features": 14,
+   "highQuantityRaisesScore": 0.07142857142857142,
+   "meanSignedEffect": -0.14030620868184737
+  },
+  "这一步 setupBig": {
+   "features": 14,
+   "highQuantityRaisesScore": 0.5714285714285714,
+   "meanSignedEffect": 0.006682721432298422
+  },
+  "这一步 mergeMax": {
+   "features": 14,
+   "highQuantityRaisesScore": 0.7142857142857143,
+   "meanSignedEffect": 0.03629186722849097
+  },
+  "阶段=768": {
+   "features": 13,
+   "highQuantityRaisesScore": 0.15384615384615385,
+   "meanSignedEffect": -0.15066897897766188
+  },
+  "视角里最大牌在第3列": {
+   "features": 12,
+   "highQuantityRaisesScore": 0.25,
+   "meanSignedEffect": -0.12669024616479874
+  },
+  "这一步 bigStill": {
+   "features": 12,
+   "highQuantityRaisesScore": 1.0,
+   "meanSignedEffect": 0.3486933584014575
+  },
+  "阶段=384": {
+   "features": 11,
+   "highQuantityRaisesScore": 0.36363636363636365,
+   "meanSignedEffect": -0.04495199955999851
+  },
+  "这一步 setup": {
+   "features": 11,
+   "highQuantityRaisesScore": 0.7272727272727273,
+   "meanSignedEffect": 0.07720140300013802
+  },
+  "再过几步出现更大的牌(log)": {
+   "features": 10,
+   "highQuantityRaisesScore": 0.4,
+   "meanSignedEffect": -0.04465015381574631
+  },
+  "这一步 pairs": {
+   "features": 10,
+   "highQuantityRaisesScore": 0.8,
+   "meanSignedEffect": 0.07454193383455276
+  },
+  "这一步 merges": {
+   "features": 9,
+   "highQuantityRaisesScore": 0.8888888888888888,
+   "meanSignedEffect": 0.11849881750014093
+  },
+  "这一步 fit": {
+   "features": 8,
+   "highQuantityRaisesScore": 0.875,
+   "meanSignedEffect": 0.13793418742716312
+  },
+  "6144 的张数": {
+   "features": 8,
+   "highQuantityRaisesScore": 0.625,
+   "meanSignedEffect": 0.04240541532635689
+  },
+  "本周期已出奖励": {
+   "features": 8,
+   "highQuantityRaisesScore": 0.625,
+   "meanSignedEffect": 0.009295317810028791
+  },
+  "阶段=6144": {
+   "features": 7,
+   "highQuantityRaisesScore": 0.42857142857142855,
+   "meanSignedEffect": -0.05411566501217229
+  },
+  "视角里最大牌在第2列": {
+   "features": 6,
+   "highQuantityRaisesScore": 0.8333333333333334,
+   "meanSignedEffect": 0.012657282253106436
+  },
+  "阶段=1536": {
+   "features": 5,
+   "highQuantityRaisesScore": 0.6,
+   "meanSignedEffect": 0.01856943257153034
+  },
+  "3072 的张数": {
+   "features": 5,
+   "highQuantityRaisesScore": 0.6,
+   "meanSignedEffect": 0.04423447996377945
+  },
+  "阶段=3072": {
+   "features": 4,
+   "highQuantityRaisesScore": 0.5,
+   "meanSignedEffect": 0.00894472049549222
+  },
+  "AI估分(log)": {
+   "features": 4,
+   "highQuantityRaisesScore": 0.75,
+   "meanSignedEffect": 0.06993216928094625
+  },
+  "384 的张数": {
+   "features": 4,
+   "highQuantityRaisesScore": 0.5,
+   "meanSignedEffect": -0.05336362216621637
+  },
+  "这一步：AI估分(log)": {
+   "features": 3,
+   "highQuantityRaisesScore": 1.0,
+   "meanSignedEffect": 0.16639423991243044
+  },
+  "这一步 lineStill": {
+   "features": 3,
+   "highQuantityRaisesScore": 0.3333333333333333,
+   "meanSignedEffect": -0.02527550607919693
+  },
+  "这一步 toward": {
+   "features": 3,
+   "highQuantityRaisesScore": 0.6666666666666666,
+   "meanSignedEffect": 0.07137460882465045
+  },
+  "阶段=192": {
+   "features": 3,
+   "highQuantityRaisesScore": 0.0,
+   "meanSignedEffect": -0.35278918345769245
+  },
+  "192 的张数": {
+   "features": 2,
+   "highQuantityRaisesScore": 0.5,
+   "meanSignedEffect": 0.06597176194190979
+  },
+  "这一步 balance": {
+   "features": 2,
+   "highQuantityRaisesScore": 0.5,
+   "meanSignedEffect": 0.008051767945289612
+  },
+  "1536 的张数": {
+   "features": 2,
+   "highQuantityRaisesScore": 0.5,
+   "meanSignedEffect": -0.03598659485578537
+  },
+  "合法方向数": {
+   "features": 2,
+   "highQuantityRaisesScore": 0.0,
+   "meanSignedEffect": -0.1301262117922306
+  },
+  "视角里最大牌在格11": {
+   "features": 2,
+   "highQuantityRaisesScore": 0.5,
+   "meanSignedEffect": 0.051849763840436935
+  },
+  "这一步 safe": {
+   "features": 1,
+   "highQuantityRaisesScore": 0.0,
+   "meanSignedEffect": -0.11185292154550552
+  },
+  "1 的张数": {
+   "features": 1,
+   "highQuantityRaisesScore": 0.0,
+   "meanSignedEffect": -0.10109905898571014
+  },
+  "2 的张数": {
+   "features": 1,
+   "highQuantityRaisesScore": 0.0,
+   "meanSignedEffect": -0.06536616384983063
+  },
+  "视角里最大牌在格5": {
+   "features": 1,
+   "highQuantityRaisesScore": 0.0,
+   "meanSignedEffect": -0.07034527510404587
+  },
+  "视角里最大牌在边行": {
+   "features": 1,
+   "highQuantityRaisesScore": 0.0,
+   "meanSignedEffect": -0.09646804630756378
+  },
+  "视角里最大牌在格6": {
+   "features": 1,
+   "highQuantityRaisesScore": 0.0,
+   "meanSignedEffect": -0.04065341502428055
+  },
+  "链长": {
+   "features": 1,
+   "highQuantityRaisesScore": 0.0,
+   "meanSignedEffect": -0.048918310552835464
+  },
+  "视角里最大牌在格10": {
+   "features": 1,
+   "highQuantityRaisesScore": 1.0,
+   "meanSignedEffect": 0.040624625980854034
+  },
+  "视角里最大牌在格14": {
+   "features": 1,
+   "highQuantityRaisesScore": 0.0,
+   "meanSignedEffect": -0.03927795961499214
+  },
+  "这一步 secondAdj": {
+   "features": 1,
+   "highQuantityRaisesScore": 0.0,
+   "meanSignedEffect": -0.02484411746263504
+  },
+  "96 的张数": {
+   "features": 1,
+   "highQuantityRaisesScore": 0.0,
+   "meanSignedEffect": -0.0827576145529747
+  },
+  "12 的张数": {
+   "features": 1,
+   "highQuantityRaisesScore": 0.0,
+   "meanSignedEffect": -0.0003943350166082382
+  },
+  "剩余3的张数": {
+   "features": 1,
+   "highQuantityRaisesScore": 1.0,
+   "meanSignedEffect": 0.029224911704659462
+  }
+ }
+}
