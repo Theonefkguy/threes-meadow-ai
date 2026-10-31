@@ -1,8 +1,8 @@
-import {loadV4Policy} from './v4-policy.js?v=33';
-import { chooseMove } from './ai.js?v=33';
-import { loadModel } from './rl-model.js?v=33';
-import { chooseLearnedMove } from './rl-search.js?v=33';
-import { chooseFastMove, webSearchOptions } from './fast-search.js?v=33';
+import {loadV4Policy} from './v4-policy.js?v=34';
+import { chooseMove } from './ai.js?v=34';
+import { loadModel } from './rl-model.js?v=34';
+import { chooseLearnedMove } from './rl-search.js?v=34';
+import { chooseFastMove, webSearchOptions } from './fast-search.js?v=34';
 // A failed V31 download is not retried on every move; it is retried once when the AI is started
 // again (the page marks the first request of each start as fresh).
 let v31Failed=false,fullFailed=false;

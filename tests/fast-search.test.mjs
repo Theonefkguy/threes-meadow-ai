@@ -129,10 +129,29 @@ test('V23 website model: V4 stages 0-1, retrained stage 2, V21 stage 3', () => {
   assert.deepEqual(v23.weights.subarray(3*S),v21.weights.subarray(3*S));
 });
 
-test('website search setting: six-ply / 0.005 / 400 ms on every move (V43)', async () => {
+test('website search setting: six-ply / 0.005 / 400 ms on every move (V43), all depths searched (V69)', async () => {
   const { webSearchOptions } = await import('../dist/fast-search.js');
   const board = [[3072,1536,768,384],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
-  assert.deepEqual(webSearchOptions(board), { maxDepth:6, threshold:0.005, budgetMs:400 });
+  const expected = { maxDepth:6, threshold:0.005, budgetMs:400 };
+  assert.deepEqual(webSearchOptions(board), expected);
   board[1][0] = 6144;
-  assert.deepEqual(webSearchOptions(board), { maxDepth:6, threshold:0.005, budgetMs:400 });
+  assert.deepEqual(webSearchOptions(board), expected);
+});
+
+test('depths: on these positions skipped depths leave the deepest values unchanged; a timeout keeps the last completed depth', () => {
+  for (const s of states(4)) {
+    const o={remaining:s.remaining,threshold:0.005,clampLeaf:true,...unlimited};
+    const full={},skip={},jump={};
+    const a=chooseFastMove(s.board,s.next,model,{...o,maxDepth:4,stats:full});
+    const b=chooseFastMove(s.board,s.next,model,{...o,depths:[1,2,4],stats:skip});
+    const c=chooseFastMove(s.board,s.next,model,{...o,depths:[1,4],stats:jump});
+    assert.equal(a.depth,4);assert.equal(b.depth,4);assert.equal(c.depth,4);
+    assert.equal(b.direction,a.direction);assert.deepEqual(skip.values,full.values);assert.deepEqual(jump.values,full.values);
+    assert(b.nodes<a.nodes);
+    // Allow exactly the nodes of depths 1 and 2: depth 4 runs out and depth 2 is returned.
+    const two={},cut={};
+    const d2=chooseFastMove(s.board,s.next,model,{...o,depths:[1,2],stats:two});
+    const r=chooseFastMove(s.board,s.next,model,{...o,depths:[1,2,4],maxNodes:d2.nodes,stats:cut});
+    assert.equal(r.depth,2);assert.equal(r.direction,d2.direction);assert.deepEqual(cut.values,two.values);
+  }
 });

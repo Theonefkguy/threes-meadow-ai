@@ -1,0 +1,16 @@
+{"index":544,"success":true,"moves":552,"scoreGained":1063125,"deepMoves":231,"searchCPU":15.063242999999998,"deepCPU":9.1086510000000036}
+{"index":545,"success":false,"moves":396,"scoreGained":111618,"deepMoves":155,"searchCPU":9.2744649999999975,"deepCPU":5.3807540000000005}
+{"index":546,"success":true,"moves":899,"scoreGained":1069710,"deepMoves":299,"searchCPU":21.772384999999982,"deepCPU":11.456347000000003}
+{"index":547,"success":false,"moves":586,"scoreGained":244557,"deepMoves":198,"searchCPU":14.590465999999985,"deepCPU":7.6134710000000005}
+{"index":548,"success":false,"moves":531,"scoreGained":264471,"deepMoves":145,"searchCPU":12.238946999999998,"deepCPU":5.3622159999999992}
+{"index":549,"success":false,"moves":416,"scoreGained":206769,"deepMoves":126,"searchCPU":9.7756750000000121,"deepCPU":4.6688060000000009}
+{"index":550,"success":false,"moves":557,"scoreGained":259341,"deepMoves":237,"searchCPU":15.962758999999995,"deepCPU":10.338421999999994}
+{"index":551,"success":false,"moves":508,"scoreGained":256227,"deepMoves":212,"searchCPU":13.042004,"deepCPU":8.0159509999999958}
+{"index":552,"success":false,"moves":762,"scoreGained":254733,"deepMoves":259,"searchCPU":18.559612000000008,"deepCPU":9.8857609999999987}
+{"index":553,"success":false,"moves":493,"scoreGained":256836,"deepMoves":148,"searchCPU":11.524161000000005,"deepCPU":5.5948559999999992}
+{"index":554,"success":true,"moves":654,"scoreGained":1069929,"deepMoves":228,"searchCPU":16.623575999999993,"deepCPU":8.695984000000001}
+{"index":555,"success":false,"moves":504,"scoreGained":212877,"deepMoves":169,"searchCPU":11.240315999999984,"deepCPU":5.9747860000000017}
+{"index":556,"success":true,"moves":655,"scoreGained":1061286,"deepMoves":229,"searchCPU":16.213675000000009,"deepCPU":8.8864620000000016}
+{"index":557,"success":true,"moves":744,"scoreGained":1062801,"deepMoves":286,"searchCPU":19.93291000000001,"deepCPU":11.978815000000004}
+{"index":558,"success":false,"moves":769,"scoreGained":242949,"deepMoves":173,"searchCPU":13.886072,"deepCPU":6.0274270000000012}
+{"index":559,"success":true,"moves":648,"scoreGained":1062735,"deepMoves":200,"searchCPU":15.081402999999996,"deepCPU":7.5016630000000024}

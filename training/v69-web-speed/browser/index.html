@@ -1,0 +1,17 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>V69 Search Timing</title>
+<style>body{font:15px/1.5 system-ui,sans-serif;margin:16px;background:#fff;color:#111}pre{white-space:pre-wrap;word-break:break-all;font-size:12px}</style>
+<h1>V69 website search timing</h1>
+<p>Serve the repository root over HTTP and open <code>/training/v69-web-speed/browser/?n=300</code>.</p>
+<button id="run">Run timing</button> <span id="status"></span>
+<pre id="result"></pre>
+<script>
+const count=+new URLSearchParams(location.search).get('n')||300;
+const status=document.getElementById('status'),result=document.getElementById('result');
+document.getElementById('run').onclick=e=>{e.target.disabled=true;status.textContent='Loading model…';
+ const w=new Worker('./bench-worker.js',{type:'module'});
+ w.onmessage=({data})=>{if(data.type==='result'){status.textContent='Complete';window.benchResult=data;result.textContent=JSON.stringify(data,null,1);w.terminate();}
+  else{status.textContent=data.message;if(data.type==='error')w.terminate();}};
+ w.onerror=e=>{status.textContent=String(e.message);w.terminate();};
+ w.postMessage({count});};
+</script></html>

@@ -1,0 +1,28 @@
+{
+  "round": "V45: are the AI's big-card rearrangements and corner departures after 6144 good moves?",
+  "createdUTC": "2026-10-20T21:03:25.347819+00:00",
+  "status": "frozen before the scan and any rollout",
+  "scan": "the 2783 first-6144 states saved by V41 arm D (pool-d6144.txt), continued with the website search (6-ply / 0.005, cycle-aware, clamp, float16 weights) with rollout seeds 45100001+index; every move classified: rearranging = the chosen direction changes the cell of 2+ cards of 768 or larger while a legal direction moves none; cornerLeave = the largest card leaves a corner while a legal direction keeps it there; every 50th move is a baseline sample",
+  "selection": "select.py: set R = one random rearranging move per game, 120 games; set C = one random cornerLeave move that is not rearranging, 120 games; random.Random(45). Alternative move: R the legal direction with no big card moved and the highest root value; C the legal direction keeping the largest card in a corner with the highest root value.",
+  "rollouts": "40 per arm per position: forced first move (AI choice vs alternative), then the website search to 12288 or death; rollout r of position p uses RNG(45200001 + 1000 p + r) in both arms",
+  "primary": "per set, mean over positions of P(12288 | AI move) - P(12288 | alternative), normal approximation across positions; Holm over R and C",
+  "secondary": "score gained, overall rates, how often such moves happen, root-value margins",
+  "question": "If the AI moves are not worse, the strange-looking moves are justified (or harmless); if they are significantly worse, the search is making mistakes there.",
+  "fileSHA256": {
+    "training/v45-explain/scan.cpp": "4f5fc8ccda921588ebcc4f98cbf514279090d975f3edeec82440ef7ab07de610",
+    "training/v45-explain/rollout.cpp": "fdb084dde5fac4a752ea1679043e5152e68501c63dc9a4e02725b0177fd27c06",
+    "training/v45-explain/scan-one.sh": "9d40dac4a7801f7dd71f3ef595b11bfdff93dfbd20f87448a8248f48514ef9df",
+    "training/v45-explain/select.py": "34860917edc6bd461fd8c5bea7cc84b7c344817dc3c1eab9416cdd1d350e3bb3",
+    "training/v45-explain/rollout-one.sh": "d384ba400886d3f4674f7319eaf578de1471d42e3b56e90a9dcda276dd748eec",
+    "training/v45-explain/analyze.py": "fcc966c5e0a9fb90996a31f1f2755a3844d462657ddbebd49b6fe4d1e33b31eb",
+    "training/v45-explain/pool-d6144.txt": "065e8274854cc11d86d98e40c90ed3b08884f37e0e57418c3a075dde742898c9",
+    "training/v45-explain/bin/scan": "fe835cc61f8e171eea0c7e9a7ea9b3b5381a3567c6a7210c0cad095ae02ad098",
+    "training/v45-explain/bin/rollout": "97cb4c0363d278bd9dcf2a06d0384919e6c96656edc5447fe860bbbadb484dbd",
+    "training/v45-explain/trace-search.mjs": "e644f1bbccbed26ba5c0467e722414fb4369ad7ef660841e4b9b4247d7acee1f",
+    "training/v45-explain/explain.mjs": "55ae84a4d0579b35dd156e625f516aeb79a674ea494dc3dc2a48fbb2ac8db25a",
+    "training/web-release/models/ntuple-v31.bin": "b94a7da2671fe28ad3390a5fcd2fbda59a599f50437b23d5e3cf7097e45f9617",
+    "training/web-release/models/v31-s1q.res": "e033ffaf5a340d75ae54b3b03db77c6f2692e456340281117262340f4a39cab6",
+    "training/web-release/models/v31-s2q.res": "077f1082e27941be25a4a43355a4e9a46f5dd66ba733554e7df4dde69c54e4a5",
+    "training/web-release/models/v31-s3q.res": "c0271389706f0f8a1dd7f01f142f85987f707577373779a89d4f042bc8c25320"
+  }
+}

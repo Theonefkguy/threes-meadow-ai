@@ -1,6 +1,6 @@
 // Analysis mode: shows the public hidden state (the 12-card bag, the bonus cycle) and the AI's view of
 // the four directions. Uses only information a player could infer; never reads the shuffled deck.
-import { t } from './i18n.js?v=33';
+import { t } from './i18n.js?v=34';
 
 const DIRS = ['left', 'right', 'up', 'down'];
 const NAMES = { left:'左', right:'右', up:'上', down:'下' };

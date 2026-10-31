@@ -1,0 +1,93 @@
+{
+ "rounds": [
+  {
+   "round": 14,
+   "near": 0.806319534778595,
+   "bad5": 0.0208041463047266,
+   "reach3072": 0.694,
+   "reach6144": 0.138,
+   "late6144": 0.18175675675675676,
+   "meanScore": 246569.766,
+   "improves": true,
+   "improvesLate": true
+  },
+  {
+   "round": 15,
+   "near": 0.8124053478240967,
+   "bad5": 0.02006114274263382,
+   "reach3072": 0.706,
+   "reach6144": 0.184,
+   "late6144": 0.21081081081081082,
+   "meanScore": 266172.924,
+   "improves": true,
+   "improvesLate": true
+  },
+  {
+   "round": 16,
+   "near": 0.8162394762039185,
+   "bad5": 0.01938619837164879,
+   "reach3072": 0.7,
+   "reach6144": 0.174,
+   "late6144": 0.22297297297297297,
+   "meanScore": 261556.092,
+   "improves": true,
+   "improvesLate": false
+  },
+  {
+   "round": 17,
+   "near": 0.8185989260673523,
+   "bad5": 0.01951097697019577,
+   "reach3072": 0.724,
+   "reach6144": 0.228,
+   "late6144": 0.25405405405405407,
+   "meanScore": 286480.752,
+   "improves": false,
+   "improvesLate": true
+  },
+  {
+   "round": 18,
+   "near": 0.8221948742866516,
+   "bad5": 0.01902320422232151,
+   "reach3072": 0.72,
+   "reach6144": 0.218,
+   "late6144": 0.2668918918918919,
+   "meanScore": 283689.708,
+   "improves": true,
+   "improvesLate": false
+  },
+  {
+   "round": 19,
+   "near": 0.824786901473999,
+   "bad5": 0.018626177683472633,
+   "reach3072": 0.764,
+   "reach6144": 0.23,
+   "late6144": 0.2594594594594595,
+   "meanScore": 299846.466,
+   "improves": true,
+   "improvesLate": false
+  },
+  {
+   "round": 20,
+   "near": 0.8271293044090271,
+   "bad5": 0.01799660734832287,
+   "reach3072": 0.762,
+   "reach6144": 0.256,
+   "late6144": 0.28783783783783784,
+   "meanScore": 312517.92,
+   "improves": false,
+   "improvesLate": true
+  },
+  {
+   "round": 21,
+   "near": 0.8296476006507874,
+   "bad5": 0.01756555214524269,
+   "reach3072": 0.804,
+   "reach6144": 0.278,
+   "late6144": 0.297972972972973,
+   "meanScore": 332229.822,
+   "improves": true,
+   "improvesLate": false
+  }
+ ],
+ "next": "go"
+}

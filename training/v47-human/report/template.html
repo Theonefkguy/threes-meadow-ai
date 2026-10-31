@@ -1,0 +1,220 @@
+<title>12288 对局复盘</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap">
+<style>
+/* Layout: one reading column; the whole game as a strip first, then where the human and the AI part ways. Look shared with the V46 report. */
+:root{
+  --bg:#f7f4e9; --panel:#fffdf6; --ink:#12363a; --soft:#56716f; --line:#d8ddd2;
+  --board:#d9e3d9; --slot:#c8d4cc; --c1:#58c5e7; --c1ink:#063f51; --c2:#ef6d72; --c2ink:#5b1320; --c3:#ffffff; --c3ink:#344f53;
+  --go:#23925b; --no:#9aa7a2; --gold:#e2a925; --human:#d0572b;
+  --p1:#e7efe6; --p2:#dbe7ea; --p3:#efe5d3; --dot:#56716f;
+  --body:"Nunito",ui-rounded,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f2326; --panel:#15302f; --ink:#e6efe9; --soft:#9db5b1; --line:#2a4744;
+  --board:#24433f; --slot:#2f524d; --c3:#f3f1e7; --go:#4cc489; --no:#5f716d; --gold:#f0bf4a; --human:#f08a5d;
+  --p1:#17322f; --p2:#152f36; --p3:#2c2a1f; --dot:#9db5b1; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f2326; --panel:#15302f; --ink:#e6efe9; --soft:#9db5b1; --line:#2a4744;
+  --board:#24433f; --slot:#2f524d; --c3:#f3f1e7; --go:#4cc489; --no:#5f716d; --gold:#f0bf4a; --human:#f08a5d;
+  --p1:#17322f; --p2:#152f36; --p3:#2c2a1f; --dot:#9db5b1; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.65;margin:0}
+.wrap{max-width:1000px;margin:0 auto;padding-block:40px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:52px}
+h1,h2,h3{text-wrap:balance;line-height:1.2;margin:0}
+h1{font-size:clamp(1.9rem,5vw,2.7rem);font-weight:900}
+h2{font-size:1.45rem;font-weight:900}
+p{margin:0;max-width:68ch}
+a{color:var(--ink);text-underline-offset:3px}
+.lede{color:var(--soft);font-size:1.05rem}
+.eyebrow{font-size:.78rem;font-weight:800;letter-spacing:.12em;color:var(--soft)}
+section,header{display:grid;gap:16px;min-width:0}
+.small{font-size:.86rem}.muted{color:var(--soft)}
+.keys{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.key{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:grid;gap:4px;align-content:start}
+.key b{font-size:1.5rem;font-weight:900;font-variant-numeric:tabular-nums;line-height:1.2}
+.key span{font-size:.9rem;color:var(--soft)}
+.chart{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:12px;overflow-x:auto}
+.chart svg{display:block;width:100%;min-width:560px;height:auto}
+.chart text{fill:var(--soft);font-family:var(--body);font-size:12px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.86rem}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:.88rem;font-variant-numeric:tabular-nums}
+th,td{padding:8px 12px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+thead th{font-weight:800;color:var(--soft);font-size:.8rem}
+tbody tr:last-child td{border-bottom:0}
+.pairs{display:grid;gap:14px}
+.pair{display:grid;grid-template-columns:110px 1fr 54px;gap:8px;align-items:center;font-size:.86rem}
+.pair .tr{height:12px;background:color-mix(in srgb,var(--line) 70%,transparent);border-radius:4px;overflow:hidden}
+.pair .fill{height:100%;border-radius:0 4px 4px 0}
+.pair .v{font-weight:800;font-variant-numeric:tabular-nums;text-align:right}
+.boards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px}
+figure.ex{margin:0;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:12px 12px 14px;display:grid;gap:10px;align-content:start;min-width:0}
+.bw{display:grid;grid-template-columns:38px 1fr 38px;grid-template-rows:38px auto 38px;align-items:center;justify-items:center}
+.bw .u{grid-area:1/2}.bw .l{grid-area:2/1}.bw .g{grid-area:2/2;width:100%}.bw .r{grid-area:2/3}.bw .d{grid-area:3/2}
+.arr{display:grid;justify-items:center;line-height:1;font-weight:900}
+.arr .a{font-size:1.35rem;color:var(--go);border-radius:8px;padding:0 4px}
+.arr .t{font-size:.64rem;font-weight:800;color:var(--soft);font-variant-numeric:tabular-nums;margin-top:1px;white-space:nowrap}
+.arr.best .a{background:color-mix(in srgb,var(--go) 18%,transparent);outline:2px solid var(--go)}
+.arr.hum .a{outline:2px dashed var(--human);outline-offset:2px}
+.arr.hum .t{color:var(--human)}
+.arr.off .a{color:var(--no);font-size:1rem}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;background:var(--board);border-radius:12px;padding:5px;aspect-ratio:1;width:100%}
+.cell{border-radius:7px;background:var(--slot);display:grid;place-items:center;font-weight:900;font-size:clamp(.7rem,2.6vw,.95rem);font-variant-numeric:tabular-nums;min-width:0}
+.cell.k1{background:var(--c1);color:var(--c1ink)}.cell.k2{background:var(--c2);color:var(--c2ink)}.cell.k3{background:var(--c3);color:var(--c3ink);box-shadow:0 2px 0 rgba(18,54,58,.18)}
+.cell.top{outline:2px solid var(--gold);outline-offset:-2px}.cell.s{font-size:clamp(.6rem,2vw,.78rem);letter-spacing:-.04em}
+figcaption{display:grid;gap:4px;font-size:.82rem;line-height:1.45}
+figcaption .meta{display:flex;gap:8px;flex-wrap:wrap;color:var(--soft);font-weight:700}
+.nx{display:inline-grid;place-items:center;min-width:20px;height:20px;padding:0 4px;border-radius:5px;font-weight:900;font-size:.74rem;vertical-align:middle}
+.note{border-left:3px solid var(--gold);padding:4px 0 4px 14px;color:var(--soft);font-size:.92rem}
+details{border-top:1px solid var(--line);padding-top:14px}
+details summary{cursor:pointer;font-weight:800}
+details ul{margin-top:10px;color:var(--soft);font-size:.92rem;max-width:74ch}
+#tip{position:fixed;z-index:20;pointer-events:none;background:var(--ink);color:var(--bg);font-size:.82rem;padding:6px 10px;border-radius:8px;max-width:260px;line-height:1.4}
+@media (max-width:640px){.pair{grid-template-columns:84px 1fr 48px}}
+</style>
+
+<div class="wrap">
+<header>
+  <span class="eyebrow">THREES MEADOW AI · V47 · 人类对局复盘</span>
+  <h1>一局 12288，AI 怎么看</h1>
+  <p class="lede">YouTube 视频 <a href="https://www.youtube.com/watch?v=88Ofi3xoU5M">Threes b2b wins second game</a>（Logic2be，官方 Threes 应用）里的第二局：从画面逐帧还原出全部 1341 步，再让网站上的 AI（6 层搜索）给每个局面的四个方向打分，看人类的选择和 AI 有多接近。</p>
+  <div class="keys" id="keys"></div>
+</header>
+
+<section>
+  <span class="eyebrow">整局</span>
+  <h2>分歧集中在后期</h2>
+  <div class="legend"><span><i style="background:var(--dot);opacity:.45"></i>和 AI 选得一样</span><span><i style="background:var(--human)"></i>和 AI 不一样（高度 = AI 认为差了多少）</span></div>
+  <div class="chart" id="timeline"></div>
+  <p>每个点是一步。前 300 步（最大的牌还是 1536）几乎没有大的分歧；合出 3072、特别是 6144 之后，AI 认为差 5% 以上的步明显多起来。这和 V46 的发现一致：后期局面更"尖锐"，一边倒的步更多，走错的代价更大。</p>
+</section>
+
+<section>
+  <span class="eyebrow">分阶段</span>
+  <h2>人类和 AI 的吻合程度</h2>
+  <div class="tw"><table id="phaseTable"></table></div>
+  <div class="tw"><table id="classTable"></table></div>
+  <p id="classText"></p>
+</section>
+
+<section>
+  <span class="eyebrow">打法</span>
+  <h2>人类比 AI 更守角</h2>
+  <div class="pairs" id="corner"></div>
+  <p id="cornerText"></p>
+</section>
+
+<section>
+  <span class="eyebrow">节奏</span>
+  <h2>关键的步，人类想得更久</h2>
+  <div class="pairs" id="think"></div>
+  <p class="small muted">思考时间 = 这一步和上一步在视频里的间隔，只算间隔不到 60 秒的步。中位数。</p>
+</section>
+
+<section>
+  <span class="eyebrow">分歧最大的几步</span>
+  <h2>AI 认为损失最大的 8 步</h2>
+  <p class="small muted">绿色实框是 AI 的选择，橙色虚框是人类的选择；箭头越深，AI 越看好；数字是比 AI 最佳低多少。</p>
+  <div class="boards" id="worst"></div>
+  <p class="note">这些只是 AI 的判断，不等于人类真的走错了。人类这一局最终合出了 12288。下一步可以用模拟检验：从这些局面出发，分别按人类和 AI 的选择各打几十次，看哪边真的更容易合出 12288。</p>
+</section>
+
+<details>
+  <summary>怎么还原的，以及局限</summary>
+  <ul>
+    <li>还原：60 帧/秒抽出 4615 个画面静止的帧，从开局盘面出发，每一帧都枚举"从上一个已知盘面走 1–3 步"的所有可能（方向 × 新牌位置 × 新牌的值），挑和画面最吻合的；拖到一半的画面、动画和菜单对不上任何可能，会被跳过。牌的样子从 4 张人工标注的画面学起。</li>
+    <li>校验：108 袋普通牌每袋都恰好是 4 张 1、4 张 2、4 张 3；63 张奖励牌每个 21 抽周期恰好一张（第一个周期没有）；每张奖励牌都落在人工读出的提示窗口里；600 秒和 2000 秒两个人工检查点完全一致。只有一处两步之间没有画面，那两步的先后顺序不完全确定。</li>
+    <li>这一局开局就有一张 1536（应用的特殊开局），所以和网站 AI 从零开始 11.7% 合出 12288 的数字不能直接比。</li>
+    <li>AI 打分：网站同款（V31 模型 float16 权重、6 层、概率截断 0.005、奖励周期感知、牌袋计数），给 AI 的信息只有人类当时能看到的：盘面、下一张提示、公开的牌袋和周期状态。</li>
+    <li>"差多少" =（AI 最佳方向的估分 − 人类所选方向的估分）÷ AI 最佳方向的估分。估分是 AI 对"之后还能拿多少分"的估计，不是真实结果。</li>
+  </ul>
+</details>
+</div>
+<div id="tip" hidden></div>
+
+<script>
+const D = __DATA__;
+const DIR = ['←','→','↑','↓'], DIRN = ['左','右','上','下'];
+const pct = (x,d=1) => (100*x).toFixed(d)+'%';
+const el = (tag, attrs={}, html='') => { const e = document.createElement(tag); for (const [k,v] of Object.entries(attrs)) e.setAttribute(k,v); if (html) e.innerHTML = html; return e; };
+const cardLabel = r => r===0 ? '' : String(r);
+const tip = document.getElementById('tip');
+function hoverTip(node, text){
+  node.setAttribute('tabindex','0'); node.setAttribute('aria-label', text);
+  const show = e => { tip.textContent = text; tip.hidden = false; const r = node.getBoundingClientRect(); const x = e && e.clientX ? e.clientX : r.left + r.width/2; const y = e && e.clientY ? e.clientY : r.top; tip.style.left = Math.min(innerWidth - tip.offsetWidth - 8, Math.max(8, x - tip.offsetWidth/2)) + 'px'; tip.style.top = Math.max(8, y - tip.offsetHeight - 12) + 'px'; };
+  node.addEventListener('pointermove', show); node.addEventListener('focus', () => show()); node.addEventListener('pointerleave', () => tip.hidden = true); node.addEventListener('blur', () => tip.hidden = true);
+}
+const O = D.overall;
+document.getElementById('keys').innerHTML = [
+  [D.moves.toLocaleString()+' 步', `${Math.round(D.durationS/60)} 分钟，最后合出 12288`],
+  [pct(O.agree), '的步和 AI 选了同一个方向'],
+  [pct(O.within025,0), '的步在 AI 看来和最佳差不到 0.25%，等于没差'],
+  [pct(O.over5), `的步 AI 认为差了 5% 以上（${Math.round(O.n*O.over5)} 步）`],
+].map(([b,s]) => `<div class="key"><b>${b}</b><span>${s}</span></div>`).join('');
+
+/* timeline */
+(() => {
+  const W = 1000, H = 280, L = 52, R = 10, T = 14, B = 34, N = D.decisions.length;
+  const ymax = 0.4, y = g => T + (H-T-B) * (1 - Math.sqrt(Math.min(g, ymax)/ymax)), x = i => L + (W-L-R) * i / (N-1);
+  const ph = [['1536',0],['3072',0],['6144',0]]; D.decisions.forEach(d => { const p = ph.find(p => p[0]===d.phase); if (!p[2]) p[2] = d.i; p[3] = d.i; });
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="每一步人类选择比 AI 最佳低多少">`;
+  ph.forEach(([name,,a,b],j) => { s += `<rect x="${x(a)}" y="${T}" width="${x(b)-x(a)}" height="${H-T-B}" fill="var(--p${j+1})"/><text x="${(x(a)+x(b))/2}" y="${H-10}" text-anchor="middle">最大的牌 ${name}（第 ${a}–${b} 步）</text>`; });
+  for (const g of [0, 0.01, 0.05, 0.1, 0.2, 0.4]) s += `<line x1="${L}" x2="${W-R}" y1="${y(g)}" y2="${y(g)}" stroke="var(--line)" stroke-width="1"/><text x="${L-6}" y="${y(g)+4}" text-anchor="end">${g? pct(g,0):'0'}</text>`;
+  for (const d of D.decisions) {
+    if (d.agree) s += `<circle cx="${x(d.i)}" cy="${y(0)}" r="1.6" fill="var(--dot)" opacity=".35"/>`;
+    else s += `<circle class="pt" data-i="${d.i}" cx="${x(d.i)}" cy="${y(d.gap)}" r="${d.gap>=0.05?3.4:2.4}" fill="var(--human)" opacity="${d.gap>=0.02?.95:.55}"/>`;
+  }
+  s += `</svg>`;
+  const host = document.getElementById('timeline'); host.innerHTML = s;
+  const byI = new Map(D.decisions.map(d => [d.i, d]));
+  host.querySelectorAll('.pt').forEach(c => { const d = byI.get(+c.dataset.i); hoverTip(c, `第 ${d.i} 步（${Math.floor(d.t/60)}:${String(Math.floor(d.t%60)).padStart(2,'0')}）：人类 ${DIRN[d.human]}，AI ${DIRN[d.ai]}，低 ${pct(d.gap)}`); });
+})();
+
+/* tables */
+const CLSN = {clear:'一边倒（第二名差 ≥2%）', mixed:'略有偏好', tie2:'两个差不多', tie3:'三个差不多'};
+const row = (name, s) => `<tr><td>${name}</td><td>${s.n}</td><td>${pct(s.agree)}</td><td>${pct(s.within025)}</td><td>${pct(s.over2)}</td><td>${pct(s.over5)}</td></tr>`;
+const head = first => `<thead><tr><th>${first}</th><th>步数</th><th>和 AI 相同</th><th>差 &lt;0.25%</th><th>差 ≥2%</th><th>差 ≥5%</th></tr></thead>`;
+document.getElementById('phaseTable').innerHTML = head('阶段（最大的牌）') + '<tbody>' + ['1536','3072','6144'].map(p => row(p, D.byPhase[p])).join('') + row('整局', O) + '</tbody>';
+document.getElementById('classTable').innerHTML = head('局面类型（按 AI 的打分）') + '<tbody>' + Object.keys(CLSN).filter(c => D.byClass[c]).map(c => row(CLSN[c], D.byClass[c])).join('') + '</tbody>';
+const C = D.byClass.clear;
+document.getElementById('classText').textContent = `AI 认为"只有一个好方向"的局面共 ${C.n} 步，人类 ${pct(C.agree,0)} 选中了那个方向；剩下 ${pct(1-C.agree,0)} 选了 AI 认为至少差 2% 的方向，这是分歧的主要来源。两三个方向差不多的局面里，和 AI 选得不一样没有关系，选哪个都行。`;
+
+/* corner + think */
+function pairs(host, rows, max=1){ const h = document.getElementById(host); for (const [label, items] of rows) { const g = el('div',{class:'pairs'}); h.append(el('p',{},label)); for (const [lab,v,col,txt] of items) { const p = el('div',{class:'pair'}, `<span>${lab}</span><div class="tr"><div class="fill" style="width:${(100*v/max).toFixed(1)}%;background:var(${col})"></div></div><span class="v">${txt}</span>`); g.append(p); } h.append(g); } }
+const CO = D.corner;
+pairs('corner', [
+  ['最大的牌在角上时，选"朝角的两个方向"之一的比例', [['人类', CO.humanToward, '--human', pct(CO.humanToward,0)], ['AI', CO.aiToward, '--go', pct(CO.aiToward,0)]]],
+  ['最大的牌是 1536 时（前 300 步）', [['人类', CO.byPhase['1536'].humanToward, '--human', pct(CO.byPhase['1536'].humanToward,0)], ['AI', CO.byPhase['1536'].aiToward, '--go', pct(CO.byPhase['1536'].aiToward,0)]]],
+  ['最大的牌是 6144 时', [['人类', CO.byPhase['6144'].humanToward, '--human', pct(CO.byPhase['6144'].humanToward,0)], ['AI', CO.byPhase['6144'].aiToward, '--go', pct(CO.byPhase['6144'].aiToward,0)]]],
+]);
+document.getElementById('cornerText').textContent = `这一局最大的牌 ${pct(CO.share,0)} 的时间在角上。前期人类比 AI 明显更守角（${pct(CO.byPhase['1536'].humanToward,0)} 对 ${pct(CO.byPhase['1536'].aiToward,0)}）：AI 前期常常觉得背离角的方向也差不多甚至更好；到了 6144 阶段两者接近。`;
+const TH = D.think, mx = Math.max(...Object.values(TH).map(t => t.median), D.thinkAgree.False.median);
+pairs('think', [
+  ['按 AI 眼中的局面类型', [['一边倒', TH.clear.median/mx, '--human', TH.clear.median.toFixed(2)+' 秒'], ['略有偏好', TH.mixed.median/mx, '--dot', TH.mixed.median.toFixed(2)+' 秒'], ['两个差不多', TH.tie2.median/mx, '--dot', TH.tie2.median.toFixed(2)+' 秒']]],
+  ['按是否和 AI 选得一样', [['一样', D.thinkAgree.True.median/mx, '--go', D.thinkAgree.True.median.toFixed(2)+' 秒'], ['不一样', D.thinkAgree.False.median/mx, '--human', D.thinkAgree.False.median.toFixed(2)+' 秒']]],
+], 1);
+
+/* worst boards */
+function boardFig(w){
+  const f = el('figure',{class:'ex'}); const b = w.board.flat(); const mc = b.reduce((bi,v,i) => v > b[bi] ? i : bi, 0);
+  const bw = el('div',{class:'bw'});
+  ['l','r','u','d'].forEach((pos,i) => {
+    const g = w.gaps[i]; const a = el('div',{class:'arr '+pos+(g===null?' off':'')+(i===w.ai?' best':'')+(i===w.human?' hum':'')});
+    if (g===null) a.innerHTML = `<span class="a">✕</span>`;
+    else { const s = Math.max(0, 1 - g/0.05); a.innerHTML = `<span class="a" style="opacity:${(0.18+0.82*s).toFixed(2)}">${DIR[i]}</span><span class="t">${i===w.ai?'AI':(i===w.human?'人类 ':'')+'−'+pct(g, g<0.1?1:0)}</span>`; }
+    a.setAttribute('aria-label', `${DIRN[i]}${i===w.ai?'，AI 选择':''}${i===w.human?'，人类选择':''}${g===null?'，走不了':g>0?'，低 '+pct(g):''}`);
+    bw.append(a);
+  });
+  const g4 = el('div',{class:'grid4 g'});
+  b.forEach((r,i) => g4.append(el('div',{class:'cell'+(r===1?' k1':r===2?' k2':r>=3?' k3':'')+(i===mc?' top':'')+(r>=1536?' s':'')}, cardLabel(r))));
+  bw.append(g4); f.append(bw);
+  const n = w.next, nx = n.bonus ? `<span class="nx" style="background:var(--gold);color:#3b2a00">${n.candidates.join('/')}</span>` : `<span class="nx" style="background:var(--${['','c1','c2','c3'][n.candidates[0]]});color:var(--${['','c1ink','c2ink','c3ink'][n.candidates[0]]})">${n.candidates[0]}</span>`;
+  f.append(el('figcaption',{}, `<div class="meta"><span>第 ${w.i} 步 · ${Math.floor(w.t/60)}:${String(Math.floor(w.t%60)).padStart(2,'0')}</span><span>下一张 ${nx}</span></div><span>人类 ${DIR[w.human]}，AI ${DIR[w.ai]}：AI 认为低 ${pct(w.gap)}</span>`));
+  return f;
+}
+const wb = document.getElementById('worst'); D.worst.slice(0,8).forEach(w => wb.append(boardFig(w)));
+</script>

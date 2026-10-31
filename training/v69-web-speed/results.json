@@ -1,0 +1,109 @@
+{
+ "bench": {
+  "positions": 6000,
+  "arms": [
+   {
+    "name": "original 1-6",
+    "sameDirectionAndValues": 6000,
+    "sameNodes": 6000,
+    "depth6": 6000,
+    "meanMs": 23.303,
+    "p95Ms": 47.8,
+    "maxMs": 105.58,
+    "timeVsOriginal": 1.0,
+    "nodesVsOriginal": 1.0
+   },
+   {
+    "name": "fast 1-6",
+    "sameDirectionAndValues": 6000,
+    "sameNodes": 6000,
+    "depth6": 6000,
+    "meanMs": 15.52,
+    "p95Ms": 31.4,
+    "maxMs": 72.29,
+    "timeVsOriginal": 0.666,
+    "nodesVsOriginal": 1.0
+   },
+   {
+    "name": "fast 1-4,6 (website)",
+    "sameDirectionAndValues": 6000,
+    "sameNodes": 0,
+    "depth6": 6000,
+    "meanMs": 12.301,
+    "p95Ms": 25.69,
+    "maxMs": 59.16,
+    "timeVsOriginal": 0.5279,
+    "nodesVsOriginal": 0.6836
+   },
+   {
+    "name": "fast 1,6",
+    "sameDirectionAndValues": 6000,
+    "sameNodes": 0,
+    "depth6": 6000,
+    "meanMs": 11.36,
+    "p95Ms": 24.76,
+    "maxMs": 59.34,
+    "timeVsOriginal": 0.4875,
+    "nodesVsOriginal": 0.5957
+   }
+  ]
+ },
+ "games": {
+  "games": 96,
+  "moves": 164455,
+  "arms": [
+   "ref",
+   "new",
+   "new:1.2.3.4.6"
+  ],
+  "gamesWithAnyDifferentMove": [
+   0,
+   0,
+   15
+  ],
+  "differentMoves": [
+   0,
+   0,
+   16
+  ],
+  "secondsPerGame": [
+   65.46,
+   42.8,
+   34.2
+  ],
+  "msPerMove": [
+   38.21,
+   24.986,
+   19.963
+  ],
+  "timeVsOriginal": [
+   1.0,
+   0.6539,
+   0.5225
+  ],
+  "perGameRatio": [
+   {
+    "median": 1.0,
+    "min": 1.0,
+    "max": 1.0
+   },
+   {
+    "median": 0.65,
+    "min": 0.637,
+    "max": 0.808
+   },
+   {
+    "median": 0.52,
+    "min": 0.511,
+    "max": 0.634
+   }
+  ],
+  "reach": {
+   "3072": 90,
+   "6144": 68,
+   "12288": 10
+  },
+  "meanScore": 665835,
+  "unsupported": 0
+ }
+}

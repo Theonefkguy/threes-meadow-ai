@@ -1,0 +1,141 @@
+{
+ "positions": 6000,
+ "ms1": 12.6114105,
+ "arms": {
+  "1": {
+   "sameMove": 1.0,
+   "moveDiffers": 0,
+   "identicalValues": 1.0,
+   "maxRelDiff": 0.0,
+   "medianRelDiffWhenDiffer": 0.0,
+   "msShare": 1.0,
+   "nodesShare": 1.0,
+   "byEmpty": {
+    "0-0": {
+     "share": 0.0925,
+     "msShare": 1.0
+    },
+    "1-2": {
+     "share": 0.4295,
+     "msShare": 1.0
+    },
+    "3-4": {
+     "share": 0.3625,
+     "msShare": 1.0
+    },
+    "5-16": {
+     "share": 0.1155,
+     "msShare": 1.0
+    }
+   }
+  },
+  "3": {
+   "sameMove": 1.0,
+   "moveDiffers": 0,
+   "identicalValues": 1.0,
+   "maxRelDiff": 0.0,
+   "medianRelDiffWhenDiffer": 0.0,
+   "msShare": 0.9980957060010588,
+   "nodesShare": 0.999826938907684,
+   "byEmpty": {
+    "0-0": {
+     "share": 0.0925,
+     "msShare": 0.9925130527068166
+    },
+    "1-2": {
+     "share": 0.4295,
+     "msShare": 0.9988055006001708
+    },
+    "3-4": {
+     "share": 0.3625,
+     "msShare": 0.9982287309748741
+    },
+    "5-16": {
+     "share": 0.1155,
+     "msShare": 0.9978449017466197
+    }
+   }
+  },
+  "4": {
+   "sameMove": 1.0,
+   "moveDiffers": 0,
+   "identicalValues": 1.0,
+   "maxRelDiff": 0.0,
+   "medianRelDiffWhenDiffer": 0.0,
+   "msShare": 0.992041519331508,
+   "nodesShare": 0.9927775163874035,
+   "byEmpty": {
+    "0-0": {
+     "share": 0.0925,
+     "msShare": 0.9895023409658792
+    },
+    "1-2": {
+     "share": 0.4295,
+     "msShare": 0.9915979131043224
+    },
+    "3-4": {
+     "share": 0.3625,
+     "msShare": 0.9925481036908361
+    },
+    "5-16": {
+     "share": 0.1155,
+     "msShare": 0.9927563142175011
+    }
+   }
+  },
+  "5": {
+   "sameMove": 1.0,
+   "moveDiffers": 0,
+   "identicalValues": 1.0,
+   "maxRelDiff": 0.0,
+   "medianRelDiffWhenDiffer": 0.0,
+   "msShare": 0.9533018795426043,
+   "nodesShare": 0.9176164870645148,
+   "byEmpty": {
+    "0-0": {
+     "share": 0.0925,
+     "msShare": 0.9618443402590144
+    },
+    "1-2": {
+     "share": 0.4295,
+     "msShare": 0.9607772148192624
+    },
+    "3-4": {
+     "share": 0.3625,
+     "msShare": 0.9511415194070857
+    },
+    "5-16": {
+     "share": 0.1155,
+     "msShare": 0.9351677508530116
+    }
+   }
+  },
+  "6": {
+   "sameMove": 1.0,
+   "moveDiffers": 0,
+   "identicalValues": 1.0,
+   "maxRelDiff": 0.0,
+   "medianRelDiffWhenDiffer": 0.0,
+   "msShare": 0.792844675594904,
+   "nodesShare": 0.6011363147881421,
+   "byEmpty": {
+    "0-0": {
+     "share": 0.0925,
+     "msShare": 0.8320522537423022
+    },
+    "1-2": {
+     "share": 0.4295,
+     "msShare": 0.8091790585735945
+    },
+    "3-4": {
+     "share": 0.3625,
+     "msShare": 0.7858342387746208
+    },
+    "5-16": {
+     "share": 0.1155,
+     "msShare": 0.7521758798341343
+    }
+   }
+  }
+ }
+}

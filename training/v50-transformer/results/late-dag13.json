@@ -1,0 +1,1 @@
+{"policy": "runs/dag13/model.pt", "late": {"1536": {"games": 100, "student reach 3072": 0.58, "student reach 6144": 0.11, "student reach 12288": 0.0, "AI reach 3072": 0.96, "AI reach 6144": 0.71}, "3072": {"games": 96, "student reach 6144": 0.15625, "student reach 12288": 0.0, "AI reach 6144": 0.7395833333333334}}}

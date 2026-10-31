@@ -170,3 +170,34 @@ training/v43-early-depth/games/*.part
 training/v43-early-depth/snaps/
 training/v44-shape/bin/
 training/v44-shape/games/*.part
+training/v45-explain/bin/
+training/v45-explain/scan/*.part
+training/v45-explain/rollouts/*.part
+training/v46-margins/bin/
+training/v46-margins/data/*.part
+training/v45-explain/scan/m-*.jsonl
+training/v46-margins/data/m-*
+training/v48-logiccube/raw/
+training/v49-rules/cache.npz
+training/v50-transformer/.venv/
+training/v50-transformer/runs/
+training/v50-transformer/bin/
+
+# V52 sparse autoencoder weights (rebuilt by sae.py)
+training/v52-interpret2/*.pt
+
+# V54 / V55 checkpoints
+training/v54-symmetry/runs/
+training/v55-shared-dagger/runs/
+training/v56-scale/runs/
+
+training/v59-selective/bin/
+training/v61-card-luck/bin/
+training/v61-card-luck/rolls/
+training/v62-time-share/bin/
+training/v63-empty-switch/bin/
+training/v64-cascade/bin/
+training/v65-cascade-games/bin/
+training/v66-direct-depth/bin/
+training/v67-leaf-cache/bin/
+training/v68-profile/bin/
