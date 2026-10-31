@@ -1,0 +1,16 @@
+{"index":512,"success":false,"moves":452,"scoreGained":183975,"deepMoves":148,"searchCPU":11.464987999999995,"deepCPU":6.3303310000000019}
+{"index":513,"success":true,"moves":645,"scoreGained":1064619,"deepMoves":173,"searchCPU":13.438601000000013,"deepCPU":6.1899560000000005}
+{"index":514,"success":false,"moves":570,"scoreGained":240495,"deepMoves":181,"searchCPU":13.650365999999988,"deepCPU":7.1412110000000002}
+{"index":515,"success":true,"moves":878,"scoreGained":1064637,"deepMoves":290,"searchCPU":20.094094999999971,"deepCPU":9.9689830000000015}
+{"index":516,"success":false,"moves":346,"scoreGained":130056,"deepMoves":154,"searchCPU":9.2927539999999933,"deepCPU":5.7224879999999985}
+{"index":517,"success":false,"moves":627,"scoreGained":206685,"deepMoves":184,"searchCPU":13.266517999999991,"deepCPU":6.4962750000000007}
+{"index":518,"success":true,"moves":699,"scoreGained":1069380,"deepMoves":269,"searchCPU":16.709815999999993,"deepCPU":9.3375879999999967}
+{"index":519,"success":false,"moves":375,"scoreGained":203217,"deepMoves":93,"searchCPU":8.1995779999999954,"deepCPU":3.5976659999999994}
+{"index":520,"success":false,"moves":668,"scoreGained":245907,"deepMoves":217,"searchCPU":16.106650999999999,"deepCPU":8.8456189999999992}
+{"index":521,"success":false,"moves":568,"scoreGained":271626,"deepMoves":216,"searchCPU":15.241811000000011,"deepCPU":8.429176}
+{"index":522,"success":false,"moves":673,"scoreGained":246051,"deepMoves":203,"searchCPU":15.249794000000019,"deepCPU":7.6933290000000003}
+{"index":523,"success":false,"moves":476,"scoreGained":186783,"deepMoves":189,"searchCPU":12.927694999999996,"deepCPU":7.9369050000000012}
+{"index":524,"success":false,"moves":374,"scoreGained":84819,"deepMoves":142,"searchCPU":9.4298630000000028,"deepCPU":5.0805370000000005}
+{"index":525,"success":false,"moves":588,"scoreGained":275685,"deepMoves":170,"searchCPU":12.741050000000001,"deepCPU":6.0906980000000024}
+{"index":526,"success":false,"moves":551,"scoreGained":243114,"deepMoves":173,"searchCPU":13.807266999999998,"deepCPU":7.0963699999999958}
+{"index":527,"success":false,"moves":462,"scoreGained":224163,"deepMoves":141,"searchCPU":10.589247,"deepCPU":5.6564470000000009}

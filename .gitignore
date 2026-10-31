@@ -190,3 +190,8 @@ training/v52-interpret2/*.pt
 training/v54-symmetry/runs/
 training/v55-shared-dagger/runs/
 training/v56-scale/runs/
+
+training/v59-selective/bin/
+training/v61-card-luck/bin/
+training/v61-card-luck/rolls/
+training/v62-time-share/bin/

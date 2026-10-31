@@ -1,0 +1,16 @@
+{"index":2000,"success":true,"moves":657,"scoreGained":1062954,"deepMoves":243,"searchCPU":18.164472000000018,"deepCPU":10.098305000000002}
+{"index":2001,"success":true,"moves":622,"scoreGained":1057368,"deepMoves":206,"searchCPU":12.718748000000003,"deepCPU":6.5142599999999984}
+{"index":2002,"success":false,"moves":665,"scoreGained":266934,"deepMoves":220,"searchCPU":14.28143400000002,"deepCPU":7.1935389999999986}
+{"index":2003,"success":false,"moves":724,"scoreGained":246222,"deepMoves":290,"searchCPU":16.972281999999993,"deepCPU":10.687270999999997}
+{"index":2004,"success":false,"moves":424,"scoreGained":199875,"deepMoves":192,"searchCPU":11.706883999999999,"deepCPU":7.3771579999999997}
+{"index":2005,"success":false,"moves":392,"scoreGained":250812,"deepMoves":125,"searchCPU":9.1788369999999961,"deepCPU":4.8718580000000005}
+{"index":2006,"success":false,"moves":131,"scoreGained":29406,"deepMoves":46,"searchCPU":3.2713990000000006,"deepCPU":1.9650780000000003}
+{"index":2007,"success":false,"moves":877,"scoreGained":244356,"deepMoves":289,"searchCPU":20.772650000000002,"deepCPU":10.114079000000002}
+{"index":2008,"success":false,"moves":814,"scoreGained":264633,"deepMoves":246,"searchCPU":16.576447999999999,"deepCPU":8.3697420000000058}
+{"index":2009,"success":false,"moves":838,"scoreGained":264069,"deepMoves":287,"searchCPU":17.021121000000001,"deepCPU":9.5067750000000082}
+{"index":2010,"success":true,"moves":560,"scoreGained":1063239,"deepMoves":172,"searchCPU":10.316159999999995,"deepCPU":4.9815069999999988}
+{"index":2011,"success":false,"moves":831,"scoreGained":258321,"deepMoves":309,"searchCPU":17.126419999999982,"deepCPU":9.6925270000000019}
+{"index":2012,"success":false,"moves":547,"scoreGained":199137,"deepMoves":223,"searchCPU":11.151576999999991,"deepCPU":6.9485159999999988}
+{"index":2013,"success":false,"moves":852,"scoreGained":263325,"deepMoves":284,"searchCPU":15.158976999999993,"deepCPU":7.9556160000000009}
+{"index":2014,"success":false,"moves":429,"scoreGained":246015,"deepMoves":135,"searchCPU":6.8936440000000028,"deepCPU":3.5589989999999991}
+{"index":2015,"success":false,"moves":657,"scoreGained":276066,"deepMoves":231,"searchCPU":14.061003000000012,"deepCPU":7.934679}
