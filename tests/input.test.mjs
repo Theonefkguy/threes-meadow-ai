@@ -25,7 +25,7 @@ function setup() {
     }
     setAttribute(k,v) { this.attrs[k] = v; }
     append(node) { this.children.push(node); }
-    replaceChildren() { this.children = []; }
+    replaceChildren(...nodes) { this.children = nodes; this.textContent = nodes.map(n => typeof n === 'string' ? n : n.textContent).join(''); }
     focus() {}
     querySelector(selector) { return ((this.queried ||= {})[selector] ||= new Element()); }
     closest() { return null; }
@@ -246,6 +246,19 @@ test('manual play is counted before AI takeover and restart resets the visible m
  ids['#new-game'].emit('click');ids['#ai-toggle'].emit('click');flush();
  assert.deepEqual(Array.from(workers.at(-1).messages.at(-1).remaining),[1,2,3].map(n=>engine.deck.filter(v=>v===n).length));
  assert.deepEqual({...workers.at(-1).messages.at(-1).cycle},{pos:0,used:0,excl:0});
+});
+
+test('the AI move line includes the search time, and later requests do not flash "thinking"',()=>{
+ const {ids,flush,workers,setBoard}=setup();setBoard([0,3,0,0]);
+ ids['#ai-toggle'].emit('click');flush();
+ assert.match(ids['#ai-status'].textContent,/正在思考/);
+ const worker=workers[0];
+ worker.onmessage({data:{id:worker.messages.at(-1).id,direction:'left',policy:'rl-fast',stage:0,searchMs:12.6}});flush();
+ assert.match(ids['#ai-status'].textContent,/AI 向左移动 · 前期策略 · 已完成 1 步 · 13 毫秒/);
+ flush();assert.equal(worker.messages.length,2);
+ assert.match(ids['#ai-status'].textContent,/13 毫秒/,'the next request keeps the last move line');
+ worker.onmessage({data:{id:worker.messages.at(-1).id,direction:'right',policy:'rl-fast',stage:0,searchMs:4.25}});flush();
+ assert.match(ids['#ai-status'].textContent,/已完成 2 步 · 4\.3 毫秒/);
 });
 
 test('switching learned policy stops old work, and failed model load visibly falls back',()=>{

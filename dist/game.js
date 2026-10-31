@@ -1,7 +1,7 @@
-import { t, locale, setLanguage, applyLanguage } from './i18n.js?v=34';
-import { createGame, projectMove, score } from './engine.js?v=34';
-import { initialCounts, observePreview, initialCycle, observeCycle } from './card-memory.js?v=34';
-import { createAnalysis } from './analysis.js?v=34';
+import { t, locale, setLanguage, applyLanguage } from './i18n.js?v=35';
+import { createGame, projectMove, score } from './engine.js?v=35';
+import { initialCounts, observePreview, initialCycle, observeCycle } from './card-memory.js?v=35';
+import { createAnalysis } from './analysis.js?v=35';
 
 const boardEl = document.querySelector('#board');
 const nextEl = document.querySelector('#next-tile');
@@ -16,6 +16,26 @@ let publicCounts = initialCounts(game.board, game.next);
 let publicCycle = initialCycle();
 const aiButton = document.querySelector('#ai-toggle');
 const aiStatus = document.querySelector('#ai-status');
+// The AI's move line: compact chips (direction, stage, move number, search time reported by the worker, model
+// loading excluded) with fixed widths so the centered row does not shift; screen readers get the full sentence.
+const directionArrows = { left:'←', right:'→', up:'↑', down:'↓' };
+function showAIMove(data) {
+  const stage = data.policy?.startsWith('rl') ? [t('前期'),t('中期'),t('后期'),t('冲刺 12288')][data.stage] : '';
+  const timed = Number.isFinite(data.searchMs);
+  const ms = timed ? data.searchMs.toLocaleString(locale(), { maximumFractionDigits: data.searchMs < 10 ? 1 : 0 }) : '';
+  const values = { direction:t(directionNames[data.direction]), phase:stage ? t(' · {stage}策略', { stage }) : '', turns:game.turns+1, ms };
+  const sentence = t(timed ? 'AI 向{direction}移动{phase} · 已完成 {turns} 步 · {ms} 毫秒' : 'AI 向{direction}移动{phase} · 已完成 {turns} 步', values);
+  if (!aiStatus.replaceChildren) { aiStatus.textContent = sentence; return; }
+  const el = (tag, className, text) => { const e = document.createElement(tag); e.className = className; e.textContent = text; return e; };
+  const spoken = el('span', 'sr-only', sentence);
+  const chips = el('span', 'ai-chips', '');
+  chips.setAttribute('aria-hidden', 'true');
+  chips.append(el('span', 'ai-chip ai-chip-dir', directionArrows[data.direction]));
+  if (stage) chips.append(el('span', 'ai-chip ai-chip-stage', stage));
+  chips.append(el('span', 'ai-chip ai-chip-turn', t('第 {turns} 步', values)));
+  if (timed) chips.append(el('span', 'ai-chip ai-chip-ms', `${ms} ms`));
+  aiStatus.replaceChildren(spoken, chips);
+}
 const aiPolicy = document.querySelector('#ai-policy');
 const aiProgress = document.querySelector('#ai-progress');
 const aiProgressBar = aiProgress.querySelector('progress');
@@ -61,7 +81,8 @@ function scheduleAI() {
     aiTimer = null;
     if (!aiRunning) return;
     if (busy) { scheduleAI(); return; }
-    aiStatus.textContent = aiPolicy.value.startsWith('rl')?t('强化学习 AI 正在思考…'):t('AI 正在思考…');
+    // Only the first request of a start says "thinking"; later ones keep the last move's line, so it does not flicker.
+    if (aiFresh) aiStatus.textContent = aiPolicy.value.startsWith('rl')?t('强化学习 AI 正在思考…'):t('AI 正在思考…');
     const id = ++aiRequest;
     armWatchdog();
     // Send visible state only, never game.deck or the random generator.
@@ -91,7 +112,7 @@ const analysis = createAnalysis({
   send: message => { try { if (!aiWorker) createWorker(); aiWorker.postMessage(message); } catch { /* Analysis is optional. */ } }
 });
 function createWorker() {
-    aiWorker = new Worker('./ai-worker.js?v=34', { type:'module' });
+    aiWorker = new Worker('./ai-worker.js?v=35', { type:'module' });
     aiWorker.onmessage = ({ data }) => {
       if (data.analysis) { analysis?.onReply(data); return; }
       if (!aiRunning || data.id !== aiRequest) return;
@@ -105,10 +126,7 @@ function createWorker() {
       if(data.fallback) {
         aiPolicy.value=['rl-fast','rl-full','rl-v4'].includes(data.policy)?data.policy:'classic';
         aiStatus.textContent=data.fallback==='full-load'?t('完整精度模型暂时无法加载，已改用标准模型。'):data.fallback==='v31-load'?t('完整模型暂时无法加载，已改用 V23 模型。'):data.fallback==='fast-load'?t('剪枝搜索暂时无法加载，已切换第四版。'):data.fallback==='load'?t('模型暂时无法加载，已切换经典搜索。'):t('已超过模型训练范围，切换经典搜索。');
-      } else {
-        const phase=data.policy?.startsWith('rl')?t(' · {stage}策略', {stage:[t('前期'),t('中期'),t('后期'),t('冲刺 12288')][data.stage]}):'';
-        aiStatus.textContent=t('AI 向{direction}移动{phase} · 已完成 {turns} 步',{direction:t(directionNames[data.direction]),phase,turns:game.turns+1});
-      }
+      } else showAIMove(data);
       analysis?.onAIReply(data);
       commitMove(data.direction);
     };

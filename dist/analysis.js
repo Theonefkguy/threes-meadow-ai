@@ -1,6 +1,6 @@
 // Analysis mode: shows the public hidden state (the 12-card bag, the bonus cycle) and the AI's view of
 // the four directions. Uses only information a player could infer; never reads the shuffled deck.
-import { t } from './i18n.js?v=34';
+import { t } from './i18n.js?v=35';
 
 const DIRS = ['left', 'right', 'up', 'down'];
 const NAMES = { left:'左', right:'右', up:'上', down:'下' };
@@ -15,19 +15,14 @@ export function createAnalysis({ getState, send }) {
   const cycleEl = document.querySelector('#an-cycle'), cycleNote = document.querySelector('#an-cycle-note');
   const recEl = document.querySelector('#an-rec'), recNote = document.querySelector('#an-rec-note');
   const arrows = document.querySelector('#rec-arrows'), app = document.querySelector('.app');
-  const bagLeft = document.querySelector('#an-bag-left'), cyclePos = document.querySelector('#an-cycle-pos');
-  let on = false, request = 0, timer = null, lastKey = '', sentKey = '', lastRec = null;
+  const bagLeft = document.querySelector('#an-bag-left'), cyclePos = document.querySelector('#an-cycle-pos'), cycleTag = document.querySelector('#an-cycle-tag');
+  // bonusAt: block position where this block's bonus was previewed (seen while analysis was on), or null.
+  let on = false, request = 0, timer = null, lastKey = '', sentKey = '', lastRec = null, bonusAt = null;
   const keyOf = s => JSON.stringify([s.board, s.next, s.remaining, s.cycle]);
 
   function renderBag(s) {
     bagEl.replaceChildren();
     const next = s.next, rem = s.remaining;
-    if (next?.bonus) {
-      const row = el('div', 'an-row');
-      for (const v of next.candidates) row.append(el('span', 'mc mc-bonus', String(v)));
-      row.append(el('span', 'an-pct', t('奖励牌')));
-      bagEl.append(row);
-    }
     const left = rem[0] + rem[1] + rem[2];
     [1, 2, 3].forEach((n, i) => {
       const row = el('div', 'an-row'), isNext = next && !next.bonus && next.candidates[0] === n;
@@ -40,14 +35,25 @@ export function createAnalysis({ getState, send }) {
       bagEl.append(row);
     });
     bagLeft.textContent = t('袋里还剩 {n} 张', { n: left });
-    bagNote.textContent = left ? t('百分比：预告之后那张普通牌是 1、2、3 的概率。') : t('本袋已发完，预告之后那张普通牌来自新的一袋。');
+    // A bonus preview goes into the note (whose height is reserved), so the card rows never move.
+    if (next?.bonus) {
+      bagNote.replaceChildren(...next.candidates.map(v => el('span', 'mc mc-bonus mc-small', String(v))), el('span', '', t('预告是奖励牌，不从袋里出。')));
+    } else bagNote.textContent = left ? t('百分比：预告之后那张普通牌是 1、2、3 的概率。') : t('本袋已发完，预告之后那张普通牌来自新的一袋。');
   }
 
   function renderCycle(s) {
     cycleEl.replaceChildren();
     const c = s.cycle, possible = Math.max(...s.board.flat()) >= 48;
-    for (let i = 0; i < 21; i++) cycleEl.append(el('span', `cy${i < c.pos ? ' cy-past' : ''}${i === c.pos ? ' cy-now' : ''}`));
+    // The preview on screen is the draw before position c.pos; a bonus preview marks that cell.
+    if (!c.used) bonusAt = null; else if (s.next?.bonus && c.pos > 0) bonusAt = c.pos - 1;
+    const state = !possible ? 'locked' : c.used ? 'used' : 'open';
+    cycleEl.className = `an-cycle cy-${state}`;
+    for (let i = 0; i < 21; i++) cycleEl.append(el('span', `cy${i < c.pos ? ' cy-past' : ''}${i === c.pos ? ' cy-now' : ''}${c.used && i === bonusAt ? ' cy-bonus' : ''}`));
     const chance = !possible ? 0 : c.used ? 0 : 1 / (21 - c.excl);
+    if (cycleTag) {
+      cycleTag.className = `an-tag an-tag-${state}`;
+      cycleTag.textContent = state === 'locked' ? t('48 后开启') : state === 'used' ? t('✓ 已出现') : t('还没出现 · {p}', { p: pct(chance, 1) });
+    }
     cyclePos.textContent = t('第 {pos} / 21 张', { pos: c.pos + 1 });
     cycleNote.textContent = !possible ? t('最大数字到 48 后才会出现奖励牌。')
       : c.used ? t('本轮的奖励牌已经出现，本轮不会再有。')
@@ -58,19 +64,22 @@ export function createAnalysis({ getState, send }) {
     lastRec = { values, direction, fromAI, key };
     recEl.replaceChildren();
     if (!values || !direction) { recNote.textContent = t('当前策略不提供各方向估值。'); setArrows(null); return; }
-    const rows = DIRS.map((d, i) => ({ d, v: values[i] })).filter(r => r.v !== null && r.v !== undefined).sort((a, b) => b.v - a.v);
+    // Rows stay in a fixed order (all four, illegal moves dimmed) so the panel does not jump between moves.
+    const all = DIRS.map((d, i) => ({ d, v: values[i] ?? null }));
+    const rows = all.filter(r => r.v !== null).sort((a, b) => b.v - a.v);
     const best = rows[0].v, scale = Math.max(1, Math.abs(best));
     // Bars: the best move is full; the others shrink with their gap, on a scale of the largest gap
     // (at least 0.5%), so small but real differences stay visible without being exaggerated.
     const span = Math.max(0.005, ...rows.map(r => (best - r.v) / scale));
-    for (const r of rows) {
-      const diff = (best - r.v) / scale, row = el('div', `an-bar${r.d === direction ? ' an-best' : ''}`);
+    for (const r of all) {
+      const legal = r.v !== null, diff = legal ? (best - r.v) / scale : 0;
+      const row = el('div', `an-bar${r.d === direction ? ' an-best' : ''}${legal ? '' : ' an-illegal'}`);
       const name = t(NAMES[r.d]), dir = el('span', 'an-dir', ARROWS[r.d]);
       dir.setAttribute('aria-label', name); dir.title = name; row.append(dir);
       const track = el('span', 'an-track'), fill = el('span', 'an-fill');
-      fill.style.width = `${Math.max(8, 100 - 85 * diff / span)}%`;
+      fill.style.width = legal ? `${Math.max(8, 100 - 85 * diff / span)}%` : '0%';
       track.append(fill); row.append(track);
-      row.append(el('span', 'an-diff', r.d === direction ? t('推荐') : `−${pct(diff, 2)}`));
+      row.append(el('span', 'an-diff', !legal ? '—' : r.d === direction ? t('推荐') : `−${pct(diff, 2)}`));
       recEl.append(row);
     }
     const margin = rows.length > 1 ? (best - rows[1].v) / scale : 1;

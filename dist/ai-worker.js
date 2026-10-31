@@ -1,12 +1,14 @@
-import {loadV4Policy} from './v4-policy.js?v=34';
-import { chooseMove } from './ai.js?v=34';
-import { loadModel } from './rl-model.js?v=34';
-import { chooseLearnedMove } from './rl-search.js?v=34';
-import { chooseFastMove, webSearchOptions } from './fast-search.js?v=34';
+import {loadV4Policy} from './v4-policy.js?v=35';
+import { chooseMove } from './ai.js?v=35';
+import { loadModel } from './rl-model.js?v=35';
+import { chooseLearnedMove } from './rl-search.js?v=35';
+import { chooseFastMove, webSearchOptions } from './fast-search.js?v=35';
 // A failed V31 download is not retried on every move; it is retried once when the AI is started
 // again (the page marks the first request of each start as fresh).
 let v31Failed=false,fullFailed=false;
 self.onmessage = async ({ data }) => {
+  // searchMs: time spent searching for this request (model loading excluded), shown under the AI button.
+  let searchMs=0;const timed=f=>{const t0=performance.now();try{return f();}finally{searchMs+=performance.now()-t0;}};
   try {
     if(data.fresh)v31Failed=fullFailed=false;
     const options={remaining:data.remaining};
@@ -17,7 +19,7 @@ self.onmessage = async ({ data }) => {
         // load, continue with the standard model below.
         try{if(fullFailed)throw new Error('full unavailable');
           const model=await loadModel('v31f',({loaded,total})=>self.postMessage({id:data.id,analysis:data.analysis,type:'progress',loaded,total}));
-          const stats={};result=chooseFastMove(data.board,data.next,model,{...options,...webSearchOptions(data.board),clampLeaf:true,cycle:data.cycle,stats});
+          const stats={};result=timed(()=>chooseFastMove(data.board,data.next,model,{...options,...webSearchOptions(data.board),clampLeaf:true,cycle:data.cycle,stats}));
           if(result.unsupported){policy='rl-v4';result=undefined;}else result.values=stats.values;
         }catch{fullFailed=true;policy='rl-fast';fallback='full-load';}
       }
@@ -34,17 +36,17 @@ self.onmessage = async ({ data }) => {
           v31Failed=true;
           try{model=await loadModel('v23');fallback='v31-load';}catch{policy='rl-v4';fallback='fast-load';}
         }
-        if(model){const stats={};result=chooseFastMove(data.board,data.next,model,{...options,...webSearchOptions(data.board),clampLeaf:true,cycle:data.cycle,stats});if(result.unsupported){policy='rl-v4';result=undefined;}else result.values=stats.values;}
+        if(model){const stats={};result=timed(()=>chooseFastMove(data.board,data.next,model,{...options,...webSearchOptions(data.board),clampLeaf:true,cycle:data.cycle,stats}));if(result.unsupported){policy='rl-v4';result=undefined;}else result.values=stats.values;}
       }
       if(policy==='rl-v4'){
         let model;
         try{model=await loadV4Policy();}
-        catch{self.postMessage({id:data.id,analysis:data.analysis,...chooseMove(data.board,data.next,options),policy:'classic',fallback:'load'});return;}
-        result=chooseLearnedMove(data.board,data.next,model.score,options);
+        catch{self.postMessage({id:data.id,analysis:data.analysis,...timed(()=>chooseMove(data.board,data.next,options)),searchMs,policy:'classic',fallback:'load'});return;}
+        result=timed(()=>chooseLearnedMove(data.board,data.next,model.score,options));
       }
-      if(!result.unsupported){self.postMessage({id:data.id,analysis:data.analysis,...result,policy,...(fallback?{fallback}:{})});return;}
-      self.postMessage({id:data.id,analysis:data.analysis,...chooseMove(data.board,data.next,options),policy:'classic',fallback:'range'});
-    } else self.postMessage({id:data.id,analysis:data.analysis,...chooseMove(data.board,data.next,options),policy:'classic'});
+      if(!result.unsupported){self.postMessage({id:data.id,analysis:data.analysis,...result,searchMs,policy,...(fallback?{fallback}:{})});return;}
+      self.postMessage({id:data.id,analysis:data.analysis,...timed(()=>chooseMove(data.board,data.next,options)),searchMs,policy:'classic',fallback:'range'});
+    } else self.postMessage({id:data.id,analysis:data.analysis,...timed(()=>chooseMove(data.board,data.next,options)),searchMs,policy:'classic'});
   } catch {
     self.postMessage({ id:data.id, analysis:data.analysis, error:true });
   }

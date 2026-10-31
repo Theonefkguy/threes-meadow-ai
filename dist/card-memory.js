@@ -1,4 +1,4 @@
-import { bonusPreviews, CYCLE } from './engine.js?v=34';
+import { bonusPreviews, CYCLE } from './engine.js?v=35';
 
 // Public-card accounting: never reads the shuffled deck or its order.
 export function initialCounts(board,next) {
