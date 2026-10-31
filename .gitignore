@@ -199,3 +199,5 @@ training/v63-empty-switch/bin/
 training/v64-cascade/bin/
 training/v65-cascade-games/bin/
 training/v66-direct-depth/bin/
+training/v67-leaf-cache/bin/
+training/v68-profile/bin/

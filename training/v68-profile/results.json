@@ -1,0 +1,31 @@
+{
+ "positions": 6000,
+ "msOriginal": 10.934281166666668,
+ "arms": {
+  "original": {
+   "identical": 6000,
+   "msPerMove": 10.934281166666668,
+   "msShare": 1.0
+  },
+  "maps": {
+   "identical": 6000,
+   "msPerMove": 7.373420333333333,
+   "msShare": 0.6743397413093166
+  },
+  "maps+half": {
+   "identical": 6000,
+   "msPerMove": 7.313668166666666,
+   "msShare": 0.6688750778571985
+  },
+  "neon": {
+   "identical": 6000,
+   "msPerMove": 8.1324815,
+   "msShare": 0.7437600493384057
+  },
+  "neon+half": {
+   "identical": 6000,
+   "msPerMove": 7.938268166666666,
+   "msShare": 0.7259981745180109
+  }
+ }
+}
