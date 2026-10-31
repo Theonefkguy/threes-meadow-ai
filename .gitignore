@@ -196,3 +196,6 @@ training/v61-card-luck/bin/
 training/v61-card-luck/rolls/
 training/v62-time-share/bin/
 training/v63-empty-switch/bin/
+training/v64-cascade/bin/
+training/v65-cascade-games/bin/
+training/v66-direct-depth/bin/

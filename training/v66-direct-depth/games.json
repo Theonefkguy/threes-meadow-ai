@@ -1,0 +1,24 @@
+{
+ "E": {
+  "games": 256,
+  "sameRecords": 256,
+  "snapshots": 185,
+  "sameSnapshots": 185,
+  "cpuPerGame": 36.221494164062506,
+  "msPerMove": 20.7398931010188
+ },
+ "D6": {
+  "games": 256,
+  "sameRecords": 256,
+  "snapshots": 185,
+  "sameSnapshots": 185,
+  "cpuPerGame": 28.985652953124994,
+  "msPerMove": 16.596757190306306
+ },
+ "D6/E cpu": 0.8002334973216919,
+ "D6/E per game: min, median, max": [
+  0.7581608366688459,
+  0.7934460252134756,
+  1.0574164629286
+ ]
+}
