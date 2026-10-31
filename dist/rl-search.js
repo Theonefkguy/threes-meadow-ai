@@ -1,6 +1,6 @@
-import { bonusPreviews } from './engine.js?v=29';
-import { projectRanks } from './ai-search.js?v=29';
-import { phaseForRanks } from './rl-model.js?v=29';
+import { bonusPreviews } from './engine.js?v=30';
+import { projectRanks } from './ai-search.js?v=30';
+import { phaseForRanks } from './rl-model.js?v=30';
 
 const directions=['left','right','up','down'];
 const rank=n=>n<3?n:Math.log2(n/3)+3;

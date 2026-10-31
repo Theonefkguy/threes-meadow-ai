@@ -7,6 +7,11 @@ weights reach 6144 in 59.3% and 12288 in 5.6% (V23: 38.6% / 3.9% on the same ope
 [README](README.md), [V31](RL-V31-STAGES.md) and training/web-release/v31-check. The sections
 below are a chronological record: statements about earlier defaults describe old releases.
 If V31 cannot load, the worker falls back to the V23 model.
+V69 (`dist/fast-search.js`): the same search runs in about two thirds of the time. The leaf evaluation and the
+moves are generated once as unrolled code, the largest tile comes from the move itself, and cards are placed
+without copying the board. On 6000 positions and 96 whole games (164,455 moves) every direction and root value is
+bit-identical to the previous release. All depths 1-6 are still searched; skipping depth 5 would save another 20%
+but changed a root value on 16 moves. See [V69](RL-V69-WEB-SPEED.md).
 
 当前默认采用 V31 模型（第 0 段沿用 V4，第 1–3 段为 4 格表加 16 位浮点 5 格残差，下载约 17 MB，解压后 32 MB）与五层剪枝搜索。网页只保留默认、第四版和经典搜索。下文为历史记录，早期默认配置以 README 为准。
 
